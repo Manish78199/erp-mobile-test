@@ -12,6 +12,7 @@ import {
     useFonts,
 } from "@expo-google-fonts/poppins";
 import { StudentAppDataProvider } from "@/context/Student/provider";
+import UserTypeProvider from "@/context/RoleAuth/proider";
 
 
 
@@ -29,9 +30,11 @@ export default function RootLayout() {
 
     return (
         <SafeAreaProvider>
+            <UserTypeProvider>
             <StudentAppDataProvider>
                 <Stack screenOptions={{ headerShown: false, animation: "none" }} />
             </StudentAppDataProvider>
+            </UserTypeProvider>
         </SafeAreaProvider>
     );
 }

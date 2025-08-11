@@ -1,4 +1,3 @@
-"use client"
 
 import { useRouter } from "expo-router"
 import type React from "react"
@@ -6,7 +5,7 @@ import { View, Text, ScrollView, TouchableOpacity, Dimensions, RefreshControl } 
 import Icon from "react-native-vector-icons/MaterialIcons"
 import { useState } from "react"
 import { useStudentData } from "@/hooks/useStudentData"
-
+import LogoutButton from "@/components/LogoutButton"
 const { width } = Dimensions.get("window")
 
 const StudentDashboard: React.FC = () => {
@@ -137,10 +136,10 @@ const StudentDashboard: React.FC = () => {
   ]
 
   const quickStats = [
-    { title: "Attendance", value: "92%", icon: "event-available", color: "#2ECC71" },
-    { title: "New Homwork", value: "3", icon: "assignment", color: "#F39C12" },
-    { title: "Next Exam", value: "5 days", icon: "quiz", color: "#E74C3C" },
-    { title: "Fees Due", value: "₹15K", icon: "payment", color: "#6A5ACD" },
+    { title: "Attendance", value: "--", icon: "event-available", color: "#2ECC71" },
+    { title: "New Homwork", value: "0", icon: "assignment", color: "#F39C12" },
+    { title: "Next Exam", value: "--", icon: "quiz", color: "#E74C3C" },
+    { title: "Fees Due", value: " -- ", icon: "payment", color: "#6A5ACD" },
   ]
 
   const upcomingEvents = [
@@ -186,9 +185,10 @@ const getGreeting = (): { period: "morning" | "afternoon" | "evening"; message: 
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
     >
       {/* Header */}
-      <View className="p-5 bg-[#6A5ACD] rounded-b-[30px] pb-10 items-center justify-center">
-        <Text className=" mt-8 font-extrabold text-white mb-2 text-center">{getGreeting().message} 👋, {Profile?.full_name}</Text>
+      <View className="p-5 mt-8 flex flex-row  items-center bg-[#6A5ACD] rounded-b-[30px] pb-10  justify-between">
+        <Text className="  font-extrabold text-white mb-2 text-center">{getGreeting().message} 👋, {Profile?.full_name} </Text>
         {/* <Text className="text-lg text-[#EAECEE] text-center">Your school journey starts here</Text> */}
+      <LogoutButton/>
       </View>
 
       {/* Quick Stats */}
@@ -258,3 +258,4 @@ const getGreeting = (): { period: "morning" | "afternoon" | "evening"; message: 
 }
 
 export default StudentDashboard
+
