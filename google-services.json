@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "205518940416",
+    "project_id": "vedaerp-dc974",
+    "storage_bucket": "vedaerp-dc974.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205518940416:android:729938da669975f0bcabe5",
+        "android_client_info": {
+          "package_name": "com.vedatron.erp_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-ErpC-40ueDSYqS9WrZ4AX1_KAPLroSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+
+/* 
+:root {
+    "--foreground": "#171717",
+        "--background-color": "#f3f5f7",
+        "--nav-text-color": "rgba(41, 39, 45, 0.733)",
+        "--card-background-color": "#ffffff",
+        "--hover-backgroud-color": "#cdcdcd4d",
+        "--card-border-color": " #e4e4e4",
+        "--text-color": "#050109",
+        "--sidebar-background-color": "#ffffff",
+        "--field-background-color": "#e4e4e4"
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+        "--foreground": "#ededed",
+            "--background-color": "#101010",
+            "--nav-text-color": "rgba(255, 255, 255, 0.6)",
+            "--card-background-color": " #27272a4d",
+            "--hover-backgroud-color": "#3636384d",
+            "--card-border-color": "#1e1e20",
+            "--text-color": "#ffffff",
+            "--sidebar-background-color": "#181819",
+            "--field-background-color": "#27272a4d",
+            "--combobox-background-color": "#27272a"
+
+    }
+}
+  */
+
+  text{
+    font-family: "poppins";
+  }
