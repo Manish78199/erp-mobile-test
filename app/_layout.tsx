@@ -11,6 +11,7 @@ import {
     Poppins_700Bold,
     useFonts,
 } from "@expo-google-fonts/poppins";
+import { StudentAppDataProvider } from "@/context/Student/provider";
 
 
 
@@ -28,7 +29,9 @@ export default function RootLayout() {
 
     return (
         <SafeAreaProvider>
-            <Stack  screenOptions={{ headerShown: false ,animation:"none"}} />
+            <StudentAppDataProvider>
+                <Stack screenOptions={{ headerShown: false, animation: "none" }} />
+            </StudentAppDataProvider>
         </SafeAreaProvider>
     );
 }

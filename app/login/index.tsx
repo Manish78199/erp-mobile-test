@@ -116,7 +116,7 @@
 //                             <Typography className="text-gray-500 text-sm mb-2">School Code</Typography>
 //                             <TypographyInput
 //                                 value={schoolCode}
-                                
+
 //                                 onChangeText={setSchoolCode}
 //                                 className="text-gray-900 py-1.5 px-2  rounded-md text-base pb-2 border border-gray-200 outline-none focus:ring-2 focus:ring-blue-500"
 //                                 keyboardType="email-address"
@@ -141,7 +141,7 @@
 //                         {/* Password Input */}
 //                         <View className="mb-8">
 //                             <Typography className="text-gray-400 text-sm mb-2">Password</Typography>
-                           
+
 //                                 <TypographyInput
 //                                     value={password}
 //                                     onChangeText={setPassword}
@@ -149,8 +149,8 @@
 //                                     className="flex-1 py-1.5  outline-none   rounded-md focus:ring-2 focus:ring-indigo-500 px-2  text-gray-900 text-base"
 //                                     placeholder="••••••••"
 //                                 />
-                             
-                         
+
+
 //                         </View>
 
 //                         {/* Sign In Button */}
@@ -201,6 +201,7 @@ import { studentLoginRequest } from '@/service/student/login';
 import { savefcmToken } from '@/service/student/fcm';
 import { LoginSchema } from '@/schema/login';
 import { AlertContext } from '@/context/Alert/context';
+import { UserTypeContext } from '@/context/RoleAuth/context';
 // import useFcmToken from '@/lib/notification';
 
 const { width, height } = Dimensions.get('window');
@@ -214,12 +215,30 @@ interface LoginFormData {
 export default function Login() {
     const router = useRouter();
     const { showAlert } = useContext(AlertContext);
-    
+
     const loginImage = require('@/assets/images/login/login_child.png');
-    
+
     const [requesting, setRequesting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
+    const { VerifyToken } = useContext(UserTypeContext)
+
+    useEffect(() => {
+        const checkLoged = async () => {
+
+            const role = await VerifyToken()
+            if (role) {
+                if (role == "STUDENT") {
+                    router.push("/student")
+
+                }
+                // if (role == "MANAGEMENT") {
+                //     router.push("/management")
+                // }
+            }
+        }
+        checkLoged()
+    }, [])
     // FCM Token Save Function
     const saveFcmTokenRequest = async () => {
         // try {
@@ -245,7 +264,7 @@ export default function Login() {
                 console.log('Permission request error:', error);
             }
         };
-        
+
         requestPermission();
     }, []);
 
@@ -255,13 +274,13 @@ export default function Login() {
 
         try {
             const response = await studentLoginRequest(values);
-            
+
             showAlert("SUCCESS", response?.data.message);
             await AsyncStorage.setItem("access_token", response?.data?.data.access_token);
-            
+
             // Save FCM token after successful login
             await saveFcmTokenRequest();
-            
+
             router.push('/student');
         } catch (error: any) {
             console.log(error);
@@ -282,12 +301,12 @@ export default function Login() {
         onSubmit: submitForm
     });
 
-    
+
     return (
         <SafeAreaView className="flex-1">
             <StatusBar barStyle="light-content" backgroundColor="#5B7FE5" />
-            
-            <KeyboardAvoidingView 
+
+            <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 className="flex-1"
             >
@@ -363,13 +382,12 @@ export default function Login() {
                                     {/* School Code Input */}
                                     <View className="mb-4">
                                         <Typography className="text-gray-700 text-sm mb-2 font-medium">School Code</Typography>
-                                        <TypographyInput
+                                        <TextInput
                                             value={values.school_code}
                                             onChangeText={handleChange('school_code')}
                                             onBlur={handleBlur('school_code')}
-                                            className={`text-gray-900 py-3 px-4 rounded-lg text-base border ${
-                                                errors.school_code && touched.school_code ? 'border-red-500' : 'border-gray-200'
-                                            } bg-gray-50`}
+                                            className={`text-gray-900 py-3 px-4 rounded-lg text-base border ${errors.school_code && touched.school_code ? 'border-red-500' : 'border-gray-200'
+                                                } bg-gray-50`}
                                             placeholder="Enter your school code"
                                             placeholderTextColor="#9CA3AF"
                                             autoCapitalize="none"
@@ -382,13 +400,12 @@ export default function Login() {
                                     {/* User ID Input */}
                                     <View className="mb-4">
                                         <Typography className="text-gray-700 text-sm mb-2 font-medium">User ID</Typography>
-                                        <TypographyInput
+                                        <TextInput
                                             value={values.userId}
                                             onChangeText={handleChange('userId')}
                                             onBlur={handleBlur('userId')}
-                                            className={`text-gray-900 py-3 px-4 rounded-lg text-base border ${
-                                                errors.userId && touched.userId ? 'border-red-500' : 'border-gray-200'
-                                            } bg-gray-50`}
+                                            className={`text-gray-900 py-3 px-4 rounded-lg text-base border ${errors.userId && touched.userId ? 'border-red-500' : 'border-gray-200'
+                                                } bg-gray-50`}
                                             placeholder="Enter your user ID"
                                             placeholderTextColor="#9CA3AF"
                                             autoCapitalize="none"
@@ -402,14 +419,13 @@ export default function Login() {
                                     <View className="mb-6">
                                         <Typography className="text-gray-700 text-sm mb-2 font-medium">Password</Typography>
                                         <View className="relative">
-                                            <TypographyInput
+                                            <TextInput
                                                 value={values.password}
                                                 onChangeText={handleChange('password')}
                                                 onBlur={handleBlur('password')}
                                                 secureTextEntry={!showPassword}
-                                                className={`text-gray-900 py-3 px-4 pr-12 rounded-lg text-base border ${
-                                                    errors.password && touched.password ? 'border-red-500' : 'border-gray-200'
-                                                } bg-gray-50`}
+                                                className={`text-gray-900 py-3 px-4 pr-12 rounded-lg text-base border ${errors.password && touched.password ? 'border-red-500' : 'border-gray-200'
+                                                    } bg-gray-50`}
                                                 placeholder="Enter your password"
                                                 placeholderTextColor="#9CA3AF"
                                             />
@@ -417,10 +433,10 @@ export default function Login() {
                                                 onPress={() => setShowPassword(!showPassword)}
                                                 className="absolute right-4 top-3"
                                             >
-                                                <Ionicons 
-                                                    name={showPassword ? "eye-off" : "eye"} 
-                                                    size={20} 
-                                                    color="#9CA3AF" 
+                                                <Ionicons
+                                                    name={showPassword ? "eye-off" : "eye"}
+                                                    size={20}
+                                                    color="#9CA3AF"
                                                 />
                                             </TouchableOpacity>
                                         </View>

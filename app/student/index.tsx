@@ -5,6 +5,7 @@ import type React from "react"
 import { View, Text, ScrollView, TouchableOpacity, Dimensions, RefreshControl } from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 import { useState } from "react"
+import { useStudentData } from "@/hooks/useStudentData"
 
 const { width } = Dimensions.get("window")
 
@@ -17,6 +18,8 @@ const StudentDashboard: React.FC = () => {
     // Simulate refresh
     setTimeout(() => setRefreshing(false), 1000)
   }
+
+  const {profile:Profile}=useStudentData()
 
   const studentModules = [
     // {
@@ -162,7 +165,19 @@ const StudentDashboard: React.FC = () => {
       icon: "beach-access",
       color: "#2ECC71",
     },
+  
   ]
+
+const getGreeting = (): { period: "morning" | "afternoon" | "evening"; message: string } => {
+  const hour = new Date().getHours()
+  if (hour < 12) {
+    return { period: "morning", message: "Good Morning" }
+  } else if (hour < 17) {
+    return { period: "afternoon", message: "Good Afternoon" }
+  } else {
+    return { period: "evening", message: "Good Evening" }
+  }
+}
 
   return (
     <ScrollView
@@ -172,8 +187,8 @@ const StudentDashboard: React.FC = () => {
     >
       {/* Header */}
       <View className="p-5 bg-[#6A5ACD] rounded-b-[30px] pb-10 items-center justify-center">
-        <Typography className="text-[32px] mt-8 font-extrabold text-white mb-2 text-center">Hello, Alex!</Typography>
-        {/* <Typography className="text-lg text-[#EAECEE] text-center">Your school journey starts here</Typography> */}
+        <Text className=" mt-8 font-extrabold text-white mb-2 text-center">{getGreeting().message} 👋, {Profile?.full_name}</Text>
+        {/* <Text className="text-lg text-[#EAECEE] text-center">Your school journey starts here</Text> */}
       </View>
 
       {/* Quick Stats */}
@@ -185,15 +200,15 @@ const StudentDashboard: React.FC = () => {
             style={{ width: (width - 48) / 2 }}
           >
             <Icon name={stat.icon} size={28} color={stat.color} />
-            <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-2">{stat.value}</Typography>
-            <Typography className="text-xs text-[#7F8C8D] mt-1">{stat.title}</Typography>
+            <Text className="text-2xl font-extrabold text-[#2C3E50] mt-2">{stat.value}</Text>
+            <Text className="text-xs text-[#7F8C8D] mt-1">{stat.title}</Text>
           </TouchableOpacity>
         ))}
       </View>
 
       {/* Module Grid */}
       <View className="px-4 mb-6">
-        <Typography className="text-[22px] font-bold text-[#2C3E50] mb-4">Quick Access</Typography>
+        <Text className="text-[22px] font-bold text-[#2C3E50] mb-4">Quick Access</Text>
         <View className="flex-row flex-wrap justify-between">
           {studentModules.map((module, index) => (
             <TouchableOpacity
@@ -208,8 +223,8 @@ const StudentDashboard: React.FC = () => {
               >
                 <Icon name={module.icon} size={24} color={module.color} />
               </View>
-              <Typography className="text-xs font-bold text-[#2C3E50] text-center mb-1">{module.title}</Typography>
-              <Typography className="text-[10px] text-[#7F8C8D] text-center">{module.description}</Typography>
+              <Text className="text-xs font-bold text-[#2C3E50] text-center mb-1">{module.title}</Text>
+              <Text className="text-[10px] text-[#7F8C8D] text-center">{module.description}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -217,7 +232,7 @@ const StudentDashboard: React.FC = () => {
 
       {/* Upcoming Events Section */}
       <View className="px-4 pb-6">
-        <Typography className="text-[22px] font-bold text-[#2C3E50] mb-4">Upcoming Events</Typography>
+        <Text className="text-[22px] font-bold text-[#2C3E50] mb-4">Upcoming Events</Text>
         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
           {upcomingEvents.map((event, index) => (
             <View key={index} className="flex-row items-center py-3 border-b border-[#DDE4EB] last:border-b-0">
@@ -228,10 +243,10 @@ const StudentDashboard: React.FC = () => {
                 <Icon name={event.icon} size={24} color={event.color} />
               </View>
               <View className="flex-1">
-                <Typography className="text-base font-semibold text-[#2C3E50] mb-0.5">{event.title}</Typography>
-                <Typography className="text-[13px] text-[#BDC3C7]">
+                <Text className="text-base font-semibold text-[#2C3E50] mb-0.5">{event.title}</Text>
+                <Text className="text-[13px] text-[#BDC3C7]">
                   {event.date} • {event.time}
-                </Typography>
+                </Text>
               </View>
               <Icon name="chevron-right" size={20} color="#BDC3C7" />
             </View>

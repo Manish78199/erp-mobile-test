@@ -135,7 +135,6 @@ export default function StudentLayout() {
       <Tabs.Screen name="calendar/index" options={{ href: null }} />
       <Tabs.Screen name="communication/index" options={{ href: null }} />
       <Tabs.Screen name="events/gallery/index" options={{ href: null }} />
-      <Tabs.Screen name="gallery/index" options={{ href: null }} />
       <Tabs.Screen name="exam/index" options={{ href: null }} />
       <Tabs.Screen name="fee/index" options={{ href: null }} />
       <Tabs.Screen name="hostel/index" options={{ href: null }} />
