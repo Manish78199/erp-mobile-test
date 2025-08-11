@@ -56,7 +56,7 @@ export const Button: React.FC<ButtonProps> = ({
       className={`rounded-lg items-center justify-center ${getVariantStyles()} ${getSizeStyles()} ${className}`}
       {...props}
     >
-      <Text className={`${getTextStyles()}`}>{title}</Text>
+      <Typography className={`${getTextStyles()}`}>{title}</Typography>
     </TouchableOpacity>
   );
 };

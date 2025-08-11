@@ -123,7 +123,7 @@ const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
           <Icon name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-        <Text className="text-xl font-bold text-white">Messages</Text>
+        <Typography className="text-xl font-bold text-white">Messages</Typography>
         <TouchableOpacity className="p-2" onPress={() => setShowComposeModal(true)}>
           <Icon name="edit" size={20} color="white" />
         </TouchableOpacity>
@@ -133,22 +133,22 @@ const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
       <View className="flex-row justify-between px-4 -mt-8 mb-5">
         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
           <Icon name="mail" size={28} color="#6A5ACD" />
-          <Text className="text-2xl font-extrabold text-[#2C3E50] mt-2">{messagesData.length}</Text>
-          <Text className="text-xs text-[#7F8C8D] mt-1">Total</Text>
+          <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-2">{messagesData.length}</Typography>
+          <Typography className="text-xs text-[#7F8C8D] mt-1">Total</Typography>
         </View>
         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
           <Icon name="mark-email-unread" size={28} color="#E74C3C" />
-          <Text className="text-2xl font-extrabold text-[#2C3E50] mt-2">
+          <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-2">
             {messagesData.filter(m => !m.isRead).length}
-          </Text>
-          <Text className="text-xs text-[#7F8C8D] mt-1">Unread</Text>
+          </Typography>
+          <Typography className="text-xs text-[#7F8C8D] mt-1">Unread</Typography>
         </View>
         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
           <Icon name="priority-high" size={28} color="#F39C12" />
-          <Text className="text-2xl font-extrabold text-[#2C3E50] mt-2">
+          <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-2">
             {messagesData.filter(m => m.priority === "high").length}
-          </Text>
-          <Text className="text-xs text-[#7F8C8D] mt-1">Priority</Text>
+          </Typography>
+          <Typography className="text-xs text-[#7F8C8D] mt-1">Priority</Typography>
         </View>
       </View>
 
@@ -163,9 +163,9 @@ const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
               }`}
               onPress={() => setSelectedTab(tab)}
             >
-              <Text className={`text-sm font-semibold ${selectedTab === tab ? "text-white" : "text-[#7F8C8D]"}`}>
+              <Typography className={`text-sm font-semibold ${selectedTab === tab ? "text-white" : "text-[#7F8C8D]"}`}>
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </Text>
+              </Typography>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -173,7 +173,7 @@ const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
 
       {/* Messages List */}
       <View className="p-4">
-        <Text className="text-xl font-bold text-[#2C3E50] mb-4">Inbox</Text>
+        <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Inbox</Typography>
         <View className="gap-3">
           {filteredMessages.map((message) => (
             <TouchableOpacity key={message.id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
@@ -186,20 +186,20 @@ const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
                     <Icon name={getTypeIcon(message.type)} size={20} color={getTypeColor(message.type)} />
                   </View>
                   <View className="flex-1">
-                    <Text className="text-sm font-bold text-[#2C3E50]">{message.sender}</Text>
-                    <Text className="text-xs text-[#7F8C8D]">{message.role}</Text>
+                    <Typography className="text-sm font-bold text-[#2C3E50]">{message.sender}</Typography>
+                    <Typography className="text-xs text-[#7F8C8D]">{message.role}</Typography>
                   </View>
                 </View>
                 <View className="items-end">
-                  <Text className="text-xs text-[#7F8C8D]">{formatDate(message.timestamp)}</Text>
-                  <Text className="text-xs text-[#7F8C8D]">{formatTime(message.timestamp)}</Text>
+                  <Typography className="text-xs text-[#7F8C8D]">{formatDate(message.timestamp)}</Typography>
+                  <Typography className="text-xs text-[#7F8C8D]">{formatTime(message.timestamp)}</Typography>
                 </View>
               </View>
 
               <View className="flex-row items-center justify-between mb-2">
-                <Text className={`text-sm font-semibold flex-1 ${!message.isRead ? "text-[#2C3E50]" : "text-[#7F8C8D]"}`}>
+                <Typography className={`text-sm font-semibold flex-1 ${!message.isRead ? "text-[#2C3E50]" : "text-[#7F8C8D]"}`}>
                   {message.subject}
-                </Text>
+                </Typography>
                 <View className="flex-row items-center ml-2">
                   {!message.isRead && (
                     <View className="w-2 h-2 bg-[#E74C3C] rounded-full mr-2" />
@@ -208,19 +208,19 @@ const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
                     className="px-2 py-1 rounded-lg"
                     style={{ backgroundColor: `${getPriorityColor(message.priority)}20` }}
                   >
-                    <Text
+                    <Typography
                       className="text-[10px] font-bold"
                       style={{ color: getPriorityColor(message.priority) }}
                     >
                       {message.priority.toUpperCase()}
-                    </Text>
+                    </Typography>
                   </View>
                 </View>
               </View>
 
-              <Text className="text-sm text-[#7F8C8D] leading-5" numberOfLines={2}>
+              <Typography className="text-sm text-[#7F8C8D] leading-5" numberOfLines={2}>
                 {message.message}
-              </Text>
+              </Typography>
             </TouchableOpacity>
           ))}
         </View>
@@ -236,31 +236,31 @@ const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
         <View className="flex-1 bg-black/50 justify-end">
           <View className="bg-white rounded-t-[25px] p-5 max-h-[80%]">
             <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-xl font-bold text-[#2C3E50]">Compose Message</Text>
+              <Typography className="text-xl font-bold text-[#2C3E50]">Compose Message</Typography>
               <TouchableOpacity onPress={() => setShowComposeModal(false)}>
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
             </View>
 
             <View className="mb-4">
-              <Text className="text-sm font-semibold text-[#2C3E50] mb-2">To:</Text>
+              <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">To:</Typography>
               <TouchableOpacity className="border border-[#DDE4EB] rounded-xl p-3 flex-row items-center justify-between">
-                <Text className="text-sm text-[#7F8C8D]">Select recipient</Text>
+                <Typography className="text-sm text-[#7F8C8D]">Select recipient</Typography>
                 <Icon name="keyboard-arrow-down" size={20} color="#7F8C8D" />
               </TouchableOpacity>
             </View>
 
             <View className="mb-4">
-              <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Subject:</Text>
-              <TextInput
+              <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">Subject:</Typography>
+              <TypographyInput
                 className="border border-[#DDE4EB] rounded-xl p-3 text-sm text-[#2C3E50]"
                 placeholder="Enter subject"
               />
             </View>
 
             <View className="mb-5">
-              <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Message:</Text>
-              <TextInput
+              <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">Message:</Typography>
+              <TypographyInput
                 className="border border-[#DDE4EB] rounded-xl p-3 text-sm text-[#2C3E50] min-h-[100px]"
                 placeholder="Type your message here..."
                 multiline
@@ -270,7 +270,7 @@ const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
             </View>
 
             <TouchableOpacity className="bg-[#6A5ACD] rounded-xl py-4 items-center">
-              <Text className="text-base font-bold text-white">Send Message</Text>
+              <Typography className="text-base font-bold text-white">Send Message</Typography>
             </TouchableOpacity>
           </View>
         </View>

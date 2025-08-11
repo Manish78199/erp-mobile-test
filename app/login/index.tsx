@@ -114,7 +114,7 @@
 
 //                         <View className="mb-6">
 //                             <Typography className="text-gray-500 text-sm mb-2">School Code</Typography>
-//                             <TextInput
+//                             <TypographyInput
 //                                 value={schoolCode}
                                 
 //                                 onChangeText={setSchoolCode}
@@ -128,7 +128,7 @@
 
 //                         <View className="mb-6">
 //                             <Typography className="text-gray-500 text-sm mb-2">User ID</Typography>
-//                             <TextInput
+//                             <TypographyInput
 //                                 value={userId}
 //                                 onChangeText={setUserId}
 //                            className="text-gray-900 py-1.5 px-2  rounded-md text-base pb-2 border border-gray-200 outline-none focus:ring-2 focus:ring-blue-500"
@@ -142,7 +142,7 @@
 //                         <View className="mb-8">
 //                             <Typography className="text-gray-400 text-sm mb-2">Password</Typography>
                            
-//                                 <TextInput
+//                                 <TypographyInput
 //                                     value={password}
 //                                     onChangeText={setPassword}
 //                                     secureTextEntry={!showPassword}
@@ -282,11 +282,7 @@ export default function Login() {
         onSubmit: submitForm
     });
 
-    // Debug log (remove in production)
-    useEffect(() => {
-        console.log({ values, errors, touched });
-    }, [values, errors, touched]);
-
+    
     return (
         <SafeAreaView className="flex-1">
             <StatusBar barStyle="light-content" backgroundColor="#5B7FE5" />
@@ -367,7 +363,7 @@ export default function Login() {
                                     {/* School Code Input */}
                                     <View className="mb-4">
                                         <Typography className="text-gray-700 text-sm mb-2 font-medium">School Code</Typography>
-                                        <TextInput
+                                        <TypographyInput
                                             value={values.school_code}
                                             onChangeText={handleChange('school_code')}
                                             onBlur={handleBlur('school_code')}
@@ -386,7 +382,7 @@ export default function Login() {
                                     {/* User ID Input */}
                                     <View className="mb-4">
                                         <Typography className="text-gray-700 text-sm mb-2 font-medium">User ID</Typography>
-                                        <TextInput
+                                        <TypographyInput
                                             value={values.userId}
                                             onChangeText={handleChange('userId')}
                                             onBlur={handleBlur('userId')}
@@ -406,7 +402,7 @@ export default function Login() {
                                     <View className="mb-6">
                                         <Typography className="text-gray-700 text-sm mb-2 font-medium">Password</Typography>
                                         <View className="relative">
-                                            <TextInput
+                                            <TypographyInput
                                                 value={values.password}
                                                 onChangeText={handleChange('password')}
                                                 onBlur={handleBlur('password')}

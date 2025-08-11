@@ -17,9 +17,9 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   return (
     <View className={`flex-row items-center justify-between mb-4 ${className}`}>
       <View className="flex-1">
-        <Text className="text-xl font-bold text-gray-900">{title}</Text>
+        <Typography className="text-xl font-bold text-gray-900">{title}</Typography>
         {subtitle && (
-          <Text className="text-gray-600 text-sm mt-1">{subtitle}</Text>
+          <Typography className="text-gray-600 text-sm mt-1">{subtitle}</Typography>
         )}
       </View>
       {rightComponent && (

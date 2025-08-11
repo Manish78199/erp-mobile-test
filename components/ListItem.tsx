@@ -28,9 +28,9 @@ export const ListItem: React.FC<ListItemProps> = ({
       )}
       
       <View className="flex-1">
-        <Text className="text-gray-900 font-medium text-base">{title}</Text>
+        <Typography className="text-gray-900 font-medium text-base">{title}</Typography>
         {subtitle && (
-          <Text className="text-gray-500 text-sm mt-1">{subtitle}</Text>
+          <Typography className="text-gray-500 text-sm mt-1">{subtitle}</Typography>
         )}
       </View>
       

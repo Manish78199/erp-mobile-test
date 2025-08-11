@@ -232,7 +232,7 @@
 //             }
 //           }}
 //         >
-//           <Text className={`text-sm font-semibold ${isToday ? "text-[#6A5ACD]" : "text-[#2C3E50]"}`}>{day}</Text>
+//           <Typography className={`text-sm font-semibold ${isToday ? "text-[#6A5ACD]" : "text-[#2C3E50]"}`}>{day}</Typography> 
 //           {attendance && (
 //             <View className="mt-1">
 //               <Icon name={getStatusIcon(attendance.status)} size={12} color={getStatusColor(attendance.status)} />
@@ -313,7 +313,7 @@
 //           </TouchableOpacity>
 //         </Link>
 //         <View className="flex-1 items-center">
-//           <Text className="text-xl font-bold text-white">Attendance Tracker</Text>
+//           <Typography className="text-xl font-bold text-white">Attendance Tracker</Typography> 
 //         </View>
 //         <TouchableOpacity className="p-2">
 //           <Icon name="analytics" size={20} color="white" />
@@ -327,22 +327,22 @@
 //             <View className="w-12 h-12 bg-[#2ECC7120] rounded-full items-center justify-center mb-2">
 //               <Icon name="check-circle" size={24} color="#2ECC71" />
 //             </View>
-//             <Text className="text-2xl font-extrabold text-[#2C3E50]">{attendanceData.overall.percentage}%</Text>
-//             <Text className="text-xs text-[#7F8C8D] text-center">Overall Attendance</Text>
+//             <Typography className="text-2xl font-extrabold text-[#2C3E50]">{attendanceData.overall.percentage}%</Typography> 
+//             <Typography className="text-xs text-[#7F8C8D] text-center">Overall Attendance</Typography> 
 //           </View>
 //           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
 //             <View className="w-12 h-12 bg-[#F39C1220] rounded-full items-center justify-center mb-2">
 //               <Icon name="local-fire-department" size={24} color="#F39C12" />
 //             </View>
-//             <Text className="text-2xl font-extrabold text-[#2C3E50]">{getAttendanceStreak()}</Text>
-//             <Text className="text-xs text-[#7F8C8D] text-center">Day Streak</Text>
+//             <Typography className="text-2xl font-extrabold text-[#2C3E50]">{getAttendanceStreak()}</Typography> 
+//             <Typography className="text-xs text-[#7F8C8D] text-center">Day Streak</Typography> 
 //           </View>
 //           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
 //             <View className="w-12 h-12 bg-[#E74C3C20] rounded-full items-center justify-center mb-2">
 //               <Icon name="event-busy" size={24} color="#E74C3C" />
 //             </View>
-//             <Text className="text-2xl font-extrabold text-[#2C3E50]">{attendanceData.overall.absentDays}</Text>
-//             <Text className="text-xs text-[#7F8C8D] text-center">Days Absent</Text>
+//             <Typography className="text-2xl font-extrabold text-[#2C3E50]">{attendanceData.overall.absentDays}</Typography> 
+//             <Typography className="text-xs text-[#7F8C8D] text-center">Days Absent</Typography> 
 //           </View>
 //         </View>
 
@@ -350,18 +350,18 @@
 //         <View className="flex-row justify-between">
 //           <View className="bg-white rounded-2xl p-3 items-center flex-1 mx-1 shadow-lg elevation-5">
 //             <Icon name="access-time" size={20} color="#F39C12" />
-//             <Text className="text-lg font-bold text-[#2C3E50] mt-1">{attendanceData.overall.lateArrivals}</Text>
-//             <Text className="text-[10px] text-[#7F8C8D] text-center">Late Arrivals</Text>
+//             <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{attendanceData.overall.lateArrivals}</Typography> 
+//             <Typography className="text-[10px] text-[#7F8C8D] text-center">Late Arrivals</Typography> 
 //           </View>
 //           <View className="bg-white rounded-2xl p-3 items-center flex-1 mx-1 shadow-lg elevation-5">
 //             <Icon name="exit-to-app" size={20} color="#9B59B6" />
-//             <Text className="text-lg font-bold text-[#2C3E50] mt-1">{attendanceData.overall.earlyDepartures}</Text>
-//             <Text className="text-[10px] text-[#7F8C8D] text-center">Early Exits</Text>
+//             <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{attendanceData.overall.earlyDepartures}</Typography> 
+//             <Typography className="text-[10px] text-[#7F8C8D] text-center">Early Exits</Typography> 
 //           </View>
 //           <View className="bg-white rounded-2xl p-3 items-center flex-1 mx-1 shadow-lg elevation-5">
 //             <Icon name="school" size={20} color="#6A5ACD" />
-//             <Text className="text-lg font-bold text-[#2C3E50] mt-1">{attendanceData.overall.totalDays}</Text>
-//             <Text className="text-[10px] text-[#7F8C8D] text-center">Total Days</Text>
+//             <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{attendanceData.overall.totalDays}</Typography> 
+//             <Typography className="text-[10px] text-[#7F8C8D] text-center">Total Days</Typography> 
 //           </View>
 //         </View>
 //       </View>
@@ -377,9 +377,9 @@
 //               }`}
 //               onPress={() => setSelectedView(view as any)}
 //             >
-//               <Text className={`text-sm font-semibold ${selectedView === view ? "text-white" : "text-[#7F8C8D]"}`}>
+//               <Typography className={`text-sm font-semibold ${selectedView === view ? "text-white" : "text-[#7F8C8D]"}`}>
 //                 {view.charAt(0).toUpperCase() + view.slice(1)}
-//               </Text>
+//               </Typography> 
 //             </TouchableOpacity>
 //           ))}
 //         </View>
@@ -394,9 +394,9 @@
 //               <TouchableOpacity onPress={() => navigateMonth(-1)} className="p-2">
 //                 <Icon name="chevron-left" size={24} color="#6A5ACD" />
 //               </TouchableOpacity>
-//               <Text className="text-lg font-bold text-[#2C3E50]">
+//               <Typography className="text-lg font-bold text-[#2C3E50]">
 //                 {monthNames[selectedMonth.getMonth()]} {selectedMonth.getFullYear()}
-//               </Text>
+//               </Typography> 
 //               <TouchableOpacity onPress={() => navigateMonth(1)} className="p-2">
 //                 <Icon name="chevron-right" size={24} color="#6A5ACD" />
 //               </TouchableOpacity>
@@ -406,20 +406,20 @@
 //             <View className="bg-[#F8F9FA] rounded-xl p-3 mb-4">
 //               <View className="flex-row justify-between items-center">
 //                 <View className="items-center">
-//                   <Text className="text-lg font-bold text-[#2ECC71]">{monthlyStats.present}</Text>
-//                   <Text className="text-xs text-[#7F8C8D]">Present</Text>
+//                   <Typography className="text-lg font-bold text-[#2ECC71]">{monthlyStats.present}</Typography> 
+//                   <Typography className="text-xs text-[#7F8C8D]">Present</Typography> 
 //                 </View>
 //                 <View className="items-center">
-//                   <Text className="text-lg font-bold text-[#E74C3C]">{monthlyStats.absent}</Text>
-//                   <Text className="text-xs text-[#7F8C8D]">Absent</Text>
+//                   <Typography className="text-lg font-bold text-[#E74C3C]">{monthlyStats.absent}</Typography> 
+//                   <Typography className="text-xs text-[#7F8C8D]">Absent</Typography> 
 //                 </View>
 //                 <View className="items-center">
-//                   <Text className="text-lg font-bold text-[#F39C12]">{monthlyStats.late}</Text>
-//                   <Text className="text-xs text-[#7F8C8D]">Late</Text>
+//                   <Typography className="text-lg font-bold text-[#F39C12]">{monthlyStats.late}</Typography> 
+//                   <Typography className="text-xs text-[#7F8C8D]">Late</Typography> 
 //                 </View>
 //                 <View className="items-center">
-//                   <Text className="text-lg font-bold text-[#6A5ACD]">{monthlyStats.percentage.toFixed(1)}%</Text>
-//                   <Text className="text-xs text-[#7F8C8D]">Rate</Text>
+//                   <Typography className="text-lg font-bold text-[#6A5ACD]">{monthlyStats.percentage.toFixed(1)}%</Typography> 
+//                   <Typography className="text-xs text-[#7F8C8D]">Rate</Typography> 
 //                 </View>
 //               </View>
 //             </View>
@@ -428,7 +428,7 @@
 //             <View className="flex-row mb-2">
 //               {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
 //                 <View key={day} className="flex-1 items-center py-2">
-//                   <Text className="text-xs font-semibold text-[#7F8C8D]">{day}</Text>
+//                   <Typography className="text-xs font-semibold text-[#7F8C8D]">{day}</Typography> 
 //                 </View>
 //               ))}
 //             </View>
@@ -438,7 +438,7 @@
 
 //             {/* Legend */}
 //             <View className="mt-4 pt-4 border-t border-[#EAECEE]">
-//               <Text className="text-sm font-semibold text-[#2C3E50] mb-3">Legend</Text>
+//               <Typography className="text-sm font-semibold text-[#2C3E50] mb-3">Legend</Typography> 
 //               <View className="flex-row flex-wrap">
 //                 {[
 //                   { status: "present", label: "Present" },
@@ -449,7 +449,7 @@
 //                 ].map((item) => (
 //                   <View key={item.status} className="flex-row items-center mr-4 mb-2">
 //                     <Icon name={getStatusIcon(item.status)} size={16} color={getStatusColor(item.status)} />
-//                     <Text className="text-xs text-[#7F8C8D] ml-1">{item.label}</Text>
+//                     <Typography className="text-xs text-[#7F8C8D] ml-1">{item.label}</Typography> 
 //                   </View>
 //                 ))}
 //               </View>
@@ -460,20 +460,20 @@
 
 //       {/* Subject-wise Attendance */}
 //       <View className="px-4 mb-5">
-//         <Text className="text-xl font-bold text-[#2C3E50] mb-4">Subject-wise Attendance</Text>
+//         <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Subject-wise Attendance</Typography> 
 //         <View className="gap-3">
 //           {attendanceData.subjects.map((subject, index) => (
 //             <View key={index} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
 //               <View className="flex-row items-center justify-between mb-3">
 //                 <View className="flex-row items-center">
 //                   <View className="w-4 h-4 rounded-full mr-3" style={{ backgroundColor: subject.color }} />
-//                   <Text className="text-base font-bold text-[#2C3E50]">{subject.name}</Text>
+//                   <Typography className="text-base font-bold text-[#2C3E50]">{subject.name}</Typography> 
 //                 </View>
 //                 <View className="items-end">
-//                   <Text className="text-lg font-bold text-[#6A5ACD]">{subject.percentage.toFixed(1)}%</Text>
-//                   <Text className="text-xs text-[#7F8C8D]">
+//                   <Typography className="text-lg font-bold text-[#6A5ACD]">{subject.percentage.toFixed(1)}%</Typography> 
+//                   <Typography className="text-xs text-[#7F8C8D]">
 //                     {subject.present}/{subject.total}
-//                   </Text>
+//                   </Typography> 
 //                 </View>
 //               </View>
 
@@ -490,9 +490,9 @@
 
 //               {/* Subject Stats */}
 //               <View className="flex-row justify-between">
-//                 <Text className="text-xs text-[#2ECC71]">Present: {subject.present}</Text>
-//                 <Text className="text-xs text-[#E74C3C]">Absent: {subject.total - subject.present}</Text>
-//                 <Text className="text-xs text-[#7F8C8D]">Total: {subject.total}</Text>
+//                 <Typography className="text-xs text-[#2ECC71]">Present: {subject.present}</Typography> 
+//                 <Typography className="text-xs text-[#E74C3C]">Absent: {subject.total - subject.present}</Typography> 
+//                 <Typography className="text-xs text-[#7F8C8D]">Total: {subject.total}</Typography> 
 //               </View>
 //             </View>
 //           ))}
@@ -501,7 +501,7 @@
 
 //       {/* Recent Activity */}
 //       <View className="px-4 mb-8">
-//         <Text className="text-xl font-bold text-[#2C3E50] mb-4">Recent Activity</Text>
+//         <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Recent Activity</Typography> 
 //         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
 //           {attendanceData.monthly
 //             .slice(-5)
@@ -523,20 +523,20 @@
 //                     <Icon name={getStatusIcon(record.status)} size={20} color={getStatusColor(record.status)} />
 //                   </View>
 //                   <View>
-//                     <Text className="text-base font-semibold text-[#2C3E50]">
+//                     <Typography className="text-base font-semibold text-[#2C3E50]">
 //                       {new Date(record.date).toLocaleDateString("en-US", {
 //                         weekday: "long",
 //                         month: "short",
 //                         day: "numeric",
 //                       })}
-//                     </Text>
-//                     <Text className="text-sm text-[#7F8C8D]" style={{ color: getStatusColor(record.status) }}>
+//                     </Typography> 
+//                     <Typography className="text-sm text-[#7F8C8D]" style={{ color: getStatusColor(record.status) }}>
 //                       {record.status.charAt(0).toUpperCase() + record.status.slice(1)}
-//                     </Text>
+//                     </Typography> 
 //                   </View>
 //                 </View>
 //                 <View className="items-end">
-//                   <Text className="text-sm font-semibold text-[#2C3E50]">{record.subjects.length} classes</Text>
+//                   <Typography className="text-sm font-semibold text-[#2C3E50]">{record.subjects.length} classes</Typography> 
 //                   <Icon name="chevron-right" size={16} color="#7F8C8D" />
 //                 </View>
 //               </TouchableOpacity>
@@ -554,7 +554,7 @@
 //         <View className="flex-1 bg-black/50 justify-end">
 //           <View className="bg-white rounded-t-[25px] p-5 max-h-[80%]">
 //             <View className="flex-row justify-between items-center mb-5">
-//               <Text className="text-xl font-bold text-[#2C3E50]">Attendance Details</Text>
+//               <Typography className="text-xl font-bold text-[#2C3E50]">Attendance Details</Typography> 
 //               <TouchableOpacity onPress={() => setShowDetailsModal(false)}>
 //                 <Icon name="close" size={24} color="#2C3E50" />
 //               </TouchableOpacity>
@@ -574,21 +574,21 @@
 //                       color={getStatusColor(selectedDate.status)}
 //                     />
 //                   </View>
-//                   <Text className="text-xl font-bold text-[#2C3E50] mb-1">
+//                   <Typography className="text-xl font-bold text-[#2C3E50] mb-1">
 //                     {selectedDate.date.toLocaleDateString("en-US", {
 //                       weekday: "long",
 //                       year: "numeric",
 //                       month: "long",
 //                       day: "numeric",
 //                     })}
-//                   </Text>
+//                   </Typography> 
 //                   <View
 //                     className="px-4 py-2 rounded-xl"
 //                     style={{ backgroundColor: `${getStatusColor(selectedDate.status)}20` }}
 //                   >
-//                     <Text className="text-sm font-bold" style={{ color: getStatusColor(selectedDate.status) }}>
+//                     <Typography className="text-sm font-bold" style={{ color: getStatusColor(selectedDate.status) }}>
 //                       {selectedDate.status.toUpperCase()}
-//                     </Text>
+//                     </Typography> 
 //                   </View>
 //                 </View>
 
@@ -598,19 +598,19 @@
 //                     {selectedDate.reason && (
 //                       <View className="flex-row items-center mb-2">
 //                         <Icon name="info" size={16} color="#6A5ACD" />
-//                         <Text className="text-sm text-[#2C3E50] ml-2">Reason: {selectedDate.reason}</Text>
+//                         <Typography className="text-sm text-[#2C3E50] ml-2">Reason: {selectedDate.reason}</Typography> 
 //                       </View>
 //                     )}
 //                     {selectedDate.arrivalTime && (
 //                       <View className="flex-row items-center mb-2">
 //                         <Icon name="login" size={16} color="#F39C12" />
-//                         <Text className="text-sm text-[#2C3E50] ml-2">Arrived at: {selectedDate.arrivalTime}</Text>
+//                         <Typography className="text-sm text-[#2C3E50] ml-2">Arrived at: {selectedDate.arrivalTime}</Typography> 
 //                       </View>
 //                     )}
 //                     {selectedDate.departureTime && (
 //                       <View className="flex-row items-center">
 //                         <Icon name="logout" size={16} color="#9B59B6" />
-//                         <Text className="text-sm text-[#2C3E50] ml-2">Left at: {selectedDate.departureTime}</Text>
+//                         <Typography className="text-sm text-[#2C3E50] ml-2">Left at: {selectedDate.departureTime}</Typography> 
 //                       </View>
 //                     )}
 //                   </View>
@@ -619,7 +619,7 @@
 //                 {/* Subject Details */}
 //                 {selectedDate.subjects.length > 0 && (
 //                   <View>
-//                     <Text className="text-lg font-bold text-[#2C3E50] mb-4">Class-wise Attendance</Text>
+//                     <Typography className="text-lg font-bold text-[#2C3E50] mb-4">Class-wise Attendance</Typography> 
 //                     <View className="gap-3">
 //                       {selectedDate.subjects.map((subject: any, index: number) => (
 //                         <View key={index} className="bg-[#F8F9FA] rounded-xl p-3">
@@ -630,13 +630,13 @@
 //                                 size={16}
 //                                 color={getStatusColor(subject.status)}
 //                               />
-//                               <Text className="text-sm font-semibold text-[#2C3E50] ml-2">{subject.name}</Text>
+//                               <Typography className="text-sm font-semibold text-[#2C3E50] ml-2">{subject.name}</Typography> 
 //                             </View>
 //                             <View className="items-end">
-//                               <Text className="text-xs text-[#7F8C8D]">{subject.time}</Text>
-//                               <Text className="text-xs font-semibold" style={{ color: getStatusColor(subject.status) }}>
+//                               <Typography className="text-xs text-[#7F8C8D]">{subject.time}</Typography> 
+//                               <Typography className="text-xs font-semibold" style={{ color: getStatusColor(subject.status) }}>
 //                                 {subject.status.toUpperCase()}
-//                               </Text>
+//                               </Typography> 
 //                             </View>
 //                           </View>
 //                         </View>
@@ -677,6 +677,7 @@ import {
     getAttendanceDetails, 
  
 } from '@/service/student/attendance';
+import { Typography } from '@/components/Typography';
 
 interface AttendanceSummary {
     session: string;
@@ -867,9 +868,9 @@ const AttendanceScreen: React.FC = () => {
                         }
                     }}
                 >
-                    <Text className={`text-sm font-semibold ${isToday ? "text-[#6A5ACD]" : "text-[#2C3E50]"}`}>
+                    <Typography className={`text-sm font-semibold ${isToday ? "text-[#6A5ACD]" : "text-[#2C3E50]"}`}>
                         {day}
-                    </Text>
+                    </Typography> 
                     {attendance && (
                         <View className="mt-1">
                             <Icon name={getStatusIcon(attendance)} size={12} color={getStatusColor(attendance)} />
@@ -934,7 +935,7 @@ const AttendanceScreen: React.FC = () => {
         return (
             <View className="flex-1 bg-[#F0F4F8] items-center justify-center">
                 <ActivityIndicator size="large" color="#6A5ACD" />
-                <Text className="text-[#2C3E50] mt-4">Loading attendance data...</Text>
+                <Typography className="text-[#2C3E50] mt-4">Loading attendance data...</Typography> 
             </View>
         );
     }
@@ -955,7 +956,7 @@ const AttendanceScreen: React.FC = () => {
                     </TouchableOpacity>
                 </Link>
                 <View className="flex-1 items-center">
-                    <Text className="text-xl font-bold text-white">Attendance </Text>
+                    <Typography className="text-xl font-bold text-white">Attendance </Typography> 
                 </View>
                 <TouchableOpacity className="p-2" onPress={onRefresh}>
                     <Icon name="refresh" size={20} color="white" />
@@ -969,28 +970,28 @@ const AttendanceScreen: React.FC = () => {
                         <View className="w-12 h-12 bg-[#2ECC7120] rounded-full items-center justify-center mb-2">
                             <Icon name="check-circle" size={24} color="#2ECC71" />
                         </View>
-                        <Text className="text-2xl font-extrabold text-[#2C3E50]">
+                        <Typography className="text-2xl font-extrabold text-[#2C3E50]">
                             {attendanceSummary?.PRESENT.percentage.toFixed(1) || 0}%
-                        </Text>
-                        <Text className="text-xs text-[#7F8C8D] text-center">Overall Attendance</Text>
+                        </Typography> 
+                        <Typography className="text-xs text-[#7F8C8D] text-center">Overall Attendance</Typography> 
                     </View>
                     <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
                         <View className="w-12 h-12 bg-[#F39C1220] rounded-full items-center justify-center mb-2">
                             <Icon name="local-fire-department" size={24} color="#F39C12" />
                         </View>
-                        <Text className="text-2xl font-extrabold text-[#2C3E50]">
+                        <Typography className="text-2xl font-extrabold text-[#2C3E50]">
                             {attendanceSummary?.PRESENT.count || 0}
-                        </Text>
-                        <Text className="text-xs text-[#7F8C8D] text-center">Present Days</Text>
+                        </Typography> 
+                        <Typography className="text-xs text-[#7F8C8D] text-center">Present Days</Typography> 
                     </View>
                     <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
                         <View className="w-12 h-12 bg-[#E74C3C20] rounded-full items-center justify-center mb-2">
                             <Icon name="event-busy" size={24} color="#E74C3C" />
                         </View>
-                        <Text className="text-2xl font-extrabold text-[#2C3E50]">
+                        <Typography className="text-2xl font-extrabold text-[#2C3E50]">
                             {attendanceSummary?.ABSENT.count || 0}
-                        </Text>
-                        <Text className="text-xs text-[#7F8C8D] text-center">Days Absent</Text>
+                        </Typography> 
+                        <Typography className="text-xs text-[#7F8C8D] text-center">Days Absent</Typography> 
                     </View>
                 </View>
 
@@ -998,24 +999,24 @@ const AttendanceScreen: React.FC = () => {
                 <View className="flex-row justify-between">
                     <View className="bg-white rounded-2xl p-3 items-center flex-1 mx-1 shadow-lg elevation-5">
                         <Icon name="access-time" size={20} color="#F39C12" />
-                        <Text className="text-lg font-bold text-[#2C3E50] mt-1">
+                        <Typography className="text-lg font-bold text-[#2C3E50] mt-1">
                             {attendanceSummary?.LATE.count || 0}
-                        </Text>
-                        <Text className="text-[10px] text-[#7F8C8D] text-center">Late Arrivals</Text>
+                        </Typography> 
+                        <Typography className="text-[10px] text-[#7F8C8D] text-center">Late Arrivals</Typography> 
                     </View>
                     <View className="bg-white rounded-2xl p-3 items-center flex-1 mx-1 shadow-lg elevation-5">
                         <Icon name="exit-to-app" size={20} color="#9B59B6" />
-                        <Text className="text-lg font-bold text-[#2C3E50] mt-1">
+                        <Typography className="text-lg font-bold text-[#2C3E50] mt-1">
                             {attendanceSummary?.LEAVE.count || 0}
-                        </Text>
-                        <Text className="text-[10px] text-[#7F8C8D] text-center">Leave Days</Text>
+                        </Typography> 
+                        <Typography className="text-[10px] text-[#7F8C8D] text-center">Leave Days</Typography> 
                     </View>
                     <View className="bg-white rounded-2xl p-3 items-center flex-1 mx-1 shadow-lg elevation-5">
                         <Icon name="school" size={20} color="#6A5ACD" />
-                        <Text className="text-lg font-bold text-[#2C3E50] mt-1">
+                        <Typography className="text-lg font-bold text-[#2C3E50] mt-1">
                             {attendanceSummary?.total_days || 0}
-                        </Text>
-                        <Text className="text-[10px] text-[#7F8C8D] text-center">Total Days</Text>
+                        </Typography> 
+                        <Typography className="text-[10px] text-[#7F8C8D] text-center">Total Days</Typography> 
                     </View>
                 </View>
             </View>
@@ -1031,11 +1032,11 @@ const AttendanceScreen: React.FC = () => {
                             }`}
                             onPress={() => setSelectedView(view as any)}
                         >
-                            <Text className={`text-sm font-semibold ${
+                            <Typography className={`text-sm font-semibold ${
                                 selectedView === view ? "text-white" : "text-[#7F8C8D]"
                             }`}>
                                 {view.charAt(0).toUpperCase() + view.slice(1)}
-                            </Text>
+                            </Typography> 
                         </TouchableOpacity>
                     ))}
                 </View>
@@ -1050,9 +1051,9 @@ const AttendanceScreen: React.FC = () => {
                             <TouchableOpacity onPress={() => navigateMonth(-1)} className="p-2">
                                 <Icon name="chevron-left" size={24} color="#6A5ACD" />
                             </TouchableOpacity>
-                            <Text className="text-lg font-bold text-[#2C3E50]">
+                            <Typography className="text-lg font-bold text-[#2C3E50]">
                                 {monthNames[selectedMonth.getMonth()]} {selectedMonth.getFullYear()}
-                            </Text>
+                            </Typography> 
                             <TouchableOpacity onPress={() => navigateMonth(1)} className="p-2">
                                 <Icon name="chevron-right" size={24} color="#6A5ACD" />
                             </TouchableOpacity>
@@ -1062,22 +1063,22 @@ const AttendanceScreen: React.FC = () => {
                         <View className="bg-[#F8F9FA] rounded-xl p-3 mb-4">
                             <View className="flex-row justify-between items-center">
                                 <View className="items-center">
-                                    <Text className="text-lg font-bold text-[#2ECC71]">{monthlyStats.present}</Text>
-                                    <Text className="text-xs text-[#7F8C8D]">Present</Text>
+                                    <Typography className="text-lg font-bold text-[#2ECC71]">{monthlyStats.present}</Typography> 
+                                    <Typography className="text-xs text-[#7F8C8D]">Present</Typography> 
                                 </View>
                                 <View className="items-center">
-                                    <Text className="text-lg font-bold text-[#E74C3C]">{monthlyStats.absent}</Text>
-                                    <Text className="text-xs text-[#7F8C8D]">Absent</Text>
+                                    <Typography className="text-lg font-bold text-[#E74C3C]">{monthlyStats.absent}</Typography> 
+                                    <Typography className="text-xs text-[#7F8C8D]">Absent</Typography> 
                                 </View>
                                 <View className="items-center">
-                                    <Text className="text-lg font-bold text-[#F39C12]">{monthlyStats.late}</Text>
-                                    <Text className="text-xs text-[#7F8C8D]">Late</Text>
+                                    <Typography className="text-lg font-bold text-[#F39C12]">{monthlyStats.late}</Typography> 
+                                    <Typography className="text-xs text-[#7F8C8D]">Late</Typography> 
                                 </View>
                                 <View className="items-center">
-                                    <Text className="text-lg font-bold text-[#6A5ACD]">
+                                    <Typography className="text-lg font-bold text-[#6A5ACD]">
                                         {monthlyStats.percentage.toFixed(1)}%
-                                    </Text>
-                                    <Text className="text-xs text-[#7F8C8D]">Rate</Text>
+                                    </Typography> 
+                                    <Typography className="text-xs text-[#7F8C8D]">Rate</Typography> 
                                 </View>
                             </View>
                         </View>
@@ -1086,7 +1087,7 @@ const AttendanceScreen: React.FC = () => {
                         <View className="flex-row mb-2">
                             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
                                 <View key={day} className="flex-1 items-center py-2">
-                                    <Text className="text-xs font-semibold text-[#7F8C8D]">{day}</Text>
+                                    <Typography className="text-xs font-semibold text-[#7F8C8D]">{day}</Typography> 
                                 </View>
                             ))}
                         </View>
@@ -1095,7 +1096,7 @@ const AttendanceScreen: React.FC = () => {
                         {calendarLoading ? (
                             <View className="items-center py-8">
                                 <ActivityIndicator size="small" color="#6A5ACD" />
-                                <Text className="text-[#7F8C8D] mt-2">Loading calendar...</Text>
+                                <Typography className="text-[#7F8C8D] mt-2">Loading calendar...</Typography> 
                             </View>
                         ) : (
                             <View>{renderCalendarDays()}</View>
@@ -1103,7 +1104,7 @@ const AttendanceScreen: React.FC = () => {
 
                         {/* Legend */}
                         <View className="mt-4 pt-4 border-t border-[#EAECEE]">
-                            <Text className="text-sm font-semibold text-[#2C3E50] mb-3">Legend</Text>
+                            <Typography className="text-sm font-semibold text-[#2C3E50] mb-3">Legend</Typography> 
                             <View className="flex-row flex-wrap">
                                 {[
                                     { status: "PRESENT", label: "Present" },
@@ -1114,7 +1115,7 @@ const AttendanceScreen: React.FC = () => {
                                 ].map((item) => (
                                     <View key={item.status} className="flex-row items-center mr-4 mb-2">
                                         <Icon name={getStatusIcon(item.status)} size={16} color={getStatusColor(item.status)} />
-                                        <Text className="text-xs text-[#7F8C8D] ml-1">{item.label}</Text>
+                                        <Typography className="text-xs text-[#7F8C8D] ml-1">{item.label}</Typography> 
                                     </View>
                                 ))}
                             </View>
@@ -1126,22 +1127,22 @@ const AttendanceScreen: React.FC = () => {
             {/* Subject-wise Attendance */}
             {subjectAttendance.length > 0 && (
                 <View className="px-4 mb-5">
-                    <Text className="text-xl font-bold text-[#2C3E50] mb-4">Subject-wise Attendance</Text>
+                    <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Subject-wise Attendance</Typography> 
                     <View className="gap-3">
                         {subjectAttendance.map((subject, index) => (
                             <View key={index} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
                                 <View className="flex-row items-center justify-between mb-3">
                                     <View className="flex-row items-center">
                                         <View className="w-4 h-4 rounded-full mr-3" style={{ backgroundColor: subject.color }} />
-                                        <Text className="text-base font-bold text-[#2C3E50]">{subject.name}</Text>
+                                        <Typography className="text-base font-bold text-[#2C3E50]">{subject.name}</Typography> 
                                     </View>
                                     <View className="items-end">
-                                        <Text className="text-lg font-bold text-[#6A5ACD]">
+                                        <Typography className="text-lg font-bold text-[#6A5ACD]">
                                             {subject.percentage.toFixed(1)}%
-                                        </Text>
-                                        <Text className="text-xs text-[#7F8C8D]">
+                                        </Typography> 
+                                        <Typography className="text-xs text-[#7F8C8D]">
                                             {subject.present}/{subject.total}
-                                        </Text>
+                                        </Typography> 
                                     </View>
                                 </View>
 
@@ -1158,9 +1159,9 @@ const AttendanceScreen: React.FC = () => {
 
                                 {/* Subject Stats */}
                                 <View className="flex-row justify-between">
-                                    <Text className="text-xs text-[#2ECC71]">Present: {subject.present}</Text>
-                                    <Text className="text-xs text-[#E74C3C]">Absent: {subject.total - subject.present}</Text>
-                                    <Text className="text-xs text-[#7F8C8D]">Total: {subject.total}</Text>
+                                    <Typography className="text-xs text-[#2ECC71]">Present: {subject.present}</Typography> 
+                                    <Typography className="text-xs text-[#E74C3C]">Absent: {subject.total - subject.present}</Typography> 
+                                    <Typography className="text-xs text-[#7F8C8D]">Total: {subject.total}</Typography> 
                                 </View>
                             </View>
                         ))}
@@ -1178,7 +1179,7 @@ const AttendanceScreen: React.FC = () => {
                 <View className="flex-1 bg-black/50 justify-end">
                     <View className="bg-white rounded-t-[25px] p-5 max-h-[80%]">
                         <View className="flex-row justify-between items-center mb-5">
-                            <Text className="text-xl font-bold text-[#2C3E50]">Attendance Details</Text>
+                            <Typography className="text-xl font-bold text-[#2C3E50]">Attendance Details</Typography> 
                             <TouchableOpacity onPress={() => setShowDetailsModal(false)}>
                                 <Icon name="close" size={24} color="#2C3E50" />
                             </TouchableOpacity>
@@ -1198,21 +1199,21 @@ const AttendanceScreen: React.FC = () => {
                                             color={getStatusColor(selectedDate.status)}
                                         />
                                     </View>
-                                    <Text className="text-xl font-bold text-[#2C3E50] mb-1">
+                                    <Typography className="text-xl font-bold text-[#2C3E50] mb-1">
                                         {selectedDate.date.toLocaleDateString("en-US", {
                                             weekday: "long",
                                             year: "numeric",
                                             month: "long",
                                             day: "numeric",
                                         })}
-                                    </Text>
+                                    </Typography> 
                                     <View
                                         className="px-4 py-2 rounded-xl"
                                         style={{ backgroundColor: `${getStatusColor(selectedDate.status)}20` }}
                                     >
-                                        <Text className="text-sm font-bold" style={{ color: getStatusColor(selectedDate.status) }}>
+                                        <Typography className="text-sm font-bold" style={{ color: getStatusColor(selectedDate.status) }}>
                                             {selectedDate.status}
-                                        </Text>
+                                        </Typography> 
                                     </View>
                                 </View>
                             </ScrollView>

@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Link } from 'expo-router';
 import { getCallenderEvent } from '@/service/student/callenderEvent';
 import { AlertContext } from '@/context/Alert/context';
+import { Typography } from '@/components/Typography';
 
 interface CalendarEvent {
   _id?: string;
@@ -183,7 +184,7 @@ const CalendarScreen: React.FC = () => {
             }`}
           >
             {day}
-          </Text>
+          </Text> 
           {hasEvents && (
             <View className="flex-row mt-1 flex-wrap justify-center max-w-[90%]">
               {allEvents.slice(0, 3).map((event, index) => (
@@ -194,7 +195,7 @@ const CalendarScreen: React.FC = () => {
                 />
               ))}
               {allEvents.length > 3 && (
-                <Text className="text-[8px] text-[#7F8C8D] ml-1 font-bold">+{allEvents.length - 3}</Text>
+                <Typography className="text-[8px] text-[#7F8C8D] ml-1 font-bold">+{allEvents.length - 3}</Typography> 
               )}
             </View>
           )}
@@ -271,7 +272,7 @@ const CalendarScreen: React.FC = () => {
           </TouchableOpacity>
         </Link>
         <View className="flex-1 items-center">
-          <Text className="text-xl font-bold text-white">Calendar</Text>
+          <Typography className="text-xl font-bold text-white">Calendar</Typography> 
         </View>
         <TouchableOpacity className="p-2" onPress={fetchCalendarEvents}>
           <Icon name="refresh" size={20} color="white" />
@@ -285,29 +286,29 @@ const CalendarScreen: React.FC = () => {
             <View className="w-12 h-12 bg-[#6A5ACD20] rounded-full items-center justify-center mb-2">
               <Icon name="event" size={24} color="#6A5ACD" />
             </View>
-            <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.totalEvents}</Text>
-            <Text className="text-xs text-[#7F8C8D] text-center">Total Events</Text>
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.totalEvents}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] text-center">Total Events</Typography> 
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#E74C3C20] rounded-full items-center justify-center mb-2">
               <Icon name="celebration" size={24} color="#E74C3C" />
             </View>
-            <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.holidays}</Text>
-            <Text className="text-xs text-[#7F8C8D] text-center">Holidays</Text>
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.holidays}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] text-center">Holidays</Typography> 
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#2ECC7120] rounded-full items-center justify-center mb-2">
               <Icon name="school" size={24} color="#2ECC71" />
             </View>
-            <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.regularEvents}</Text>
-            <Text className="text-xs text-[#7F8C8D] text-center">Academic</Text>
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.regularEvents}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] text-center">Academic</Typography> 
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#F39C1220] rounded-full items-center justify-center mb-2">
               <Icon name="today" size={24} color="#F39C12" />
             </View>
-            <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.todayEvents}</Text>
-            <Text className="text-xs text-[#7F8C8D] text-center">Today</Text>
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.todayEvents}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] text-center">Today</Typography> 
           </View>
         </View>
       </View>
@@ -319,9 +320,9 @@ const CalendarScreen: React.FC = () => {
             <TouchableOpacity onPress={() => navigateMonth(-1)} className="p-2">
               <Icon name="chevron-left" size={24} color="#6A5ACD" />
             </TouchableOpacity>
-            <Text className="text-lg font-bold text-[#2C3E50]">
+            <Typography className="text-lg font-bold text-[#2C3E50]">
               {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
-            </Text>
+            </Typography> 
             <TouchableOpacity onPress={() => navigateMonth(1)} className="p-2">
               <Icon name="chevron-right" size={24} color="#6A5ACD" />
             </TouchableOpacity>
@@ -331,7 +332,7 @@ const CalendarScreen: React.FC = () => {
           {isLoading && (
             <View className="text-center py-6">
               <Icon name="refresh" size={32} color="#6A5ACD" />
-              <Text className="text-[#7F8C8D] mt-2">Loading calendar events...</Text>
+              <Typography className="text-[#7F8C8D] mt-2">Loading calendar events...</Typography> 
             </View>
           )}
 
@@ -342,7 +343,7 @@ const CalendarScreen: React.FC = () => {
               <View className="flex-row mb-2">
                 {dayNames.map((day) => (
                   <View key={day} className="flex-1 items-center py-2">
-                    <Text className="text-xs font-semibold text-[#7F8C8D]">{day}</Text>
+                    <Typography className="text-xs font-semibold text-[#7F8C8D]">{day}</Typography> 
                   </View>
                 ))}
               </View>
@@ -367,11 +368,11 @@ const CalendarScreen: React.FC = () => {
               onPress={() => setSelectedFilter(type.id)}
             >
               <View className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: type.color }} />
-              <Text
+              <Typography
                 className={`text-sm font-semibold ${selectedFilter === type.id ? "text-[#2C3E50]" : "text-[#7F8C8D]"}`}
               >
                 {type.label}
-              </Text>
+              </Typography> 
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -380,14 +381,14 @@ const CalendarScreen: React.FC = () => {
       {/* Selected Date Events */}
       {todayEvents.length > 0 && (
         <View className="px-4 mb-5">
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">
+          <Typography className="text-xl font-bold text-[#2C3E50] mb-4">
             Events on{" "}
             {selectedDate.toLocaleDateString("en-US", {
               month: "long",
               day: "numeric",
               year: "numeric",
             })}
-          </Text>
+          </Typography> 
           <View className="gap-3">
             {todayEvents.map((event, index) => (
               <TouchableOpacity
@@ -401,34 +402,34 @@ const CalendarScreen: React.FC = () => {
                 <View className="flex-row items-center justify-between mb-2">
                   <View className="flex-row items-center flex-1">
                     <View className="w-4 h-4 rounded-full mr-3" style={{ backgroundColor: getEventColor(event) }} />
-                    <Text className="text-base font-bold text-[#2C3E50] flex-1">{event.title}</Text>
+                    <Typography className="text-base font-bold text-[#2C3E50] flex-1">{event.title}</Typography> 
                   </View>
                   <View className="flex-row items-center">
                     {event.is_holiday && (
                       <View className="bg-[#E74C3C20] px-2 py-1 rounded-lg mr-2">
-                        <Text className="text-[10px] font-bold text-[#E74C3C]">HOLIDAY</Text>
+                        <Typography className="text-[10px] font-bold text-[#E74C3C]">HOLIDAY</Typography> 
                       </View>
                     )}
                     <View className="px-2 py-1 rounded-lg" style={{ backgroundColor: `${getEventColor(event)}20` }}>
-                      <Text className="text-[10px] font-bold" style={{ color: getEventColor(event) }}>
+                      <Typography className="text-[10px] font-bold" style={{ color: getEventColor(event) }}>
                         {event.event_type?.toUpperCase() || "EVENT"}
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
                 </View>
-                <Text className="text-sm text-[#7F8C8D]" numberOfLines={2}>
+                <Typography className="text-sm text-[#7F8C8D]" numberOfLines={2}>
                   {event.description}
-                </Text>
+                </Typography> 
                 {event.time && (
                   <View className="flex-row items-center mt-2">
                     <Icon name="access-time" size={16} color="#7F8C8D" />
-                    <Text className="text-xs text-[#7F8C8D] ml-1">{event.time}</Text>
+                    <Typography className="text-xs text-[#7F8C8D] ml-1">{event.time}</Typography> 
                   </View>
                 )}
                 {event.location && (
                   <View className="flex-row items-center mt-1">
                     <Icon name="location-on" size={16} color="#7F8C8D" />
-                    <Text className="text-xs text-[#7F8C8D] ml-1">{event.location}</Text>
+                    <Typography className="text-xs text-[#7F8C8D] ml-1">{event.location}</Typography> 
                   </View>
                 )}
               </TouchableOpacity>
@@ -439,7 +440,7 @@ const CalendarScreen: React.FC = () => {
 
       {/* Upcoming Events */}
       <View className="px-4 mb-8">
-        <Text className="text-xl font-bold text-[#2C3E50] mb-4">Upcoming Events</Text>
+        <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Upcoming Events</Typography> 
         {upcomingEvents.length > 0 ? (
           <View className="gap-3">
             {upcomingEvents.map((event, index) => (
@@ -455,39 +456,39 @@ const CalendarScreen: React.FC = () => {
                   <View className="flex-row items-center flex-1">
                     <View className="w-4 h-4 rounded-full mr-3" style={{ backgroundColor: getEventColor(event) }} />
                     <View className="flex-1">
-                      <Text className="text-base font-bold text-[#2C3E50]">{event.title}</Text>
-                      <Text className="text-xs text-[#7F8C8D]">
+                      <Typography className="text-base font-bold text-[#2C3E50]">{event.title}</Typography> 
+                      <Typography className="text-xs text-[#7F8C8D]">
                         {new Date(event.event_date).toLocaleDateString("en-US", {
                           weekday: "long",
                           month: "short",
                           day: "numeric",
                         })}
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
                   <View className="flex-row items-center">
                     {event.is_holiday && (
                       <View className="bg-[#E74C3C20] px-2 py-1 rounded-lg mr-2">
-                        <Text className="text-[10px] font-bold text-[#E74C3C]">HOLIDAY</Text>
+                        <Typography className="text-[10px] font-bold text-[#E74C3C]">HOLIDAY</Typography> 
                       </View>
                     )}
                     <View className="px-2 py-1 rounded-lg" style={{ backgroundColor: `${getEventColor(event)}20` }}>
-                      <Text className="text-[10px] font-bold" style={{ color: getEventColor(event) }}>
+                      <Typography className="text-[10px] font-bold" style={{ color: getEventColor(event) }}>
                         {event.event_type?.toUpperCase() || "EVENT"}
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
                 </View>
-                <Text className="text-sm text-[#7F8C8D]" numberOfLines={2}>
+                <Typography className="text-sm text-[#7F8C8D]" numberOfLines={2}>
                   {event.description}
-                </Text>
+                </Typography> 
               </TouchableOpacity>
             ))}
           </View>
         ) : (
           <View className="text-center py-8">
             <Icon name="event" size={48} color="#BDC3C7" />
-            <Text className="text-[#7F8C8D] mt-4">No upcoming events found.</Text>
+            <Typography className="text-[#7F8C8D] mt-4">No upcoming events found.</Typography> 
           </View>
         )}
       </View>
@@ -502,7 +503,7 @@ const CalendarScreen: React.FC = () => {
         <View className="flex-1 bg-black/50 justify-end">
           <View className="bg-white rounded-t-[25px] p-5 max-h-[70%]">
             <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Event Details</Text>
+              <Typography className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Event Details</Typography> 
               <TouchableOpacity onPress={() => setShowEventModal(false)}>
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
@@ -521,17 +522,17 @@ const CalendarScreen: React.FC = () => {
                       color={getEventColor(selectedEvent)}
                     />
                   </View>
-                  <Text className="text-xl font-bold text-[#2C3E50] text-center mb-2">{selectedEvent.title}</Text>
+                  <Typography className="text-xl font-bold text-[#2C3E50] text-center mb-2">{selectedEvent.title}</Typography> 
                   <View className="flex-row items-center">
                     {selectedEvent.is_holiday && (
                       <View className="bg-[#E74C3C20] px-3 py-1 rounded-xl mr-2">
-                        <Text className="text-sm font-bold text-[#E74C3C]">HOLIDAY</Text>
+                        <Typography className="text-sm font-bold text-[#E74C3C]">HOLIDAY</Typography> 
                       </View>
                     )}
                     <View className="px-3 py-1 rounded-xl" style={{ backgroundColor: `${getEventColor(selectedEvent)}20` }}>
-                      <Text className="text-sm font-bold" style={{ color: getEventColor(selectedEvent) }}>
+                      <Typography className="text-sm font-bold" style={{ color: getEventColor(selectedEvent) }}>
                         {selectedEvent.event_type?.toUpperCase() || "EVENT"}
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
                 </View>
@@ -539,37 +540,37 @@ const CalendarScreen: React.FC = () => {
                 <View className="bg-[#F8F9FA] rounded-2xl p-4 mb-6">
                   <View className="flex-row items-center mb-3">
                     <Icon name="event" size={20} color="#6A5ACD" />
-                    <Text className="text-base font-semibold text-[#2C3E50] ml-3">
+                    <Typography className="text-base font-semibold text-[#2C3E50] ml-3">
                       {new Date(selectedEvent.event_date).toLocaleDateString("en-US", {
                         weekday: "long",
                         year: "numeric",
                         month: "long",
                         day: "numeric",
                       })}
-                    </Text>
+                    </Typography> 
                   </View>
                   {selectedEvent.time && (
                     <View className="flex-row items-center mb-3">
                       <Icon name="access-time" size={20} color="#6A5ACD" />
-                      <Text className="text-base font-semibold text-[#2C3E50] ml-3">{selectedEvent.time}</Text>
+                      <Typography className="text-base font-semibold text-[#2C3E50] ml-3">{selectedEvent.time}</Typography> 
                     </View>
                   )}
                   {selectedEvent.location && (
                     <View className="flex-row items-center mb-3">
                       <Icon name="location-on" size={20} color="#6A5ACD" />
-                      <Text className="text-base font-semibold text-[#2C3E50] ml-3">{selectedEvent.location}</Text>
+                      <Typography className="text-base font-semibold text-[#2C3E50] ml-3">{selectedEvent.location}</Typography> 
                     </View>
                   )}
-                  <Text className="text-sm text-[#2C3E50] leading-6">{selectedEvent.description}</Text>
+                  <Typography className="text-sm text-[#2C3E50] leading-6">{selectedEvent.description}</Typography> 
                 </View>
 
                 {selectedEvent.is_holiday && (
                   <View className="bg-[#E74C3C10] border border-[#E74C3C30] rounded-2xl p-4 mb-4">
                     <View className="flex-row items-center">
                       <Icon name="info" size={20} color="#E74C3C" />
-                      <Text className="text-sm font-semibold text-[#E74C3C] ml-2">
+                      <Typography className="text-sm font-semibold text-[#E74C3C] ml-2">
                         School Holiday - No classes scheduled
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
                 )}

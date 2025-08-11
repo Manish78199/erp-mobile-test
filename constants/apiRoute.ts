@@ -158,6 +158,9 @@ const ApiRoute = {
             get_sessional_exams:`${BASE_URL}/student/result/session-exams`,
             get_exam_result:`${BASE_URL}/student/result`,
 
+        },
+        TRANSPORT: {
+            transport_details: `${BASE_URL}/student/transport`
         }
 
     }

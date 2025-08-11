@@ -1,588 +1,262 @@
-// "use client"
 
-// import type React from "react"
-// import { useState } from "react"
-// import { View, Text, ScrollView, TouchableOpacity, Modal } from "react-native"
-// import Icon from "react-native-vector-icons/MaterialIcons"
-
-// interface ExamScreenProps {
-//   navigation: any
-// }
-
-// const ExamScreen: React.FC<ExamScreenProps> = ({ navigation }) => {
-//   const [selectedTab, setSelectedTab] = useState("upcoming")
-//   const [showResultModal, setShowResultModal] = useState(false)
-//   const [selectedResult, setSelectedResult] = useState<any>(null)
-
-//   const upcomingExams = [
-//     {
-//       id: 1,
-//       subject: "Mathematics",
-//       type: "Mid-term Exam",
-//       date: "2024-12-20",
-//       time: "09:00 AM - 12:00 PM",
-//       duration: "3 hours",
-//       room: "Room 101",
-//       syllabus: ["Algebra", "Geometry", "Trigonometry"],
-//       instructions: "Bring calculator, ruler, and compass",
-//     },
-//     {
-//       id: 2,
-//       subject: "Physics",
-//       type: "Practical Exam",
-//       date: "2024-12-22",
-//       time: "02:00 PM - 05:00 PM",
-//       duration: "3 hours",
-//       room: "Physics Lab",
-//       syllabus: ["Mechanics", "Optics", "Electricity"],
-//       instructions: "Lab coat mandatory",
-//     },
-//     {
-//       id: 3,
-//       subject: "Chemistry",
-//       type: "Theory Exam",
-//       date: "2024-12-25",
-//       time: "10:00 AM - 01:00 PM",
-//       duration: "3 hours",
-//       room: "Room 203",
-//       syllabus: ["Organic Chemistry", "Inorganic Chemistry"],
-//       instructions: "Periodic table will be provided",
-//     },
-//   ]
-
-//   const examResults = [
-//     {
-//       id: 1,
-//       subject: "English",
-//       type: "Unit Test",
-//       date: "2024-11-15",
-//       totalMarks: 100,
-//       obtainedMarks: 85,
-//       grade: "A",
-//       percentage: 85,
-//       rank: 5,
-//       remarks: "Excellent performance",
-//     },
-//     {
-//       id: 2,
-//       subject: "Biology",
-//       type: "Mid-term",
-//       date: "2024-11-20",
-//       totalMarks: 100,
-//       obtainedMarks: 78,
-//       grade: "B+",
-//       percentage: 78,
-//       rank: 12,
-//       remarks: "Good work, focus on diagrams",
-//     },
-//     {
-//       id: 3,
-//       subject: "History",
-//       type: "Assignment",
-//       date: "2024-11-25",
-//       totalMarks: 50,
-//       obtainedMarks: 42,
-//       grade: "B",
-//       percentage: 84,
-//       rank: 8,
-//       remarks: "Well researched content",
-//     },
-//   ]
-
-//   const reportCards = [
-//     {
-//       term: "First Term 2024",
-//       subjects: [
-//         { name: "Mathematics", marks: 85, grade: "A", remarks: "Excellent" },
-//         { name: "Physics", marks: 78, grade: "B+", remarks: "Good" },
-//         { name: "Chemistry", marks: 82, grade: "A-", remarks: "Very Good" },
-//         { name: "Biology", marks: 88, grade: "A", remarks: "Outstanding" },
-//         { name: "English", marks: 85, grade: "A", remarks: "Excellent" },
-//       ],
-//       overall: { percentage: 83.6, grade: "A", rank: 7 },
-//     },
-//   ]
-
-//   const getSubjectColor = (subject: string) => {
-//     const colorMap: { [key: string]: string } = {
-//       Mathematics: "#6A5ACD",
-//       Physics: "#00BCD4",
-//       Chemistry: "#2ECC71",
-//       Biology: "#FFC107",
-//       English: "#5B4BBD",
-//       History: "#E74C3C",
-//     }
-//     return colorMap[subject] || "#BDC3C7"
-//   }
-
-//   const getGradeColor = (grade: string) => {
-//     if (grade === "A" || grade === "A+") return "#2ECC71"
-//     if (grade === "A-" || grade === "B+") return "#6A5ACD"
-//     if (grade === "B" || grade === "B-") return "#F39C12"
-//     return "#E74C3C"
-//   }
-
-//   const formatDate = (dateString: string) => {
-//     const date = new Date(dateString)
-//     return date.toLocaleDateString("en-US", {
-//       month: "short",
-//       day: "numeric",
-//       year: "numeric",
-//     })
-//   }
-
-//   const getDaysUntilExam = (examDate: string) => {
-//     const today = new Date()
-//     const exam = new Date(examDate)
-//     const diffTime = exam.getTime() - today.getTime()
-//     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-//     return diffDays
-//   }
-
-//   return (
-//     <ScrollView className="flex-1 bg-[#F0F4F8]" showsVerticalScrollIndicator={false}>
-//       {/* Header */}
-//       <View className="flex-row items-center justify-between bg-[#6A5ACD] pt-12 pb-5 px-4 rounded-b-[25px]">
-//         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
-//           <Icon name="arrow-back" size={24} color="white" />
-//         </TouchableOpacity>
-//         <Text className="text-xl font-bold text-white">Exams & Results</Text>
-//         <TouchableOpacity className="p-2">
-//           <Icon name="calendar-today" size={20} color="white" />
-//         </TouchableOpacity>
-//       </View>
-
-//       {/* Tab Navigation */}
-//       <View className="flex-row px-4 mt-5 mb-5">
-//         {["upcoming", "results", "reports"].map((tab) => (
-//           <TouchableOpacity
-//             key={tab}
-//             className={`flex-1 py-3 items-center mx-1 rounded-xl border ${
-//               selectedTab === tab ? "bg-[#6A5ACD] border-[#6A5ACD]" : "bg-white border-[#DDE4EB]"
-//             }`}
-//             onPress={() => setSelectedTab(tab)}
-//           >
-//             <Text className={`text-sm font-semibold ${selectedTab === tab ? "text-white" : "text-[#7F8C8D]"}`}>
-//               {tab.charAt(0).toUpperCase() + tab.slice(1)}
-//             </Text>
-//           </TouchableOpacity>
-//         ))}
-//       </View>
-
-//       {/* Upcoming Exams */}
-//       {selectedTab === "upcoming" && (
-//         <View className="p-4">
-//           <Text className="text-xl font-bold text-[#2C3E50] mb-4">Upcoming Exams</Text>
-//           <View className="gap-4">
-//             {upcomingExams.map((exam) => (
-//               <View key={exam.id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-//                 <View className="flex-row justify-between items-center mb-2">
-//                   <View className="flex-row items-center">
-//                     <View
-//                       className="w-1 h-4 rounded-sm mr-2"
-//                       style={{ backgroundColor: getSubjectColor(exam.subject) }}
-//                     />
-//                     <Text className="text-sm font-semibold text-[#2C3E50]">{exam.subject}</Text>
-//                   </View>
-//                   <View className="bg-[#F39C12]/20 px-2 py-1 rounded-xl">
-//                     <Text className="text-[10px] font-bold text-[#F39C12]">{getDaysUntilExam(exam.date)} days</Text>
-//                   </View>
-//                 </View>
-
-//                 <Text className="text-base font-bold text-[#2C3E50] mb-3">{exam.type}</Text>
-
-//                 <View className="mb-3">
-//                   <View className="flex-row items-center mb-1">
-//                     <Icon name="event" size={16} color="#7F8C8D" />
-//                     <Text className="text-xs text-[#7F8C8D] ml-2">{formatDate(exam.date)}</Text>
-//                   </View>
-//                   <View className="flex-row items-center mb-1">
-//                     <Icon name="access-time" size={16} color="#7F8C8D" />
-//                     <Text className="text-xs text-[#7F8C8D] ml-2">{exam.time}</Text>
-//                   </View>
-//                   <View className="flex-row items-center">
-//                     <Icon name="room" size={16} color="#7F8C8D" />
-//                     <Text className="text-xs text-[#7F8C8D] ml-2">{exam.room}</Text>
-//                   </View>
-//                 </View>
-
-//                 <View className="mb-3">
-//                   <Text className="text-xs font-semibold text-[#2C3E50] mb-2">Syllabus:</Text>
-//                   <View className="flex-row flex-wrap gap-2">
-//                     {exam.syllabus.map((topic, index) => (
-//                       <View key={index} className="bg-[#6A5ACD]/10 px-2 py-1 rounded-lg">
-//                         <Text className="text-[10px] text-[#6A5ACD] font-semibold">{topic}</Text>
-//                       </View>
-//                     ))}
-//                   </View>
-//                 </View>
-
-//                 <View className="flex-row items-center bg-[#6A5ACD]/10 p-2 rounded-lg">
-//                   <Icon name="info" size={16} color="#6A5ACD" />
-//                   <Text className="text-xs text-[#6A5ACD] ml-2 flex-1">{exam.instructions}</Text>
-//                 </View>
-//               </View>
-//             ))}
-//           </View>
-//         </View>
-//       )}
-
-//       {/* Results */}
-//       {selectedTab === "results" && (
-//         <View className="p-4">
-//           <Text className="text-xl font-bold text-[#2C3E50] mb-4">Recent Results</Text>
-//           <View className="gap-4">
-//             {examResults.map((result) => (
-//               <TouchableOpacity
-//                 key={result.id}
-//                 className="bg-white rounded-2xl p-4 shadow-lg elevation-5"
-//                 onPress={() => {
-//                   setSelectedResult(result)
-//                   setShowResultModal(true)
-//                 }}
-//               >
-//                 <View className="flex-row justify-between items-center mb-2">
-//                   <View className="flex-row items-center">
-//                     <View
-//                       className="w-1 h-4 rounded-sm mr-2"
-//                       style={{ backgroundColor: getSubjectColor(result.subject) }}
-//                     />
-//                     <Text className="text-sm font-semibold text-[#2C3E50]">{result.subject}</Text>
-//                   </View>
-//                   <View
-//                     className="px-3 py-1.5 rounded-xl"
-//                     style={{ backgroundColor: `${getGradeColor(result.grade)}20` }}
-//                   >
-//                     <Text className="text-sm font-bold" style={{ color: getGradeColor(result.grade) }}>
-//                       {result.grade}
-//                     </Text>
-//                   </View>
-//                 </View>
-
-//                 <Text className="text-base font-bold text-[#2C3E50] mb-3">{result.type}</Text>
-
-//                 <View className="flex-row justify-between mb-2">
-//                   <View className="items-center">
-//                     <Text className="text-base font-bold text-[#2C3E50]">
-//                       {result.obtainedMarks}/{result.totalMarks}
-//                     </Text>
-//                     <Text className="text-[10px] text-[#7F8C8D] mt-0.5">Marks</Text>
-//                   </View>
-//                   <View className="items-center">
-//                     <Text className="text-base font-bold text-[#2C3E50]">{result.percentage}%</Text>
-//                     <Text className="text-[10px] text-[#7F8C8D] mt-0.5">Percentage</Text>
-//                   </View>
-//                   <View className="items-center">
-//                     <Text className="text-base font-bold text-[#2C3E50]">#{result.rank}</Text>
-//                     <Text className="text-[10px] text-[#7F8C8D] mt-0.5">Rank</Text>
-//                   </View>
-//                 </View>
-
-//                 <Text className="text-xs text-[#7F8C8D] text-right">{formatDate(result.date)}</Text>
-//               </TouchableOpacity>
-//             ))}
-//           </View>
-//         </View>
-//       )}
-
-//       {/* Report Cards */}
-//       {selectedTab === "reports" && (
-//         <View className="p-4">
-//           <Text className="text-xl font-bold text-[#2C3E50] mb-4">Report Cards</Text>
-//           <View className="gap-4">
-//             {reportCards.map((report, index) => (
-//               <View key={index} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-//                 <View className="flex-row justify-between items-center mb-4">
-//                   <Text className="text-base font-bold text-[#2C3E50]">{report.term}</Text>
-//                   <TouchableOpacity className="flex-row items-center px-3 py-1.5 bg-[#6A5ACD]/10 rounded-xl">
-//                     <Icon name="download" size={16} color="#6A5ACD" />
-//                     <Text className="text-xs text-[#6A5ACD] font-semibold ml-1">Download</Text>
-//                   </TouchableOpacity>
-//                 </View>
-
-//                 <View className="flex-row justify-between bg-[#EAECEE] p-4 rounded-xl mb-4">
-//                   <View className="items-center">
-//                     <Text className="text-xl font-extrabold text-[#2C3E50]">{report.overall.percentage}%</Text>
-//                     <Text className="text-xs text-[#7F8C8D] mt-1">Overall</Text>
-//                   </View>
-//                   <View className="items-center">
-//                     <Text className="text-xl font-extrabold" style={{ color: getGradeColor(report.overall.grade) }}>
-//                       {report.overall.grade}
-//                     </Text>
-//                     <Text className="text-xs text-[#7F8C8D] mt-1">Grade</Text>
-//                   </View>
-//                   <View className="items-center">
-//                     <Text className="text-xl font-extrabold text-[#2C3E50]">#{report.overall.rank}</Text>
-//                     <Text className="text-xs text-[#7F8C8D] mt-1">Rank</Text>
-//                   </View>
-//                 </View>
-
-//                 <View className="gap-2">
-//                   {report.subjects.map((subject, subIndex) => (
-//                     <View
-//                       key={subIndex}
-//                       className="flex-row justify-between items-center py-2 border-b border-[#DDE4EB]"
-//                     >
-//                       <Text className="text-sm text-[#2C3E50] flex-1">{subject.name}</Text>
-//                       <Text className="text-sm font-semibold text-[#2C3E50] mr-4">{subject.marks}</Text>
-//                       <Text
-//                         className="text-sm font-bold min-w-[30px] text-center"
-//                         style={{ color: getGradeColor(subject.grade) }}
-//                       >
-//                         {subject.grade}
-//                       </Text>
-//                     </View>
-//                   ))}
-//                 </View>
-//               </View>
-//             ))}
-//           </View>
-//         </View>
-//       )}
-
-//       {/* Result Detail Modal */}
-//       <Modal
-//         visible={showResultModal}
-//         animationType="slide"
-//         transparent={true}
-//         onRequestClose={() => setShowResultModal(false)}
-//       >
-//         <View className="flex-1 bg-black/50 justify-center items-center">
-//           <View className="bg-white rounded-[20px] p-5 w-[90%] max-h-[80%]">
-//             <View className="flex-row justify-between items-center mb-5">
-//               <Text className="text-xl font-bold text-[#2C3E50]">Result Details</Text>
-//               <TouchableOpacity onPress={() => setShowResultModal(false)}>
-//                 <Icon name="close" size={24} color="#2C3E50" />
-//               </TouchableOpacity>
-//             </View>
-
-//             {selectedResult && (
-//               <>
-//                 <View className="items-center mb-5">
-//                   <Text className="text-lg font-bold text-[#6A5ACD]">{selectedResult.subject}</Text>
-//                   <Text className="text-sm text-[#7F8C8D] mt-1">{selectedResult.type}</Text>
-//                 </View>
-
-//                 <View className="flex-row justify-between mb-5">
-//                   <View className="items-center bg-[#EAECEE] p-4 rounded-xl flex-1 mx-1">
-//                     <Text className="text-lg font-bold text-[#2C3E50]">{selectedResult.obtainedMarks}</Text>
-//                     <Text className="text-[10px] text-[#7F8C8D] mt-1 text-center">Marks Obtained</Text>
-//                   </View>
-//                   <View className="items-center bg-[#EAECEE] p-4 rounded-xl flex-1 mx-1">
-//                     <Text className="text-lg font-bold text-[#2C3E50]">{selectedResult.totalMarks}</Text>
-//                     <Text className="text-[10px] text-[#7F8C8D] mt-1 text-center">Total Marks</Text>
-//                   </View>
-//                   <View className="items-center bg-[#EAECEE] p-4 rounded-xl flex-1 mx-1">
-//                     <Text className="text-lg font-bold" style={{ color: getGradeColor(selectedResult.grade) }}>
-//                       {selectedResult.grade}
-//                     </Text>
-//                     <Text className="text-[10px] text-[#7F8C8D] mt-1 text-center">Grade</Text>
-//                   </View>
-//                 </View>
-
-//                 <View className="bg-[#EAECEE] p-4 rounded-xl">
-//                   <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Teacher's Remarks:</Text>
-//                   <Text className="text-sm text-[#7F8C8D] leading-5">{selectedResult.remarks}</Text>
-//                 </View>
-//               </>
-//             )}
-//           </View>
-//         </View>
-//       </Modal>
-//     </ScrollView>
-//   )
-// }
-
-// export default ExamScreen
-
-
-"use client"
 
 import type React from "react"
-import { useState } from "react"
-import { View, Text, ScrollView, TouchableOpacity, Modal } from "react-native"
+import { useState, useEffect } from "react"
+import { View, Text, ScrollView, TouchableOpacity, Modal, Alert, RefreshControl } from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 import { Link } from "expo-router"
+import { get_latest_exam_schedule } from "@/service/student/exam"
+import { format, isToday, isTomorrow, differenceInDays, isPast } from "date-fns"
+
+// Custom SVG Illustrations
+const NoScheduleIllustration = () => (
+  <View className="items-center justify-center p-8">
+    <View className="relative">
+      {/* Calendar Base */}
+      <View className="w-24 h-20 bg-gray-200 rounded-lg border-2 border-gray-300">
+        {/* Calendar Header */}
+        <View className="h-4 bg-gray-400 rounded-t-md flex-row justify-center items-center">
+          <View className="w-1 h-3 bg-white rounded-full mx-1" />
+          <View className="w-1 h-3 bg-white rounded-full mx-1" />
+        </View>
+        {/* Calendar Grid */}
+        <View className="flex-1 p-2">
+          <View className="flex-row justify-between mb-1">
+            <View className="w-2 h-2 bg-gray-300 rounded-sm" />
+            <View className="w-2 h-2 bg-gray-300 rounded-sm" />
+            <View className="w-2 h-2 bg-gray-300 rounded-sm" />
+          </View>
+          <View className="flex-row justify-between mb-1">
+            <View className="w-2 h-2 bg-gray-300 rounded-sm" />
+            <View className="w-2 h-2 bg-red-300 rounded-sm" />
+            <View className="w-2 h-2 bg-gray-300 rounded-sm" />
+          </View>
+          <View className="flex-row justify-between">
+            <View className="w-2 h-2 bg-gray-300 rounded-sm" />
+            <View className="w-2 h-2 bg-gray-300 rounded-sm" />
+            <View className="w-2 h-2 bg-gray-300 rounded-sm" />
+          </View>
+        </View>
+      </View>
+      {/* Question Mark */}
+      <View className="absolute -top-2 -right-2 w-8 h-8 bg-orange-400 rounded-full items-center justify-center">
+        <Text className="text-white font-bold text-lg">?</Text>
+      </View>
+      {/* Floating Elements */}
+      <View className="absolute -left-4 top-2 w-3 h-3 bg-blue-300 rounded-full opacity-60" />
+      <View className="absolute -right-1 bottom-2 w-2 h-2 bg-purple-300 rounded-full opacity-60" />
+    </View>
+  </View>
+)
+
+const NoExamsFoundIllustration = () => (
+  <View className="items-center justify-center p-8">
+    <View className="relative">
+      {/* Search Glass */}
+      <View className="w-16 h-16 border-4 border-gray-300 rounded-full items-center justify-center">
+        <View className="w-8 h-8 border-2 border-gray-400 rounded-full" />
+      </View>
+      {/* Search Handle */}
+      <View className="absolute bottom-2 right-2 w-6 h-1 bg-gray-400 rounded-full transform rotate-45" />
+      {/* Cross/X mark inside */}
+      <View className="absolute inset-0 items-center justify-center">
+        <View className="w-6 h-0.5 bg-red-400 rounded-full transform rotate-45" />
+        <View className="w-6 h-0.5 bg-red-400 rounded-full transform -rotate-45 absolute" />
+      </View>
+      {/* Floating dots */}
+      <View className="absolute -top-2 -left-2 w-2 h-2 bg-blue-300 rounded-full opacity-60" />
+      <View className="absolute -bottom-1 -left-3 w-1.5 h-1.5 bg-purple-300 rounded-full opacity-60" />
+      <View className="absolute -top-1 right-6 w-1 h-1 bg-green-300 rounded-full opacity-60" />
+    </View>
+  </View>
+)
+
+const LoadingIllustration = () => (
+  <View className="items-center justify-center p-8">
+    <View className="relative">
+      {/* Books Stack */}
+      <View className="relative">
+        <View className="w-20 h-3 bg-blue-400 rounded-sm mb-1 transform -rotate-2" />
+        <View className="w-20 h-3 bg-green-400 rounded-sm mb-1 transform rotate-1" />
+        <View className="w-20 h-3 bg-purple-400 rounded-sm transform -rotate-1" />
+      </View>
+      {/* Clock */}
+      <View className="absolute -top-2 -right-4 w-12 h-12 bg-white border-2 border-gray-300 rounded-full items-center justify-center">
+        <View className="w-0.5 h-3 bg-gray-600 rounded-full absolute" style={{ transform: [{ rotate: "90deg" }] }} />
+        <View className="w-0.5 h-2 bg-gray-600 rounded-full absolute" style={{ transform: [{ rotate: "180deg" }] }} />
+        <View className="w-1 h-1 bg-gray-600 rounded-full" />
+      </View>
+      {/* Loading dots */}
+      <View className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 flex-row">
+        <View className="w-2 h-2 bg-blue-400 rounded-full mx-1 animate-pulse" />
+        <View className="w-2 h-2 bg-green-400 rounded-full mx-1 animate-pulse" style={{ animationDelay: "0.2s" }} />
+        <View className="w-2 h-2 bg-purple-400 rounded-full mx-1 animate-pulse" style={{ animationDelay: "0.4s" }} />
+      </View>
+    </View>
+  </View>
+)
+
+const EmptyFilterIllustration = ({ filterType }: { filterType: FilterType }) => {
+  const getFilterSpecificElements = () => {
+    switch (filterType) {
+      case "TODAY":
+        return (
+          <>
+            <View className="w-16 h-16 bg-red-100 rounded-full items-center justify-center border-2 border-red-200">
+              <Text className="text-2xl">📅</Text>
+            </View>
+            <View className="absolute -top-1 -right-1 w-6 h-6 bg-red-400 rounded-full items-center justify-center">
+              <Text className="text-white text-xs font-bold">0</Text>
+            </View>
+          </>
+        )
+      case "UPCOMING":
+        return (
+          <>
+            <View className="w-16 h-16 bg-orange-100 rounded-full items-center justify-center border-2 border-orange-200">
+              <Text className="text-2xl">⏰</Text>
+            </View>
+            <View className="absolute -top-1 -right-1 w-6 h-6 bg-orange-400 rounded-full items-center justify-center">
+              <Text className="text-white text-xs font-bold">0</Text>
+            </View>
+          </>
+        )
+      case "COMPLETED":
+        return (
+          <>
+            <View className="w-16 h-16 bg-green-100 rounded-full items-center justify-center border-2 border-green-200">
+              <Text className="text-2xl">✅</Text>
+            </View>
+            <View className="absolute -top-1 -right-1 w-6 h-6 bg-green-400 rounded-full items-center justify-center">
+              <Text className="text-white text-xs font-bold">0</Text>
+            </View>
+          </>
+        )
+      default:
+        return (
+          <>
+            <View className="w-16 h-16 bg-gray-100 rounded-full items-center justify-center border-2 border-gray-200">
+              <Text className="text-2xl">📋</Text>
+            </View>
+            <View className="absolute -top-1 -right-1 w-6 h-6 bg-gray-400 rounded-full items-center justify-center">
+              <Text className="text-white text-xs font-bold">0</Text>
+            </View>
+          </>
+        )
+    }
+  }
+
+  return (
+    <View className="items-center justify-center p-8">
+      <View className="relative">
+        {getFilterSpecificElements()}
+        {/* Floating elements */}
+        <View className="absolute -left-3 top-3 w-2 h-2 bg-blue-300 rounded-full opacity-60" />
+        <View className="absolute -right-2 bottom-4 w-1.5 h-1.5 bg-purple-300 rounded-full opacity-60" />
+        <View className="absolute left-6 -bottom-2 w-1 h-1 bg-green-300 rounded-full opacity-60" />
+      </View>
+    </View>
+  )
+}
+
+// Types from the service
+interface ExamSchedule {
+  exam_id: string
+  exam_name: string
+  session: string
+  start_date: string | null
+  end_date: string | null
+  subjects: Subject[]
+  total_subjects?: number
+  exam_type?: string
+  instructions?: string
+}
+
+interface Subject {
+  _id: string
+  subject_id: string
+  subject_name: string
+  subject_code: string
+  subject_type: "THEORETICAL" | "PRACTICAL" | "BOTH"
+  max_marks: number
+  pass_marks: number | null
+  schedule_at: string
+}
+
+type FilterType = "ALL" | "TODAY" | "UPCOMING" | "COMPLETED"
 
 const ExamScheduleScreen: React.FC = () => {
-  const [selectedExam, setSelectedExam] = useState("mid-term")
+  // State management
+  const [examData, setExamData] = useState<ExamSchedule | null>(null)
+  const [filteredSubjects, setFilteredSubjects] = useState<Subject[]>([])
+  const [selectedFilter, setSelectedFilter] = useState<FilterType>("ALL")
   const [showExamModal, setShowExamModal] = useState(false)
-  const [selectedExamDetail, setSelectedExamDetail] = useState<any>(null)
+  const [selectedExamDetail, setSelectedExamDetail] = useState<Subject | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
 
-  const examData = {
-    "mid-term": {
-      name: "Mid-Term Examination",
-      duration: "December 16-22, 2024",
-      status: "upcoming",
-      totalSubjects: 6,
-      completedSubjects: 0,
-      schedule: [
-        {
-          id: 1,
-          subject: "Mathematics",
-          date: "2024-12-16",
-          time: "09:00 AM - 12:00 PM",
-          duration: "3 hours",
-          room: "Room 101",
-          invigilator: "Mrs. Sarah Johnson",
-          syllabus: ["Quadratic Equations", "Trigonometry", "Statistics"],
-          marks: 100,
-          status: "upcoming",
-        },
-        {
-          id: 2,
-          subject: "Physics",
-          date: "2024-12-17",
-          time: "09:00 AM - 12:00 PM",
-          duration: "3 hours",
-          room: "Room 102",
-          invigilator: "Dr. Michael Brown",
-          syllabus: ["Light", "Electricity", "Magnetism"],
-          marks: 100,
-          status: "upcoming",
-        },
-        {
-          id: 3,
-          subject: "Chemistry",
-          date: "2024-12-18",
-          time: "09:00 AM - 12:00 PM",
-          duration: "3 hours",
-          room: "Room 103",
-          invigilator: "Prof. Lisa Anderson",
-          syllabus: ["Organic Chemistry", "Acids and Bases", "Metals"],
-          marks: 100,
-          status: "upcoming",
-        },
-        {
-          id: 4,
-          subject: "Biology",
-          date: "2024-12-19",
-          time: "09:00 AM - 12:00 PM",
-          duration: "3 hours",
-          room: "Room 104",
-          invigilator: "Dr. Robert Wilson",
-          syllabus: ["Cell Division", "Genetics", "Evolution"],
-          marks: 100,
-          status: "upcoming",
-        },
-        {
-          id: 5,
-          subject: "English",
-          date: "2024-12-20",
-          time: "09:00 AM - 12:00 PM",
-          duration: "3 hours",
-          room: "Room 105",
-          invigilator: "Ms. Emily Davis",
-          syllabus: ["Literature", "Grammar", "Essay Writing"],
-          marks: 100,
-          status: "upcoming",
-        },
-        {
-          id: 6,
-          subject: "History",
-          date: "2024-12-22",
-          time: "09:00 AM - 12:00 PM",
-          duration: "3 hours",
-          room: "Room 106",
-          invigilator: "Mr. James Smith",
-          syllabus: ["World Wars", "Indian Independence", "Modern History"],
-          marks: 100,
-          status: "upcoming",
-        },
-      ],
-    },
-    final: {
-      name: "Final Examination",
-      duration: "March 15-25, 2025",
-      status: "scheduled",
-      totalSubjects: 8,
-      completedSubjects: 0,
-      schedule: [
-        {
-          id: 7,
-          subject: "Mathematics",
-          date: "2025-03-15",
-          time: "09:00 AM - 12:00 PM",
-          duration: "3 hours",
-          room: "Room 101",
-          invigilator: "Mrs. Sarah Johnson",
-          syllabus: ["Complete Syllabus"],
-          marks: 100,
-          status: "scheduled",
-        },
-        {
-          id: 8,
-          subject: "Physics",
-          date: "2025-03-17",
-          time: "09:00 AM - 12:00 PM",
-          duration: "3 hours",
-          room: "Room 102",
-          invigilator: "Dr. Michael Brown",
-          syllabus: ["Complete Syllabus"],
-          marks: 100,
-          status: "scheduled",
-        },
-      ],
-    },
-    "unit-test": {
-      name: "Unit Test",
-      duration: "January 20-25, 2025",
-      status: "scheduled",
-      totalSubjects: 5,
-      completedSubjects: 0,
-      schedule: [
-        {
-          id: 9,
-          subject: "Mathematics",
-          date: "2025-01-20",
-          time: "10:00 AM - 11:30 AM",
-          duration: "1.5 hours",
-          room: "Room 101",
-          invigilator: "Mrs. Sarah Johnson",
-          syllabus: ["Recent Chapters"],
-          marks: 50,
-          status: "scheduled",
-        },
-      ],
-    },
-  }
-
-  const examTypes = [
-    { id: "mid-term", label: "Mid-Term", icon: "quiz", color: "#6A5ACD" },
-    { id: "final", label: "Final", icon: "school", color: "#E74C3C" },
-    { id: "unit-test", label: "Unit Test", icon: "assignment", color: "#F39C12" },
-  ]
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "upcoming":
-        return "#F39C12"
-      case "completed":
-        return "#2ECC71"
-      case "scheduled":
-        return "#6A5ACD"
-      case "ongoing":
-        return "#00BCD4"
-      default:
-        return "#BDC3C7"
+  // Safe date parsing
+  const safeParseDateString = (dateString: string | undefined | null): Date | null => {
+    if (!dateString) return null
+    try {
+      const date = new Date(dateString)
+      if (!isNaN(date.getTime())) {
+        return date
+      }
+      return null
+    } catch (error) {
+      return null
     }
   }
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "upcoming":
-        return "schedule"
-      case "completed":
-        return "check-circle"
-      case "scheduled":
-        return "event"
-      case "ongoing":
-        return "play-circle-filled"
-      default:
-        return "help"
+  // Get exam status
+  const getExamStatus = (scheduleAt: string) => {
+    const examDate = safeParseDateString(scheduleAt)
+    if (!examDate) return { status: "unknown", color: "#BDC3C7", days: 0 }
+
+    if (isPast(examDate)) {
+      return { status: "completed", color: "#2ECC71", days: 0 }
+    } else if (isToday(examDate)) {
+      return { status: "today", color: "#E74C3C", days: 0 }
+    } else if (isTomorrow(examDate)) {
+      return { status: "tomorrow", color: "#F39C12", days: 1 }
+    } else {
+      const days = differenceInDays(examDate, new Date())
+      return { status: "upcoming", color: "#6A5ACD", days }
     }
   }
 
+  // Format date display
+  const formatDateDisplay = (scheduleAt: string) => {
+    const date = safeParseDateString(scheduleAt)
+    if (!date) return "Date not available"
+
+    try {
+      if (isToday(date)) {
+        return "Today"
+      } else if (isTomorrow(date)) {
+        return "Tomorrow"
+      } else {
+        return format(date, "dd MMM yyyy")
+      }
+    } catch (error) {
+      return format(date, "dd/MM/yyyy")
+    }
+  }
+
+  // Format time display
+  const formatTimeDisplay = (scheduleAt: string) => {
+    const date = safeParseDateString(scheduleAt)
+    if (!date) return "Time not available"
+
+    try {
+      return format(date, "hh:mm a")
+    } catch (error) {
+      return "Time not available"
+    }
+  }
+
+  // Get subject color
   const getSubjectColor = (subject: string) => {
     const colorMap: { [key: string]: string } = {
       Mathematics: "#6A5ACD",
@@ -595,34 +269,187 @@ const ExamScheduleScreen: React.FC = () => {
     return colorMap[subject] || "#BDC3C7"
   }
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString("en-US", {
-      weekday: "long",
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    })
+  // Fetch exam schedule
+  const fetchExamSchedule = async () => {
+    setIsLoading(true)
+    try {
+      const scheduleData = await get_latest_exam_schedule()
+      setExamData(scheduleData)
+      if (scheduleData?.subjects) {
+        // Set initial filtered subjects based on current filter
+        const initialFiltered = scheduleData.subjects.sort((a:any, b:any) => {
+          const dateA = safeParseDateString(a.schedule_at)
+          const dateB = safeParseDateString(b.schedule_at)
+          if (!dateA && !dateB) return 0
+          if (!dateA) return 1
+          if (!dateB) return -1
+          return dateA.getTime() - dateB.getTime()
+        })
+        setFilteredSubjects(initialFiltered)
+      }
+    } catch (error) {
+      console.error("Error fetching exam schedule:", error)
+      Alert.alert("Error", "Failed to fetch exam schedule. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
-  const formatTime = (timeString: string) => {
-    return timeString
+  // Refresh handler
+  const onRefresh = async () => {
+    setRefreshing(true)
+    await fetchExamSchedule()
+    setRefreshing(false)
   }
 
-  const getDaysUntilExam = (dateString: string) => {
-    const today = new Date()
-    const examDate = new Date(dateString)
-    const diffTime = examDate.getTime() - today.getTime()
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-    return diffDays
+  // Filter subjects
+  const filterSubjects = (filterType: FilterType) => {
+    // if (!examData?.subjects) {
+    //   setFilteredSubjects([])
+    //   setSelectedFilter(filterType)
+    //   return
+    // }
+
+    // let filtered = [...examData.subjects]
+
+    // switch (filterType) {
+    //   case "TODAY":
+    //     filtered = filtered.filter((subject) => {
+    //       const date = safeParseDateString(subject.schedule_at)
+    //       return date ? isToday(date) : false
+    //     })
+    //     break
+    //   case "UPCOMING":
+    //     filtered = filtered.filter((subject) => {
+    //       const date = safeParseDateString(subject.schedule_at)
+    //       return date ? !isPast(date) && !isToday(date) : false
+    //     })
+    //     break
+    //   case "COMPLETED":
+    //     filtered = filtered.filter((subject) => {
+    //       const date = safeParseDateString(subject.schedule_at)
+    //       return date ? isPast(date) : false
+    //     })
+    //     break
+    //   default:
+    //     // ALL - no filtering needed
+    //     break
+    // }
+
+    // // Sort by date
+    // filtered.sort((a, b) => {
+    //   const dateA = safeParseDateString(a.schedule_at)
+    //   const dateB = safeParseDateString(b.schedule_at)
+    //   if (!dateA && !dateB) return 0
+    //   if (!dateA) return 1
+    //   if (!dateB) return -1
+    //   return dateA.getTime() - dateB.getTime()
+    // })
+
+    // setFilteredSubjects(filtered)
+    // setSelectedFilter(filterType)
   }
 
-  const currentExamData = examData[selectedExam as keyof typeof examData]
+  // Get schedule stats
+  const getScheduleStats = () => {
+    if (!examData?.subjects) return { total: 0, today: 0, upcoming: 0, completed: 0 }
+
+    const total = examData.subjects.length
+    const today = examData.subjects.filter((subject) => {
+      const date = safeParseDateString(subject.schedule_at)
+      return date ? isToday(date) : false
+    }).length
+    const upcoming = examData.subjects.filter((subject) => {
+      const date = safeParseDateString(subject.schedule_at)
+      return date ? !isPast(date) && !isToday(date) : false
+    }).length
+    const completed = examData.subjects.filter((subject) => {
+      const date = safeParseDateString(subject.schedule_at)
+      return date ? isPast(date) : false
+    }).length
+
+    return { total, today, upcoming, completed }
+  }
+
+  // Set reminder handler
+  const handleSetReminder = async (subject: Subject) => {
+    // try {
+    //   if (!examData) return
+
+    //   // Set reminder for 1 day before the exam
+    //   const examDate = safeParseDateString(subject.schedule_at)
+    //   if (!examDate) return
+
+    //   const reminderDate = new Date(examDate)
+    //   reminderDate.setDate(reminderDate.getDate() - 1)
+
+    //   await set_exam_reminder(examData.exam_id, subject.subject_id, reminderDate.toISOString())
+    //   Alert.alert("Success", "Reminder set successfully!")
+    // } catch (error) {
+    //   console.error("Error setting reminder:", error)
+    //   Alert.alert("Error", "Failed to set reminder. Please try again.")
+    // }
+  }
+
+  // Download admit card handler (placeholder - you'll need to implement file download)
+  const handleDownloadAdmitCard = async (subject: Subject) => {
+    try {
+      // This is a placeholder - you'll need to implement actual file download
+      Alert.alert(
+        "Info",
+        "Admit card download functionality will be implemented based on your file handling requirements.",
+      )
+    } catch (error) {
+      console.error("Error downloading admit card:", error)
+      Alert.alert("Error", "Failed to download admit card. Please try again.")
+    }
+  }
+
+  useEffect(() => {
+    fetchExamSchedule()
+  }, [])
+
+  useEffect(() => {
+    if (examData) {
+      filterSubjects(selectedFilter)
+    }
+  }, [examData])
+
+  // Add a separate useEffect for when selectedFilter changes
+  useEffect(() => {
+    if (examData) {
+      filterSubjects(selectedFilter)
+    }
+  }, [selectedFilter])
+
+  const stats = getScheduleStats()
+  const examTypes = [
+    { id: "ALL", label: "All", icon: "list", color: "#6A5ACD" },
+    { id: "TODAY", label: "Today", icon: "today", color: "#E74C3C" },
+    { id: "UPCOMING", label: "Upcoming", icon: "schedule", color: "#F39C12" },
+    { id: "COMPLETED", label: "Completed", icon: "check-circle", color: "#2ECC71" },
+  ]
+
+  if (isLoading && !examData) {
+    return (
+      <View className="flex-1 bg-[#F0F4F8] justify-center items-center">
+        <LoadingIllustration />
+        <Text className="text-lg font-semibold text-[#2C3E50] mt-4">Loading exam schedule...</Text>
+        <Text className="text-sm text-[#7F8C8D] mt-2 text-center px-8">
+          Please wait while we fetch your latest exam information
+        </Text>
+      </View>
+    )
+  }
 
   return (
-    <ScrollView className="flex-1 bg-[#F0F4F8]" showsVerticalScrollIndicator={false}>
+    <ScrollView
+      className="flex-1 bg-[#F0F4F8]"
+      showsVerticalScrollIndicator={false}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+    >
       {/* Header */}
-      <View className="flex-row items-center justify-between bg-[#6A5ACD] pt-12 pb-5 px-4 rounded-b-[25px]">
+      <View className="flex-row items-center justify-between bg-[#6A5ACD] py-12 px-4 rounded-b-[25px]">
         <Link href="/student" asChild>
           <TouchableOpacity className="p-2">
             <Icon name="arrow-back" size={24} color="white" />
@@ -631,163 +458,212 @@ const ExamScheduleScreen: React.FC = () => {
         <View className="flex-1 items-center">
           <Text className="text-xl font-bold text-white">Exam Schedule</Text>
         </View>
-        <TouchableOpacity className="p-2">
-          <Icon name="download" size={20} color="white" />
+        <TouchableOpacity className="p-2" onPress={onRefresh}>
+          <Icon name="refresh" size={20} color="white" />
         </TouchableOpacity>
       </View>
 
-      {/* Exam Overview Card */}
-      <View className="px-4 -mt-8 mb-5">
-        <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-          <View className="flex-row items-center justify-between mb-4">
-            <View>
-              <Text className="text-lg font-bold text-[#2C3E50]">{currentExamData.name}</Text>
-              <Text className="text-sm text-[#7F8C8D]">{currentExamData.duration}</Text>
-            </View>
-            <View
-              className="px-4 py-2 rounded-xl"
-              style={{ backgroundColor: `${getStatusColor(currentExamData.status)}20` }}
-            >
-              <Text className="text-sm font-bold" style={{ color: getStatusColor(currentExamData.status) }}>
-                {currentExamData.status.toUpperCase()}
-              </Text>
-            </View>
-          </View>
-
-          <View className="flex-row justify-between">
-            <View className="items-center">
-              <Text className="text-2xl font-bold text-[#6A5ACD]">{currentExamData.totalSubjects}</Text>
-              <Text className="text-xs text-[#7F8C8D]">Total Subjects</Text>
-            </View>
-            <View className="items-center">
-              <Text className="text-2xl font-bold text-[#2ECC71]">{currentExamData.completedSubjects}</Text>
-              <Text className="text-xs text-[#7F8C8D]">Completed</Text>
-            </View>
-            <View className="items-center">
-              <Text className="text-2xl font-bold text-[#F39C12]">
-                {currentExamData.totalSubjects - currentExamData.completedSubjects}
-              </Text>
-              <Text className="text-xs text-[#7F8C8D]">Remaining</Text>
-            </View>
-            <View className="items-center">
-              <Text className="text-2xl font-bold text-[#E74C3C]">
-                {Math.round((currentExamData.completedSubjects / currentExamData.totalSubjects) * 100)}%
-              </Text>
-              <Text className="text-xs text-[#7F8C8D]">Progress</Text>
-            </View>
+      {!examData ? (
+        <View className="px-4 mt-8">
+          <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5 items-center">
+            <NoScheduleIllustration />
+            <Text className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">No Exam Schedule Available</Text>
+            <Text className="text-sm text-[#7F8C8D] text-center mb-4">
+              The exam schedule has not been published yet. Please check back later or contact your academic office.
+            </Text>
+            <TouchableOpacity className="bg-[#6A5ACD] px-6 py-3 rounded-xl" onPress={onRefresh}>
+              <Text className="text-white font-semibold">Refresh</Text>
+            </TouchableOpacity>
           </View>
         </View>
-      </View>
-
-      {/* Exam Type Selector */}
-      <View className="px-4 mb-5">
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {examTypes.map((exam) => (
-            <TouchableOpacity
-              key={exam.id}
-              className={`flex-row items-center px-4 py-2.5 mr-3 rounded-[20px] border ${
-                selectedExam === exam.id ? "border-[#6A5ACD]" : "bg-white border-[#DDE4EB]"
-              }`}
-              style={selectedExam === exam.id ? { backgroundColor: `${exam.color}20` } : {}}
-              onPress={() => setSelectedExam(exam.id)}
-            >
-              <Icon name={exam.icon} size={16} color={exam.color} />
-              <Text
-                className={`text-sm font-semibold ml-2 ${
-                  selectedExam === exam.id ? "text-[#2C3E50]" : "text-[#7F8C8D]"
-                }`}
-              >
-                {exam.label}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
-
-      {/* Exam Schedule */}
-      <View className="px-4 mb-8">
-        <Text className="text-xl font-bold text-[#2C3E50] mb-4">Examination Schedule</Text>
-        <View className="gap-4">
-          {currentExamData.schedule.map((exam, index) => (
-            <TouchableOpacity
-              key={exam.id}
-              className="bg-white rounded-2xl p-4 shadow-lg elevation-5"
-              onPress={() => {
-                setSelectedExamDetail(exam)
-                setShowExamModal(true)
-              }}
-            >
-              {/* Header */}
-              <View className="flex-row items-center justify-between mb-3">
-                <View className="flex-row items-center flex-1">
-                  <View
-                    className="w-12 h-12 rounded-xl items-center justify-center mr-3"
-                    style={{ backgroundColor: `${getSubjectColor(exam.subject)}20` }}
-                  >
-                    <Text className="text-lg font-bold" style={{ color: getSubjectColor(exam.subject) }}>
-                      {index + 1}
-                    </Text>
-                  </View>
-                  <View className="flex-1">
-                    <Text className="text-base font-bold text-[#2C3E50]">{exam.subject}</Text>
-                    <Text className="text-sm text-[#7F8C8D]">{exam.invigilator}</Text>
-                  </View>
-                </View>
-                <View className="items-end">
-                  <View
-                    className="px-2 py-1 rounded-lg mb-1"
-                    style={{ backgroundColor: `${getStatusColor(exam.status)}20` }}
-                  >
-                    <Text className="text-[10px] font-bold" style={{ color: getStatusColor(exam.status) }}>
-                      {exam.status.toUpperCase()}
-                    </Text>
-                  </View>
-                  {exam.status === "upcoming" && (
-                    <Text className="text-xs text-[#F39C12] font-semibold">
-                      {getDaysUntilExam(exam.date)} days left
+      ) : (
+        <>
+          {/* Exam Overview Card */}
+          <View className="px-4 -mt-8 mb-5">
+            <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
+              <View className="flex-row items-center justify-between mb-4">
+                <View>
+                  <Text className="text-lg font-bold text-[#2C3E50]">{examData.exam_name}</Text>
+                  <Text className="text-sm text-[#7F8C8D]">Session: {examData.session}</Text>
+                  {examData.start_date && examData.end_date && (
+                    <Text className="text-xs text-[#7F8C8D] mt-1">
+                      {format(new Date(examData.start_date), "dd MMM")} -{" "}
+                      {format(new Date(examData.end_date), "dd MMM yyyy")}
                     </Text>
                   )}
                 </View>
               </View>
-
-              {/* Date & Time */}
-              <View className="bg-[#F8F9FA] rounded-xl p-3 mb-3">
-                <View className="flex-row justify-between items-center mb-2">
-                  <View className="flex-row items-center">
-                    <Icon name="event" size={16} color="#6A5ACD" />
-                    <Text className="text-sm font-semibold text-[#2C3E50] ml-2">{formatDate(exam.date)}</Text>
-                  </View>
-                  <View className="flex-row items-center">
-                    <Icon name="access-time" size={16} color="#F39C12" />
-                    <Text className="text-sm font-semibold text-[#2C3E50] ml-2">{formatTime(exam.time)}</Text>
-                  </View>
+              <View className="flex-row justify-between">
+                <View className="items-center">
+                  <Text className="text-2xl font-bold text-[#6A5ACD]">{stats.total}</Text>
+                  <Text className="text-xs text-[#7F8C8D]">Total Subjects</Text>
                 </View>
-                <View className="flex-row justify-between items-center">
-                  <View className="flex-row items-center">
-                    <Icon name="location-on" size={16} color="#2ECC71" />
-                    <Text className="text-sm text-[#2C3E50] ml-2">{exam.room}</Text>
-                  </View>
-                  <View className="flex-row items-center">
-                    <Icon name="schedule" size={16} color="#E74C3C" />
-                    <Text className="text-sm text-[#2C3E50] ml-2">{exam.duration}</Text>
-                  </View>
+                <View className="items-center">
+                  <Text className="text-2xl font-bold text-[#2ECC71]">{stats.completed}</Text>
+                  <Text className="text-xs text-[#7F8C8D]">Completed</Text>
+                </View>
+                <View className="items-center">
+                  <Text className="text-2xl font-bold text-[#F39C12]">{stats.upcoming}</Text>
+                  <Text className="text-xs text-[#7F8C8D]">Upcoming</Text>
+                </View>
+                <View className="items-center">
+                  <Text className="text-2xl font-bold text-[#E74C3C]">{stats.today}</Text>
+                  <Text className="text-xs text-[#7F8C8D]">Today</Text>
                 </View>
               </View>
+            </View>
+          </View>
 
-              {/* Syllabus Preview */}
-              <View className="flex-row items-center justify-between">
-                <View className="flex-row items-center">
-                  <Icon name="menu-book" size={16} color="#7F8C8D" />
-                  <Text className="text-sm text-[#7F8C8D] ml-2">
-                    {exam.syllabus.length} topics • {exam.marks} marks
+          {/* Filter Selector */}
+          <View className="px-4 mb-5">
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {examTypes.map((filter) => (
+                <TouchableOpacity
+                  key={filter.id}
+                  className={`flex-row items-center px-4 py-2.5 mr-3 rounded-[20px] border ${
+                    selectedFilter === filter.id ? "border-[#6A5ACD]" : "bg-white border-[#DDE4EB]"
+                  }`}
+                  style={selectedFilter === filter.id ? { backgroundColor: `${filter.color}20` } : {}}
+                  onPress={() => filterSubjects(filter.id as FilterType)}
+                >
+                  <Icon name={filter.icon} size={16} color={filter.color} />
+                  <Text
+                    className={`text-sm font-semibold ml-2 ${
+                      selectedFilter === filter.id ? "text-[#2C3E50]" : "text-[#7F8C8D]"
+                    }`}
+                  >
+                    {filter.label}
                   </Text>
-                </View>
-                <Icon name="chevron-right" size={16} color="#7F8C8D" />
+                  {filter.id === "TODAY" && stats.today > 0 && (
+                    <View className="ml-2 bg-[#E74C3C] rounded-full px-2 py-0.5">
+                      <Text className="text-xs text-white font-bold">{stats.today}</Text>
+                    </View>
+                  )}
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+
+          {/* Exam Schedule */}
+          <View className="px-4 mb-8">
+            <Text className="text-xl font-bold text-[#2C3E50] mb-4"> Scheduled Subjects</Text>
+            {filteredSubjects.length === 0 ? (
+              <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5 items-center">
+                <EmptyFilterIllustration filterType={selectedFilter} />
+                <Text className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">
+                  {selectedFilter === "ALL"
+                    ? "No Exams Scheduled"
+                    : selectedFilter === "TODAY"
+                      ? "No Exams Today"
+                      : selectedFilter === "UPCOMING"
+                        ? "No Upcoming Exams"
+                        : "No Completed Exams"}
+                </Text>
+                <Text className="text-sm text-[#7F8C8D] text-center mb-4">
+                  {selectedFilter === "ALL"
+                    ? "There are no exams scheduled at the moment."
+                    : selectedFilter === "TODAY"
+                      ? "You don't have any exams scheduled for today. Enjoy your free time!"
+                      : selectedFilter === "UPCOMING"
+                        ? "All your exams are either completed or scheduled for today."
+                        : "You haven't completed any exams yet. Keep preparing!"}
+                </Text>
+                {selectedFilter !== "ALL" && (
+                  <TouchableOpacity className="bg-[#6A5ACD] px-6 py-3 rounded-xl" onPress={() => filterSubjects("ALL")}>
+                    <Text className="text-white font-semibold">View All Exams</Text>
+                  </TouchableOpacity>
+                )}
               </View>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </View>
+            ) : (
+              <View className="gap-4">
+                {filteredSubjects.map((exam, index) => {
+                  const examStatus = getExamStatus(exam.schedule_at)
+                  return (
+                    <TouchableOpacity
+                      key={exam.subject_id}
+                      className="bg-white rounded-2xl p-4 shadow-lg elevation-5"
+                      onPress={() => {
+                        setSelectedExamDetail(exam)
+                        setShowExamModal(true)
+                      }}
+                    >
+                      {/* Header */}
+                      <View className="flex-row items-center justify-between mb-3">
+                        <View className="flex-row items-center flex-1">
+                          <View
+                            className="w-12 h-12 rounded-xl items-center justify-center mr-3"
+                            style={{ backgroundColor: `${getSubjectColor(exam.subject_name)}20` }}
+                          >
+                            <Text className="text-lg font-bold" style={{ color: getSubjectColor(exam.subject_name) }}>
+                              {index + 1}
+                            </Text>
+                          </View>
+                          <View className="flex-1">
+                            <Text className="text-base font-bold text-[#2C3E50]">{exam.subject_name}</Text>
+                            <Text className="text-sm text-[#7F8C8D]">{exam.subject_code}</Text>
+                          </View>
+                        </View>
+                        <View className="items-end">
+                          <View
+                            className="px-2 py-1 rounded-lg mb-1"
+                            style={{ backgroundColor: `${examStatus.color}20` }}
+                          >
+                            <Text className="text-[10px] font-bold" style={{ color: examStatus.color }}>
+                              {examStatus.status.toUpperCase()}
+                            </Text>
+                          </View>
+                          {examStatus.status === "upcoming" && examStatus.days > 0 && (
+                            <Text className="text-xs text-[#F39C12] font-semibold">{examStatus.days} days left</Text>
+                          )}
+                        </View>
+                      </View>
+
+                      {/* Date & Time */}
+                      <View className="bg-[#F8F9FA] rounded-xl p-3 mb-3">
+                        <View className="flex-row justify-between items-center mb-2">
+                          <View className="flex-row items-center">
+                            <Icon name="event" size={16} color="#6A5ACD" />
+                            <Text className="text-sm font-semibold text-[#2C3E50] ml-2">
+                              {formatDateDisplay(exam.schedule_at)}
+                            </Text>
+                          </View>
+                          <View className="flex-row items-center">
+                            <Icon name="access-time" size={16} color="#F39C12" />
+                            <Text className="text-sm font-semibold text-[#2C3E50] ml-2">
+                              {formatTimeDisplay(exam.schedule_at)}
+                            </Text>
+                          </View>
+                        </View>
+                        <View className="flex-row justify-between items-center">
+                          <View className="flex-row items-center">
+                            <Icon name="category" size={16} color="#2ECC71" />
+                            <Text className="text-sm text-[#2C3E50] ml-2">{exam.subject_type}</Text>
+                          </View>
+                          <View className="flex-row items-center">
+                            <Icon name="grade" size={16} color="#E74C3C" />
+                            <Text className="text-sm text-[#2C3E50] ml-2">{exam.max_marks} marks</Text>
+                          </View>
+                        </View>
+                      </View>
+
+                      {/* Quick Info */}
+                      <View className="flex-row items-center justify-between">
+                        <View className="flex-row items-center">
+                          <Icon name="info" size={16} color="#7F8C8D" />
+                          <Text className="text-sm text-[#7F8C8D] ml-2">
+                            {exam.pass_marks ? `Pass: ${exam.pass_marks}` : "No pass marks"}
+                          </Text>
+                        </View>
+                        <Icon name="chevron-right" size={16} color="#7F8C8D" />
+                      </View>
+                    </TouchableOpacity>
+                  )
+                })}
+              </View>
+            )}
+          </View>
+        </>
+      )}
 
       {/* Exam Detail Modal */}
       <Modal
@@ -804,26 +680,29 @@ const ExamScheduleScreen: React.FC = () => {
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
             </View>
-
             {selectedExamDetail && (
               <ScrollView showsVerticalScrollIndicator={false}>
                 {/* Subject Header */}
                 <View className="items-center mb-6">
                   <View
                     className="w-16 h-16 rounded-full items-center justify-center mb-3"
-                    style={{ backgroundColor: `${getSubjectColor(selectedExamDetail.subject)}20` }}
+                    style={{ backgroundColor: `${getSubjectColor(selectedExamDetail.subject_name)}20` }}
                   >
-                    <Icon name="quiz" size={32} color={getSubjectColor(selectedExamDetail.subject)} />
+                    <Icon name="quiz" size={32} color={getSubjectColor(selectedExamDetail.subject_name)} />
                   </View>
                   <Text className="text-xl font-bold text-[#2C3E50] text-center mb-2">
-                    {selectedExamDetail.subject}
+                    {selectedExamDetail.subject_name}
                   </Text>
+                  <Text className="text-sm text-[#7F8C8D] text-center mb-2">{selectedExamDetail.subject_code}</Text>
                   <View
                     className="px-4 py-2 rounded-xl"
-                    style={{ backgroundColor: `${getStatusColor(selectedExamDetail.status)}20` }}
+                    style={{ backgroundColor: `${getExamStatus(selectedExamDetail.schedule_at).color}20` }}
                   >
-                    <Text className="text-sm font-bold" style={{ color: getStatusColor(selectedExamDetail.status) }}>
-                      {selectedExamDetail.status.toUpperCase()}
+                    <Text
+                      className="text-sm font-bold"
+                      style={{ color: getExamStatus(selectedExamDetail.schedule_at).color }}
+                    >
+                      {getExamStatus(selectedExamDetail.schedule_at).status.toUpperCase()}
                     </Text>
                   </View>
                 </View>
@@ -834,58 +713,41 @@ const ExamScheduleScreen: React.FC = () => {
                     <View>
                       <Text className="text-xs text-[#7F8C8D] mb-1">Date</Text>
                       <Text className="text-sm font-semibold text-[#2C3E50]">
-                        {formatDate(selectedExamDetail.date)}
+                        {formatDateDisplay(selectedExamDetail.schedule_at)}
                       </Text>
                     </View>
                     <View>
                       <Text className="text-xs text-[#7F8C8D] mb-1">Time</Text>
-                      <Text className="text-sm font-semibold text-[#2C3E50]">{selectedExamDetail.time}</Text>
+                      <Text className="text-sm font-semibold text-[#2C3E50]">
+                        {formatTimeDisplay(selectedExamDetail.schedule_at)}
+                      </Text>
                     </View>
                   </View>
                   <View className="flex-row justify-between mb-3">
                     <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Duration</Text>
-                      <Text className="text-sm font-semibold text-[#2C3E50]">{selectedExamDetail.duration}</Text>
+                      <Text className="text-xs text-[#7F8C8D] mb-1">Type</Text>
+                      <Text className="text-sm font-semibold text-[#2C3E50]">{selectedExamDetail.subject_type}</Text>
                     </View>
                     <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Room</Text>
-                      <Text className="text-sm font-semibold text-[#2C3E50]">{selectedExamDetail.room}</Text>
+                      <Text className="text-xs text-[#7F8C8D] mb-1">Max Marks</Text>
+                      <Text className="text-sm font-semibold text-[#6A5ACD]">{selectedExamDetail.max_marks}</Text>
                     </View>
                   </View>
-                  <View className="flex-row justify-between">
+                  {selectedExamDetail.pass_marks && (
                     <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Invigilator</Text>
-                      <Text className="text-sm font-semibold text-[#2C3E50]">{selectedExamDetail.invigilator}</Text>
+                      <Text className="text-xs text-[#7F8C8D] mb-1">Pass Marks</Text>
+                      <Text className="text-sm font-semibold text-[#2C3E50]">{selectedExamDetail.pass_marks}</Text>
                     </View>
-                    <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Total Marks</Text>
-                      <Text className="text-sm font-semibold text-[#6A5ACD]">{selectedExamDetail.marks}</Text>
-                    </View>
-                  </View>
-                </View>
-
-                {/* Syllabus */}
-                <View className="mb-6">
-                  <Text className="text-lg font-bold text-[#2C3E50] mb-3">Syllabus Coverage</Text>
-                  <View className="gap-2">
-                    {selectedExamDetail.syllabus.map((topic: string, index: number) => (
-                      <View key={index} className="flex-row items-center p-3 bg-[#F8F9FA] rounded-xl">
-                        <View className="w-6 h-6 rounded-full bg-[#6A5ACD20] items-center justify-center mr-3">
-                          <Text className="text-xs font-bold text-[#6A5ACD]">{index + 1}</Text>
-                        </View>
-                        <Text className="text-sm text-[#2C3E50] flex-1">{topic}</Text>
-                      </View>
-                    ))}
-                  </View>
+                  )}
                 </View>
 
                 {/* Countdown */}
-                {selectedExamDetail.status === "upcoming" && (
+                {getExamStatus(selectedExamDetail.schedule_at).status === "upcoming" && (
                   <View className="bg-[#F39C1210] border border-[#F39C1230] rounded-2xl p-4 mb-6">
                     <View className="items-center">
                       <Icon name="schedule" size={32} color="#F39C12" />
                       <Text className="text-2xl font-bold text-[#F39C12] mt-2">
-                        {getDaysUntilExam(selectedExamDetail.date)} Days Left
+                        {getExamStatus(selectedExamDetail.schedule_at).days} Days Left
                       </Text>
                       <Text className="text-sm text-[#7F8C8D] text-center mt-1">
                         Make sure to prepare well and arrive 15 minutes early
@@ -896,10 +758,16 @@ const ExamScheduleScreen: React.FC = () => {
 
                 {/* Actions */}
                 <View className="flex-row gap-3">
-                  <TouchableOpacity className="flex-1 bg-[#6A5ACD] rounded-xl py-4 items-center">
+                  <TouchableOpacity
+                    className="flex-1 bg-[#6A5ACD] rounded-xl py-4 items-center"
+                    onPress={() => handleDownloadAdmitCard(selectedExamDetail)}
+                  >
                     <Text className="text-base font-bold text-white">Download Admit Card</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity className="flex-1 bg-[#F8F9FA] border border-[#DDE4EB] rounded-xl py-4 items-center">
+                  <TouchableOpacity
+                    className="flex-1 bg-[#F8F9FA] border border-[#DDE4EB] rounded-xl py-4 items-center"
+                    onPress={() => handleSetReminder(selectedExamDetail)}
+                  >
                     <Text className="text-base font-bold text-[#2C3E50]">Set Reminder</Text>
                   </TouchableOpacity>
                 </View>

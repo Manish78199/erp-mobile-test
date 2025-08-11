@@ -1006,7 +1006,7 @@ const HomeworkScreen: React.FC = () => {
                     {/* Header */}
                     <View className="flex-row items-center justify-between mb-3">
                       <View className="flex-row items-center flex-1">
-                        <View
+                        {/* <View
                           className="w-10 h-10 rounded-full items-center justify-center mr-3"
                           style={{ backgroundColor: `${getSubjectColor(homework.subject)}20` }}
                         >
@@ -1015,18 +1015,24 @@ const HomeworkScreen: React.FC = () => {
                             size={20}
                             color={getSubjectColor(homework.subject)}
                           />
-                        </View>
+                        </View> */}
                         <View className="flex-1">
                           <Text className="text-base font-bold text-[#2C3E50]" numberOfLines={1}>
                             {homework.title}
                           </Text>
-                          <View className="flex items-center flex-row">
-                            <Text style={{ backgroundColor: getSubjectColor(homework.subject) }} className={`text-xs p-[2px] text-white rounded-md  `}>
+
+                          <View className="flex flex-row items-center">
+                            <Text className={`text-xs p-[2px] bg-gray-100  shadow-sm ring-gray-300 capitalize text-[#4d5965] rounded-md  `}>
                               {homework.subject}
                             </Text>
-                            <Text> {homework.teacher}</Text>
-
+                            <Text className={`text-xs p-[2px] text-[#4d5965] rounded-md  `}>
+                            |  {homework.teacher}
+                            </Text>
                           </View>
+
+
+
+
 
                         </View>
                       </View>

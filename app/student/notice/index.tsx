@@ -225,7 +225,7 @@ const NoticesScreen: React.FC = () => {
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
     >
       {/* Header */}
-      <View className="flex-row items-center justify-between bg-[#6A5ACD] pt-12 pb-5 px-4 rounded-b-[25px]">
+      <View className="flex-row items-center justify-between bg-[#6A5ACD] py-12 px-4 rounded-b-[25px]">
         <Link href="/student" asChild>
           <TouchableOpacity className="p-2">
             <Icon name="arrow-back" size={24} color="white" />

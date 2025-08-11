@@ -40,9 +40,9 @@ export const Avatar: React.FC<AvatarProps> = ({
       {source ? (
         <Image source={source} className={`rounded-full ${getSizeStyles()}`} />
       ) : (
-        <Text className="text-primary-600 font-semibold">
+        <Typography className="text-primary-600 font-semibold">
           {getInitials(name)}
-        </Text>
+        </Typography>
       )}
     </View>
   );

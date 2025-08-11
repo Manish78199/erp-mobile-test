@@ -13,9 +13,9 @@ const Tab = createBottomTabNavigator();
 
 // Simple icon component (you can replace with react-native-vector-icons)
 const TabIcon = ({ name, focused }: { name: string; focused: boolean }) => (
-  <Text className={`text-lg ${focused ? 'text-primary-600' : 'text-gray-400'}`}>
+  <Typography className={`text-lg ${focused ? 'text-primary-600' : 'text-gray-400'}`}>
     {name}
-  </Text>
+  </Typography>
 );
 
 export const BottomTabs = () => {

@@ -28,7 +28,7 @@ export default function RootLayout() {
 
     return (
         <SafeAreaProvider>
-            <Stack screenOptions={{ headerShown: false ,animation:"none"}} />
+            <Stack  screenOptions={{ headerShown: false ,animation:"none"}} />
         </SafeAreaProvider>
     );
 }
