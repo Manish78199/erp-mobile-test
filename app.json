@@ -45,7 +45,10 @@
       "typedRoutes": true
     },
     "extra": {
-      "router": {}
+      "router": {},
+      "eas": {
+        "projectId": "92ab4676-bafa-438a-9ef6-de824692ff43"
+      }
     },
     "owner": "vedatron"
   }

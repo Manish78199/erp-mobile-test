@@ -1,5 +1,6 @@
 // app/_layout.tsx
 
+import { Text } from "react-native";
 
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -28,12 +29,14 @@ export default function RootLayout() {
     })
     if (!fontsLoaded) return null
 
+    
+
     return (
         <SafeAreaProvider>
             <UserTypeProvider>
-            <StudentAppDataProvider>
-                <Stack screenOptions={{ headerShown: false, animation: "none" }} />
-            </StudentAppDataProvider>
+                <StudentAppDataProvider>
+                    <Stack screenOptions={{ headerShown: false, animation: "none" }} />
+                </StudentAppDataProvider>
             </UserTypeProvider>
         </SafeAreaProvider>
     );
