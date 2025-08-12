@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, View, Text, TouchableOpacityProps } from 'react-native';
+import { Typography } from './Typography';
 
 interface ListItemProps extends TouchableOpacityProps {
   title: string;

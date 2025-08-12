@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
+import { Typography } from './Typography';
 
 interface AvatarProps {
   source?: { uri: string };

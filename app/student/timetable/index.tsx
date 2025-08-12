@@ -1,5 +1,6 @@
 
 
+import { Typography } from '@/components/Typography';
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -68,7 +69,7 @@ const TimetableScreen: React.FC<TimetableScreenProps> = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
           <Icon name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-        <Text className="text-xl font-bold text-white">Class Schedule</Text>
+        <Typography className="text-xl font-bold text-white">Class Schedule</Typography> 
         <TouchableOpacity className="p-2">
           <Icon name="today" size={20} color="white" />
         </TouchableOpacity>
@@ -85,11 +86,11 @@ const TimetableScreen: React.FC<TimetableScreenProps> = ({ navigation }) => {
               }`}
               onPress={() => setSelectedDay(day)}
             >
-              <Text className={`text-sm font-semibold ${
+              <Typography className={`text-sm font-semibold ${
                 selectedDay === day ? 'text-[#6A5ACD]' : 'text-[#7F8C8D]'
               }`}>
                 {day}
-              </Text>
+              </Typography> 
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -100,12 +101,12 @@ const TimetableScreen: React.FC<TimetableScreenProps> = ({ navigation }) => {
         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
           <View className="flex-row items-center justify-between">
             <View>
-              <Text className="text-xl font-bold text-[#2C3E50]">{selectedDay}</Text>
-              <Text className="text-sm text-[#7F8C8D]">{currentSchedule.length - 2} classes today</Text>
+              <Typography className="text-xl font-bold text-[#2C3E50]">{selectedDay}</Typography> 
+              <Typography className="text-sm text-[#7F8C8D]">{currentSchedule.length - 2} classes today</Typography> 
             </View>
             <View className="items-center">
               <Icon name="schedule" size={32} color="#6A5ACD" />
-              <Text className="text-xs text-[#7F8C8D] mt-1">8:00 AM - 2:15 PM</Text>
+              <Typography className="text-xs text-[#7F8C8D] mt-1">8:00 AM - 2:15 PM</Typography> 
             </View>
           </View>
         </View>
@@ -113,7 +114,7 @@ const TimetableScreen: React.FC<TimetableScreenProps> = ({ navigation }) => {
 
       {/* Schedule List */}
       <View className="px-4 mb-6">
-        <Text className="text-xl font-bold text-[#2C3E50] mb-4">Today's Schedule</Text>
+        <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Today's Schedule</Typography> 
         <View className="space-y-3">
           {currentSchedule.map((period, index) => (
             <View key={index} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
@@ -127,21 +128,21 @@ const TimetableScreen: React.FC<TimetableScreenProps> = ({ navigation }) => {
                 
                 <View className="flex-1">
                   <View className="flex-row justify-between items-center mb-1">
-                    <Text className="text-base font-bold text-[#2C3E50]">{period.subject}</Text>
-                    <Text className="text-xs font-semibold text-[#6A5ACD]">{period.time}</Text>
+                    <Typography className="text-base font-bold text-[#2C3E50]">{period.subject}</Typography> 
+                    <Typography className="text-xs font-semibold text-[#6A5ACD]">{period.time}</Typography> 
                   </View>
                   
                   {period.teacher && (
                     <View className="flex-row items-center mb-1">
                       <Icon name="person" size={14} color="#7F8C8D" />
-                      <Text className="text-sm text-[#7F8C8D] ml-1">{period.teacher}</Text>
+                      <Typography className="text-sm text-[#7F8C8D] ml-1">{period.teacher}</Typography> 
                     </View>
                   )}
                   
                   {period.room && (
                     <View className="flex-row items-center">
                       <Icon name="location-on" size={14} color="#7F8C8D" />
-                      <Text className="text-sm text-[#7F8C8D] ml-1">{period.room}</Text>
+                      <Typography className="text-sm text-[#7F8C8D] ml-1">{period.room}</Typography> 
                     </View>
                   )}
                 </View>
@@ -159,22 +160,22 @@ const TimetableScreen: React.FC<TimetableScreenProps> = ({ navigation }) => {
 
       {/* Quick Stats */}
       <View className="px-4 mb-8">
-        <Text className="text-xl font-bold text-[#2C3E50] mb-4">Weekly Overview</Text>
+        <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Weekly Overview</Typography> 
         <View className="flex-row justify-between">
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <Icon name="school" size={24} color="#6A5ACD" />
-            <Text className="text-lg font-extrabold text-[#2C3E50] mt-2">35</Text>
-            <Text className="text-xs text-[#7F8C8D] mt-1">Total Classes</Text>
+            <Typography className="text-lg font-extrabold text-[#2C3E50] mt-2">35</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] mt-1">Total Classes</Typography> 
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <Icon name="science" size={24} color="#00BCD4" />
-            <Text className="text-lg font-extrabold text-[#2C3E50] mt-2">12</Text>
-            <Text className="text-xs text-[#7F8C8D] mt-1">Lab Sessions</Text>
+            <Typography className="text-lg font-extrabold text-[#2C3E50] mt-2">12</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] mt-1">Lab Sessions</Typography> 
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <Icon name="sports" size={24} color="#2ECC71" />
-            <Text className="text-lg font-extrabold text-[#2C3E50] mt-2">5</Text>
-            <Text className="text-xs text-[#7F8C8D] mt-1">Activities</Text>
+            <Typography className="text-lg font-extrabold text-[#2C3E50] mt-2">5</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] mt-1">Activities</Typography> 
           </View>
         </View>
       </View>

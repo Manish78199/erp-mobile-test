@@ -16,7 +16,7 @@ export const Typography = ({ className, style, ...props }: TypographyProps) => {
       style={style}
       className={`text-base font-poppins ${className ?? ''}`} >
         {props.children}
-        </Text>
+        </Text> 
 
 
 

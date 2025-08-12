@@ -1,3 +1,4 @@
+import { Typography } from "@/components/Typography"
 import type React from "react"
 import { View, Text, Dimensions } from "react-native"
 import { CartesianChart, Line, useChartPressState } from "victory-native"
@@ -33,11 +34,11 @@ const ChartCard: React.FC<{
 
   return (
     <View className="bg-white rounded-xl shadow-lg elevation-5 p-4 mb-4">
-      <Text className="text-lg font-semibold text-[#2C3E50] mb-2">{title}</Text>
+      <Typography className="text-lg font-semibold text-[#2C3E50] mb-2">{title}</Typography> 
       {isActive && (
-        <Text className="text-sm text-[#7F8C8D] mb-2">
+        <Typography className="text-sm text-[#7F8C8D] mb-2">
           {chart[Math.round(state.x.value.value)]?.month}: {state.y.y.value.value.toFixed(1)}
-        </Text>
+        </Typography> 
       )}
       <View style={{ height: 200 }}>
         <CartesianChart

@@ -1,5 +1,6 @@
 "use client"
 
+import { Typography } from "@/components/Typography"
 import type React from "react"
 import { useEffect, useRef } from "react"
 import { View, Text, Animated } from "react-native"
@@ -45,7 +46,7 @@ const HeightScale: React.FC<HeightScaleProps> = ({ height = 0 }) => {
             return (
               <View key={i} className="flex-row items-center">
                 <View className="w-2 h-[1px] bg-[#7F8C8D]" />
-                <Text className="text-xs text-[#7F8C8D] ml-1">{markerHeight}</Text>
+                <Typography className="text-xs text-[#7F8C8D] ml-1">{markerHeight}</Typography> 
               </View>
             )
           })}
@@ -54,10 +55,10 @@ const HeightScale: React.FC<HeightScaleProps> = ({ height = 0 }) => {
 
       {/* Label for actual height */}
       <View className="mt-2 items-center">
-        <Text className="text-sm font-semibold text-[#2C3E50]">{height} cm</Text>
-        <Text className="text-xs text-[#7F8C8D]">
+        <Typography className="text-sm font-semibold text-[#2C3E50]">{height} cm</Typography> 
+        <Typography className="text-xs text-[#7F8C8D]">
           {heightInFeet}' {heightInInches}"
-        </Text>
+        </Typography> 
       </View>
     </View>
   )

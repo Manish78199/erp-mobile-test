@@ -210,7 +210,7 @@
 //           </TouchableOpacity>
 //         </Link>
 //         <View className="flex-1 items-center">
-//           <Text className="text-xl font-bold text-white">Results</Text>
+//           <Typography className="text-xl font-bold text-white">Results</Typography> 
 //         </View>
 //         <TouchableOpacity className="p-2">
 //           <Icon name="download" size={20} color="white" />
@@ -222,16 +222,16 @@
 //         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
 //           <View className="flex-row items-center justify-between mb-4">
 //             <View>
-//               <Text className="text-lg font-bold text-[#2C3E50]">{currentResult.name}</Text>
-//               <Text className="text-sm text-[#7F8C8D]">{currentResult.date}</Text>
+//               <Typography className="text-lg font-bold text-[#2C3E50]">{currentResult.name}</Typography> 
+//               <Typography className="text-sm text-[#7F8C8D]">{currentResult.date}</Typography> 
 //             </View>
 //             <View
 //               className="px-4 py-2 rounded-xl"
 //               style={{ backgroundColor: `${getStatusColor(currentResult.status)}20` }}
 //             >
-//               <Text className="text-sm font-bold" style={{ color: getStatusColor(currentResult.status) }}>
+//               <Typography className="text-sm font-bold" style={{ color: getStatusColor(currentResult.status) }}>
 //                 {currentResult.status.toUpperCase()}
-//               </Text>
+//               </Typography> 
 //             </View>
 //           </View>
 
@@ -239,49 +239,49 @@
 //             <>
 //               <View className="flex-row justify-between items-center mb-4">
 //                 <View className="items-center">
-//                   <Text className="text-3xl font-bold text-[#6A5ACD]">{currentResult.percentage}%</Text>
-//                   <Text className="text-xs text-[#7F8C8D]">Overall</Text>
+//                   <Typography className="text-3xl font-bold text-[#6A5ACD]">{currentResult.percentage}%</Typography> 
+//                   <Typography className="text-xs text-[#7F8C8D]">Overall</Typography> 
 //                 </View>
 //                 <View className="items-center">
-//                   <Text className="text-3xl font-bold" style={{ color: getGradeColor(currentResult.overallGrade) }}>
+//                   <Typography className="text-3xl font-bold" style={{ color: getGradeColor(currentResult.overallGrade) }}>
 //                     {currentResult.overallGrade}
-//                   </Text>
-//                   <Text className="text-xs text-[#7F8C8D]">Grade</Text>
+//                   </Typography> 
+//                   <Typography className="text-xs text-[#7F8C8D]">Grade</Typography> 
 //                 </View>
 //                 <View className="items-center">
-//                   <Text className="text-3xl font-bold text-[#F39C12]">#{currentResult.rank}</Text>
-//                   <Text className="text-xs text-[#7F8C8D]">Rank</Text>
+//                   <Typography className="text-3xl font-bold text-[#F39C12]">#{currentResult.rank}</Typography> 
+//                   <Typography className="text-xs text-[#7F8C8D]">Rank</Typography> 
 //                 </View>
 //               </View>
 
 //               <View className="bg-[#F8F9FA] rounded-xl p-3">
 //                 <View className="flex-row justify-between items-center mb-2">
-//                   <Text className="text-sm text-[#7F8C8D]">Marks Obtained:</Text>
-//                   <Text className="text-sm font-bold text-[#2C3E50]">
+//                   <Typography className="text-sm text-[#7F8C8D]">Marks Obtained:</Typography> 
+//                   <Typography className="text-sm font-bold text-[#2C3E50]">
 //                     {currentResult.obtainedMarks}/{currentResult.totalMarks}
-//                   </Text>
+//                   </Typography> 
 //                 </View>
 //                 <View className="flex-row justify-between items-center mb-2">
-//                   <Text className="text-sm text-[#7F8C8D]">Class Rank:</Text>
-//                   <Text className="text-sm font-bold text-[#6A5ACD]">
+//                   <Typography className="text-sm text-[#7F8C8D]">Class Rank:</Typography> 
+//                   <Typography className="text-sm font-bold text-[#6A5ACD]">
 //                     {currentResult.rank} out of {currentResult.totalStudents}
-//                   </Text>
+//                   </Typography> 
 //                 </View>
 //                 <View className="flex-row justify-between items-center">
-//                   <Text className="text-sm text-[#7F8C8D]">Performance:</Text>
-//                   <Text className="text-sm font-bold" style={{ color: performance.color }}>
+//                   <Typography className="text-sm text-[#7F8C8D]">Performance:</Typography> 
+//                   <Typography className="text-sm font-bold" style={{ color: performance.color }}>
 //                     {performance.level}
-//                   </Text>
+//                   </Typography> 
 //                 </View>
 //               </View>
 //             </>
 //           ) : (
 //             <View className="items-center py-8">
 //               <Icon name="schedule" size={48} color="#F39C12" />
-//               <Text className="text-lg font-bold text-[#F39C12] mt-3">Results Awaited</Text>
-//               <Text className="text-sm text-[#7F8C8D] text-center mt-2">
+//               <Typography className="text-lg font-bold text-[#F39C12] mt-3">Results Awaited</Typography> 
+//               <Typography className="text-sm text-[#7F8C8D] text-center mt-2">
 //                 Results will be published soon. You will be notified once available.
-//               </Text>
+//               </Typography> 
 //             </View>
 //           )}
 //         </View>
@@ -306,7 +306,7 @@
 //                 }`}
 //               >
 //                 {exam.label}
-//               </Text>
+//               </Typography> 
 //             </TouchableOpacity>
 //           ))}
 //         </ScrollView>
@@ -315,7 +315,7 @@
 //       {/* Subject-wise Results */}
 //       {currentResult.status === "published" && currentResult.subjects.length > 0 && (
 //         <View className="px-4 mb-8">
-//           <Text className="text-xl font-bold text-[#2C3E50] mb-4">Subject-wise Performance</Text>
+//           <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Subject-wise Performance</Typography> 
 //           <View className="gap-4">
 //             {currentResult.subjects.map((subject, index) => (
 //               <TouchableOpacity
@@ -331,8 +331,8 @@
 //                   <View className="flex-row items-center flex-1">
 //                     <View className="w-4 h-4 rounded-full mr-3" style={{ backgroundColor: subject.color }} />
 //                     <View className="flex-1">
-//                       <Text className="text-base font-bold text-[#2C3E50]">{subject.subject}</Text>
-//                       <Text className="text-sm text-[#7F8C8D]">{subject.teacher}</Text>
+//                       <Typography className="text-base font-bold text-[#2C3E50]">{subject.subject}</Typography> 
+//                       <Typography className="text-sm text-[#7F8C8D]">{subject.teacher}</Typography> 
 //                     </View>
 //                   </View>
 //                   <View className="items-end">
@@ -340,20 +340,20 @@
 //                       className="px-3 py-1 rounded-xl mb-1"
 //                       style={{ backgroundColor: `${getGradeColor(subject.grade)}20` }}
 //                     >
-//                       <Text className="text-sm font-bold" style={{ color: getGradeColor(subject.grade) }}>
+//                       <Typography className="text-sm font-bold" style={{ color: getGradeColor(subject.grade) }}>
 //                         {subject.grade}
-//                       </Text>
+//                       </Typography> 
 //                     </View>
-//                     <Text className="text-xs text-[#7F8C8D]">{subject.percentage}%</Text>
+//                     <Typography className="text-xs text-[#7F8C8D]">{subject.percentage}%</Typography> 
 //                   </View>
 //                 </View>
 
 //                 {/* Marks */}
 //                 <View className="flex-row justify-between items-center mb-3">
-//                   <Text className="text-lg font-bold text-[#2C3E50]">
+//                   <Typography className="text-lg font-bold text-[#2C3E50]">
 //                     {subject.obtainedMarks}/{subject.totalMarks}
-//                   </Text>
-//                   <Text className="text-sm text-[#6A5ACD] font-semibold">{subject.percentage}%</Text>
+//                   </Typography> 
+//                   <Typography className="text-sm text-[#6A5ACD] font-semibold">{subject.percentage}%</Typography> 
 //                 </View>
 
 //                 {/* Progress Bar */}
@@ -368,7 +368,7 @@
 //                 </View>
 
 //                 {/* Remarks */}
-//                 <Text className="text-sm text-[#7F8C8D] italic">{subject.remarks}</Text>
+//                 <Typography className="text-sm text-[#7F8C8D] italic">{subject.remarks}</Typography> 
 //               </TouchableOpacity>
 //             ))}
 //           </View>
@@ -385,7 +385,7 @@
 //         <View className="flex-1 bg-black/50 justify-end">
 //           <View className="bg-white rounded-t-[25px] p-5 max-h-[80%]">
 //             <View className="flex-row justify-between items-center mb-5">
-//               <Text className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Subject Details</Text>
+//               <Typography className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Subject Details</Typography> 
 //               <TouchableOpacity onPress={() => setShowResultModal(false)}>
 //                 <Icon name="close" size={24} color="#2C3E50" />
 //               </TouchableOpacity>
@@ -401,28 +401,28 @@
 //                   >
 //                     <Icon name="grade" size={32} color={selectedResult.color} />
 //                   </View>
-//                   <Text className="text-xl font-bold text-[#2C3E50] text-center mb-2">{selectedResult.subject}</Text>
-//                   <Text className="text-sm text-[#7F8C8D] text-center">{selectedResult.teacher}</Text>
+//                   <Typography className="text-xl font-bold text-[#2C3E50] text-center mb-2">{selectedResult.subject}</Typography> 
+//                   <Typography className="text-sm text-[#7F8C8D] text-center">{selectedResult.teacher}</Typography> 
 //                 </View>
 
 //                 {/* Grade & Marks */}
 //                 <View className="bg-[#F8F9FA] rounded-2xl p-4 mb-6">
 //                   <View className="flex-row justify-between items-center mb-4">
 //                     <View className="items-center">
-//                       <Text className="text-3xl font-bold" style={{ color: getGradeColor(selectedResult.grade) }}>
+//                       <Typography className="text-3xl font-bold" style={{ color: getGradeColor(selectedResult.grade) }}>
 //                         {selectedResult.grade}
-//                       </Text>
-//                       <Text className="text-xs text-[#7F8C8D]">Grade</Text>
+//                       </Typography> 
+//                       <Typography className="text-xs text-[#7F8C8D]">Grade</Typography> 
 //                     </View>
 //                     <View className="items-center">
-//                       <Text className="text-3xl font-bold text-[#6A5ACD]">{selectedResult.percentage}%</Text>
-//                       <Text className="text-xs text-[#7F8C8D]">Percentage</Text>
+//                       <Typography className="text-3xl font-bold text-[#6A5ACD]">{selectedResult.percentage}%</Typography> 
+//                       <Typography className="text-xs text-[#7F8C8D]">Percentage</Typography> 
 //                     </View>
 //                     <View className="items-center">
-//                       <Text className="text-3xl font-bold text-[#2C3E50]">
+//                       <Typography className="text-3xl font-bold text-[#2C3E50]">
 //                         {selectedResult.obtainedMarks}/{selectedResult.totalMarks}
-//                       </Text>
-//                       <Text className="text-xs text-[#7F8C8D]">Marks</Text>
+//                       </Typography> 
+//                       <Typography className="text-xs text-[#7F8C8D]">Marks</Typography> 
 //                     </View>
 //                   </View>
 
@@ -440,33 +440,33 @@
 
 //                 {/* Teacher's Remarks */}
 //                 <View className="mb-6">
-//                   <Text className="text-lg font-bold text-[#2C3E50] mb-3">Teacher's Remarks</Text>
+//                   <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Teacher's Remarks</Typography> 
 //                   <View className="bg-[#F8F9FA] rounded-2xl p-4">
-//                     <Text className="text-sm text-[#2C3E50] leading-6 italic">"{selectedResult.remarks}"</Text>
+//                     <Typography className="text-sm text-[#2C3E50] leading-6 italic">"{selectedResult.remarks}"</Typography> 
 //                   </View>
 //                 </View>
 
 //                 {/* Performance Analysis */}
 //                 <View className="mb-6">
-//                   <Text className="text-lg font-bold text-[#2C3E50] mb-3">Performance Analysis</Text>
+//                   <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Performance Analysis</Typography> 
 //                   <View className="gap-3">
 //                     <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-//                       <Text className="text-sm text-[#7F8C8D]">Marks Obtained</Text>
-//                       <Text className="text-sm font-bold text-[#2C3E50]">{selectedResult.obtainedMarks}</Text>
+//                       <Typography className="text-sm text-[#7F8C8D]">Marks Obtained</Typography> 
+//                       <Typography className="text-sm font-bold text-[#2C3E50]">{selectedResult.obtainedMarks}</Typography> 
 //                     </View>
 //                     <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-//                       <Text className="text-sm text-[#7F8C8D]">Total Marks</Text>
-//                       <Text className="text-sm font-bold text-[#2C3E50]">{selectedResult.totalMarks}</Text>
+//                       <Typography className="text-sm text-[#7F8C8D]">Total Marks</Typography> 
+//                       <Typography className="text-sm font-bold text-[#2C3E50]">{selectedResult.totalMarks}</Typography> 
 //                     </View>
 //                     <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-//                       <Text className="text-sm text-[#7F8C8D]">Percentage</Text>
-//                       <Text className="text-sm font-bold text-[#6A5ACD]">{selectedResult.percentage}%</Text>
+//                       <Typography className="text-sm text-[#7F8C8D]">Percentage</Typography> 
+//                       <Typography className="text-sm font-bold text-[#6A5ACD]">{selectedResult.percentage}%</Typography> 
 //                     </View>
 //                     <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-//                       <Text className="text-sm text-[#7F8C8D]">Grade</Text>
-//                       <Text className="text-sm font-bold" style={{ color: getGradeColor(selectedResult.grade) }}>
+//                       <Typography className="text-sm text-[#7F8C8D]">Grade</Typography> 
+//                       <Typography className="text-sm font-bold" style={{ color: getGradeColor(selectedResult.grade) }}>
 //                         {selectedResult.grade}
-//                       </Text>
+//                       </Typography> 
 //                     </View>
 //                   </View>
 //                 </View>
@@ -474,10 +474,10 @@
 //                 {/* Actions */}
 //                 <View className="flex-row gap-3">
 //                   <TouchableOpacity className="flex-1 bg-[#6A5ACD] rounded-xl py-4 items-center">
-//                     <Text className="text-base font-bold text-white">Download Report</Text>
+//                     <Typography className="text-base font-bold text-white">Download Report</Typography> 
 //                   </TouchableOpacity>
 //                   <TouchableOpacity className="flex-1 bg-[#F8F9FA] border border-[#DDE4EB] rounded-xl py-4 items-center">
-//                     <Text className="text-base font-bold text-[#2C3E50]">Share</Text>
+//                     <Typography className="text-base font-bold text-[#2C3E50]">Share</Typography> 
 //                   </TouchableOpacity>
 //                 </View>
 //               </ScrollView>
@@ -499,6 +499,7 @@ import { View, Text, ScrollView, TouchableOpacity, Modal, Alert, RefreshControl,
 import Icon from "react-native-vector-icons/MaterialIcons"
 import { Link } from "expo-router"
 import { get_sessional_exams, get_exam_result } from "@/service/student/result"
+import { Typography } from "@/components/Typography"
 
 // Types
 interface Subject {
@@ -543,7 +544,7 @@ const NoResultsIllustration = () => (
         <Icon name="assessment" size={32} color="#BDC3C7" />
       </View>
       <View className="absolute -top-2 -right-2 w-8 h-8 bg-orange-400 rounded-full items-center justify-center">
-        <Text className="text-white font-bold text-lg">?</Text>
+        <Typography className="text-white font-bold text-lg">?</Typography> 
       </View>
       <View className="absolute -left-3 top-3 w-2 h-2 bg-blue-300 rounded-full opacity-60" />
       <View className="absolute -right-1 bottom-2 w-1.5 h-1.5 bg-purple-300 rounded-full opacity-60" />
@@ -633,11 +634,11 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
               <Icon name="assessment" size={20} color="#6366F1" />
             </View>
             <View className="flex-1">
-              <Text className="text-base font-bold text-[#2C3E50]">{exam.name}</Text>
+              <Typography className="text-base font-bold text-[#2C3E50]">{exam.name}</Typography> 
               {result && (
-                <Text className="text-sm text-[#7F8C8D] mt-1">
+                <Typography className="text-sm text-[#7F8C8D] mt-1">
                   {result.total_obtained}/{result.total_max} ({getPercentage()}%)
-                </Text>
+                </Typography> 
               )}
             </View>
           </View>
@@ -647,9 +648,9 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
                 className="px-3 py-1 rounded-lg mr-2"
                 style={{ backgroundColor: `${getGradeColor(result.final_result.grade)}20` }}
               >
-                <Text className="text-xs font-bold" style={{ color: getGradeColor(result.final_result.grade) }}>
+                <Typography className="text-xs font-bold" style={{ color: getGradeColor(result.final_result.grade) }}>
                   Grade {result.final_result.grade}
-                </Text>
+                </Typography> 
               </View>
             )}
             <Icon name={isExpanded ? "expand-less" : "expand-more"} size={24} color="#7F8C8D" />
@@ -662,7 +663,7 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
           {isLoading && (
             <View className="items-center py-8">
               <ActivityIndicator size="large" color="#6A5ACD" />
-              <Text className="text-sm text-[#7F8C8D] mt-2">Loading result...</Text>
+              <Typography className="text-sm text-[#7F8C8D] mt-2">Loading result...</Typography> 
             </View>
           )}
 
@@ -672,53 +673,53 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
               <View className="flex-row justify-between mb-4">
                 <View className="bg-[#F8F9FA] rounded-xl p-3 flex-1 mr-2 items-center">
                   <Icon name="moving" size={20} color="#3B82F6" />
-                  <Text className="text-lg font-bold text-[#2C3E50] mt-1">
+                  <Typography className="text-lg font-bold text-[#2C3E50] mt-1">
                     {result.total_obtained}/{result.total_max}
-                  </Text>
-                  <Text className="text-xs text-[#7F8C8D]">Total Score</Text>
-                  <Text className="text-xs text-[#7F8C8D]">{getPercentage()}%</Text>
+                  </Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">Total Score</Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">{getPercentage()}%</Typography> 
                 </View>
                 <View className="bg-[#F8F9FA] rounded-xl p-3 flex-1 mx-1 items-center">
                   <Icon name="grade" size={20} color="#10B981" />
-                  <Text className="text-lg font-bold text-[#2C3E50] mt-1">{result.final_result.grade}</Text>
-                  <Text className="text-xs text-[#7F8C8D]">Final Grade</Text>
-                  <Text className="text-xs text-[#10B981]">{result.final_result.remark}</Text>
+                  <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{result.final_result.grade}</Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">Final Grade</Typography> 
+                  <Typography className="text-xs text-[#10B981]">{result.final_result.remark}</Typography> 
                 </View>
                 <View className="bg-[#F8F9FA] rounded-xl p-3 flex-1 ml-2 items-center">
                   <Icon name="emoji-events" size={20} color="#F59E0B" />
-                  <Text className="text-lg font-bold text-[#2C3E50] mt-1">{result.final_result.value}</Text>
-                  <Text className="text-xs text-[#7F8C8D]">{result.final_result.result_type}</Text>
-                  <Text className="text-xs text-[#7F8C8D]">Performance</Text>
+                  <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{result.final_result.value}</Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">{result.final_result.result_type}</Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">Performance</Typography> 
                 </View>
               </View>
 
               {/* Subjects List */}
               <View className="mb-4">
-                <Text className="text-base font-bold text-[#2C3E50] mb-3">Subject-wise Results</Text>
+                <Typography className="text-base font-bold text-[#2C3E50] mb-3">Subject-wise Results</Typography> 
                 <View className="gap-3">
                   {result.subjects.map((subject, idx) => (
                     <View key={idx} className="bg-[#F8F9FA] rounded-xl p-3">
                       <View className="flex-row items-center justify-between mb-2">
                         <View className="flex-1">
-                          <Text className="text-sm font-semibold text-[#2C3E50]">{subject.subject_name}</Text>
-                          <Text className="text-xs text-[#7F8C8D]">{subject.subject_type}</Text>
+                          <Typography className="text-sm font-semibold text-[#2C3E50]">{subject.subject_name}</Typography> 
+                          <Typography className="text-xs text-[#7F8C8D]">{subject.subject_type}</Typography> 
                         </View>
                         <View className="items-end">
                           <View
                             className="px-2 py-1 rounded-lg mb-1"
                             style={{ backgroundColor: `${getGradeColor(subject.grade)}20` }}
                           >
-                            <Text className="text-xs font-bold" style={{ color: getGradeColor(subject.grade) }}>
+                            <Typography className="text-xs font-bold" style={{ color: getGradeColor(subject.grade) }}>
                               {subject.grade}
-                            </Text>
+                            </Typography> 
                           </View>
                           <View
                             className="px-2 py-1 rounded-lg"
                             style={{ backgroundColor: `${getStatusColor(subject.status)}20` }}
                           >
-                            <Text className="text-xs font-bold" style={{ color: getStatusColor(subject.status) }}>
+                            <Typography className="text-xs font-bold" style={{ color: getStatusColor(subject.status) }}>
                               {subject.status}
-                            </Text>
+                            </Typography> 
                           </View>
                         </View>
                       </View>
@@ -727,23 +728,23 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
                         <View className="flex-row gap-4">
                           {["THEORETICAL", "BOTH"].includes(subject.subject_type) && (
                             <View>
-                              <Text className="text-xs text-[#7F8C8D]">Theory</Text>
-                              <Text className="text-sm font-semibold text-[#2C3E50]">
+                              <Typography className="text-xs text-[#7F8C8D]">Theory</Typography> 
+                              <Typography className="text-sm font-semibold text-[#2C3E50]">
                                 {subject.absent ? "AB" : subject.marks_obtained.written || "--"}
-                              </Text>
+                              </Typography> 
                             </View>
                           )}
                           {["PRACTICAL", "BOTH"].includes(subject.subject_type) && (
                             <View>
-                              <Text className="text-xs text-[#7F8C8D]">Practical</Text>
-                              <Text className="text-sm font-semibold text-[#2C3E50]">
+                              <Typography className="text-xs text-[#7F8C8D]">Practical</Typography> 
+                              <Typography className="text-sm font-semibold text-[#2C3E50]">
                                 {subject.marks_obtained.practical || "--"}
-                              </Text>
+                              </Typography> 
                             </View>
                           )}
                           <View>
-                            <Text className="text-xs text-[#7F8C8D]">Total</Text>
-                            <Text className="text-sm font-bold text-[#6A5ACD]">{subject.marks_obtained.total}</Text>
+                            <Typography className="text-xs text-[#7F8C8D]">Total</Typography> 
+                            <Typography className="text-sm font-bold text-[#6A5ACD]">{subject.marks_obtained.total}</Typography> 
                           </View>
                         </View>
                       </View>
@@ -754,27 +755,27 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
 
               {/* Performance Summary */}
               <View className="bg-[#F8F9FA] rounded-xl p-4">
-                <Text className="text-sm font-bold text-[#2C3E50] mb-3 flex-row items-center">
+                <Typography className="text-sm font-bold text-[#2C3E50] mb-3 flex-row items-center">
                   <Icon name="trending-up" size={16} color="#6A5ACD" />
-                  <Text className="ml-2">Performance Summary</Text>
-                </Text>
+                  <Typography className="ml-2">Performance Summary</Typography> 
+                </Typography> 
                 <View className="flex-row justify-between mb-2">
-                  <Text className="text-sm text-[#7F8C8D]">Total Marks:</Text>
-                  <Text className="text-sm font-semibold text-[#2C3E50]">
+                  <Typography className="text-sm text-[#7F8C8D]">Total Marks:</Typography> 
+                  <Typography className="text-sm font-semibold text-[#2C3E50]">
                     {result.total_obtained}/{result.total_max}
-                  </Text>
+                  </Typography> 
                 </View>
                 <View className="flex-row justify-between mb-2">
-                  <Text className="text-sm text-[#7F8C8D]">Percentage:</Text>
-                  <Text className="text-sm font-semibold text-[#2C3E50]">{getPercentage()}%</Text>
+                  <Typography className="text-sm text-[#7F8C8D]">Percentage:</Typography> 
+                  <Typography className="text-sm font-semibold text-[#2C3E50]">{getPercentage()}%</Typography> 
                 </View>
                 <View className="flex-row justify-between mb-2">
-                  <Text className="text-sm text-[#7F8C8D]">Grade:</Text>
-                  <Text className="text-sm font-semibold text-[#2C3E50]">{result.final_result.grade}</Text>
+                  <Typography className="text-sm text-[#7F8C8D]">Grade:</Typography> 
+                  <Typography className="text-sm font-semibold text-[#2C3E50]">{result.final_result.grade}</Typography> 
                 </View>
                 <View className="flex-row justify-between">
-                  <Text className="text-sm text-[#7F8C8D]">Remark:</Text>
-                  <Text className="text-sm font-semibold text-[#2C3E50]">{result.final_result.remark}</Text>
+                  <Typography className="text-sm text-[#7F8C8D]">Remark:</Typography> 
+                  <Typography className="text-sm font-semibold text-[#2C3E50]">{result.final_result.remark}</Typography> 
                 </View>
               </View>
             </View>
@@ -900,7 +901,7 @@ const ResultScreen: React.FC = () => {
           </TouchableOpacity>
         </Link>
         <View className="flex-1 items-center">
-          <Text className="text-xl font-bold text-white">Results</Text>
+          <Typography className="text-xl font-bold text-white">Results</Typography> 
         </View>
         <TouchableOpacity className="p-2" onPress={onRefresh}>
           <Icon name="refresh" size={20} color="white" />
@@ -910,23 +911,23 @@ const ResultScreen: React.FC = () => {
       {/* Stats Overview */}
       <View className="px-4 -mt-8 mb-5">
         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-          <Text className="text-lg font-bold text-[#2C3E50] mb-4">Overview</Text>
+          <Typography className="text-lg font-bold text-[#2C3E50] mb-4">Overview</Typography> 
           <View className="flex-row justify-between">
             <View className="items-center">
-              <Text className="text-2xl font-bold text-[#6A5ACD]">{stats.totalSessions}</Text>
-              <Text className="text-xs text-[#7F8C8D]">Sessions</Text>
+              <Typography className="text-2xl font-bold text-[#6A5ACD]">{stats.totalSessions}</Typography> 
+              <Typography className="text-xs text-[#7F8C8D]">Sessions</Typography> 
             </View>
             <View className="items-center">
-              <Text className="text-2xl font-bold text-[#2ECC71]">{stats.totalExams}</Text>
-              <Text className="text-xs text-[#7F8C8D]">Exams</Text>
+              <Typography className="text-2xl font-bold text-[#2ECC71]">{stats.totalExams}</Typography> 
+              <Typography className="text-xs text-[#7F8C8D]">Exams</Typography> 
             </View>
             <View className="items-center">
-              <Text className="text-2xl font-bold text-[#F39C12]">{stats.avgPercentage}%</Text>
-              <Text className="text-xs text-[#7F8C8D]">Avg Score</Text>
+              <Typography className="text-2xl font-bold text-[#F39C12]">{stats.avgPercentage}%</Typography> 
+              <Typography className="text-xs text-[#7F8C8D]">Avg Score</Typography> 
             </View>
             <View className="items-center">
-              <Text className="text-2xl font-bold text-[#E74C3C]">{stats.totalSubjects}</Text>
-              <Text className="text-xs text-[#7F8C8D]">Subjects</Text>
+              <Typography className="text-2xl font-bold text-[#E74C3C]">{stats.totalSubjects}</Typography> 
+              <Typography className="text-xs text-[#7F8C8D]">Subjects</Typography> 
             </View>
           </View>
         </View>
@@ -940,9 +941,9 @@ const ResultScreen: React.FC = () => {
         >
           <View className="flex-row items-center">
             <Icon name="filter-list" size={20} color="#6A5ACD" />
-            <Text className="text-base font-semibold text-[#2C3E50] ml-2">
+            <Typography className="text-base font-semibold text-[#2C3E50] ml-2">
               {selectedSession === "all" ? "All Sessions" : `Session ${selectedSession}`}
-            </Text>
+            </Typography> 
           </View>
           <Icon name="expand-more" size={20} color="#7F8C8D" />
         </TouchableOpacity>
@@ -953,10 +954,10 @@ const ResultScreen: React.FC = () => {
         <View className="px-4">
           <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5 items-center">
             <LoadingResultsIllustration />
-            <Text className="text-lg font-semibold text-[#2C3E50] mt-4">Loading Results...</Text>
-            <Text className="text-sm text-[#7F8C8D] mt-2 text-center">
+            <Typography className="text-lg font-semibold text-[#2C3E50] mt-4">Loading Results...</Typography> 
+            <Typography className="text-sm text-[#7F8C8D] mt-2 text-center">
               Please wait while we fetch your examination results
-            </Text>
+            </Typography> 
           </View>
         </View>
       )}
@@ -976,16 +977,16 @@ const ResultScreen: React.FC = () => {
                           <Icon name="school" size={20} color="#3B82F6" />
                         </View>
                         <View>
-                          <Text className="text-lg font-bold text-[#2C3E50]">Session {session}</Text>
-                          <Text className="text-sm text-[#7F8C8D]">
+                          <Typography className="text-lg font-bold text-[#2C3E50]">Session {session}</Typography> 
+                          <Typography className="text-sm text-[#7F8C8D]">
                             {filteredSessions[session].length} exam(s) available
-                          </Text>
+                          </Typography> 
                         </View>
                       </View>
                       <View className="px-3 py-1 bg-blue-100 rounded-lg">
-                        <Text className="text-xs font-bold text-blue-800">
+                        <Typography className="text-xs font-bold text-blue-800">
                           {filteredSessions[session].length} Exams
-                        </Text>
+                        </Typography> 
                       </View>
                     </View>
                   </View>
@@ -1002,12 +1003,12 @@ const ResultScreen: React.FC = () => {
           ) : (
             <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5 items-center">
               <NoResultsIllustration />
-              <Text className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">No Results Available</Text>
-              <Text className="text-sm text-[#7F8C8D] text-center mb-4">
+              <Typography className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">No Results Available</Typography> 
+              <Typography className="text-sm text-[#7F8C8D] text-center mb-4">
                 Your examination results will appear here once they are published by your institution.
-              </Text>
+              </Typography> 
               <TouchableOpacity className="bg-[#6A5ACD] px-6 py-3 rounded-xl" onPress={onRefresh}>
-                <Text className="text-white font-semibold">Refresh</Text>
+                <Typography className="text-white font-semibold">Refresh</Typography> 
               </TouchableOpacity>
             </View>
           )}
@@ -1024,7 +1025,7 @@ const ResultScreen: React.FC = () => {
         <View className="flex-1 bg-black/50 justify-end">
           <View className="bg-white rounded-t-[25px] p-5 max-h-[60%]">
             <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-xl font-bold text-[#2C3E50]">Select Session</Text>
+              <Typography className="text-xl font-bold text-[#2C3E50]">Select Session</Typography> 
               <TouchableOpacity onPress={() => setShowSessionModal(false)}>
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
@@ -1038,11 +1039,11 @@ const ResultScreen: React.FC = () => {
                   setShowSessionModal(false)
                 }}
               >
-                <Text
+                <Typography
                   className={`text-base font-semibold ${selectedSession === "all" ? "text-white" : "text-[#2C3E50]"}`}
                 >
                   All Sessions
-                </Text>
+                </Typography> 
               </TouchableOpacity>
 
               {sessionExams &&
@@ -1056,16 +1057,16 @@ const ResultScreen: React.FC = () => {
                     }}
                   >
                     <View className="flex-row items-center justify-between">
-                      <Text
+                      <Typography
                         className={`text-base font-semibold ${
                           selectedSession === session ? "text-white" : "text-[#2C3E50]"
                         }`}
                       >
                         Session {session}
-                      </Text>
-                      <Text className={`text-sm ${selectedSession === session ? "text-white" : "text-[#7F8C8D]"}`}>
+                      </Typography> 
+                      <Typography className={`text-sm ${selectedSession === session ? "text-white" : "text-[#7F8C8D]"}`}>
                         {sessionExams[session].length} exams
-                      </Text>
+                      </Typography> 
                     </View>
                   </TouchableOpacity>
                 ))}
@@ -1084,7 +1085,7 @@ const ResultScreen: React.FC = () => {
         <View className="flex-1 bg-black/50 justify-end">
           <View className="bg-white rounded-t-[25px] p-5 max-h-[80%]">
             <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Subject Details</Text>
+              <Typography className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Subject Details</Typography> 
               <TouchableOpacity onPress={() => setShowSubjectModal(false)}>
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
@@ -1100,69 +1101,69 @@ const ResultScreen: React.FC = () => {
                   >
                     <Icon name="subject" size={32} color={getGradeColor(selectedSubject.grade)} />
                   </View>
-                  <Text className="text-xl font-bold text-[#2C3E50] text-center mb-2">
+                  <Typography className="text-xl font-bold text-[#2C3E50] text-center mb-2">
                     {selectedSubject.subject_name}
-                  </Text>
-                  <Text className="text-sm text-[#7F8C8D] text-center">{selectedSubject.subject_type}</Text>
+                  </Typography> 
+                  <Typography className="text-sm text-[#7F8C8D] text-center">{selectedSubject.subject_type}</Typography> 
                 </View>
 
                 {/* Grade & Marks */}
                 <View className="bg-[#F8F9FA] rounded-2xl p-4 mb-6">
                   <View className="flex-row justify-between items-center mb-4">
                     <View className="items-center">
-                      <Text className="text-3xl font-bold" style={{ color: getGradeColor(selectedSubject.grade) }}>
+                      <Typography className="text-3xl font-bold" style={{ color: getGradeColor(selectedSubject.grade) }}>
                         {selectedSubject.grade}
-                      </Text>
-                      <Text className="text-xs text-[#7F8C8D]">Grade</Text>
+                      </Typography> 
+                      <Typography className="text-xs text-[#7F8C8D]">Grade</Typography> 
                     </View>
                     <View className="items-center">
-                      <Text className="text-3xl font-bold text-[#6A5ACD]">{selectedSubject.marks_obtained.total}</Text>
-                      <Text className="text-xs text-[#7F8C8D]">Total Marks</Text>
+                      <Typography className="text-3xl font-bold text-[#6A5ACD]">{selectedSubject.marks_obtained.total}</Typography> 
+                      <Typography className="text-xs text-[#7F8C8D]">Total Marks</Typography> 
                     </View>
                     <View className="items-center">
-                      <Text className="text-3xl font-bold" style={{ color: getStatusColor(selectedSubject.status) }}>
+                      <Typography className="text-3xl font-bold" style={{ color: getStatusColor(selectedSubject.status) }}>
                         {selectedSubject.status}
-                      </Text>
-                      <Text className="text-xs text-[#7F8C8D]">Status</Text>
+                      </Typography> 
+                      <Typography className="text-xs text-[#7F8C8D]">Status</Typography> 
                     </View>
                   </View>
                 </View>
 
                 {/* Detailed Marks */}
                 <View className="mb-6">
-                  <Text className="text-lg font-bold text-[#2C3E50] mb-3">Detailed Marks</Text>
+                  <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Detailed Marks</Typography> 
                   <View className="gap-3">
                     {["THEORETICAL", "BOTH"].includes(selectedSubject.subject_type) && (
                       <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-                        <Text className="text-sm text-[#7F8C8D]">Theory Marks</Text>
-                        <Text className="text-sm font-bold text-[#2C3E50]">
+                        <Typography className="text-sm text-[#7F8C8D]">Theory Marks</Typography> 
+                        <Typography className="text-sm font-bold text-[#2C3E50]">
                           {selectedSubject.absent ? "Absent" : selectedSubject.marks_obtained.written || "--"}
-                        </Text>
+                        </Typography> 
                       </View>
                     )}
                     {["PRACTICAL", "BOTH"].includes(selectedSubject.subject_type) && (
                       <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-                        <Text className="text-sm text-[#7F8C8D]">Practical Marks</Text>
-                        <Text className="text-sm font-bold text-[#2C3E50]">
+                        <Typography className="text-sm text-[#7F8C8D]">Practical Marks</Typography> 
+                        <Typography className="text-sm font-bold text-[#2C3E50]">
                           {selectedSubject.marks_obtained.practical || "--"}
-                        </Text>
+                        </Typography> 
                       </View>
                     )}
                     <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-                      <Text className="text-sm text-[#7F8C8D]">Total Marks</Text>
-                      <Text className="text-sm font-bold text-[#6A5ACD]">{selectedSubject.marks_obtained.total}</Text>
+                      <Typography className="text-sm text-[#7F8C8D]">Total Marks</Typography> 
+                      <Typography className="text-sm font-bold text-[#6A5ACD]">{selectedSubject.marks_obtained.total}</Typography> 
                     </View>
                     <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-                      <Text className="text-sm text-[#7F8C8D]">Grade</Text>
-                      <Text className="text-sm font-bold" style={{ color: getGradeColor(selectedSubject.grade) }}>
+                      <Typography className="text-sm text-[#7F8C8D]">Grade</Typography> 
+                      <Typography className="text-sm font-bold" style={{ color: getGradeColor(selectedSubject.grade) }}>
                         {selectedSubject.grade}
-                      </Text>
+                      </Typography> 
                     </View>
                     <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-                      <Text className="text-sm text-[#7F8C8D]">Status</Text>
-                      <Text className="text-sm font-bold" style={{ color: getStatusColor(selectedSubject.status) }}>
+                      <Typography className="text-sm text-[#7F8C8D]">Status</Typography> 
+                      <Typography className="text-sm font-bold" style={{ color: getStatusColor(selectedSubject.status) }}>
                         {selectedSubject.status}
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
                 </View>
@@ -1170,10 +1171,10 @@ const ResultScreen: React.FC = () => {
                 {/* Actions */}
                 <View className="flex-row gap-3">
                   <TouchableOpacity className="flex-1 bg-[#6A5ACD] rounded-xl py-4 items-center">
-                    <Text className="text-base font-bold text-white">Download Report</Text>
+                    <Typography className="text-base font-bold text-white">Download Report</Typography> 
                   </TouchableOpacity>
                   <TouchableOpacity className="flex-1 bg-[#F8F9FA] border border-[#DDE4EB] rounded-xl py-4 items-center">
-                    <Text className="text-base font-bold text-[#2C3E50]">Share</Text>
+                    <Typography className="text-base font-bold text-[#2C3E50]">Share</Typography> 
                   </TouchableOpacity>
                 </View>
               </ScrollView>
@@ -1185,34 +1186,34 @@ const ResultScreen: React.FC = () => {
       {/* Performance Guidelines */}
       {loadedResults.length > 0 && (
         <View className="mx-4 mt-6 mb-8 bg-white rounded-2xl p-4 shadow-lg elevation-5">
-          <Text className="text-lg font-bold text-[#2C3E50] mb-3 flex-row items-center">
+          <Typography className="text-lg font-bold text-[#2C3E50] mb-3 flex-row items-center">
             <Icon name="info" size={20} color="#6A5ACD" />
-            <Text className="ml-2">Grading System</Text>
-          </Text>
+            <Typography className="ml-2">Grading System</Typography> 
+          </Typography> 
           <View className="gap-2">
             <View className="flex-row items-center justify-between">
-              <Text className="text-sm text-[#7F8C8D]">A+ Grade</Text>
-              <Text className="text-sm font-semibold text-[#10B981]">90% and above</Text>
+              <Typography className="text-sm text-[#7F8C8D]">A+ Grade</Typography> 
+              <Typography className="text-sm font-semibold text-[#10B981]">90% and above</Typography> 
             </View>
             <View className="flex-row items-center justify-between">
-              <Text className="text-sm text-[#7F8C8D]">A Grade</Text>
-              <Text className="text-sm font-semibold text-[#059669]">80% - 89%</Text>
+              <Typography className="text-sm text-[#7F8C8D]">A Grade</Typography> 
+              <Typography className="text-sm font-semibold text-[#059669]">80% - 89%</Typography> 
             </View>
             <View className="flex-row items-center justify-between">
-              <Text className="text-sm text-[#7F8C8D]">B Grade</Text>
-              <Text className="text-sm font-semibold text-[#3B82F6]">70% - 79%</Text>
+              <Typography className="text-sm text-[#7F8C8D]">B Grade</Typography> 
+              <Typography className="text-sm font-semibold text-[#3B82F6]">70% - 79%</Typography> 
             </View>
             <View className="flex-row items-center justify-between">
-              <Text className="text-sm text-[#7F8C8D]">C Grade</Text>
-              <Text className="text-sm font-semibold text-[#F59E0B]">60% - 69%</Text>
+              <Typography className="text-sm text-[#7F8C8D]">C Grade</Typography> 
+              <Typography className="text-sm font-semibold text-[#F59E0B]">60% - 69%</Typography> 
             </View>
             <View className="flex-row items-center justify-between">
-              <Text className="text-sm text-[#7F8C8D]">D Grade</Text>
-              <Text className="text-sm font-semibold text-[#F97316]">50% - 59%</Text>
+              <Typography className="text-sm text-[#7F8C8D]">D Grade</Typography> 
+              <Typography className="text-sm font-semibold text-[#F97316]">50% - 59%</Typography> 
             </View>
             <View className="flex-row items-center justify-between">
-              <Text className="text-sm text-[#7F8C8D]">F Grade</Text>
-              <Text className="text-sm font-semibold text-[#EF4444]">Below 50%</Text>
+              <Typography className="text-sm text-[#7F8C8D]">F Grade</Typography> 
+              <Typography className="text-sm font-semibold text-[#EF4444]">Below 50%</Typography> 
             </View>
           </View>
         </View>

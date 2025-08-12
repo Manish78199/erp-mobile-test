@@ -20,6 +20,7 @@ import type { HealthData } from "@/types/health"
 import HeightScale from "@/components/student/health/HeightScale"
 import WeightScale from "@/components/student/health/WeightScale"
 import HealthCharts from "@/components/student/health/HealthCharts"
+import { Typography } from "@/components/Typography"
 
 const { width } = Dimensions.get("window")
 
@@ -208,7 +209,7 @@ const HealthScreen: React.FC = () => {
     return (
       <View className="flex-1 justify-center items-center bg-[#F0F4F8]">
         <ActivityIndicator size="large" color="#6A5ACD" />
-        <Text className="text-[#7F8C8D] mt-4">Loading health data...</Text>
+        <Typography className="text-[#7F8C8D] mt-4">Loading health data...</Typography> 
       </View>
     )
   }
@@ -217,12 +218,12 @@ const HealthScreen: React.FC = () => {
     return (
       <View className="flex-1 justify-center items-center bg-[#F0F4F8]">
         <Icon name="error-outline" size={48} color="#E74C3C" />
-        <Text className="text-xl font-bold text-[#2C3E50] mt-4">No Health Data</Text>
-        <Text className="text-[#7F8C8D] mt-2 text-center px-8">
+        <Typography className="text-xl font-bold text-[#2C3E50] mt-4">No Health Data</Typography> 
+        <Typography className="text-[#7F8C8D] mt-2 text-center px-8">
           Unable to load health information. Please try again later.
-        </Text>
+        </Typography> 
         <TouchableOpacity onPress={() => fetchHealthData()} className="bg-[#6A5ACD] px-6 py-3 rounded-xl mt-4">
-          <Text className="text-white font-semibold">Retry</Text>
+          <Typography className="text-white font-semibold">Retry</Typography> 
         </TouchableOpacity>
       </View>
     )
@@ -242,7 +243,7 @@ const HealthScreen: React.FC = () => {
           <Icon name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
         <View className="flex-1 items-center">
-          <Text className="text-xl font-bold text-white">Health Records</Text>
+          <Typography className="text-xl font-bold text-white">Health Records</Typography> 
         </View>
         {/* <TouchableOpacity className="p-2" onPress={() => setShowReportModal(true)}>
           <Icon name="add" size={20} color="white" />
@@ -256,22 +257,22 @@ const HealthScreen: React.FC = () => {
             <View className="w-12 h-12 bg-[#2ECC7120] rounded-full items-center justify-center mb-2">
               <Icon name="health-and-safety" size={24} color="#2ECC71" />
             </View>
-            <Text className="text-lg font-bold text-[#2C3E50]">{bmiStatus?.status}</Text>
-            <Text className="text-xs text-[#7F8C8D] text-center">Overall Health</Text>
+            <Typography className="text-lg font-bold text-[#2C3E50]">{bmiStatus?.status}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] text-center">Overall Health</Typography> 
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#6A5ACD20] rounded-full items-center justify-center mb-2">
               <Icon name="fitness-center" size={24} color="#6A5ACD" />
             </View>
-            <Text className="text-lg font-bold text-[#2C3E50]">{healthData?.current?.bmi}</Text>
-            <Text className="text-xs text-[#7F8C8D] text-center">BMI Score</Text>
+            <Typography className="text-lg font-bold text-[#2C3E50]">{healthData?.current?.bmi}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] text-center">BMI Score</Typography> 
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#F39C1220] rounded-full items-center justify-center mb-2">
               <Icon name="event" size={24} color="#F39C12" />
             </View>
-            <Text className="text-lg font-bold text-[#2C3E50]">{healthData?.appointments?.length}</Text>
-            <Text className="text-xs text-[#7F8C8D] text-center">Upcoming</Text>
+            <Typography className="text-lg font-bold text-[#2C3E50]">{healthData?.appointments?.length}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] text-center">Upcoming</Typography> 
           </View>
         </View>
       </View>
@@ -287,9 +288,9 @@ const HealthScreen: React.FC = () => {
               }`}
               onPress={() => setSelectedTab(tab)}
             >
-              <Text className={`text-sm font-semibold ${selectedTab === tab ? "text-white" : "text-[#7F8C8D]"}`}>
+              <Typography className={`text-sm font-semibold ${selectedTab === tab ? "text-white" : "text-[#7F8C8D]"}`}>
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </Text>
+              </Typography> 
             </TouchableOpacity>
           ))}
         </View>
@@ -300,14 +301,14 @@ const HealthScreen: React.FC = () => {
         <View className="px-4">
           {/* Avatar and Height Scale */}
           <View className="bg-white rounded-2xl p-4 mb-5 shadow-lg elevation-5">
-            <Text className="text-lg font-bold text-[#2C3E50] mb-4 text-center">Physical Stats</Text>
+            <Typography className="text-lg font-bold text-[#2C3E50] mb-4 text-center">Physical Stats</Typography> 
             <View className="flex-row justify-center items-center mb-4">
               <View className="items-center mr-8">
                 {/* Avatar placeholder */}
                 <View className="w-32 h-40 bg-[#F0F4F8] rounded-2xl items-center justify-center mb-2">
                   <Icon name="person" size={60} color="#6A5ACD" />
                 </View>
-                <Text className="text-sm font-semibold text-[#2C3E50]">Student Avatar</Text>
+                <Typography className="text-sm font-semibold text-[#2C3E50]">Student Avatar</Typography> 
               </View>
               <HeightScale height={healthData.current.height} />
             </View>
@@ -320,46 +321,46 @@ const HealthScreen: React.FC = () => {
 
           {/* Health Charts */}
           <View className="mb-5">
-            <Text className="text-xl font-bold text-[#2C3E50] mb-4">Health Trends</Text>
+            <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Health Trends</Typography> 
             <HealthCharts chart={healthData.chart} />
           </View>
 
           {/* Health Profile Info */}
           <View className="bg-white rounded-2xl p-4 mb-5 shadow-lg elevation-5">
-            <Text className="text-lg font-bold text-[#2C3E50] mb-4">Health Information</Text>
+            <Typography className="text-lg font-bold text-[#2C3E50] mb-4">Health Information</Typography> 
             <View className="flex-row flex-wrap">
               <View className="w-1/2 mb-4">
-                <Text className="text-sm text-[#7F8C8D] mb-1">Blood Group</Text>
-                <Text className="text-base font-semibold text-[#E74C3C]">{healthData.current.bloodGroup}</Text>
+                <Typography className="text-sm text-[#7F8C8D] mb-1">Blood Group</Typography> 
+                <Typography className="text-base font-semibold text-[#E74C3C]">{healthData.current.bloodGroup}</Typography> 
               </View>
               <View className="w-1/2 mb-4">
-                <Text className="text-sm text-[#7F8C8D] mb-1">BMI</Text>
-                <Text className="text-base font-semibold text-[#2C3E50]">{healthData.current.bmi}</Text>
+                <Typography className="text-sm text-[#7F8C8D] mb-1">BMI</Typography> 
+                <Typography className="text-base font-semibold text-[#2C3E50]">{healthData.current.bmi}</Typography> 
               </View>
               <View className="w-full mb-4">
-                <Text className="text-sm text-[#7F8C8D] mb-1">Last Checkup</Text>
-                <Text className="text-base font-semibold text-[#2C3E50]">
+                <Typography className="text-sm text-[#7F8C8D] mb-1">Last Checkup</Typography> 
+                <Typography className="text-base font-semibold text-[#2C3E50]">
                   {formatDate(healthData.current.lastCheckup)}
-                </Text>
+                </Typography> 
               </View>
             </View>
             <View className="border-t border-[#EAECEE] pt-4 mt-2">
               <View className="mb-3">
-                <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Allergies</Text>
+                <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">Allergies</Typography> 
                 <View className="flex-row flex-wrap">
                   {healthData?.current?.allergies?.map((allergy, index) => (
                     <View key={index} className="bg-[#E74C3C20] px-3 py-1 rounded-xl mr-2 mb-2">
-                      <Text className="text-sm text-[#E74C3C]">{allergy}</Text>
+                      <Typography className="text-sm text-[#E74C3C]">{allergy}</Typography> 
                     </View>
                   ))}
                 </View>
               </View>
               <View>
-                <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Current Medications</Text>
+                <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">Current Medications</Typography> 
                 <View className="flex-row flex-wrap">
                   {healthData?.current?.medications?.map((medication, index) => (
                     <View key={index} className="bg-[#2ECC7120] px-3 py-1 rounded-xl mr-2 mb-2">
-                      <Text className="text-sm text-[#2ECC71]">{medication}</Text>
+                      <Typography className="text-sm text-[#2ECC71]">{medication}</Typography> 
                     </View>
                   ))}
                 </View>
@@ -369,7 +370,7 @@ const HealthScreen: React.FC = () => {
 
           {/* Vital Signs */}
           <View className="bg-white rounded-2xl p-4 mb-5 shadow-lg elevation-5">
-            <Text className="text-lg font-bold text-[#2C3E50] mb-4">Latest Vital Signs</Text>
+            <Typography className="text-lg font-bold text-[#2C3E50] mb-4">Latest Vital Signs</Typography> 
             <View className="gap-3">
               {healthData?.vitals?.map((vital, index) => (
                 <View key={index} className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
@@ -381,19 +382,19 @@ const HealthScreen: React.FC = () => {
                       <Icon name={vital.icon} size={20} color={vital.color} />
                     </View>
                     <View>
-                      <Text className="text-sm font-semibold text-[#2C3E50]">{vital.name}</Text>
-                      <Text className="text-xs text-[#7F8C8D]">
+                      <Typography className="text-sm font-semibold text-[#2C3E50]">{vital.name}</Typography> 
+                      <Typography className="text-xs text-[#7F8C8D]">
                         {vital.value} {vital.unit}
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
                   <View
                     className="px-3 py-1 rounded-xl"
                     style={{ backgroundColor: `${getStatusColor(vital.status)}20` }}
                   >
-                    <Text className="text-xs font-bold" style={{ color: getStatusColor(vital.status) }}>
+                    <Typography className="text-xs font-bold" style={{ color: getStatusColor(vital.status) }}>
                       {vital.status.toUpperCase()}
-                    </Text>
+                    </Typography> 
                   </View>
                 </View>
               ))}
@@ -405,7 +406,7 @@ const HealthScreen: React.FC = () => {
       {/* Records Tab */}
       {selectedTab === "records" && (
         <View className="px-4">
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Medical Records</Text>
+          <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Medical Records</Typography> 
           <View className="gap-4">
             {healthData?.records?.map((record) => (
               <View key={record.id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
@@ -418,23 +419,23 @@ const HealthScreen: React.FC = () => {
                       <Icon name={getTypeIcon(record.type)} size={20} color={getStatusColor(record.status)} />
                     </View>
                     <View>
-                      <Text className="text-base font-bold text-[#2C3E50]">{record.title}</Text>
-                      <Text className="text-sm text-[#7F8C8D]">{record.doctor}</Text>
+                      <Typography className="text-base font-bold text-[#2C3E50]">{record.title}</Typography> 
+                      <Typography className="text-sm text-[#7F8C8D]">{record.doctor}</Typography> 
                     </View>
                   </View>
                   <View className="items-end">
-                    <Text className="text-sm text-[#7F8C8D]">{formatDate(record.date)}</Text>
+                    <Typography className="text-sm text-[#7F8C8D]">{formatDate(record.date)}</Typography> 
                     <View
                       className="px-2 py-1 rounded-lg mt-1"
                       style={{ backgroundColor: `${getStatusColor(record.status)}20` }}
                     >
-                      <Text className="text-xs font-bold" style={{ color: getStatusColor(record.status) }}>
+                      <Typography className="text-xs font-bold" style={{ color: getStatusColor(record.status) }}>
                         {record.status.toUpperCase()}
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
                 </View>
-                <Text className="text-sm text-[#7F8C8D] leading-5">{record.notes}</Text>
+                <Typography className="text-sm text-[#7F8C8D] leading-5">{record.notes}</Typography> 
               </View>
             ))}
           </View>
@@ -444,7 +445,7 @@ const HealthScreen: React.FC = () => {
       {/* Appointments Tab */}
       {selectedTab === "appointments" && (
         <View className="px-4">
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Upcoming Appointments</Text>
+          <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Upcoming Appointments</Typography> 
           <View className="gap-4">
             {healthData?.appointments?.map((appointment) => (
               <View key={appointment.id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
@@ -454,13 +455,13 @@ const HealthScreen: React.FC = () => {
                       <Icon name={getTypeIcon(appointment.type)} size={24} color="#6A5ACD" />
                     </View>
                     <View>
-                      <Text className="text-base font-bold text-[#2C3E50]">{appointment.type}</Text>
-                      <Text className="text-sm text-[#7F8C8D]">{appointment.doctor}</Text>
+                      <Typography className="text-base font-bold text-[#2C3E50]">{appointment.type}</Typography> 
+                      <Typography className="text-sm text-[#7F8C8D]">{appointment.doctor}</Typography> 
                     </View>
                   </View>
                   <View className="items-end">
-                    <Text className="text-sm font-semibold text-[#2C3E50]">{formatDate(appointment.date)}</Text>
-                    <Text className="text-sm text-[#6A5ACD]">{appointment.time}</Text>
+                    <Typography className="text-sm font-semibold text-[#2C3E50]">{formatDate(appointment.date)}</Typography> 
+                    <Typography className="text-sm text-[#6A5ACD]">{appointment.time}</Typography> 
                   </View>
                 </View>
                 <View className="flex-row justify-between items-center">
@@ -468,16 +469,16 @@ const HealthScreen: React.FC = () => {
                     className="px-3 py-1 rounded-xl"
                     style={{ backgroundColor: `${getStatusColor(appointment.status)}20` }}
                   >
-                    <Text className="text-xs font-bold" style={{ color: getStatusColor(appointment.status) }}>
+                    <Typography className="text-xs font-bold" style={{ color: getStatusColor(appointment.status) }}>
                       {appointment.status.toUpperCase()}
-                    </Text>
+                    </Typography> 
                   </View>
                   <View className="flex-row gap-2">
                     <TouchableOpacity className="bg-[#6A5ACD] px-4 py-2 rounded-xl">
-                      <Text className="text-xs font-semibold text-white">Reschedule</Text>
+                      <Typography className="text-xs font-semibold text-white">Reschedule</Typography> 
                     </TouchableOpacity>
                     <TouchableOpacity className="bg-[#E74C3C] px-4 py-2 rounded-xl">
-                      <Text className="text-xs font-semibold text-white">Cancel</Text>
+                      <Typography className="text-xs font-semibold text-white">Cancel</Typography> 
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -490,24 +491,24 @@ const HealthScreen: React.FC = () => {
       {/* Symptoms Tab */}
       {selectedTab === "symptoms" && (
         <View className="px-4 mb-8">
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Reported Symptoms</Text>
+          <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Reported Symptoms</Typography> 
           <View className="gap-4">
             {healthData?.symptoms?.map((symptom, index) => (
               <View key={index} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
                 <View className="flex-row items-center justify-between mb-2">
-                  <Text className="text-base font-bold text-[#2C3E50]">{symptom.name}</Text>
+                  <Typography className="text-base font-bold text-[#2C3E50]">{symptom.name}</Typography> 
                   <View
                     className="px-3 py-1 rounded-xl"
                     style={{ backgroundColor: `${getSeverityColor(symptom.severity)}20` }}
                   >
-                    <Text className="text-xs font-bold" style={{ color: getSeverityColor(symptom.severity) }}>
+                    <Typography className="text-xs font-bold" style={{ color: getSeverityColor(symptom.severity) }}>
                       {symptom.severity.toUpperCase()}
-                    </Text>
+                    </Typography> 
                   </View>
                 </View>
                 <View className="flex-row justify-between">
-                  <Text className="text-sm text-[#7F8C8D]">Frequency: {symptom.frequency}</Text>
-                  <Text className="text-sm text-[#7F8C8D]">Last: {formatDate(symptom.lastReported)}</Text>
+                  <Typography className="text-sm text-[#7F8C8D]">Frequency: {symptom.frequency}</Typography> 
+                  <Typography className="text-sm text-[#7F8C8D]">Last: {formatDate(symptom.lastReported)}</Typography> 
                 </View>
               </View>
             ))}
@@ -525,14 +526,14 @@ const HealthScreen: React.FC = () => {
         <View className="flex-1 bg-black/50 justify-end">
           <View className="bg-white rounded-t-[25px] p-5 max-h-[80%]">
             <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-xl font-bold text-[#2C3E50]">Report Health Issue</Text>
+              <Typography className="text-xl font-bold text-[#2C3E50]">Report Health Issue</Typography> 
               <TouchableOpacity onPress={() => setShowReportModal(false)}>
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
               <View className="mb-4">
-                <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Symptom/Issue</Text>
+                <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">Symptom/Issue</Typography> 
                 <TextInput
                   className="border border-[#DDE4EB] rounded-xl p-3 text-sm text-[#2C3E50]"
                   placeholder="Describe your symptom or health issue"
@@ -543,7 +544,7 @@ const HealthScreen: React.FC = () => {
                 />
               </View>
               <View className="mb-4">
-                <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Severity</Text>
+                <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">Severity</Typography> 
                 <View className="flex-row gap-2">
                   {["mild", "moderate", "severe"].map((severity) => (
                     <TouchableOpacity
@@ -557,13 +558,13 @@ const HealthScreen: React.FC = () => {
                         className={`text-sm ${symptomForm.severity === severity ? "text-[#6A5ACD] font-semibold" : "text-[#2C3E50]"}`}
                       >
                         {severity.charAt(0).toUpperCase() + severity.slice(1)}
-                      </Text>
+                      </Typography> 
                     </TouchableOpacity>
                   ))}
                 </View>
               </View>
               <View className="mb-6">
-                <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Additional Notes</Text>
+                <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">Additional Notes</Typography> 
                 <TextInput
                   className="border border-[#DDE4EB] rounded-xl p-3 text-sm text-[#2C3E50] min-h-[80px]"
                   placeholder="Any additional information..."
@@ -575,7 +576,7 @@ const HealthScreen: React.FC = () => {
                 />
               </View>
               <TouchableOpacity className="bg-[#6A5ACD] rounded-xl py-4 items-center" onPress={handleSubmitSymptom}>
-                <Text className="text-base font-bold text-white">Submit Report</Text>
+                <Typography className="text-base font-bold text-white">Submit Report</Typography> 
               </TouchableOpacity>
             </ScrollView>
           </View>

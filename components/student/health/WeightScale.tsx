@@ -1,5 +1,6 @@
 "use client"
 
+import { Typography } from "@/components/Typography"
 import React from "react"
 import { useEffect, useRef } from "react"
 import { View, Text, Animated } from "react-native"
@@ -52,7 +53,7 @@ const WeightScale: React.FC<WeightScaleProps> = ({ weight = 0 }) => {
         {displayWeight.toFixed(0)}
       </Animated.Text>
       {/* Removed erroneous Animated.Text using __getValue() */}
-      <Text className="text-lg text-[#7F8C8D]">kg</Text>
+      <Typography className="text-lg text-[#7F8C8D]">kg</Typography> 
       <View className="relative w-full bg-[#EAECEE] rounded h-5 overflow-hidden mb-4">
         <Animated.View
           className="absolute top-0 left-0 h-full bg-emerald-600"
@@ -69,7 +70,7 @@ const WeightScale: React.FC<WeightScaleProps> = ({ weight = 0 }) => {
           {ticks.map((tick, index) => (
             <View key={index} className="items-center">
               <View className="w-0.5 h-4 bg-[#7F8C8D] opacity-50" />
-              <Text className="text-xs text-[#7F8C8D] mt-0.5">{tick}</Text>
+              <Typography className="text-xs text-[#7F8C8D] mt-0.5">{tick}</Typography> 
             </View>
           ))}
         </View>

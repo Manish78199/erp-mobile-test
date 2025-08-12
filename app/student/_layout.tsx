@@ -59,7 +59,7 @@ export default function StudentLayout() {
         },
         tabBarLabelStyle: {
           fontSize: 11,
-        
+          // fontFamily:"Poppins_400Regular",
           marginTop: 4,
           textTransform: "uppercase",
           letterSpacing: 0.5,

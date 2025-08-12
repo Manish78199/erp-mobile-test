@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/MaterialIcons"
 import { Link } from "expo-router"
 import { get_latest_exam_schedule } from "@/service/student/exam"
 import { format, isToday, isTomorrow, differenceInDays, isPast } from "date-fns"
+import { Typography } from "@/components/Typography"
 
 // Custom SVG Illustrations
 const NoScheduleIllustration = () => (
@@ -40,7 +41,7 @@ const NoScheduleIllustration = () => (
       </View>
       {/* Question Mark */}
       <View className="absolute -top-2 -right-2 w-8 h-8 bg-orange-400 rounded-full items-center justify-center">
-        <Text className="text-white font-bold text-lg">?</Text>
+        <Typography className="text-white font-bold text-lg">?</Typography> 
       </View>
       {/* Floating Elements */}
       <View className="absolute -left-4 top-2 w-3 h-3 bg-blue-300 rounded-full opacity-60" />
@@ -103,10 +104,10 @@ const EmptyFilterIllustration = ({ filterType }: { filterType: FilterType }) => 
         return (
           <>
             <View className="w-16 h-16 bg-red-100 rounded-full items-center justify-center border-2 border-red-200">
-              <Text className="text-2xl">📅</Text>
+              <Typography className="text-2xl">📅</Typography> 
             </View>
             <View className="absolute -top-1 -right-1 w-6 h-6 bg-red-400 rounded-full items-center justify-center">
-              <Text className="text-white text-xs font-bold">0</Text>
+              <Typography className="text-white text-xs font-bold">0</Typography> 
             </View>
           </>
         )
@@ -114,10 +115,10 @@ const EmptyFilterIllustration = ({ filterType }: { filterType: FilterType }) => 
         return (
           <>
             <View className="w-16 h-16 bg-orange-100 rounded-full items-center justify-center border-2 border-orange-200">
-              <Text className="text-2xl">⏰</Text>
+              <Typography className="text-2xl">⏰</Typography> 
             </View>
             <View className="absolute -top-1 -right-1 w-6 h-6 bg-orange-400 rounded-full items-center justify-center">
-              <Text className="text-white text-xs font-bold">0</Text>
+              <Typography className="text-white text-xs font-bold">0</Typography> 
             </View>
           </>
         )
@@ -125,10 +126,10 @@ const EmptyFilterIllustration = ({ filterType }: { filterType: FilterType }) => 
         return (
           <>
             <View className="w-16 h-16 bg-green-100 rounded-full items-center justify-center border-2 border-green-200">
-              <Text className="text-2xl">✅</Text>
+              <Typography className="text-2xl">✅</Typography> 
             </View>
             <View className="absolute -top-1 -right-1 w-6 h-6 bg-green-400 rounded-full items-center justify-center">
-              <Text className="text-white text-xs font-bold">0</Text>
+              <Typography className="text-white text-xs font-bold">0</Typography> 
             </View>
           </>
         )
@@ -136,10 +137,10 @@ const EmptyFilterIllustration = ({ filterType }: { filterType: FilterType }) => 
         return (
           <>
             <View className="w-16 h-16 bg-gray-100 rounded-full items-center justify-center border-2 border-gray-200">
-              <Text className="text-2xl">📋</Text>
+              <Typography className="text-2xl">📋</Typography> 
             </View>
             <View className="absolute -top-1 -right-1 w-6 h-6 bg-gray-400 rounded-full items-center justify-center">
-              <Text className="text-white text-xs font-bold">0</Text>
+              <Typography className="text-white text-xs font-bold">0</Typography> 
             </View>
           </>
         )
@@ -434,10 +435,10 @@ const ExamScheduleScreen: React.FC = () => {
     return (
       <View className="flex-1 bg-[#F0F4F8] justify-center items-center">
         <LoadingIllustration />
-        <Text className="text-lg font-semibold text-[#2C3E50] mt-4">Loading exam schedule...</Text>
-        <Text className="text-sm text-[#7F8C8D] mt-2 text-center px-8">
+        <Typography className="text-lg font-semibold text-[#2C3E50] mt-4">Loading exam schedule...</Typography> 
+        <Typography className="text-sm text-[#7F8C8D] mt-2 text-center px-8">
           Please wait while we fetch your latest exam information
-        </Text>
+        </Typography> 
       </View>
     )
   }
@@ -456,7 +457,7 @@ const ExamScheduleScreen: React.FC = () => {
           </TouchableOpacity>
         </Link>
         <View className="flex-1 items-center">
-          <Text className="text-xl font-bold text-white">Exam Schedule</Text>
+          <Typography className="text-xl font-bold text-white">Exam Schedule</Typography> 
         </View>
         <TouchableOpacity className="p-2" onPress={onRefresh}>
           <Icon name="refresh" size={20} color="white" />
@@ -467,12 +468,12 @@ const ExamScheduleScreen: React.FC = () => {
         <View className="px-4 mt-8">
           <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5 items-center">
             <NoScheduleIllustration />
-            <Text className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">No Exam Schedule Available</Text>
-            <Text className="text-sm text-[#7F8C8D] text-center mb-4">
+            <Typography className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">No Exam Schedule Available</Typography> 
+            <Typography className="text-sm text-[#7F8C8D] text-center mb-4">
               The exam schedule has not been published yet. Please check back later or contact your academic office.
-            </Text>
+            </Typography> 
             <TouchableOpacity className="bg-[#6A5ACD] px-6 py-3 rounded-xl" onPress={onRefresh}>
-              <Text className="text-white font-semibold">Refresh</Text>
+              <Typography className="text-white font-semibold">Refresh</Typography> 
             </TouchableOpacity>
           </View>
         </View>
@@ -483,32 +484,32 @@ const ExamScheduleScreen: React.FC = () => {
             <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
               <View className="flex-row items-center justify-between mb-4">
                 <View>
-                  <Text className="text-lg font-bold text-[#2C3E50]">{examData.exam_name}</Text>
-                  <Text className="text-sm text-[#7F8C8D]">Session: {examData.session}</Text>
+                  <Typography className="text-lg font-bold text-[#2C3E50]">{examData.exam_name}</Typography> 
+                  <Typography className="text-sm text-[#7F8C8D]">Session: {examData.session}</Typography> 
                   {examData.start_date && examData.end_date && (
-                    <Text className="text-xs text-[#7F8C8D] mt-1">
+                    <Typography className="text-xs text-[#7F8C8D] mt-1">
                       {format(new Date(examData.start_date), "dd MMM")} -{" "}
                       {format(new Date(examData.end_date), "dd MMM yyyy")}
-                    </Text>
+                    </Typography> 
                   )}
                 </View>
               </View>
               <View className="flex-row justify-between">
                 <View className="items-center">
-                  <Text className="text-2xl font-bold text-[#6A5ACD]">{stats.total}</Text>
-                  <Text className="text-xs text-[#7F8C8D]">Total Subjects</Text>
+                  <Typography className="text-2xl font-bold text-[#6A5ACD]">{stats.total}</Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">Total Subjects</Typography> 
                 </View>
                 <View className="items-center">
-                  <Text className="text-2xl font-bold text-[#2ECC71]">{stats.completed}</Text>
-                  <Text className="text-xs text-[#7F8C8D]">Completed</Text>
+                  <Typography className="text-2xl font-bold text-[#2ECC71]">{stats.completed}</Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">Completed</Typography> 
                 </View>
                 <View className="items-center">
-                  <Text className="text-2xl font-bold text-[#F39C12]">{stats.upcoming}</Text>
-                  <Text className="text-xs text-[#7F8C8D]">Upcoming</Text>
+                  <Typography className="text-2xl font-bold text-[#F39C12]">{stats.upcoming}</Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">Upcoming</Typography> 
                 </View>
                 <View className="items-center">
-                  <Text className="text-2xl font-bold text-[#E74C3C]">{stats.today}</Text>
-                  <Text className="text-xs text-[#7F8C8D]">Today</Text>
+                  <Typography className="text-2xl font-bold text-[#E74C3C]">{stats.today}</Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">Today</Typography> 
                 </View>
               </View>
             </View>
@@ -527,16 +528,16 @@ const ExamScheduleScreen: React.FC = () => {
                   onPress={() => filterSubjects(filter.id as FilterType)}
                 >
                   <Icon name={filter.icon} size={16} color={filter.color} />
-                  <Text
+                  <Typography
                     className={`text-sm font-semibold ml-2 ${
                       selectedFilter === filter.id ? "text-[#2C3E50]" : "text-[#7F8C8D]"
                     }`}
                   >
                     {filter.label}
-                  </Text>
+                  </Typography> 
                   {filter.id === "TODAY" && stats.today > 0 && (
                     <View className="ml-2 bg-[#E74C3C] rounded-full px-2 py-0.5">
-                      <Text className="text-xs text-white font-bold">{stats.today}</Text>
+                      <Typography className="text-xs text-white font-bold">{stats.today}</Typography> 
                     </View>
                   )}
                 </TouchableOpacity>
@@ -546,11 +547,11 @@ const ExamScheduleScreen: React.FC = () => {
 
           {/* Exam Schedule */}
           <View className="px-4 mb-8">
-            <Text className="text-xl font-bold text-[#2C3E50] mb-4"> Scheduled Subjects</Text>
+            <Typography className="text-xl font-bold text-[#2C3E50] mb-4"> Scheduled Subjects</Typography> 
             {filteredSubjects.length === 0 ? (
               <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5 items-center">
                 <EmptyFilterIllustration filterType={selectedFilter} />
-                <Text className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">
+                <Typography className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">
                   {selectedFilter === "ALL"
                     ? "No Exams Scheduled"
                     : selectedFilter === "TODAY"
@@ -558,8 +559,8 @@ const ExamScheduleScreen: React.FC = () => {
                       : selectedFilter === "UPCOMING"
                         ? "No Upcoming Exams"
                         : "No Completed Exams"}
-                </Text>
-                <Text className="text-sm text-[#7F8C8D] text-center mb-4">
+                </Typography> 
+                <Typography className="text-sm text-[#7F8C8D] text-center mb-4">
                   {selectedFilter === "ALL"
                     ? "There are no exams scheduled at the moment."
                     : selectedFilter === "TODAY"
@@ -567,10 +568,10 @@ const ExamScheduleScreen: React.FC = () => {
                       : selectedFilter === "UPCOMING"
                         ? "All your exams are either completed or scheduled for today."
                         : "You haven't completed any exams yet. Keep preparing!"}
-                </Text>
+                </Typography> 
                 {selectedFilter !== "ALL" && (
                   <TouchableOpacity className="bg-[#6A5ACD] px-6 py-3 rounded-xl" onPress={() => filterSubjects("ALL")}>
-                    <Text className="text-white font-semibold">View All Exams</Text>
+                    <Typography className="text-white font-semibold">View All Exams</Typography> 
                   </TouchableOpacity>
                 )}
               </View>
@@ -594,13 +595,13 @@ const ExamScheduleScreen: React.FC = () => {
                             className="w-12 h-12 rounded-xl items-center justify-center mr-3"
                             style={{ backgroundColor: `${getSubjectColor(exam.subject_name)}20` }}
                           >
-                            <Text className="text-lg font-bold" style={{ color: getSubjectColor(exam.subject_name) }}>
+                            <Typography className="text-lg font-bold" style={{ color: getSubjectColor(exam.subject_name) }}>
                               {index + 1}
-                            </Text>
+                            </Typography> 
                           </View>
                           <View className="flex-1">
-                            <Text className="text-base font-bold text-[#2C3E50]">{exam.subject_name}</Text>
-                            <Text className="text-sm text-[#7F8C8D]">{exam.subject_code}</Text>
+                            <Typography className="text-base font-bold text-[#2C3E50]">{exam.subject_name}</Typography> 
+                            <Typography className="text-sm text-[#7F8C8D]">{exam.subject_code}</Typography> 
                           </View>
                         </View>
                         <View className="items-end">
@@ -608,12 +609,12 @@ const ExamScheduleScreen: React.FC = () => {
                             className="px-2 py-1 rounded-lg mb-1"
                             style={{ backgroundColor: `${examStatus.color}20` }}
                           >
-                            <Text className="text-[10px] font-bold" style={{ color: examStatus.color }}>
+                            <Typography className="text-[10px] font-bold" style={{ color: examStatus.color }}>
                               {examStatus.status.toUpperCase()}
-                            </Text>
+                            </Typography> 
                           </View>
                           {examStatus.status === "upcoming" && examStatus.days > 0 && (
-                            <Text className="text-xs text-[#F39C12] font-semibold">{examStatus.days} days left</Text>
+                            <Typography className="text-xs text-[#F39C12] font-semibold">{examStatus.days} days left</Typography> 
                           )}
                         </View>
                       </View>
@@ -623,25 +624,25 @@ const ExamScheduleScreen: React.FC = () => {
                         <View className="flex-row justify-between items-center mb-2">
                           <View className="flex-row items-center">
                             <Icon name="event" size={16} color="#6A5ACD" />
-                            <Text className="text-sm font-semibold text-[#2C3E50] ml-2">
+                            <Typography className="text-sm font-semibold text-[#2C3E50] ml-2">
                               {formatDateDisplay(exam.schedule_at)}
-                            </Text>
+                            </Typography> 
                           </View>
                           <View className="flex-row items-center">
                             <Icon name="access-time" size={16} color="#F39C12" />
-                            <Text className="text-sm font-semibold text-[#2C3E50] ml-2">
+                            <Typography className="text-sm font-semibold text-[#2C3E50] ml-2">
                               {formatTimeDisplay(exam.schedule_at)}
-                            </Text>
+                            </Typography> 
                           </View>
                         </View>
                         <View className="flex-row justify-between items-center">
                           <View className="flex-row items-center">
                             <Icon name="category" size={16} color="#2ECC71" />
-                            <Text className="text-sm text-[#2C3E50] ml-2">{exam.subject_type}</Text>
+                            <Typography className="text-sm text-[#2C3E50] ml-2">{exam.subject_type}</Typography> 
                           </View>
                           <View className="flex-row items-center">
                             <Icon name="grade" size={16} color="#E74C3C" />
-                            <Text className="text-sm text-[#2C3E50] ml-2">{exam.max_marks} marks</Text>
+                            <Typography className="text-sm text-[#2C3E50] ml-2">{exam.max_marks} marks</Typography> 
                           </View>
                         </View>
                       </View>
@@ -650,9 +651,9 @@ const ExamScheduleScreen: React.FC = () => {
                       <View className="flex-row items-center justify-between">
                         <View className="flex-row items-center">
                           <Icon name="info" size={16} color="#7F8C8D" />
-                          <Text className="text-sm text-[#7F8C8D] ml-2">
+                          <Typography className="text-sm text-[#7F8C8D] ml-2">
                             {exam.pass_marks ? `Pass: ${exam.pass_marks}` : "No pass marks"}
-                          </Text>
+                          </Typography> 
                         </View>
                         <Icon name="chevron-right" size={16} color="#7F8C8D" />
                       </View>
@@ -675,7 +676,7 @@ const ExamScheduleScreen: React.FC = () => {
         <View className="flex-1 bg-black/50 justify-end">
           <View className="bg-white rounded-t-[25px] p-5 max-h-[90%]">
             <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Exam Details</Text>
+              <Typography className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Exam Details</Typography> 
               <TouchableOpacity onPress={() => setShowExamModal(false)}>
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
@@ -690,20 +691,20 @@ const ExamScheduleScreen: React.FC = () => {
                   >
                     <Icon name="quiz" size={32} color={getSubjectColor(selectedExamDetail.subject_name)} />
                   </View>
-                  <Text className="text-xl font-bold text-[#2C3E50] text-center mb-2">
+                  <Typography className="text-xl font-bold text-[#2C3E50] text-center mb-2">
                     {selectedExamDetail.subject_name}
-                  </Text>
-                  <Text className="text-sm text-[#7F8C8D] text-center mb-2">{selectedExamDetail.subject_code}</Text>
+                  </Typography> 
+                  <Typography className="text-sm text-[#7F8C8D] text-center mb-2">{selectedExamDetail.subject_code}</Typography> 
                   <View
                     className="px-4 py-2 rounded-xl"
                     style={{ backgroundColor: `${getExamStatus(selectedExamDetail.schedule_at).color}20` }}
                   >
-                    <Text
+                    <Typography
                       className="text-sm font-bold"
                       style={{ color: getExamStatus(selectedExamDetail.schedule_at).color }}
                     >
                       {getExamStatus(selectedExamDetail.schedule_at).status.toUpperCase()}
-                    </Text>
+                    </Typography> 
                   </View>
                 </View>
 
@@ -711,32 +712,32 @@ const ExamScheduleScreen: React.FC = () => {
                 <View className="bg-[#F8F9FA] rounded-2xl p-4 mb-6">
                   <View className="flex-row justify-between mb-3">
                     <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Date</Text>
-                      <Text className="text-sm font-semibold text-[#2C3E50]">
+                      <Typography className="text-xs text-[#7F8C8D] mb-1">Date</Typography> 
+                      <Typography className="text-sm font-semibold text-[#2C3E50]">
                         {formatDateDisplay(selectedExamDetail.schedule_at)}
-                      </Text>
+                      </Typography> 
                     </View>
                     <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Time</Text>
-                      <Text className="text-sm font-semibold text-[#2C3E50]">
+                      <Typography className="text-xs text-[#7F8C8D] mb-1">Time</Typography> 
+                      <Typography className="text-sm font-semibold text-[#2C3E50]">
                         {formatTimeDisplay(selectedExamDetail.schedule_at)}
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
                   <View className="flex-row justify-between mb-3">
                     <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Type</Text>
-                      <Text className="text-sm font-semibold text-[#2C3E50]">{selectedExamDetail.subject_type}</Text>
+                      <Typography className="text-xs text-[#7F8C8D] mb-1">Type</Typography> 
+                      <Typography className="text-sm font-semibold text-[#2C3E50]">{selectedExamDetail.subject_type}</Typography> 
                     </View>
                     <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Max Marks</Text>
-                      <Text className="text-sm font-semibold text-[#6A5ACD]">{selectedExamDetail.max_marks}</Text>
+                      <Typography className="text-xs text-[#7F8C8D] mb-1">Max Marks</Typography> 
+                      <Typography className="text-sm font-semibold text-[#6A5ACD]">{selectedExamDetail.max_marks}</Typography> 
                     </View>
                   </View>
                   {selectedExamDetail.pass_marks && (
                     <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Pass Marks</Text>
-                      <Text className="text-sm font-semibold text-[#2C3E50]">{selectedExamDetail.pass_marks}</Text>
+                      <Typography className="text-xs text-[#7F8C8D] mb-1">Pass Marks</Typography> 
+                      <Typography className="text-sm font-semibold text-[#2C3E50]">{selectedExamDetail.pass_marks}</Typography> 
                     </View>
                   )}
                 </View>
@@ -746,12 +747,12 @@ const ExamScheduleScreen: React.FC = () => {
                   <View className="bg-[#F39C1210] border border-[#F39C1230] rounded-2xl p-4 mb-6">
                     <View className="items-center">
                       <Icon name="schedule" size={32} color="#F39C12" />
-                      <Text className="text-2xl font-bold text-[#F39C12] mt-2">
+                      <Typography className="text-2xl font-bold text-[#F39C12] mt-2">
                         {getExamStatus(selectedExamDetail.schedule_at).days} Days Left
-                      </Text>
-                      <Text className="text-sm text-[#7F8C8D] text-center mt-1">
+                      </Typography> 
+                      <Typography className="text-sm text-[#7F8C8D] text-center mt-1">
                         Make sure to prepare well and arrive 15 minutes early
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
                 )}
@@ -762,13 +763,13 @@ const ExamScheduleScreen: React.FC = () => {
                     className="flex-1 bg-[#6A5ACD] rounded-xl py-4 items-center"
                     onPress={() => handleDownloadAdmitCard(selectedExamDetail)}
                   >
-                    <Text className="text-base font-bold text-white">Download Admit Card</Text>
+                    <Typography className="text-base font-bold text-white">Download Admit Card</Typography> 
                   </TouchableOpacity>
                   <TouchableOpacity
                     className="flex-1 bg-[#F8F9FA] border border-[#DDE4EB] rounded-xl py-4 items-center"
                     onPress={() => handleSetReminder(selectedExamDetail)}
                   >
-                    <Text className="text-base font-bold text-[#2C3E50]">Set Reminder</Text>
+                    <Typography className="text-base font-bold text-[#2C3E50]">Set Reminder</Typography> 
                   </TouchableOpacity>
                 </View>
               </ScrollView>

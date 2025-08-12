@@ -1,3 +1,4 @@
+import { Typography } from '@/components/Typography';
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, TextInput, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -42,7 +43,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
           <Icon name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-        <Text className="text-xl font-bold text-white">Profile</Text>
+        <Typography className="text-xl font-bold text-white">Profile</Typography> 
         <TouchableOpacity onPress={() => setIsEditing(!isEditing)} className="p-2">
           <Icon name={isEditing ? "save" : "edit"} size={20} color="white" />
         </TouchableOpacity>
@@ -53,41 +54,41 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         <View className="w-24 h-24 bg-white rounded-full items-center justify-center shadow-lg elevation-5 mb-4">
           <Icon name="person" size={48} color="#6A5ACD" />
         </View>
-        <Text className="text-2xl font-bold text-[#2C3E50]">{studentProfile.name}</Text>
-        <Text className="text-sm text-[#7F8C8D]">{studentProfile.class} • Roll: {studentProfile.rollNumber}</Text>
+        <Typography className="text-2xl font-bold text-[#2C3E50]">{studentProfile.name}</Typography> 
+        <Typography className="text-sm text-[#7F8C8D]">{studentProfile.class} • Roll: {studentProfile.rollNumber}</Typography> 
       </View>
 
       {/* Personal Information */}
       <View className="px-4 mb-6">
-        <Text className="text-xl font-bold text-[#2C3E50] mb-4">Personal Information</Text>
+        <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Personal Information</Typography> 
         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
           <View className="space-y-4">
             <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Text className="text-sm text-[#7F8C8D]">Full Name</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Full Name</Typography> 
               {isEditing ? (
                 <TextInput 
                   className="text-sm font-semibold text-[#2C3E50] border-b border-[#6A5ACD] min-w-[150px] text-right"
                   value={studentProfile.name}
                 />
               ) : (
-                <Text className="text-sm font-semibold text-[#2C3E50]">{studentProfile.name}</Text>
+                <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.name}</Typography> 
               )}
             </View>
             <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Text className="text-sm text-[#7F8C8D]">Date of Birth</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50]">{studentProfile.dateOfBirth}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Date of Birth</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.dateOfBirth}</Typography> 
             </View>
             <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Text className="text-sm text-[#7F8C8D]">Gender</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50]">{studentProfile.gender}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Gender</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.gender}</Typography> 
             </View>
             <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Text className="text-sm text-[#7F8C8D]">Blood Group</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50]">{studentProfile.bloodGroup}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Blood Group</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.bloodGroup}</Typography> 
             </View>
             <View className="flex-row justify-between items-start py-3">
-              <Text className="text-sm text-[#7F8C8D]">Address</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50] text-right flex-1 ml-4">{studentProfile.address}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Address</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50] text-right flex-1 ml-4">{studentProfile.address}</Typography> 
             </View>
           </View>
         </View>
@@ -95,24 +96,24 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
       {/* Contact Information */}
       <View className="px-4 mb-6">
-        <Text className="text-xl font-bold text-[#2C3E50] mb-4">Contact Information</Text>
+        <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Contact Information</Typography> 
         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
           <View className="space-y-4">
             <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Text className="text-sm text-[#7F8C8D]">Phone</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50]">{studentProfile.phone}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Phone</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.phone}</Typography> 
             </View>
             <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Text className="text-sm text-[#7F8C8D]">Email</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50]">{studentProfile.email}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Email</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.email}</Typography> 
             </View>
             <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Text className="text-sm text-[#7F8C8D]">Parent Name</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50]">{studentProfile.parentName}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Parent Name</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.parentName}</Typography> 
             </View>
             <View className="flex-row justify-between items-center py-3">
-              <Text className="text-sm text-[#7F8C8D]">Parent Phone</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50]">{studentProfile.parentPhone}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Parent Phone</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.parentPhone}</Typography> 
             </View>
           </View>
         </View>
@@ -120,24 +121,24 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
       {/* Academic Information */}
       <View className="px-4 mb-6">
-        <Text className="text-xl font-bold text-[#2C3E50] mb-4">Academic Information</Text>
+        <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Academic Information</Typography> 
         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
           <View className="space-y-4">
             <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Text className="text-sm text-[#7F8C8D]">Academic Year</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50]">{academicInfo.academicYear}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Academic Year</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50]">{academicInfo.academicYear}</Typography> 
             </View>
             <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Text className="text-sm text-[#7F8C8D]">Admission Number</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50]">{studentProfile.admissionNumber}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Admission Number</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.admissionNumber}</Typography> 
             </View>
             <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Text className="text-sm text-[#7F8C8D]">House</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50]">{academicInfo.house}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">House</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50]">{academicInfo.house}</Typography> 
             </View>
             <View className="flex-row justify-between items-center py-3">
-              <Text className="text-sm text-[#7F8C8D]">Transport</Text>
-              <Text className="text-sm font-semibold text-[#2C3E50]">{academicInfo.transport}</Text>
+              <Typography className="text-sm text-[#7F8C8D]">Transport</Typography> 
+              <Typography className="text-sm font-semibold text-[#2C3E50]">{academicInfo.transport}</Typography> 
             </View>
           </View>
         </View>
@@ -149,11 +150,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
           className="bg-[#6A5ACD] rounded-xl py-4 items-center mb-3"
           onPress={() => setShowChangePassword(true)}
         >
-          <Text className="text-base font-bold text-white">Change Password</Text>
+          <Typography className="text-base font-bold text-white">Change Password</Typography> 
         </TouchableOpacity>
         
         <TouchableOpacity className="bg-white border border-[#E74C3C] rounded-xl py-4 items-center">
-          <Text className="text-base font-bold text-[#E74C3C]">Logout</Text>
+          <Typography className="text-base font-bold text-[#E74C3C]">Logout</Typography> 
         </TouchableOpacity>
       </View>
 
@@ -167,7 +168,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         <View className="flex-1 bg-black/50 justify-end">
           <View className="bg-white rounded-t-[25px] p-5">
             <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-xl font-bold text-[#2C3E50]">Change Password</Text>
+              <Typography className="text-xl font-bold text-[#2C3E50]">Change Password</Typography> 
               <TouchableOpacity onPress={() => setShowChangePassword(false)}>
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
@@ -190,7 +191,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
             />
 
             <TouchableOpacity className="bg-[#6A5ACD] rounded-xl py-4 items-center">
-              <Text className="text-base font-bold text-white">Update Password</Text>
+              <Typography className="text-base font-bold text-white">Update Password</Typography> 
             </TouchableOpacity>
           </View>
         </View>

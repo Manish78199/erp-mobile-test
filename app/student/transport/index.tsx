@@ -158,7 +158,7 @@
 //           </TouchableOpacity>
 //         </Link>
 //         <View className="flex-1 items-center">
-//           <Text className="text-xl font-bold text-white">Transport Tracking</Text>
+//           <Typography className="text-xl font-bold text-white">Transport Tracking</Typography> 
 //         </View>
 //         <TouchableOpacity className="p-2">
 //           <Icon name="refresh" size={20} color="white" />
@@ -170,14 +170,14 @@
 //         <View className="bg-white rounded-2xl shadow-lg elevation-5 overflow-hidden">
 //           {/* Map Header */}
 //           <View className="flex-row justify-between items-center p-4 bg-[#6A5ACD10]">
-//             <Text className="text-lg font-bold text-[#2C3E50]">Live Location</Text>
+//             <Typography className="text-lg font-bold text-[#2C3E50]">Live Location</Typography> 
 //             <TouchableOpacity
 //               className={`px-4 py-2 rounded-xl ${isTracking ? "bg-[#E74C3C]" : "bg-[#2ECC71]"}`}
 //               onPress={() => setIsTracking(!isTracking)}
 //             >
-//               <Text className="text-sm font-semibold text-white">
+//               <Typography className="text-sm font-semibold text-white">
 //                 {isTracking ? "Stop Tracking" : "Start Tracking"}
-//               </Text>
+//               </Typography> 
 //             </TouchableOpacity>
 //           </View>
 
@@ -241,9 +241,9 @@
 //                     <Icon name={getStopStatusIcon(stop.status)} size={12} color="white" />
 //                   </View>
 //                   <View className="absolute -bottom-6 -left-8 w-16">
-//                     <Text className="text-[8px] text-[#2C3E50] text-center font-semibold" numberOfLines={1}>
+//                     <Typography className="text-[8px] text-[#2C3E50] text-center font-semibold" numberOfLines={1}>
 //                       {stop.name}
-//                     </Text>
+//                     </Typography> 
 //                   </View>
 //                 </View>
 //               )
@@ -267,7 +267,7 @@
 //                 )}
 //               </View>
 //               <View className="absolute -bottom-6 -left-6 w-12">
-//                 <Text className="text-[8px] text-[#F39C12] text-center font-bold">BUS</Text>
+//                 <Typography className="text-[8px] text-[#F39C12] text-center font-bold">BUS</Typography> 
 //               </View>
 //             </View>
 
@@ -275,15 +275,15 @@
 //             <View className="absolute bottom-4 left-4 bg-white/90 rounded-lg p-2">
 //               <View className="flex-row items-center mb-1">
 //                 <View className="w-3 h-3 bg-[#2ECC71] rounded-full mr-2" />
-//                 <Text className="text-[10px] text-[#2C3E50]">Completed</Text>
+//                 <Typography className="text-[10px] text-[#2C3E50]">Completed</Typography> 
 //               </View>
 //               <View className="flex-row items-center mb-1">
 //                 <View className="w-3 h-3 bg-[#F39C12] rounded-full mr-2" />
-//                 <Text className="text-[10px] text-[#2C3E50]">Current</Text>
+//                 <Typography className="text-[10px] text-[#2C3E50]">Current</Typography> 
 //               </View>
 //               <View className="flex-row items-center">
 //                 <View className="w-3 h-3 bg-[#BDC3C7] rounded-full mr-2" />
-//                 <Text className="text-[10px] text-[#2C3E50]">Upcoming</Text>
+//                 <Typography className="text-[10px] text-[#2C3E50]">Upcoming</Typography> 
 //               </View>
 //             </View>
 
@@ -309,18 +309,18 @@
 //                   <View className="w-3 h-3 bg-[#2ECC71] rounded-full mr-2">
 //                     <View className="w-3 h-3 bg-[#2ECC71] rounded-full animate-pulse" />
 //                   </View>
-//                   <Text className="text-sm font-semibold text-[#2C3E50]">
+//                   <Typography className="text-sm font-semibold text-[#2C3E50]">
 //                     Live at {transportData.tracking.currentLocation}
-//                   </Text>
+//                   </Typography> 
 //                 </View>
-//                 <Text className="text-xs text-[#7F8C8D]">Updated {formatLastUpdated(lastUpdated)}</Text>
+//                 <Typography className="text-xs text-[#7F8C8D]">Updated {formatLastUpdated(lastUpdated)}</Typography> 
 //               </View>
 //               <View className="flex-row justify-between">
-//                 <Text className="text-xs text-[#7F8C8D]">
+//                 <Typography className="text-xs text-[#7F8C8D]">
 //                   Next: {transportData.tracking.nextStop} ({transportData.tracking.distanceToNextStop})
-//                 </Text>
-//                 <Text className="text-xs text-[#7F8C8D]">Speed: {transportData.tracking.speed}</Text>
-//                 <Text className="text-xs text-[#7F8C8D]">ETA: {transportData.tracking.estimatedArrival}</Text>
+//                 </Typography> 
+//                 <Typography className="text-xs text-[#7F8C8D]">Speed: {transportData.tracking.speed}</Typography> 
+//                 <Typography className="text-xs text-[#7F8C8D]">ETA: {transportData.tracking.estimatedArrival}</Typography> 
 //               </View>
 //             </View>
 //           )}
@@ -329,7 +329,7 @@
 
 //       {/* Vehicle Details */}
 //       <View className="px-4 mb-5">
-//         <Text className="text-xl font-bold text-[#2C3E50] mb-4">Vehicle Information</Text>
+//         <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Vehicle Information</Typography> 
 //         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
 //           {/* Vehicle Header */}
 //           <View className="flex-row items-center justify-between mb-4">
@@ -338,73 +338,73 @@
 //                 <Icon name="directions-bus" size={32} color="#6A5ACD" />
 //               </View>
 //               <View>
-//                 <Text className="text-lg font-bold text-[#2C3E50]">{transportData.vehicle.number}</Text>
-//                 <Text className="text-sm text-[#7F8C8D]">{transportData.vehicle.route}</Text>
-//                 <Text className="text-xs text-[#6A5ACD] font-semibold">{transportData.vehicle.type}</Text>
+//                 <Typography className="text-lg font-bold text-[#2C3E50]">{transportData.vehicle.number}</Typography> 
+//                 <Typography className="text-sm text-[#7F8C8D]">{transportData.vehicle.route}</Typography> 
+//                 <Typography className="text-xs text-[#6A5ACD] font-semibold">{transportData.vehicle.type}</Typography> 
 //               </View>
 //             </View>
 //             <View className="items-end">
-//               <Text className="text-2xl font-bold text-[#2ECC71]">
+//               <Typography className="text-2xl font-bold text-[#2ECC71]">
 //                 {transportData.vehicle.currentOccupancy}/{transportData.vehicle.capacity}
-//               </Text>
-//               <Text className="text-xs text-[#7F8C8D]">Occupancy</Text>
+//               </Typography> 
+//               <Typography className="text-xs text-[#7F8C8D]">Occupancy</Typography> 
 //             </View>
 //           </View>
 
 //           {/* Vehicle Specs */}
 //           <View className="bg-[#F8F9FA] rounded-xl p-3 mb-4">
-//             <Text className="text-sm font-semibold text-[#2C3E50] mb-3">Vehicle Specifications</Text>
+//             <Typography className="text-sm font-semibold text-[#2C3E50] mb-3">Vehicle Specifications</Typography> 
 //             <View className="flex-row flex-wrap">
 //               <View className="w-1/2 mb-2">
-//                 <Text className="text-xs text-[#7F8C8D]">Model</Text>
-//                 <Text className="text-sm font-semibold text-[#2C3E50]">{transportData.vehicle.model}</Text>
+//                 <Typography className="text-xs text-[#7F8C8D]">Model</Typography> 
+//                 <Typography className="text-sm font-semibold text-[#2C3E50]">{transportData.vehicle.model}</Typography> 
 //               </View>
 //               <View className="w-1/2 mb-2">
-//                 <Text className="text-xs text-[#7F8C8D]">Year</Text>
-//                 <Text className="text-sm font-semibold text-[#2C3E50]">{transportData.vehicle.year}</Text>
+//                 <Typography className="text-xs text-[#7F8C8D]">Year</Typography> 
+//                 <Typography className="text-sm font-semibold text-[#2C3E50]">{transportData.vehicle.year}</Typography> 
 //               </View>
 //               <View className="w-1/2 mb-2">
-//                 <Text className="text-xs text-[#7F8C8D]">Fuel Type</Text>
-//                 <Text className="text-sm font-semibold text-[#2C3E50]">{transportData.vehicle.fuelType}</Text>
+//                 <Typography className="text-xs text-[#7F8C8D]">Fuel Type</Typography> 
+//                 <Typography className="text-sm font-semibold text-[#2C3E50]">{transportData.vehicle.fuelType}</Typography> 
 //               </View>
 //               <View className="w-1/2 mb-2">
-//                 <Text className="text-xs text-[#7F8C8D]">Capacity</Text>
-//                 <Text className="text-sm font-semibold text-[#2C3E50]">{transportData.vehicle.capacity} seats</Text>
+//                 <Typography className="text-xs text-[#7F8C8D]">Capacity</Typography> 
+//                 <Typography className="text-sm font-semibold text-[#2C3E50]">{transportData.vehicle.capacity} seats</Typography> 
 //               </View>
 //             </View>
 //           </View>
 
 //           {/* Compliance Status */}
 //           <View className="bg-[#F8F9FA] rounded-xl p-3">
-//             <Text className="text-sm font-semibold text-[#2C3E50] mb-3">Compliance & Maintenance</Text>
+//             <Typography className="text-sm font-semibold text-[#2C3E50] mb-3">Compliance & Maintenance</Typography> 
 //             <View className="gap-2">
 //               <View className="flex-row items-center justify-between">
 //                 <View className="flex-row items-center">
 //                   <Icon name="verified" size={16} color="#2ECC71" />
-//                   <Text className="text-sm text-[#2C3E50] ml-2">Insurance</Text>
+//                   <Typography className="text-sm text-[#2C3E50] ml-2">Insurance</Typography> 
 //                 </View>
-//                 <Text className="text-xs text-[#2ECC71] font-semibold">{transportData.vehicle.insurance}</Text>
+//                 <Typography className="text-xs text-[#2ECC71] font-semibold">{transportData.vehicle.insurance}</Typography> 
 //               </View>
 //               <View className="flex-row items-center justify-between">
 //                 <View className="flex-row items-center">
 //                   <Icon name="verified" size={16} color="#2ECC71" />
-//                   <Text className="text-sm text-[#2C3E50] ml-2">Fitness Certificate</Text>
+//                   <Typography className="text-sm text-[#2C3E50] ml-2">Fitness Certificate</Typography> 
 //                 </View>
-//                 <Text className="text-xs text-[#2ECC71] font-semibold">{transportData.vehicle.fitness}</Text>
+//                 <Typography className="text-xs text-[#2ECC71] font-semibold">{transportData.vehicle.fitness}</Typography> 
 //               </View>
 //               <View className="flex-row items-center justify-between">
 //                 <View className="flex-row items-center">
 //                   <Icon name="build" size={16} color="#F39C12" />
-//                   <Text className="text-sm text-[#2C3E50] ml-2">Last Service</Text>
+//                   <Typography className="text-sm text-[#2C3E50] ml-2">Last Service</Typography> 
 //                 </View>
-//                 <Text className="text-xs text-[#7F8C8D]">{transportData.vehicle.lastService}</Text>
+//                 <Typography className="text-xs text-[#7F8C8D]">{transportData.vehicle.lastService}</Typography> 
 //               </View>
 //               <View className="flex-row items-center justify-between">
 //                 <View className="flex-row items-center">
 //                   <Icon name="schedule" size={16} color="#6A5ACD" />
-//                   <Text className="text-sm text-[#2C3E50] ml-2">Next Service</Text>
+//                   <Typography className="text-sm text-[#2C3E50] ml-2">Next Service</Typography> 
 //                 </View>
-//                 <Text className="text-xs text-[#6A5ACD] font-semibold">{transportData.vehicle.nextService}</Text>
+//                 <Typography className="text-xs text-[#6A5ACD] font-semibold">{transportData.vehicle.nextService}</Typography> 
 //               </View>
 //             </View>
 //           </View>
@@ -413,24 +413,24 @@
 
 //       {/* Route Information */}
 //       <View className="px-4 mb-5">
-//         <Text className="text-xl font-bold text-[#2C3E50] mb-4">Route Details</Text>
+//         <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Route Details</Typography> 
 //         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
 //           {/* Route Summary */}
 //           <View className="flex-row justify-between items-center mb-4 p-3 bg-[#6A5ACD10] rounded-xl">
 //             <View className="items-center">
 //               <Icon name="straighten" size={24} color="#6A5ACD" />
-//               <Text className="text-lg font-bold text-[#2C3E50] mt-1">{transportData.route.totalDistance}</Text>
-//               <Text className="text-xs text-[#7F8C8D]">Total Distance</Text>
+//               <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{transportData.route.totalDistance}</Typography> 
+//               <Typography className="text-xs text-[#7F8C8D]">Total Distance</Typography> 
 //             </View>
 //             <View className="items-center">
 //               <Icon name="access-time" size={24} color="#00BCD4" />
-//               <Text className="text-lg font-bold text-[#2C3E50] mt-1">{transportData.route.estimatedTime}</Text>
-//               <Text className="text-xs text-[#7F8C8D]">Est. Time</Text>
+//               <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{transportData.route.estimatedTime}</Typography> 
+//               <Typography className="text-xs text-[#7F8C8D]">Est. Time</Typography> 
 //             </View>
 //             <View className="items-center">
 //               <Icon name="location-on" size={24} color="#2ECC71" />
-//               <Text className="text-lg font-bold text-[#2C3E50] mt-1">{transportData.route.stops.length}</Text>
-//               <Text className="text-xs text-[#7F8C8D]">Total Stops</Text>
+//               <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{transportData.route.stops.length}</Typography> 
+//               <Typography className="text-xs text-[#7F8C8D]">Total Stops</Typography> 
 //             </View>
 //           </View>
 
@@ -445,21 +445,21 @@
 //               </View>
 //               <View className="flex-1">
 //                 <View className="flex-row items-center justify-between mb-1">
-//                   <Text className="text-base font-semibold text-[#2C3E50]">{stop.name}</Text>
-//                   <Text className="text-sm font-semibold text-[#6A5ACD]">{stop.time}</Text>
+//                   <Typography className="text-base font-semibold text-[#2C3E50]">{stop.name}</Typography> 
+//                   <Typography className="text-sm font-semibold text-[#6A5ACD]">{stop.time}</Typography> 
 //                 </View>
 //                 <View className="flex-row items-center justify-between">
 //                   <View
 //                     className="px-2 py-1 rounded-lg"
 //                     style={{ backgroundColor: `${getStopStatusColor(stop.status)}20` }}
 //                   >
-//                     <Text className="text-[10px] font-bold" style={{ color: getStopStatusColor(stop.status) }}>
+//                     <Typography className="text-[10px] font-bold" style={{ color: getStopStatusColor(stop.status) }}>
 //                       {stop.status.toUpperCase()}
-//                     </Text>
+//                     </Typography> 
 //                   </View>
-//                   <Text className="text-xs text-[#7F8C8D]">
+//                   <Typography className="text-xs text-[#7F8C8D]">
 //                     {stop.studentsCount > 0 ? `${stop.studentsCount} students` : "Destination"}
-//                   </Text>
+//                   </Typography> 
 //                 </View>
 //               </View>
 //               {index < transportData.route.stops.length - 1 && (
@@ -472,7 +472,7 @@
 
 //       {/* Driver Contact */}
 //       <View className="px-4 mb-5">
-//         <Text className="text-xl font-bold text-[#2C3E50] mb-4">Driver Information</Text>
+//         <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Driver Information</Typography> 
 //         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
 //           <View className="flex-row items-center justify-between">
 //             <View className="flex-row items-center flex-1">
@@ -480,15 +480,15 @@
 //                 <Icon name="person" size={28} color="#6A5ACD" />
 //               </View>
 //               <View className="flex-1">
-//                 <Text className="text-lg font-semibold text-[#2C3E50]">{transportData.vehicle.driver}</Text>
-//                 <Text className="text-sm text-[#7F8C8D] mb-1">{transportData.vehicle.contact}</Text>
+//                 <Typography className="text-lg font-semibold text-[#2C3E50]">{transportData.vehicle.driver}</Typography> 
+//                 <Typography className="text-sm text-[#7F8C8D] mb-1">{transportData.vehicle.contact}</Typography> 
 //                 <View className="flex-row items-center">
 //                   <Icon name="star" size={14} color="#F39C12" />
 //                   <Icon name="star" size={14} color="#F39C12" />
 //                   <Icon name="star" size={14} color="#F39C12" />
 //                   <Icon name="star" size={14} color="#F39C12" />
 //                   <Icon name="star" size={14} color="#F39C12" />
-//                   <Text className="text-xs text-[#7F8C8D] ml-2">5.0 Rating</Text>
+//                   <Typography className="text-xs text-[#7F8C8D] ml-2">5.0 Rating</Typography> 
 //                 </View>
 //               </View>
 //             </View>
@@ -506,24 +506,24 @@
 
 //       {/* Emergency Contacts */}
 //       <View className="px-4 pb-8">
-//         <Text className="text-xl font-bold text-[#2C3E50] mb-4">Emergency Contacts</Text>
+//         <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Emergency Contacts</Typography> 
 //         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
 //           <View className="flex-row justify-between mb-3">
 //             <View className="flex-row items-center flex-1">
 //               <Icon name="local-hospital" size={20} color="#E74C3C" />
-//               <Text className="text-sm font-semibold text-[#2C3E50] ml-2">School Office</Text>
+//               <Typography className="text-sm font-semibold text-[#2C3E50] ml-2">School Office</Typography> 
 //             </View>
 //             <TouchableOpacity className="bg-[#E74C3C] px-4 py-2 rounded-lg">
-//               <Text className="text-xs font-semibold text-white">Call Now</Text>
+//               <Typography className="text-xs font-semibold text-white">Call Now</Typography> 
 //             </TouchableOpacity>
 //           </View>
 //           <View className="flex-row justify-between">
 //             <View className="flex-row items-center flex-1">
 //               <Icon name="security" size={20} color="#F39C12" />
-//               <Text className="text-sm font-semibold text-[#2C3E50] ml-2">Transport Coordinator</Text>
+//               <Typography className="text-sm font-semibold text-[#2C3E50] ml-2">Transport Coordinator</Typography> 
 //             </View>
 //             <TouchableOpacity className="bg-[#F39C12] px-4 py-2 rounded-lg">
-//               <Text className="text-xs font-semibold text-white">Call Now</Text>
+//               <Typography className="text-xs font-semibold text-white">Call Now</Typography> 
 //             </TouchableOpacity>
 //           </View>
 //         </View>
@@ -557,6 +557,7 @@ import type { TransportDetails, Position, TRACK_DATA } from "@/types/transport"
 import { get_access_token } from "@/utils/accessToken"
 
 import { io, Socket } from "socket.io-client"
+import { Typography } from "@/components/Typography"
 const { width, height } = Dimensions.get("window")
 
 const TransportScreen: React.FC = () => {
@@ -718,10 +719,10 @@ const TransportScreen: React.FC = () => {
       <View className="w-24 h-24 bg-gray-100 rounded-full items-center justify-center mb-6">
         <Icon name="directions-bus" size={48} color="#BDC3C7" />
       </View>
-      <Text className="text-xl font-bold text-[#2C3E50] mb-2 text-center">No Transport Assigned</Text>
-      <Text className="text-sm text-[#7F8C8D] text-center px-8 leading-5">
+      <Typography className="text-xl font-bold text-[#2C3E50] mb-2 text-center">No Transport Assigned</Typography> 
+      <Typography className="text-sm text-[#7F8C8D] text-center px-8 leading-5">
         You don't have any transport assigned yet. Please contact the school administration.
-      </Text>
+      </Typography> 
     </View>
   )
 
@@ -771,7 +772,7 @@ const TransportScreen: React.FC = () => {
         <TouchableOpacity onPress={() => router.back()} className="p-2">
           <Icon name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-        <Text className="text-xl font-bold text-white">Transport</Text>
+        <Typography className="text-xl font-bold text-white">Transport</Typography> 
         <TouchableOpacity onPress={() => fetchTransportData()} disabled={loading} className="p-2">
           <Icon
             name="refresh"
@@ -788,7 +789,7 @@ const TransportScreen: React.FC = () => {
           <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5">
             <View className="items-center">
               <ActivityIndicator size="large" color="#6A5ACD" />
-              <Text className="text-[#7F8C8D] mt-4">Loading transport details...</Text>
+              <Typography className="text-[#7F8C8D] mt-4">Loading transport details...</Typography> 
             </View>
           </View>
         </View>
@@ -809,8 +810,8 @@ const TransportScreen: React.FC = () => {
                         <Icon name="directions-bus" size={24} color="white" />
                       </View>
                       <View>
-                        <Text className="text-lg font-bold text-[#2C3E50]">Assigned Transport</Text>
-                        <Text className="text-sm text-[#7F8C8D]">Your current transport details</Text>
+                        <Typography className="text-lg font-bold text-[#2C3E50]">Assigned Transport</Typography> 
+                        <Typography className="text-sm text-[#7F8C8D]">Your current transport details</Typography> 
                       </View>
                     </View>
                     <View className="items-center">
@@ -823,7 +824,7 @@ const TransportScreen: React.FC = () => {
                           shadowRadius: 4,
                         }}
                       />
-                      <Text className="text-xs text-[#7F8C8D] mt-1">{isTracking ? "Active" : "Inactive"}</Text>
+                      <Typography className="text-xs text-[#7F8C8D] mt-1">{isTracking ? "Active" : "Inactive"}</Typography> 
                     </View>
                   </View>
 
@@ -832,23 +833,23 @@ const TransportScreen: React.FC = () => {
                     <View className="space-y-3">
                       <View className="flex-row items-center">
                         <Icon name="directions-bus" size={16} color="#6A5ACD" />
-                        <Text className="text-sm text-[#7F8C8D] ml-2 flex-1">Vehicle:</Text>
-                        <Text className="text-sm font-semibold text-[#2C3E50]">{transport.vehicle_number}</Text>
+                        <Typography className="text-sm text-[#7F8C8D] ml-2 flex-1">Vehicle:</Typography> 
+                        <Typography className="text-sm font-semibold text-[#2C3E50]">{transport.vehicle_number}</Typography> 
                       </View>
                       <View className="flex-row items-center">
                         <Icon name="route" size={16} color="#6A5ACD" />
-                        <Text className="text-sm text-[#7F8C8D] ml-2 flex-1">Route:</Text>
-                        <Text className="text-sm font-semibold text-[#2C3E50]">{transport.route_name}</Text>
+                        <Typography className="text-sm text-[#7F8C8D] ml-2 flex-1">Route:</Typography> 
+                        <Typography className="text-sm font-semibold text-[#2C3E50]">{transport.route_name}</Typography> 
                       </View>
                       <View className="flex-row items-center">
                         <Icon name="person" size={16} color="#6A5ACD" />
-                        <Text className="text-sm text-[#7F8C8D] ml-2 flex-1">Driver:</Text>
-                        <Text className="text-sm font-semibold text-[#2C3E50]">{transport.driver_name}</Text>
+                        <Typography className="text-sm text-[#7F8C8D] ml-2 flex-1">Driver:</Typography> 
+                        <Typography className="text-sm font-semibold text-[#2C3E50]">{transport.driver_name}</Typography> 
                       </View>
                       <View className="flex-row items-center">
                         <Icon name="location-on" size={16} color="#6A5ACD" />
-                        <Text className="text-sm text-[#7F8C8D] ml-2 flex-1">Pickup:</Text>
-                        <Text className="text-sm font-semibold text-[#2C3E50]">{transport.pickUp_point_name}</Text>
+                        <Typography className="text-sm text-[#7F8C8D] ml-2 flex-1">Pickup:</Typography> 
+                        <Typography className="text-sm font-semibold text-[#2C3E50]">{transport.pickUp_point_name}</Typography> 
                       </View>
                     </View>
                   </View>
@@ -857,13 +858,13 @@ const TransportScreen: React.FC = () => {
                   <View className="flex-row gap-3">
                     <View className="flex-1 bg-[#E3F2FD] rounded-xl p-3 items-center">
                       <Icon name="schedule" size={20} color="#1976D2" />
-                      <Text className="text-xs text-[#1976D2] mt-1">Pickup Time</Text>
-                      <Text className="text-sm font-bold text-[#1976D2]">{transport.departure_time}</Text>
+                      <Typography className="text-xs text-[#1976D2] mt-1">Pickup Time</Typography> 
+                      <Typography className="text-sm font-bold text-[#1976D2]">{transport.departure_time}</Typography> 
                     </View>
                     <View className="flex-1 bg-[#E8F5E8] rounded-xl p-3 items-center">
                       <Icon name="schedule" size={20} color="#388E3C" />
-                      <Text className="text-xs text-[#388E3C] mt-1">Drop Time</Text>
-                      <Text className="text-sm font-bold text-[#388E3C]">{transport.arrival_time}</Text>
+                      <Typography className="text-xs text-[#388E3C] mt-1">Drop Time</Typography> 
+                      <Typography className="text-sm font-bold text-[#388E3C]">{transport.arrival_time}</Typography> 
                     </View>
                   </View>
                 </View>
@@ -876,7 +877,7 @@ const TransportScreen: React.FC = () => {
                   <View className="flex-row items-center justify-between mb-4">
                     <View className="flex-row items-center">
                       <Icon name="navigation" size={20} color="#6A5ACD" />
-                      <Text className="text-lg font-bold text-[#2C3E50] ml-2">Live Vehicle Tracking</Text>
+                      <Typography className="text-lg font-bold text-[#2C3E50] ml-2">Live Vehicle Tracking</Typography> 
                     </View>
                     {!isConnected && (
                       <TouchableOpacity
@@ -894,13 +895,13 @@ const TransportScreen: React.FC = () => {
                       <View className="flex-row items-center">
                         <View className={`w-3 h-3 rounded-full mr-3 ${isTracking ? "bg-[#2ECC71]" : "bg-[#BDC3C7]"}`} />
                         <View>
-                          <Text className="text-sm font-semibold text-[#2C3E50]">{transport.vehicle_number}</Text>
-                          <Text className="text-xs text-[#7F8C8D]">Driver: {transport.driver_name}</Text>
+                          <Typography className="text-sm font-semibold text-[#2C3E50]">{transport.vehicle_number}</Typography> 
+                          <Typography className="text-xs text-[#7F8C8D]">Driver: {transport.driver_name}</Typography> 
                         </View>
                       </View>
                       <View className="items-end">
-                        <Text className="text-sm font-bold text-[#2C3E50]">{position.speed} km/h</Text>
-                        <Text className="text-xs text-[#7F8C8D]">{formatTimestamp(position.timestamp)}</Text>
+                        <Typography className="text-sm font-bold text-[#2C3E50]">{position.speed} km/h</Typography> 
+                        <Typography className="text-xs text-[#7F8C8D]">{formatTimestamp(position.timestamp)}</Typography> 
                       </View>
                     </View>
                   </View>
@@ -916,7 +917,7 @@ const TransportScreen: React.FC = () => {
                       renderLoading={() => (
                         <View className="absolute inset-0 items-center justify-center bg-[#F8F9FA]">
                           <ActivityIndicator size="large" color="#6A5ACD" />
-                          <Text className="text-[#7F8C8D] mt-2">Loading map...</Text>
+                          <Typography className="text-[#7F8C8D] mt-2">Loading map...</Typography> 
                         </View>
                       )}
                     /> */}
@@ -931,7 +932,7 @@ const TransportScreen: React.FC = () => {
                       renderLoading={() => (
                         <View className="absolute inset-0 items-center justify-center bg-[#F8F9FA]">
                           <ActivityIndicator size="large" color="#6A5ACD" />
-                          <Text className="text-[#7F8C8D] mt-2">Loading map...</Text>
+                          <Typography className="text-[#7F8C8D] mt-2">Loading map...</Typography> 
                         </View>
                       )}
                     />
@@ -946,12 +947,12 @@ const TransportScreen: React.FC = () => {
                         onPress={() => setMapView(view as any)}
                         className={`flex-1 py-2 items-center ${mapView === view ? "bg-[#6A5ACD]" : "bg-[#F8F9FA]"}`}
                       >
-                        <Text
+                        <Typography
                           className={`text-xs font-semibold capitalize ${mapView === view ? "text-white" : "text-[#2C3E50]"
                             }`}
                         >
                           {view}
-                        </Text>
+                        </Typography> 
                       </TouchableOpacity>
                     ))}
                   </View>
@@ -961,14 +962,14 @@ const TransportScreen: React.FC = () => {
               {/* Quick Actions */}
               <View className="px-4 mb-5">
                 <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-                  <Text className="text-lg font-bold text-[#2C3E50] mb-4">Quick Actions</Text>
+                  <Typography className="text-lg font-bold text-[#2C3E50] mb-4">Quick Actions</Typography> 
                   <View className="gap-3">
                     <TouchableOpacity
                       onPress={callDriver}
                       className="flex-row items-center p-3 bg-[#E8F5E8] rounded-xl"
                     >
                       <Icon name="phone" size={20} color="#2ECC71" />
-                      <Text className="text-[#2C3E50] font-semibold ml-3 flex-1">Call Driver</Text>
+                      <Typography className="text-[#2C3E50] font-semibold ml-3 flex-1">Call Driver</Typography> 
                       <Icon name="chevron-right" size={20} color="#BDC3C7" />
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -976,7 +977,7 @@ const TransportScreen: React.FC = () => {
                       className="flex-row items-center p-3 bg-[#E3F2FD] rounded-xl"
                     >
                       <Icon name="refresh" size={20} color="#1976D2" />
-                      <Text className="text-[#2C3E50] font-semibold ml-3 flex-1">Refresh Location</Text>
+                      <Typography className="text-[#2C3E50] font-semibold ml-3 flex-1">Refresh Location</Typography> 
                       <Icon name="chevron-right" size={20} color="#BDC3C7" />
                     </TouchableOpacity>
                   </View>
@@ -989,14 +990,14 @@ const TransportScreen: React.FC = () => {
                   <View className="bg-red-50 border border-red-200 rounded-2xl p-4">
                     <View className="flex-row items-center mb-2">
                       <Icon name="error-outline" size={20} color="#E74C3C" />
-                      <Text className="text-lg font-bold text-red-800 ml-2">Connection Issue</Text>
+                      <Typography className="text-lg font-bold text-red-800 ml-2">Connection Issue</Typography> 
                     </View>
-                    <Text className="text-sm text-red-700">{error}</Text>
+                    <Typography className="text-sm text-red-700">{error}</Typography> 
                     <TouchableOpacity
                       onPress={() => fetchTransportData()}
                       className="bg-[#E74C3C] px-4 py-2 rounded-lg mt-3 self-start"
                     >
-                      <Text className="text-white font-semibold">Retry</Text>
+                      <Typography className="text-white font-semibold">Retry</Typography> 
                     </TouchableOpacity>
                   </View>
                 </View>

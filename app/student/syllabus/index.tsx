@@ -127,7 +127,7 @@
 //         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
 //           <Icon name="arrow-back" size={24} color="white" />
 //         </TouchableOpacity>
-//         <Text className="text-xl font-bold text-white">Syllabus Viewer</Text>
+//         <Typography className="text-xl font-bold text-white">Syllabus Viewer</Typography> 
 //         <TouchableOpacity className="p-2">
 //           <Icon name="download" size={20} color="white" />
 //         </TouchableOpacity>
@@ -137,16 +137,16 @@
 //       <View className="px-4 -mt-8 mb-5">
 //         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
 //           <View className="flex-row justify-between items-center mb-3">
-//             <Text className="text-lg font-bold text-[#2C3E50]">{selectedSubject} Progress</Text>
-//             <Text className="text-2xl font-bold text-[#6A5ACD]">{overallProgress}%</Text>
+//             <Typography className="text-lg font-bold text-[#2C3E50]">{selectedSubject} Progress</Typography> 
+//             <Typography className="text-2xl font-bold text-[#6A5ACD]">{overallProgress}%</Typography> 
 //           </View>
 //           <View className="h-2 bg-[#EAECEE] rounded-sm overflow-hidden mb-2">
 //             <View className="h-full bg-[#2ECC71] rounded-sm" style={{ width: `${overallProgress}%` }} />
 //           </View>
-//           <Text className="text-xs text-[#7F8C8D] text-center">
+//           <Typography className="text-xs text-[#7F8C8D] text-center">
 //             {currentSyllabus.chapters.filter((c) => c.status === "completed").length} of{" "}
 //             {currentSyllabus.chapters.length} chapters completed
-//           </Text>
+//           </Typography> 
 //         </View>
 //       </View>
 
@@ -165,7 +165,7 @@
 //                 className={`text-sm font-semibold ${selectedSubject === subject ? "text-white" : "text-[#7F8C8D]"}`}
 //               >
 //                 {subject}
-//               </Text>
+//               </Typography> 
 //             </TouchableOpacity>
 //           ))}
 //         </ScrollView>
@@ -173,7 +173,7 @@
 
 //       {/* Chapters List */}
 //       <View className="p-4">
-//         <Text className="text-xl font-bold text-[#2C3E50] mb-4">{selectedSubject} Syllabus</Text>
+//         <Typography className="text-xl font-bold text-[#2C3E50] mb-4">{selectedSubject} Syllabus</Typography> 
 //         <View className="gap-4">
 //           {currentSyllabus.chapters.map((chapter) => (
 //             <View key={chapter.id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
@@ -183,22 +183,22 @@
 //                     className="w-1 h-4 rounded-sm mr-3"
 //                     style={{ backgroundColor: getSubjectColor(selectedSubject) }}
 //                   />
-//                   <Text className="text-base font-bold text-[#2C3E50] flex-1">{chapter.title}</Text>
+//                   <Typography className="text-base font-bold text-[#2C3E50] flex-1">{chapter.title}</Typography> 
 //                 </View>
 //                 <View className="flex-row items-center">
 //                   <Icon name={getStatusIcon(chapter.status)} size={16} color={getStatusColor(chapter.status)} />
-//                   <Text className="text-xs font-bold ml-1" style={{ color: getStatusColor(chapter.status) }}>
+//                   <Typography className="text-xs font-bold ml-1" style={{ color: getStatusColor(chapter.status) }}>
 //                     {chapter.status.toUpperCase()}
-//                   </Text>
+//                   </Typography> 
 //                 </View>
 //               </View>
 
 //               <View className="mb-3">
-//                 <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Topics Covered:</Text>
+//                 <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">Topics Covered:</Typography> 
 //                 {chapter.topics.map((topic, index) => (
 //                   <View key={index} className="flex-row items-center mb-1">
 //                     <View className="w-1.5 h-1.5 bg-[#6A5ACD] rounded-full mr-2" />
-//                     <Text className="text-sm text-[#7F8C8D] flex-1">{topic}</Text>
+//                     <Typography className="text-sm text-[#7F8C8D] flex-1">{topic}</Typography> 
 //                   </View>
 //                 ))}
 //               </View>
@@ -206,8 +206,8 @@
 //               <View className="flex-row justify-between items-center">
 //                 <View className="flex-1 mr-4">
 //                   <View className="flex-row justify-between items-center mb-1">
-//                     <Text className="text-xs text-[#7F8C8D]">Progress</Text>
-//                     <Text className="text-xs font-bold text-[#6A5ACD]">{chapter.progress}%</Text>
+//                     <Typography className="text-xs text-[#7F8C8D]">Progress</Typography> 
+//                     <Typography className="text-xs font-bold text-[#6A5ACD]">{chapter.progress}%</Typography> 
 //                   </View>
 //                   <View className="h-1.5 bg-[#EAECEE] rounded-sm overflow-hidden">
 //                     <View
@@ -220,7 +220,7 @@
 //                   </View>
 //                 </View>
 //                 <TouchableOpacity className="bg-[#6A5ACD] px-4 py-2 rounded-xl">
-//                   <Text className="text-xs font-semibold text-white">View Details</Text>
+//                   <Typography className="text-xs font-semibold text-white">View Details</Typography> 
 //                 </TouchableOpacity>
 //               </View>
 //             </View>
@@ -257,6 +257,7 @@ import { WebView } from "react-native-webview"
 import Icon from "react-native-vector-icons/MaterialIcons"
 import { useRouter } from "expo-router"
 import { getMySyllabus } from "@/service/student/syllabus"
+import { Typography } from "@/components/Typography"
 
 
 interface Syllabus {
@@ -405,13 +406,13 @@ const SyllabusScreen: React.FC = () => {
       <View className="w-24 h-24 bg-gray-100 rounded-full items-center justify-center mb-6">
         <Icon name="description" size={48} color="#BDC3C7" />
       </View>
-      <Text className="text-xl font-bold text-[#2C3E50] mb-2 text-center">No Syllabus Available</Text>
-      <Text className="text-sm text-[#7F8C8D] text-center px-8 leading-5">
+      <Typography className="text-xl font-bold text-[#2C3E50] mb-2 text-center">No Syllabus Available</Typography> 
+      <Typography className="text-sm text-[#7F8C8D] text-center px-8 leading-5">
         The syllabus for your class has not been uploaded yet. Please check back later or contact your teacher.
-      </Text>
+      </Typography> 
       <View className="flex-row items-center mt-4">
         <Icon name="schedule" size={16} color="#7F8C8D" />
-        <Text className="text-xs text-[#7F8C8D] ml-2">Last checked: {new Date().toLocaleTimeString()}</Text>
+        <Typography className="text-xs text-[#7F8C8D] ml-2">Last checked: {new Date().toLocaleTimeString()}</Typography> 
       </View>
     </View>
   )
@@ -422,10 +423,10 @@ const SyllabusScreen: React.FC = () => {
       <View className="w-20 h-20 bg-red-100 rounded-full items-center justify-center mb-4">
         <Icon name="error-outline" size={40} color="#E74C3C" />
       </View>
-      <Text className="text-lg font-bold text-[#E74C3C] mb-2 text-center">PDF Loading Error</Text>
-      <Text className="text-sm text-[#7F8C8D] text-center px-6 mb-6 leading-5">
+      <Typography className="text-lg font-bold text-[#E74C3C] mb-2 text-center">PDF Loading Error</Typography> 
+      <Typography className="text-sm text-[#7F8C8D] text-center px-6 mb-6 leading-5">
         The PDF document could not be displayed. This might be due to network issues or file corruption.
-      </Text>
+      </Typography> 
       <View className="flex-row gap-3">
         <TouchableOpacity
           onPress={retryPdfLoad}
@@ -438,14 +439,14 @@ const SyllabusScreen: React.FC = () => {
             color="white"
             style={{ transform: [{ rotate: isRetrying ? "360deg" : "0deg" }] }}
           />
-          <Text className="text-white font-semibold ml-2">{isRetrying ? "Retrying..." : "Retry"}</Text>
+          <Typography className="text-white font-semibold ml-2">{isRetrying ? "Retrying..." : "Retry"}</Typography> 
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => handlePdfAction("download")}
           className="bg-[#6A5ACD] px-4 py-2 rounded-xl flex-row items-center"
         >
           <Icon name="download" size={16} color="white" />
-          <Text className="text-white font-semibold ml-2">Download</Text>
+          <Typography className="text-white font-semibold ml-2">Download</Typography> 
         </TouchableOpacity>
       </View>
     </View>
@@ -462,19 +463,19 @@ const SyllabusScreen: React.FC = () => {
         {pdfLoading && (
           <View className="absolute inset-0 bg-[#F8F9FA] items-center justify-center z-10">
             <ActivityIndicator size="large" color="#6A5ACD" />
-            <Text className="text-[#7F8C8D] mt-2">Loading PDF...</Text>
+            <Typography className="text-[#7F8C8D] mt-2">Loading PDF...</Typography> 
           </View>
         )}
 
         {webViewError ? (
           <View className="flex-1 items-center justify-center bg-[#F8F9FA]">
             <Icon name="error-outline" size={48} color="#E74C3C" />
-            <Text className="text-lg font-bold text-[#E74C3C] mt-4 mb-2">Failed to Load PDF</Text>
-            <Text className="text-sm text-[#7F8C8D] text-center px-4 mb-4">
+            <Typography className="text-lg font-bold text-[#E74C3C] mt-4 mb-2">Failed to Load PDF</Typography> 
+            <Typography className="text-sm text-[#7F8C8D] text-center px-4 mb-4">
               The PDF viewer encountered an error. Try opening in external app.
-            </Text>
+            </Typography> 
             <TouchableOpacity onPress={() => handlePdfAction("open")} className="bg-[#6A5ACD] px-4 py-2 rounded-xl">
-              <Text className="text-white font-semibold">Open Externally</Text>
+              <Typography className="text-white font-semibold">Open Externally</Typography> 
             </TouchableOpacity>
           </View>
         ) : (
@@ -516,7 +517,7 @@ const SyllabusScreen: React.FC = () => {
         <TouchableOpacity onPress={() => router.back()} className="p-2">
           <Icon name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-        <Text className="text-xl font-bold text-white"> Syllabus</Text>
+        <Typography className="text-xl font-bold text-white"> Syllabus</Typography> 
         <TouchableOpacity onPress={() => fetchSyllabus()} disabled={isLoading} className="p-2">
           <Icon
             name="refresh"
@@ -533,7 +534,7 @@ const SyllabusScreen: React.FC = () => {
           <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5">
             <View className="items-center">
               <ActivityIndicator size="large" color="#6A5ACD" />
-              <Text className="text-[#7F8C8D] mt-4">Loading syllabus...</Text>
+              <Typography className="text-[#7F8C8D] mt-4">Loading syllabus...</Typography> 
             </View>
           </View>
         </View>
@@ -550,7 +551,7 @@ const SyllabusScreen: React.FC = () => {
               <View className="px-4 -mt-8 mb-5">
                 <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
                   <View className="flex-row items-center justify-between mb-4">
-                    <Text className="text-lg font-bold text-[#2C3E50]">Document Preview</Text>
+                    <Typography className="text-lg font-bold text-[#2C3E50]">Document Preview</Typography> 
                     <View className="flex-row items-center gap-2">
                       <TouchableOpacity onPress={() => setShowFullPdf(!showFullPdf)} className="p-2">
                         <Icon name={showFullPdf ? "fullscreen-exit" : "fullscreen"} size={20} color="#6A5ACD" />
@@ -569,9 +570,9 @@ const SyllabusScreen: React.FC = () => {
                       <View className="flex-row justify-between items-center mt-4 p-3 bg-[#F8F9FA] rounded-xl">
                         <View className="flex-row items-center">
                           <Icon name="picture-as-pdf" size={20} color="#E74C3C" />
-                          <Text className="text-sm font-semibold text-[#2C3E50] ml-2">
+                          <Typography className="text-sm font-semibold text-[#2C3E50] ml-2">
                             {syllabus.title || "Course Syllabus"}
-                          </Text>
+                          </Typography> 
                         </View>
                         <View className="flex-row items-center gap-2">
                           <TouchableOpacity onPress={retryPdfLoad} disabled={isRetrying} className="p-2">
@@ -592,11 +593,11 @@ const SyllabusScreen: React.FC = () => {
                       <View className="mt-3 p-3 bg-blue-50 rounded-xl">
                         <View className="flex-row items-center mb-2">
                           <Icon name="info-outline" size={16} color="#6A5ACD" />
-                          <Text className="text-sm font-semibold text-[#6A5ACD] ml-2">PDF Viewer Tips</Text>
+                          <Typography className="text-sm font-semibold text-[#6A5ACD] ml-2">PDF Viewer Tips</Typography> 
                         </View>
-                        <Text className="text-xs text-[#7F8C8D] leading-4">
+                        <Typography className="text-xs text-[#7F8C8D] leading-4">
                           • Pinch to zoom in/out • Scroll to navigate pages • Tap fullscreen for better view
-                        </Text>
+                        </Typography> 
                       </View>
                     </View>
                   ) : (
@@ -604,10 +605,10 @@ const SyllabusScreen: React.FC = () => {
                       <View className="w-16 h-20 bg-white rounded-lg shadow-md items-center justify-center mb-4">
                         <Icon name="picture-as-pdf" size={32} color="#E74C3C" />
                       </View>
-                      <Text className="text-base font-semibold text-[#2C3E50] mb-2">No PDF Available</Text>
-                      <Text className="text-sm text-[#7F8C8D] text-center mb-4">
+                      <Typography className="text-base font-semibold text-[#2C3E50] mb-2">No PDF Available</Typography> 
+                      <Typography className="text-sm text-[#7F8C8D] text-center mb-4">
                         PDF path not found. Please contact your teacher.
-                      </Text>
+                      </Typography> 
                     </View>
                   )}
                 </View>
@@ -616,14 +617,14 @@ const SyllabusScreen: React.FC = () => {
               {/* Quick Actions */}
               <View className="px-4 mb-5">
                 <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-                  <Text className="text-lg font-bold text-[#2C3E50] mb-4">Quick Actions</Text>
+                  <Typography className="text-lg font-bold text-[#2C3E50] mb-4">Quick Actions</Typography> 
                   <View className="gap-3">
                     <TouchableOpacity
                       onPress={() => handlePdfAction("download")}
                       className="flex-row items-center p-3 bg-[#F8F9FA] rounded-xl"
                     >
                       <Icon name="download" size={20} color="#6A5ACD" />
-                      <Text className="text-[#2C3E50] font-semibold ml-3 flex-1">Download PDF</Text>
+                      <Typography className="text-[#2C3E50] font-semibold ml-3 flex-1">Download PDF</Typography> 
                       <Icon name="chevron-right" size={20} color="#BDC3C7" />
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -631,7 +632,7 @@ const SyllabusScreen: React.FC = () => {
                       className="flex-row items-center p-3 bg-[#F8F9FA] rounded-xl"
                     >
                       <Icon name="share" size={20} color="#6A5ACD" />
-                      <Text className="text-[#2C3E50] font-semibold ml-3 flex-1">Share Document</Text>
+                      <Typography className="text-[#2C3E50] font-semibold ml-3 flex-1">Share Document</Typography> 
                       <Icon name="chevron-right" size={20} color="#BDC3C7" />
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -639,7 +640,7 @@ const SyllabusScreen: React.FC = () => {
                       className="flex-row items-center p-3 bg-[#F8F9FA] rounded-xl"
                     >
                       <Icon name="open-in-new" size={20} color="#6A5ACD" />
-                      <Text className="text-[#2C3E50] font-semibold ml-3 flex-1">Open in Browser</Text>
+                      <Typography className="text-[#2C3E50] font-semibold ml-3 flex-1">Open in Browser</Typography> 
                       <Icon name="chevron-right" size={20} color="#BDC3C7" />
                     </TouchableOpacity>
                   </View>
@@ -652,20 +653,20 @@ const SyllabusScreen: React.FC = () => {
                   <View className="bg-red-50 border border-red-200 rounded-2xl p-4">
                     <View className="flex-row items-center mb-3">
                       <Icon name="help-outline" size={20} color="#E74C3C" />
-                      <Text className="text-lg font-bold text-red-800 ml-2">Troubleshooting Tips</Text>
+                      <Typography className="text-lg font-bold text-red-800 ml-2">Troubleshooting Tips</Typography> 
                     </View>
-                    <Text className="text-sm text-red-700 mb-3">
-                      <Text className="font-semibold">If the PDF won't load, try:</Text>
-                    </Text>
+                    <Typography className="text-sm text-red-700 mb-3">
+                      <Typography className="font-semibold">If the PDF won't load, try:</Typography> 
+                    </Typography> 
                     <View className="space-y-2">
-                      <Text className="text-sm text-red-700">• Refreshing the page and trying again</Text>
-                      <Text className="text-sm text-red-700">• Downloading the file directly instead</Text>
-                      <Text className="text-sm text-red-700">• Checking your internet connection</Text>
-                      <Text className="text-sm text-red-700">• Installing a PDF viewer app</Text>
+                      <Typography className="text-sm text-red-700">• Refreshing the page and trying again</Typography> 
+                      <Typography className="text-sm text-red-700">• Downloading the file directly instead</Typography> 
+                      <Typography className="text-sm text-red-700">• Checking your internet connection</Typography> 
+                      <Typography className="text-sm text-red-700">• Installing a PDF viewer app</Typography> 
                     </View>
-                    <Text className="text-sm text-red-700 mt-3">
-                      <Text className="font-semibold">Still having issues?</Text> Contact your teacher or IT support.
-                    </Text>
+                    <Typography className="text-sm text-red-700 mt-3">
+                      <Typography className="font-semibold">Still having issues?</Typography>  Contact your teacher or IT support.
+                    </Typography> 
                   </View>
                 </View>
               )}
@@ -697,11 +698,11 @@ export default SyllabusScreen
   //                       <Icon name="description" size={24} color="white" />
   //                     </View>
   //                     <View className="flex-1">
-  //                       <Text className="text-lg font-bold text-[#2C3E50]">
+  //                       <Typography className="text-lg font-bold text-[#2C3E50]">
   //                         {syllabus.title || `${syllabus.subject || "Course"} Syllabus`}
-  //                       </Text>
+  //                       </Typography> 
   //                       {syllabus.description && (
-  //                         <Text className="text-sm text-[#7F8C8D] mt-1">{syllabus.description}</Text>
+  //                         <Typography className="text-sm text-[#7F8C8D] mt-1">{syllabus.description}</Typography> 
   //                       )}
   //                     </View>
   //                   </View>
@@ -710,9 +711,9 @@ export default SyllabusScreen
   //                       className="px-3 py-1 rounded-xl"
   //                       style={{ backgroundColor: `${getStatusColor(syllabus.status)}20` }}
   //                     >
-  //                       <Text className="text-xs font-bold" style={{ color: getStatusColor(syllabus.status) }}>
+  //                       <Typography className="text-xs font-bold" style={{ color: getStatusColor(syllabus.status) }}>
   //                         {syllabus.status}
-  //                       </Text>
+  //                       </Typography> 
   //                     </View>
   //                   )}
   //                 </View>
@@ -721,44 +722,44 @@ export default SyllabusScreen
   //                 <View className="bg-[#F8F9FA] rounded-xl p-4 mb-4">
   //                   <View className="flex-row justify-between mb-3">
   //                     <View className="flex-1">
-  //                       <Text className="text-xs text-[#7F8C8D]">Subject</Text>
-  //                       <Text className="text-sm font-semibold text-[#2C3E50]">
+  //                       <Typography className="text-xs text-[#7F8C8D]">Subject</Typography> 
+  //                       <Typography className="text-sm font-semibold text-[#2C3E50]">
   //                         {syllabus.subject || "Not specified"}
-  //                       </Text>
+  //                       </Typography> 
   //                     </View>
   //                     <View className="flex-1">
-  //                       <Text className="text-xs text-[#7F8C8D]">Class</Text>
-  //                       <Text className="text-sm font-semibold text-[#2C3E50]">
+  //                       <Typography className="text-xs text-[#7F8C8D]">Class</Typography> 
+  //                       <Typography className="text-sm font-semibold text-[#2C3E50]">
   //                         {syllabus.class_name || "Not specified"}
-  //                       </Text>
+  //                       </Typography> 
   //                     </View>
   //                   </View>
   //                   <View className="flex-row justify-between mb-3">
   //                     <View className="flex-1">
-  //                       <Text className="text-xs text-[#7F8C8D]">Session</Text>
-  //                       <Text className="text-sm font-semibold text-[#2C3E50]">
+  //                       <Typography className="text-xs text-[#7F8C8D]">Session</Typography> 
+  //                       <Typography className="text-sm font-semibold text-[#2C3E50]">
   //                         {syllabus.session || "Not specified"}
-  //                       </Text>
+  //                       </Typography> 
   //                     </View>
   //                     <View className="flex-1">
-  //                       <Text className="text-xs text-[#7F8C8D]">File Size</Text>
-  //                       <Text className="text-sm font-semibold text-[#2C3E50]">
+  //                       <Typography className="text-xs text-[#7F8C8D]">File Size</Typography> 
+  //                       <Typography className="text-sm font-semibold text-[#2C3E50]">
   //                         {formatFileSize(syllabus.file_size || 0)}
-  //                       </Text>
+  //                       </Typography> 
   //                     </View>
   //                   </View>
   //                   <View className="flex-row justify-between">
   //                     <View className="flex-1">
-  //                       <Text className="text-xs text-[#7F8C8D]">Uploaded</Text>
-  //                       <Text className="text-sm font-semibold text-[#2C3E50]">
+  //                       <Typography className="text-xs text-[#7F8C8D]">Uploaded</Typography> 
+  //                       <Typography className="text-sm font-semibold text-[#2C3E50]">
   //                         {formatDate(syllabus.uploaded_date)}
-  //                       </Text>
+  //                       </Typography> 
   //                     </View>
   //                     <View className="flex-1">
-  //                       <Text className="text-xs text-[#7F8C8D]">Status</Text>
-  //                       <Text className="text-sm font-semibold" style={{ color: pdfError ? "#E74C3C" : "#2ECC71" }}>
+  //                       <Typography className="text-xs text-[#7F8C8D]">Status</Typography> 
+  //                       <Typography className="text-sm font-semibold" style={{ color: pdfError ? "#E74C3C" : "#2ECC71" }}>
   //                         {pdfError ? "Error Loading" : "Available"}
-  //                       </Text>
+  //                       </Typography> 
   //                     </View>
   //                   </View>
   //                 </View>
@@ -770,14 +771,14 @@ export default SyllabusScreen
   //                     className="flex-1 bg-[#6A5ACD] py-3 rounded-xl items-center flex-row justify-center"
   //                   >
   //                     <Icon name="visibility" size={18} color="white" />
-  //                     <Text className="text-white font-semibold ml-2">View PDF</Text>
+  //                     <Typography className="text-white font-semibold ml-2">View PDF</Typography> 
   //                   </TouchableOpacity>
   //                   <TouchableOpacity
   //                     onPress={() => handlePdfAction("download")}
   //                     className="flex-1 bg-[#2ECC71] py-3 rounded-xl items-center flex-row justify-center"
   //                   >
   //                     <Icon name="download" size={18} color="white" />
-  //                     <Text className="text-white font-semibold ml-2">Download</Text>
+  //                     <Typography className="text-white font-semibold ml-2">Download</Typography> 
   //                   </TouchableOpacity>
   //                 </View>
   //               </View>

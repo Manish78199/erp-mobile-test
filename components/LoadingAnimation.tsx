@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import { View, Text, Animated, Dimensions } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
+import { Typography } from "./Typography"
 
 const { width } = Dimensions.get("window")
 
@@ -88,7 +89,7 @@ export default function LoadingAnimation() {
           }}
           className="w-24 h-24 bg-white rounded-full items-center justify-center mb-6 shadow-lg"
         >
-          <Text className="text-blue-500 text-3xl font-bold">VT</Text>
+          <Typography className="text-blue-500 text-3xl font-bold">VT</Typography> 
         </Animated.View>
 
         {/* School-related icons */}

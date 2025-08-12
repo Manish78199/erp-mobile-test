@@ -9,6 +9,7 @@ export  function StudentAppDataProvider({ children }: { children: React.ReactNod
 
     const fetchProfile = async () => {
         const myProfile = await getMyProfile()
+        console.log("Profile Data:", myProfile)
         setProfile(myProfile)
     }
     useEffect(() => {

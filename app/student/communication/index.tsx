@@ -1,3 +1,4 @@
+import { Typography } from "@/components/Typography"
 import type React from "react"
 import { useState } from "react"
 import { View, Text, ScrollView, TouchableOpacity, TextInput, Modal } from "react-native"
@@ -252,7 +253,7 @@ const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
 
             <View className="mb-4">
               <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">Subject:</Typography>
-              <TypographyInput
+              <TextInput
                 className="border border-[#DDE4EB] rounded-xl p-3 text-sm text-[#2C3E50]"
                 placeholder="Enter subject"
               />
@@ -260,7 +261,7 @@ const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
 
             <View className="mb-5">
               <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">Message:</Typography>
-              <TypographyInput
+              <TextInput
                 className="border border-[#DDE4EB] rounded-xl p-3 text-sm text-[#2C3E50] min-h-[100px]"
                 placeholder="Type your message here..."
                 multiline

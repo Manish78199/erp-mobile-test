@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { Typography } from './Typography';
 
 interface SectionHeaderProps {
   title: string;

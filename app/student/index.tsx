@@ -3,9 +3,10 @@ import { useRouter } from "expo-router"
 import type React from "react"
 import { View, Text, ScrollView, TouchableOpacity, Dimensions, RefreshControl } from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useStudentData } from "@/hooks/useStudentData"
 import LogoutButton from "@/components/LogoutButton"
+import { Typography } from "@/components/Typography"
 const { width } = Dimensions.get("window")
 
 const StudentDashboard: React.FC = () => {
@@ -177,6 +178,9 @@ const getGreeting = (): { period: "morning" | "afternoon" | "evening"; message: 
     return { period: "evening", message: "Good Evening" }
   }
 }
+useEffect(() => {
+ console.log(Profile,"Profile Data")
+}, [])
 
   return (
     <ScrollView
@@ -186,8 +190,8 @@ const getGreeting = (): { period: "morning" | "afternoon" | "evening"; message: 
     >
       {/* Header */}
       <View className="p-5 mt-8 flex flex-row  items-center bg-[#6A5ACD] rounded-b-[30px] pb-10  justify-between">
-        <Text className="  font-extrabold text-white mb-2 text-center">{getGreeting().message} 👋, {Profile?.full_name} </Text>
-        {/* <Text className="text-lg text-[#EAECEE] text-center">Your school journey starts here</Text> */}
+        <Typography className="  font-extrabold text-white mb-2 text-center">{getGreeting().message} 👋, {Profile?.full_name} </Typography> 
+        {/* <Typography className="text-lg text-[#EAECEE] text-center">Your school journey starts here</Typography>  */}
       <LogoutButton/>
       </View>
 
@@ -200,15 +204,15 @@ const getGreeting = (): { period: "morning" | "afternoon" | "evening"; message: 
             style={{ width: (width - 48) / 2 }}
           >
             <Icon name={stat.icon} size={28} color={stat.color} />
-            <Text className="text-2xl font-extrabold text-[#2C3E50] mt-2">{stat.value}</Text>
-            <Text className="text-xs text-[#7F8C8D] mt-1">{stat.title}</Text>
+            <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-2">{stat.value}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] mt-1">{stat.title}</Typography> 
           </TouchableOpacity>
         ))}
       </View>
 
       {/* Module Grid */}
       <View className="px-4 mb-6">
-        <Text className="text-[22px] font-bold text-[#2C3E50] mb-4">Quick Access</Text>
+        <Typography className="text-[22px] font-bold text-[#2C3E50] mb-4">Quick Access</Typography> 
         <View className="flex-row flex-wrap justify-between">
           {studentModules.map((module, index) => (
             <TouchableOpacity
@@ -223,8 +227,8 @@ const getGreeting = (): { period: "morning" | "afternoon" | "evening"; message: 
               >
                 <Icon name={module.icon} size={24} color={module.color} />
               </View>
-              <Text className="text-xs font-bold text-[#2C3E50] text-center mb-1">{module.title}</Text>
-              <Text className="text-[10px] text-[#7F8C8D] text-center">{module.description}</Text>
+              <Typography className="text-xs font-bold text-[#2C3E50] text-center mb-1">{module.title}</Typography> 
+              <Typography className="text-xs  text-[#7F8C8D] text-center">{module.description}</Typography> 
             </TouchableOpacity>
           ))}
         </View>
@@ -232,7 +236,7 @@ const getGreeting = (): { period: "morning" | "afternoon" | "evening"; message: 
 
       {/* Upcoming Events Section */}
       <View className="px-4 pb-6">
-        <Text className="text-[22px] font-bold text-[#2C3E50] mb-4">Upcoming Events</Text>
+        <Typography className="text-[22px] font-bold text-[#2C3E50] mb-4">Upcoming Events</Typography> 
         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
           {upcomingEvents.map((event, index) => (
             <View key={index} className="flex-row items-center py-3 border-b border-[#DDE4EB] last:border-b-0">
@@ -243,10 +247,10 @@ const getGreeting = (): { period: "morning" | "afternoon" | "evening"; message: 
                 <Icon name={event.icon} size={24} color={event.color} />
               </View>
               <View className="flex-1">
-                <Text className="text-base font-semibold text-[#2C3E50] mb-0.5">{event.title}</Text>
-                <Text className="text-[13px] text-[#BDC3C7]">
+                <Typography className="text-base font-semibold text-[#2C3E50] mb-0.5">{event.title}</Typography> 
+                <Typography className="text-[13px] text-[#BDC3C7]">
                   {event.date} • {event.time}
-                </Text>
+                </Typography> 
               </View>
               <Icon name="chevron-right" size={20} color="#BDC3C7" />
             </View>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, TouchableOpacityProps } from 'react-native';
+import { Typography } from './Typography';
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;

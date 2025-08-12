@@ -1,4 +1,5 @@
 
+import { Typography } from "@/components/Typography"
 import type React from "react"
 import { useState } from "react"
 import { View, Text, ScrollView, TouchableOpacity, Modal } from "react-native"
@@ -65,7 +66,7 @@ const FeesScreen: React.FC<FeesScreenProps> = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
           <Icon name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-        <Text className="text-xl font-bold text-white">Fees & Payments</Text>
+        <Typography className="text-xl font-bold text-white">Fees & Payments</Typography> 
         <TouchableOpacity className="p-2">
           <Icon name="help" size={20} color="white" />
         </TouchableOpacity>
@@ -75,34 +76,34 @@ const FeesScreen: React.FC<FeesScreenProps> = ({ navigation }) => {
       <View className="flex-row justify-between px-4 -mt-8 mb-5">
         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
           <Icon name="account-balance-wallet" size={28} color="#6A5ACD" />
-          <Text className="text-base font-extrabold text-[#2C3E50] mt-2">
+          <Typography className="text-base font-extrabold text-[#2C3E50] mt-2">
             {formatCurrency(feeStructure.totalAnnualFee)}
-          </Text>
-          <Text className="text-xs text-[#7F8C8D] mt-1">Total Fee</Text>
+          </Typography> 
+          <Typography className="text-xs text-[#7F8C8D] mt-1">Total Fee</Typography> 
         </View>
         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
           <Icon name="check-circle" size={28} color="#2ECC71" />
-          <Text className="text-base font-extrabold text-[#2C3E50] mt-2">
+          <Typography className="text-base font-extrabold text-[#2C3E50] mt-2">
             {formatCurrency(feeStructure.paidAmount)}
-          </Text>
-          <Text className="text-xs text-[#7F8C8D] mt-1">Paid</Text>
+          </Typography> 
+          <Typography className="text-xs text-[#7F8C8D] mt-1">Paid</Typography> 
         </View>
         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
           <Icon name="schedule" size={28} color="#F39C12" />
-          <Text className="text-base font-extrabold text-[#2C3E50] mt-2">
+          <Typography className="text-base font-extrabold text-[#2C3E50] mt-2">
             {formatCurrency(feeStructure.pendingAmount)}
-          </Text>
-          <Text className="text-xs text-[#7F8C8D] mt-1">Pending</Text>
+          </Typography> 
+          <Typography className="text-xs text-[#7F8C8D] mt-1">Pending</Typography> 
         </View>
       </View>
 
       {/* Progress Bar */}
       <View className="bg-white mx-4 rounded-2xl p-4 mb-5 shadow-lg elevation-5">
         <View className="flex-row justify-between items-center mb-3">
-          <Text className="text-base font-semibold text-[#2C3E50]">Payment Progress</Text>
-          <Text className="text-base font-bold text-[#6A5ACD]">
+          <Typography className="text-base font-semibold text-[#2C3E50]">Payment Progress</Typography> 
+          <Typography className="text-base font-bold text-[#6A5ACD]">
             {Math.round((feeStructure.paidAmount / feeStructure.totalAnnualFee) * 100)}%
-          </Text>
+          </Typography> 
         </View>
         <View className="h-2 bg-[#EAECEE] rounded-sm overflow-hidden mb-2">
           <View
@@ -110,9 +111,9 @@ const FeesScreen: React.FC<FeesScreenProps> = ({ navigation }) => {
             style={{ width: `${(feeStructure.paidAmount / feeStructure.totalAnnualFee) * 100}%` }}
           />
         </View>
-        <Text className="text-xs text-[#7F8C8D] text-center">
+        <Typography className="text-xs text-[#7F8C8D] text-center">
           Next due date: {formatDate(feeStructure.nextDueDate)}
-        </Text>
+        </Typography> 
       </View>
 
       {/* Tab Navigation */}
@@ -125,9 +126,9 @@ const FeesScreen: React.FC<FeesScreenProps> = ({ navigation }) => {
             }`}
             onPress={() => setSelectedTab(tab)}
           >
-            <Text className={`text-sm font-semibold ${selectedTab === tab ? "text-white" : "text-[#7F8C8D]"}`}>
+            <Typography className={`text-sm font-semibold ${selectedTab === tab ? "text-white" : "text-[#7F8C8D]"}`}>
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </Text>
+            </Typography> 
           </TouchableOpacity>
         ))}
       </View>
@@ -135,27 +136,27 @@ const FeesScreen: React.FC<FeesScreenProps> = ({ navigation }) => {
       {/* Fee Breakdown */}
       {selectedTab === "overview" && (
         <View className="p-4">
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Fee Breakdown</Text>
+          <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Fee Breakdown</Typography> 
           <View className="gap-3">
             {feeBreakdown.map((fee, index) => (
               <View key={index} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
                 <View className="flex-row justify-between items-center mb-2">
-                  <Text className="text-base font-semibold text-[#2C3E50]">{fee.category}</Text>
+                  <Typography className="text-base font-semibold text-[#2C3E50]">{fee.category}</Typography> 
                   <View className="flex-row items-center">
                     <Icon
                       name={fee.status === "paid" ? "check-circle" : "schedule"}
                       size={16}
                       color={getStatusColor(fee.status)}
                     />
-                    <Text className="text-[10px] font-bold ml-1" style={{ color: getStatusColor(fee.status) }}>
+                    <Typography className="text-[10px] font-bold ml-1" style={{ color: getStatusColor(fee.status) }}>
                       {fee.status.toUpperCase()}
-                    </Text>
+                    </Typography> 
                   </View>
                 </View>
 
                 <View className="flex-row justify-between items-center mb-3">
-                  <Text className="text-lg font-bold text-[#2C3E50]">{formatCurrency(fee.amount)}</Text>
-                  <Text className="text-xs text-[#7F8C8D]">Due: {formatDate(fee.dueDate)}</Text>
+                  <Typography className="text-lg font-bold text-[#2C3E50]">{formatCurrency(fee.amount)}</Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">Due: {formatDate(fee.dueDate)}</Typography> 
                 </View>
 
                 {fee.status === "pending" && (
@@ -164,7 +165,7 @@ const FeesScreen: React.FC<FeesScreenProps> = ({ navigation }) => {
                     onPress={() => handlePayNow(fee)}
                   >
                     <Icon name="payment" size={16} color="white" />
-                    <Text className="text-sm font-semibold text-white ml-2">Pay Now</Text>
+                    <Typography className="text-sm font-semibold text-white ml-2">Pay Now</Typography> 
                   </TouchableOpacity>
                 )}
               </View>
@@ -183,7 +184,7 @@ const FeesScreen: React.FC<FeesScreenProps> = ({ navigation }) => {
         <View className="flex-1 bg-black/50 justify-end">
           <View className="bg-white rounded-t-[25px] p-5 max-h-[80%]">
             <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-xl font-bold text-[#2C3E50]">Make Payment</Text>
+              <Typography className="text-xl font-bold text-[#2C3E50]">Make Payment</Typography> 
               <TouchableOpacity onPress={() => setShowPaymentModal(false)}>
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
@@ -192,37 +193,37 @@ const FeesScreen: React.FC<FeesScreenProps> = ({ navigation }) => {
             {selectedFee && (
               <>
                 <View className="bg-[#EAECEE] p-4 rounded-2xl items-center mb-5">
-                  <Text className="text-base font-semibold text-[#2C3E50] mb-2">{selectedFee.category}</Text>
-                  <Text className="text-2xl font-extrabold text-[#6A5ACD] mb-1">
+                  <Typography className="text-base font-semibold text-[#2C3E50] mb-2">{selectedFee.category}</Typography> 
+                  <Typography className="text-2xl font-extrabold text-[#6A5ACD] mb-1">
                     {formatCurrency(selectedFee.amount)}
-                  </Text>
-                  <Text className="text-xs text-[#7F8C8D]">Due: {formatDate(selectedFee.dueDate)}</Text>
+                  </Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">Due: {formatDate(selectedFee.dueDate)}</Typography> 
                 </View>
 
                 <View className="mb-5">
-                  <Text className="text-base font-semibold text-[#2C3E50] mb-4">Select Payment Method</Text>
+                  <Typography className="text-base font-semibold text-[#2C3E50] mb-4">Select Payment Method</Typography> 
 
                   <TouchableOpacity className="flex-row items-center py-4 px-4 bg-[#EAECEE] rounded-xl mb-2">
                     <Icon name="account-balance" size={24} color="#6A5ACD" />
-                    <Text className="text-sm text-[#2C3E50] font-medium flex-1 ml-3">Net Banking</Text>
+                    <Typography className="text-sm text-[#2C3E50] font-medium flex-1 ml-3">Net Banking</Typography> 
                     <Icon name="chevron-right" size={20} color="#BDC3C7" />
                   </TouchableOpacity>
 
                   <TouchableOpacity className="flex-row items-center py-4 px-4 bg-[#EAECEE] rounded-xl mb-2">
                     <Icon name="credit-card" size={24} color="#00BCD4" />
-                    <Text className="text-sm text-[#2C3E50] font-medium flex-1 ml-3">Credit/Debit Card</Text>
+                    <Typography className="text-sm text-[#2C3E50] font-medium flex-1 ml-3">Credit/Debit Card</Typography> 
                     <Icon name="chevron-right" size={20} color="#BDC3C7" />
                   </TouchableOpacity>
 
                   <TouchableOpacity className="flex-row items-center py-4 px-4 bg-[#EAECEE] rounded-xl">
                     <Icon name="account-balance-wallet" size={24} color="#2ECC71" />
-                    <Text className="text-sm text-[#2C3E50] font-medium flex-1 ml-3">UPI Payment</Text>
+                    <Typography className="text-sm text-[#2C3E50] font-medium flex-1 ml-3">UPI Payment</Typography> 
                     <Icon name="chevron-right" size={20} color="#BDC3C7" />
                   </TouchableOpacity>
                 </View>
 
                 <TouchableOpacity className="bg-[#6A5ACD] rounded-xl py-4 items-center">
-                  <Text className="text-base font-bold text-white">Proceed to Pay</Text>
+                  <Typography className="text-base font-bold text-white">Proceed to Pay</Typography> 
                 </TouchableOpacity>
               </>
             )}

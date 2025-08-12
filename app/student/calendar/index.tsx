@@ -172,7 +172,7 @@ const CalendarScreen: React.FC = () => {
             }
           }}
         >
-          <Text
+          <Typography
             className={`text-sm font-semibold ${
               isSelectedDate(date)
                 ? "text-white"
@@ -184,7 +184,7 @@ const CalendarScreen: React.FC = () => {
             }`}
           >
             {day}
-          </Text> 
+          </Typography>  
           {hasEvents && (
             <View className="flex-row mt-1 flex-wrap justify-center max-w-[90%]">
               {allEvents.slice(0, 3).map((event, index) => (

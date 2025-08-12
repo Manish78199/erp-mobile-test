@@ -97,7 +97,7 @@
 //         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
 //           <Icon name="arrow-back" size={24} color="white" />
 //         </TouchableOpacity>
-//         <Text className="text-xl font-bold text-white">Library</Text>
+//         <Typography className="text-xl font-bold text-white">Library</Typography> 
 //         <TouchableOpacity className="p-2">
 //           <Icon name="qr-code-scanner" size={20} color="white" />
 //         </TouchableOpacity>
@@ -107,22 +107,22 @@
 //       <View className="flex-row justify-between px-4 -mt-8 mb-5">
 //         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
 //           <Icon name="menu-book" size={28} color="#6A5ACD" />
-//           <Text className="text-2xl font-extrabold text-[#2C3E50] mt-2">{libraryData.issuedBooks.length}</Text>
-//           <Text className="text-xs text-[#7F8C8D] mt-1">Issued</Text>
+//           <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-2">{libraryData.issuedBooks.length}</Typography> 
+//           <Typography className="text-xs text-[#7F8C8D] mt-1">Issued</Typography> 
 //         </View>
 //         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
 //           <Icon name="library-books" size={28} color="#2ECC71" />
-//           <Text className="text-2xl font-extrabold text-[#2C3E50] mt-2">
+//           <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-2">
 //             {libraryData.availableBooks.reduce((sum, book) => sum + book.copies, 0)}
-//           </Text>
-//           <Text className="text-xs text-[#7F8C8D] mt-1">Available</Text>
+//           </Typography> 
+//           <Typography className="text-xs text-[#7F8C8D] mt-1">Available</Typography> 
 //         </View>
 //         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
 //           <Icon name="schedule" size={28} color="#E74C3C" />
-//           <Text className="text-2xl font-extrabold text-[#2C3E50] mt-2">
+//           <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-2">
 //             {libraryData.issuedBooks.filter((book) => book.status === "overdue").length}
-//           </Text>
-//           <Text className="text-xs text-[#7F8C8D] mt-1">Overdue</Text>
+//           </Typography> 
+//           <Typography className="text-xs text-[#7F8C8D] mt-1">Overdue</Typography> 
 //         </View>
 //       </View>
 
@@ -136,9 +136,9 @@
 //             }`}
 //             onPress={() => setSelectedTab(tab)}
 //           >
-//             <Text className={`text-sm font-semibold ${selectedTab === tab ? "text-white" : "text-[#7F8C8D]"}`}>
+//             <Typography className={`text-sm font-semibold ${selectedTab === tab ? "text-white" : "text-[#7F8C8D]"}`}>
 //               {tab.charAt(0).toUpperCase() + tab.slice(1)}
-//             </Text>
+//             </Typography> 
 //           </TouchableOpacity>
 //         ))}
 //       </View>
@@ -156,39 +156,39 @@
 //             <Icon name="search" size={20} color="#7F8C8D" className="absolute left-4 top-3.5" />
 //           </View>
 
-//           <Text className="text-xl font-bold text-[#2C3E50] mb-4">Available Books</Text>
+//           <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Available Books</Typography> 
 //           <View className="gap-4">
 //             {libraryData.availableBooks.map((book) => (
 //               <View key={book.id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
 //                 <View className="flex-row justify-between items-start mb-3">
 //                   <View className="flex-1">
-//                     <Text className="text-base font-bold text-[#2C3E50] mb-1">{book.title}</Text>
-//                     <Text className="text-sm text-[#7F8C8D] mb-1">by {book.author}</Text>
-//                     <Text className="text-xs text-[#6A5ACD]">{book.category}</Text>
+//                     <Typography className="text-base font-bold text-[#2C3E50] mb-1">{book.title}</Typography> 
+//                     <Typography className="text-sm text-[#7F8C8D] mb-1">by {book.author}</Typography> 
+//                     <Typography className="text-xs text-[#6A5ACD]">{book.category}</Typography> 
 //                   </View>
 //                   <View className="items-end">
 //                     <View className="flex-row items-center mb-1">
 //                       <Icon name="star" size={14} color="#F39C12" />
-//                       <Text className="text-xs text-[#7F8C8D] ml-1">{book.rating}</Text>
+//                       <Typography className="text-xs text-[#7F8C8D] ml-1">{book.rating}</Typography> 
 //                     </View>
-//                     <Text className="text-xs text-[#2ECC71] font-semibold">{book.copies} copies</Text>
+//                     <Typography className="text-xs text-[#2ECC71] font-semibold">{book.copies} copies</Typography> 
 //                   </View>
 //                 </View>
 
 //                 <View className="flex-row justify-between items-center mb-3">
 //                   <View className="flex-row items-center">
 //                     <Icon name="location-on" size={16} color="#7F8C8D" />
-//                     <Text className="text-xs text-[#7F8C8D] ml-1">{book.location}</Text>
+//                     <Typography className="text-xs text-[#7F8C8D] ml-1">{book.location}</Typography> 
 //                   </View>
-//                   <Text className="text-xs text-[#7F8C8D]">ISBN: {book.isbn}</Text>
+//                   <Typography className="text-xs text-[#7F8C8D]">ISBN: {book.isbn}</Typography> 
 //                 </View>
 
 //                 <View className="flex-row gap-2">
 //                   <TouchableOpacity className="flex-1 bg-[#6A5ACD] py-2 rounded-xl items-center">
-//                     <Text className="text-sm font-semibold text-white">Reserve</Text>
+//                     <Typography className="text-sm font-semibold text-white">Reserve</Typography> 
 //                   </TouchableOpacity>
 //                   <TouchableOpacity className="flex-1 bg-[#EAECEE] py-2 rounded-xl items-center">
-//                     <Text className="text-sm font-semibold text-[#2C3E50]">Details</Text>
+//                     <Typography className="text-sm font-semibold text-[#2C3E50]">Details</Typography> 
 //                   </TouchableOpacity>
 //                 </View>
 //               </View>
@@ -200,31 +200,31 @@
 //       {/* Issued Tab */}
 //       {selectedTab === "issued" && (
 //         <View className="p-4">
-//           <Text className="text-xl font-bold text-[#2C3E50] mb-4">My Issued Books</Text>
+//           <Typography className="text-xl font-bold text-[#2C3E50] mb-4">My Issued Books</Typography> 
 //           <View className="gap-4">
 //             {libraryData.issuedBooks.map((book) => (
 //               <View key={book.id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
 //                 <View className="flex-row justify-between items-center mb-3">
-//                   <Text className="text-base font-bold text-[#2C3E50] flex-1">{book.title}</Text>
+//                   <Typography className="text-base font-bold text-[#2C3E50] flex-1">{book.title}</Typography> 
 //                   <View
 //                     className="px-2 py-1 rounded-xl"
 //                     style={{ backgroundColor: `${getStatusColor(book.status)}20` }}
 //                   >
-//                     <Text className="text-[10px] font-bold" style={{ color: getStatusColor(book.status) }}>
+//                     <Typography className="text-[10px] font-bold" style={{ color: getStatusColor(book.status) }}>
 //                       {book.status.toUpperCase()}
-//                     </Text>
+//                     </Typography> 
 //                   </View>
 //                 </View>
 
-//                 <Text className="text-sm text-[#7F8C8D] mb-3">by {book.author}</Text>
+//                 <Typography className="text-sm text-[#7F8C8D] mb-3">by {book.author}</Typography> 
 
 //                 <View className="flex-row justify-between items-center mb-3">
 //                   <View>
-//                     <Text className="text-xs text-[#7F8C8D]">Issued: {formatDate(book.issueDate)}</Text>
-//                     <Text className="text-xs text-[#7F8C8D]">Due: {formatDate(book.dueDate)}</Text>
+//                     <Typography className="text-xs text-[#7F8C8D]">Issued: {formatDate(book.issueDate)}</Typography> 
+//                     <Typography className="text-xs text-[#7F8C8D]">Due: {formatDate(book.dueDate)}</Typography> 
 //                   </View>
 //                   <View className="items-end">
-//                     <Text className="text-xs text-[#7F8C8D]">Renewals: {book.renewals}/2</Text>
+//                     <Typography className="text-xs text-[#7F8C8D]">Renewals: {book.renewals}/2</Typography> 
 //                     <Text
 //                       className={`text-xs font-semibold ${
 //                         getDaysUntilDue(book.dueDate) < 0 ? "text-[#E74C3C]" : "text-[#2ECC71]"
@@ -233,16 +233,16 @@
 //                       {getDaysUntilDue(book.dueDate) < 0
 //                         ? `${Math.abs(getDaysUntilDue(book.dueDate))} days overdue`
 //                         : `${getDaysUntilDue(book.dueDate)} days left`}
-//                     </Text>
+//                     </Typography> 
 //                   </View>
 //                 </View>
 
 //                 <View className="flex-row gap-2">
 //                   <TouchableOpacity className="flex-1 bg-[#2ECC71] py-2 rounded-xl items-center">
-//                     <Text className="text-sm font-semibold text-white">Renew</Text>
+//                     <Typography className="text-sm font-semibold text-white">Renew</Typography> 
 //                   </TouchableOpacity>
 //                   <TouchableOpacity className="flex-1 bg-[#F39C12] py-2 rounded-xl items-center">
-//                     <Text className="text-sm font-semibold text-white">Return</Text>
+//                     <Typography className="text-sm font-semibold text-white">Return</Typography> 
 //                   </TouchableOpacity>
 //                 </View>
 //               </View>
@@ -283,6 +283,7 @@ import {
   // reserve_book,
   // return_book,
 } from "@/service/student/library"
+import { Typography } from "@/components/Typography"
 
 // Types
 interface BorrowedBook {
@@ -345,7 +346,7 @@ const NoIssuedBooksIllustration = () => (
         <Icon name="menu-book" size={32} color="#BDC3C7" />
       </View>
       <View className="absolute -top-2 -right-2 w-8 h-8 bg-blue-400 rounded-full items-center justify-center">
-        <Text className="text-white font-bold text-sm">0</Text>
+        <Typography className="text-white font-bold text-sm">0</Typography> 
       </View>
       <View className="absolute -left-3 top-3 w-2 h-2 bg-purple-300 rounded-full opacity-60" />
       <View className="absolute -right-1 bottom-2 w-1.5 h-1.5 bg-green-300 rounded-full opacity-60" />
@@ -634,7 +635,7 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
           <Icon name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-        <Text className="text-xl font-bold text-white">Library</Text>
+        <Typography className="text-xl font-bold text-white">Library</Typography> 
         <TouchableOpacity className="p-2" onPress={onRefresh}>
           <Icon name="refresh" size={20} color="white" />
         </TouchableOpacity>
@@ -644,18 +645,18 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
       <View className="flex-row justify-between px-4 -mt-8 mb-5">
         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
           <Icon name="menu-book" size={28} color="#6A5ACD" />
-          <Text className="text-2xl font-extrabold text-[#2C3E50] mt-2">{stats.total}</Text>
-          <Text className="text-xs text-[#7F8C8D] mt-1">Issued</Text>
+          <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-2">{stats.total}</Typography> 
+          <Typography className="text-xs text-[#7F8C8D] mt-1">Issued</Typography> 
         </View>
         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
           <Icon name="library-books" size={28} color="#2ECC71" />
-          <Text className="text-2xl font-extrabold text-[#2C3E50] mt-2">{stats.availableCount}</Text>
-          <Text className="text-xs text-[#7F8C8D] mt-1">Available</Text>
+          <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-2">{stats.availableCount}</Typography> 
+          <Typography className="text-xs text-[#7F8C8D] mt-1">Available</Typography> 
         </View>
         <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
           <Icon name="schedule" size={28} color="#E74C3C" />
-          <Text className="text-2xl font-extrabold text-[#2C3E50] mt-2">{stats.overdue}</Text>
-          <Text className="text-xs text-[#7F8C8D] mt-1">Overdue</Text>
+          <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-2">{stats.overdue}</Typography> 
+          <Typography className="text-xs text-[#7F8C8D] mt-1">Overdue</Typography> 
         </View>
       </View>
 
@@ -664,11 +665,11 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
         <View className="mx-4 mb-5 bg-red-50 border border-red-200 rounded-2xl p-4">
           <View className="flex-row items-center">
             <Icon name="warning" size={20} color="#E74C3C" />
-            <Text className="text-sm font-semibold text-red-800 ml-2">
+            <Typography className="text-sm font-semibold text-red-800 ml-2">
               Total Outstanding Fines: {formatCurrency(stats.totalFines)}
-            </Text>
+            </Typography> 
           </View>
-          <Text className="text-xs text-red-600 mt-1">Please clear your fines to continue borrowing books.</Text>
+          <Typography className="text-xs text-red-600 mt-1">Please clear your fines to continue borrowing books.</Typography> 
         </View>
       )}
 
@@ -687,9 +688,9 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
             onPress={() => setSelectedTab(tab.id as TabType)}
           >
             <Icon name={tab.icon} size={16} color={selectedTab === tab.id ? "white" : "#7F8C8D"} />
-            <Text className={`text-sm font-semibold mt-1 ${selectedTab === tab.id ? "text-white" : "text-[#7F8C8D]"}`}>
+            <Typography className={`text-sm font-semibold mt-1 ${selectedTab === tab.id ? "text-white" : "text-[#7F8C8D]"}`}>
               {tab.label}
-            </Text>
+            </Typography> 
           </TouchableOpacity>
         ))}
       </View>
@@ -708,23 +709,23 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
             <Icon name="search" size={20} color="#7F8C8D" style={{ position: "absolute", left: 16, top: 12 }} />
           </View>
 
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Available Books</Text>
+          <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Available Books</Typography> 
 
           {isLoading ? (
             <View className="items-center py-8">
               <ActivityIndicator size="large" color="#6A5ACD" />
-              <Text className="text-sm text-[#7F8C8D] mt-2">Loading books...</Text>
+              <Typography className="text-sm text-[#7F8C8D] mt-2">Loading books...</Typography> 
             </View>
           ) : availableBooks.length === 0 ? (
             <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5 items-center">
               <NoSearchResultsIllustration />
-              <Text className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">No Books Found</Text>
-              <Text className="text-sm text-[#7F8C8D] text-center mb-4">
+              <Typography className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">No Books Found</Typography> 
+              <Typography className="text-sm text-[#7F8C8D] text-center mb-4">
                 {searchQuery ? "No books match your search criteria." : "No books available at the moment."}
-              </Text>
+              </Typography> 
               {searchQuery && (
                 <TouchableOpacity className="bg-[#6A5ACD] px-6 py-3 rounded-xl" onPress={() => setSearchQuery("")}>
-                  <Text className="text-white font-semibold">Clear Search</Text>
+                  <Typography className="text-white font-semibold">Clear Search</Typography> 
                 </TouchableOpacity>
               )}
             </View>
@@ -734,31 +735,31 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
                 <View key={book._id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
                   <View className="flex-row justify-between items-start mb-3">
                     <View className="flex-1">
-                      <Text className="text-base font-bold text-[#2C3E50] mb-1">{book.title}</Text>
-                      <Text className="text-sm text-[#7F8C8D] mb-1">by {book.author}</Text>
-                      {book.category && <Text className="text-xs text-[#6A5ACD]">{book.category}</Text>}
+                      <Typography className="text-base font-bold text-[#2C3E50] mb-1">{book.title}</Typography> 
+                      <Typography className="text-sm text-[#7F8C8D] mb-1">by {book.author}</Typography> 
+                      {book.category && <Typography className="text-xs text-[#6A5ACD]">{book.category}</Typography> }
                     </View>
                     <View className="items-end">
                       {book.rating && (
                         <View className="flex-row items-center mb-1">
                           <Icon name="star" size={14} color="#F39C12" />
-                          <Text className="text-xs text-[#7F8C8D] ml-1">{book.rating}</Text>
+                          <Typography className="text-xs text-[#7F8C8D] ml-1">{book.rating}</Typography> 
                         </View>
                       )}
-                      <Text className="text-xs text-[#2ECC71] font-semibold">
+                      <Typography className="text-xs text-[#2ECC71] font-semibold">
                         {book.copies_available || 0} available
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
 
                   {book.location && (
                     <View className="flex-row items-center mb-3">
                       <Icon name="location-on" size={16} color="#7F8C8D" />
-                      <Text className="text-xs text-[#7F8C8D] ml-1">{book.location}</Text>
+                      <Typography className="text-xs text-[#7F8C8D] ml-1">{book.location}</Typography> 
                     </View>
                   )}
 
-                  {book.isbn && <Text className="text-xs text-[#7F8C8D] mb-3">ISBN: {book.isbn}</Text>}
+                  {book.isbn && <Typography className="text-xs text-[#7F8C8D] mb-3">ISBN: {book.isbn}</Typography> }
 
                   <View className="flex-row gap-2">
                     <TouchableOpacity
@@ -769,9 +770,9 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
                       {isReserving === book._id ? (
                         <ActivityIndicator size="small" color="white" />
                       ) : (
-                        <Text className="text-sm font-semibold text-white">
+                        <Typography className="text-sm font-semibold text-white">
                           {(book.copies_available || 0) > 0 ? "Reserve" : "Not Available"}
-                        </Text>
+                        </Typography> 
                       )}
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -781,7 +782,7 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
                         setShowBookModal(true)
                       }}
                     >
-                      <Text className="text-sm font-semibold text-[#2C3E50]">Details</Text>
+                      <Typography className="text-sm font-semibold text-[#2C3E50]">Details</Typography> 
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -813,41 +814,41 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
                 }`}
                 onPress={() => filterBorrowedBooks(filter.id as FilterType)}
               >
-                <Text
+                <Typography
                   className={`text-sm font-semibold ${selectedFilter === filter.id ? "text-white" : "text-[#7F8C8D]"}`}
                 >
                   {filter.label} ({filter.count})
-                </Text>
+                </Typography> 
               </TouchableOpacity>
             ))}
           </View>
 
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">My Issued Books</Text>
+          <Typography className="text-xl font-bold text-[#2C3E50] mb-4">My Issued Books</Typography> 
 
           {isLoading ? (
             <View className="items-center py-8">
               <ActivityIndicator size="large" color="#6A5ACD" />
-              <Text className="text-sm text-[#7F8C8D] mt-2">Loading books...</Text>
+              <Typography className="text-sm text-[#7F8C8D] mt-2">Loading books...</Typography> 
             </View>
           ) : filteredBorrowedBooks.length === 0 ? (
             <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5 items-center">
               <NoIssuedBooksIllustration />
-              <Text className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">
+              <Typography className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">
                 {selectedFilter === "ALL"
                   ? "No Issued Books"
                   : `No ${selectedFilter.toLowerCase().replace("_", " ")} Books`}
-              </Text>
-              <Text className="text-sm text-[#7F8C8D] text-center mb-4">
+              </Typography> 
+              <Typography className="text-sm text-[#7F8C8D] text-center mb-4">
                 {selectedFilter === "ALL"
                   ? "You haven't borrowed any books yet."
                   : `No books match the ${selectedFilter.toLowerCase().replace("_", " ")} filter.`}
-              </Text>
+              </Typography> 
               {selectedFilter !== "ALL" && (
                 <TouchableOpacity
                   className="bg-[#6A5ACD] px-6 py-3 rounded-xl"
                   onPress={() => filterBorrowedBooks("ALL")}
                 >
-                  <Text className="text-white font-semibold">View All Books</Text>
+                  <Typography className="text-white font-semibold">View All Books</Typography> 
                 </TouchableOpacity>
               )}
             </View>
@@ -860,33 +861,33 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
                 return (
                   <View key={book._id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
                     <View className="flex-row justify-between items-center mb-3">
-                      <Text className="text-base font-bold text-[#2C3E50] flex-1">{book.title}</Text>
+                      <Typography className="text-base font-bold text-[#2C3E50] flex-1">{book.title}</Typography> 
                       <View className="px-2 py-1 rounded-xl" style={{ backgroundColor: `${bookStatus.color}20` }}>
-                        <Text className="text-[10px] font-bold" style={{ color: bookStatus.color }}>
+                        <Typography className="text-[10px] font-bold" style={{ color: bookStatus.color }}>
                           {bookStatus.label.toUpperCase()}
-                        </Text>
+                        </Typography> 
                       </View>
                     </View>
 
-                    <Text className="text-sm text-[#7F8C8D] mb-3">by {book.author}</Text>
+                    <Typography className="text-sm text-[#7F8C8D] mb-3">by {book.author}</Typography> 
 
                     <View className="flex-row justify-between items-center mb-3">
                       <View>
-                        <Text className="text-xs text-[#7F8C8D]">Issued: {formatDateDisplay(book.assign_date)}</Text>
-                        <Text className="text-xs text-[#7F8C8D]">Due: {formatDateDisplay(book.due_date)}</Text>
-                        {book.isbn && <Text className="text-xs text-[#7F8C8D]">ISBN: {book.isbn}</Text>}
+                        <Typography className="text-xs text-[#7F8C8D]">Issued: {formatDateDisplay(book.assign_date)}</Typography> 
+                        <Typography className="text-xs text-[#7F8C8D]">Due: {formatDateDisplay(book.due_date)}</Typography> 
+                        {book.isbn && <Typography className="text-xs text-[#7F8C8D]">ISBN: {book.isbn}</Typography> }
                       </View>
                       <View className="items-end">
-                        <Text className="text-xs text-[#7F8C8D]">
+                        <Typography className="text-xs text-[#7F8C8D]">
                           Renewals: {book.renewal_count || 0}/{book.max_renewals || 3}
-                        </Text>
-                        <Text
+                        </Typography> 
+                        <Typography
                           className={`text-xs font-semibold ${
                             bookStatus.status === "overdue" ? "text-[#E74C3C]" : "text-[#2ECC71]"
                           }`}
                         >
                           {bookStatus.label}
-                        </Text>
+                        </Typography> 
                       </View>
                     </View>
 
@@ -894,9 +895,9 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
                       <View className="bg-red-50 border border-red-200 rounded-xl p-3 mb-3">
                         <View className="flex-row items-center">
                           <Icon name="warning" size={16} color="#E74C3C" />
-                          <Text className="text-sm font-semibold text-red-800 ml-2">
+                          <Typography className="text-sm font-semibold text-red-800 ml-2">
                             Fine: {formatCurrency(book.fine_amount)}
-                          </Text>
+                          </Typography> 
                         </View>
                       </View>
                     )}
@@ -911,7 +912,7 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
                           {isRenewing === book._id ? (
                             <ActivityIndicator size="small" color="white" />
                           ) : (
-                            <Text className="text-sm font-semibold text-white">Renew</Text>
+                            <Typography className="text-sm font-semibold text-white">Renew</Typography> 
                           )}
                         </TouchableOpacity>
                       )}
@@ -923,7 +924,7 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
                         {isReturning === book._id ? (
                           <ActivityIndicator size="small" color="white" />
                         ) : (
-                          <Text className="text-sm font-semibold text-white">Return</Text>
+                          <Typography className="text-sm font-semibold text-white">Return</Typography> 
                         )}
                       </TouchableOpacity>
                       <TouchableOpacity
@@ -933,7 +934,7 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
                           setShowBookModal(true)
                         }}
                       >
-                        <Text className="text-sm font-semibold text-[#2C3E50]">Details</Text>
+                        <Typography className="text-sm font-semibold text-[#2C3E50]">Details</Typography> 
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -947,20 +948,20 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
       {/* History Tab */}
       {selectedTab === "history" && (
         <View className="px-4">
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Library History</Text>
+          <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Library History</Typography> 
 
           {isLoading ? (
             <View className="items-center py-8">
               <ActivityIndicator size="large" color="#6A5ACD" />
-              <Text className="text-sm text-[#7F8C8D] mt-2">Loading history...</Text>
+              <Typography className="text-sm text-[#7F8C8D] mt-2">Loading history...</Typography> 
             </View>
           ) : libraryHistory.length === 0 ? (
             <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5 items-center">
               <Icon name="history" size={48} color="#BDC3C7" />
-              <Text className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">No History Available</Text>
-              <Text className="text-sm text-[#7F8C8D] text-center">
+              <Typography className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">No History Available</Typography> 
+              <Typography className="text-sm text-[#7F8C8D] text-center">
                 Your library history will appear here once you start borrowing books.
-              </Text>
+              </Typography> 
             </View>
           ) : (
             <View className="gap-4">
@@ -968,25 +969,25 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
                 <View key={book._id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
                   <View className="flex-row justify-between items-start mb-3">
                     <View className="flex-1">
-                      <Text className="text-base font-bold text-[#2C3E50] mb-1">{book.title}</Text>
-                      <Text className="text-sm text-[#7F8C8D] mb-1">by {book.author}</Text>
-                      {book.isbn && <Text className="text-xs text-[#7F8C8D]">ISBN: {book.isbn}</Text>}
+                      <Typography className="text-base font-bold text-[#2C3E50] mb-1">{book.title}</Typography> 
+                      <Typography className="text-sm text-[#7F8C8D] mb-1">by {book.author}</Typography> 
+                      {book.isbn && <Typography className="text-xs text-[#7F8C8D]">ISBN: {book.isbn}</Typography> }
                     </View>
                     <View className="px-2 py-1 rounded-xl bg-green-100">
-                      <Text className="text-[10px] font-bold text-green-800">RETURNED</Text>
+                      <Typography className="text-[10px] font-bold text-green-800">RETURNED</Typography> 
                     </View>
                   </View>
 
                   <View className="flex-row justify-between items-center">
                     <View>
-                      <Text className="text-xs text-[#7F8C8D]">Borrowed: {formatDateDisplay(book.assign_date)}</Text>
-                      <Text className="text-xs text-[#7F8C8D]">Returned: {formatDateDisplay(book.return_date)}</Text>
+                      <Typography className="text-xs text-[#7F8C8D]">Borrowed: {formatDateDisplay(book.assign_date)}</Typography> 
+                      <Typography className="text-xs text-[#7F8C8D]">Returned: {formatDateDisplay(book.return_date)}</Typography> 
                     </View>
                     {book.fine_amount && book.fine_amount > 0 && (
                       <View className="items-end">
-                        <Text className="text-xs text-red-600 font-semibold">
+                        <Typography className="text-xs text-red-600 font-semibold">
                           Fine Paid: {formatCurrency(book.fine_amount)}
-                        </Text>
+                        </Typography> 
                       </View>
                     )}
                   </View>
@@ -1007,7 +1008,7 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
         <View className="flex-1 bg-black/50 justify-end">
           <View className="bg-white rounded-t-[25px] p-5 max-h-[80%]">
             <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Book Details</Text>
+              <Typography className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Book Details</Typography> 
               <TouchableOpacity onPress={() => setShowBookModal(false)}>
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
@@ -1028,39 +1029,39 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
 
                 {/* Book Info */}
                 <View className="bg-[#F8F9FA] rounded-2xl p-4 mb-4">
-                  <Text className="text-lg font-bold text-[#2C3E50] mb-2">{selectedBook.title}</Text>
-                  <Text className="text-sm text-[#7F8C8D] mb-2">by {selectedBook.author}</Text>
+                  <Typography className="text-lg font-bold text-[#2C3E50] mb-2">{selectedBook.title}</Typography> 
+                  <Typography className="text-sm text-[#7F8C8D] mb-2">by {selectedBook.author}</Typography> 
 
-                  {selectedBook.isbn && <Text className="text-sm text-[#7F8C8D] mb-2">ISBN: {selectedBook.isbn}</Text>}
+                  {selectedBook.isbn && <Typography className="text-sm text-[#7F8C8D] mb-2">ISBN: {selectedBook.isbn}</Typography> }
 
                   {selectedBook.category && (
-                    <Text className="text-sm text-[#7F8C8D] mb-2">Category: {selectedBook.category}</Text>
+                    <Typography className="text-sm text-[#7F8C8D] mb-2">Category: {selectedBook.category}</Typography> 
                   )}
 
                   {selectedBook.publisher && (
-                    <Text className="text-sm text-[#7F8C8D] mb-2">Publisher: {selectedBook.publisher}</Text>
+                    <Typography className="text-sm text-[#7F8C8D] mb-2">Publisher: {selectedBook.publisher}</Typography> 
                   )}
 
                   {"location" in selectedBook && selectedBook.location && (
-                    <Text className="text-sm text-[#7F8C8D] mb-2">Location: {selectedBook.location}</Text>
+                    <Typography className="text-sm text-[#7F8C8D] mb-2">Location: {selectedBook.location}</Typography> 
                   )}
 
                   {"description" in selectedBook && selectedBook.description && (
-                    <Text className="text-sm text-[#2C3E50] mt-2">{selectedBook.description}</Text>
+                    <Typography className="text-sm text-[#2C3E50] mt-2">{selectedBook.description}</Typography> 
                   )}
                 </View>
 
                 {/* Borrowed Book Specific Info */}
                 {"due_date" in selectedBook && selectedBook.due_date && (
                   <View className="bg-[#F8F9FA] rounded-2xl p-4 mb-4">
-                    <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Borrowing Details</Text>
-                    <Text className="text-sm text-[#7F8C8D] mb-1">
+                    <Typography className="text-sm font-semibold text-[#2C3E50] mb-2">Borrowing Details</Typography> 
+                    <Typography className="text-sm text-[#7F8C8D] mb-1">
                       Issued: {formatDateDisplay(selectedBook.assign_date)}
-                    </Text>
-                    <Text className="text-sm text-[#7F8C8D] mb-1">Due: {formatDateDisplay(selectedBook.due_date)}</Text>
-                    <Text className="text-sm text-[#7F8C8D]">
+                    </Typography> 
+                    <Typography className="text-sm text-[#7F8C8D] mb-1">Due: {formatDateDisplay(selectedBook.due_date)}</Typography> 
+                    <Typography className="text-sm text-[#7F8C8D]">
                       Renewals: {selectedBook.renewal_count || 0}/{selectedBook.max_renewals || 3}
-                    </Text>
+                    </Typography> 
                   </View>
                 )}
               </ScrollView>
@@ -1072,26 +1073,26 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
       {/* Renewal Guidelines */}
       {selectedTab === "issued" && filteredBorrowedBooks.length > 0 && (
         <View className="mx-4 mt-6 mb-8 bg-white rounded-2xl p-4 shadow-lg elevation-5">
-          <Text className="text-lg font-bold text-[#2C3E50] mb-3 flex-row items-center">
+          <Typography className="text-lg font-bold text-[#2C3E50] mb-3 flex-row items-center">
             <Icon name="info" size={20} color="#6A5ACD" />
-            <Text className="ml-2">Renewal Guidelines</Text>
-          </Text>
+            <Typography className="ml-2">Renewal Guidelines</Typography> 
+          </Typography> 
           <View className="space-y-2">
             <View className="flex-row items-center">
               <Icon name="check-circle" size={16} color="#2ECC71" />
-              <Text className="text-sm text-[#7F8C8D] ml-2">Books can be renewed up to 3 times</Text>
+              <Typography className="text-sm text-[#7F8C8D] ml-2">Books can be renewed up to 3 times</Typography> 
             </View>
             <View className="flex-row items-center">
               <Icon name="check-circle" size={16} color="#2ECC71" />
-              <Text className="text-sm text-[#7F8C8D] ml-2">Renewal extends due date by 14 days</Text>
+              <Typography className="text-sm text-[#7F8C8D] ml-2">Renewal extends due date by 14 days</Typography> 
             </View>
             <View className="flex-row items-center">
               <Icon name="cancel" size={16} color="#E74C3C" />
-              <Text className="text-sm text-[#7F8C8D] ml-2">Overdue books cannot be renewed</Text>
+              <Typography className="text-sm text-[#7F8C8D] ml-2">Overdue books cannot be renewed</Typography> 
             </View>
             <View className="flex-row items-center">
               <Icon name="cancel" size={16} color="#E74C3C" />
-              <Text className="text-sm text-[#7F8C8D] ml-2">Books with pending fines cannot be renewed</Text>
+              <Typography className="text-sm text-[#7F8C8D] ml-2">Books with pending fines cannot be renewed</Typography> 
             </View>
           </View>
         </View>

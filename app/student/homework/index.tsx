@@ -193,7 +193,7 @@
 //           </TouchableOpacity>
 //         </Link>
 //         <View className="flex-1 items-center">
-//           <Text className="text-xl font-bold text-white">Homework</Text>
+//           <Typography className="text-xl font-bold text-white">Homework</Typography> 
 //         </View>
 //         <TouchableOpacity className="p-2" onPress={getHomeworkRequest}>
 //           <Icon name="refresh" size={20} color="white" />
@@ -207,29 +207,29 @@
 //             <View className="w-12 h-12 bg-[#6A5ACD20] rounded-full items-center justify-center mb-2">
 //               <Icon name="assignment" size={24} color="#6A5ACD" />
 //             </View>
-//             <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.total}</Text>
-//             <Text className="text-xs text-[#7F8C8D] text-center">Total</Text>
+//             <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.total}</Typography> 
+//             <Typography className="text-xs text-[#7F8C8D] text-center">Total</Typography> 
 //           </View>
 //           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
 //             <View className="w-12 h-12 bg-[#2ECC7120] rounded-full items-center justify-center mb-2">
 //               <Icon name="check-circle" size={24} color="#2ECC71" />
 //             </View>
-//             <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.completed}</Text>
-//             <Text className="text-xs text-[#7F8C8D] text-center">Completed</Text>
+//             <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.completed}</Typography> 
+//             <Typography className="text-xs text-[#7F8C8D] text-center">Completed</Typography> 
 //           </View>
 //           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
 //             <View className="w-12 h-12 bg-[#F39C1220] rounded-full items-center justify-center mb-2">
 //               <Icon name="schedule" size={24} color="#F39C12" />
 //             </View>
-//             <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.pending}</Text>
-//             <Text className="text-xs text-[#7F8C8D] text-center">Pending</Text>
+//             <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.pending}</Typography> 
+//             <Typography className="text-xs text-[#7F8C8D] text-center">Pending</Typography> 
 //           </View>
 //           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
 //             <View className="w-12 h-12 bg-[#E74C3C20] rounded-full items-center justify-center mb-2">
 //               <Icon name="warning" size={24} color="#E74C3C" />
 //             </View>
-//             <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.overdue}</Text>
-//             <Text className="text-xs text-[#7F8C8D] text-center">Overdue</Text>
+//             <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.overdue}</Typography> 
+//             <Typography className="text-xs text-[#7F8C8D] text-center">Overdue</Typography> 
 //           </View>
 //         </View>
 //       </View>
@@ -259,12 +259,12 @@
 //               }`}
 //               onPress={() => setSelectedFilter(filter)}
 //             >
-//               <Text className={`text-sm font-semibold ${selectedFilter === filter ? "text-white" : "text-[#7F8C8D]"}`}>
+//               <Typography className={`text-sm font-semibold ${selectedFilter === filter ? "text-white" : "text-[#7F8C8D]"}`}>
 //                 {filter === "ALL" ? `All (${stats.total})` : 
 //                  filter === "PENDING" ? `Pending (${stats.pending})` :
 //                  filter === "COMPLETED" ? `Completed (${stats.completed})` :
 //                  `Overdue (${stats.overdue})`}
-//               </Text>
+//               </Typography> 
 //             </TouchableOpacity>
 //           ))}
 //         </ScrollView>
@@ -274,14 +274,14 @@
 //       {isLoading && (
 //         <View className="flex-1 items-center justify-center py-8">
 //           <Icon name="refresh" size={32} color="#6A5ACD" />
-//           <Text className="text-[#7F8C8D] mt-2">Loading homework...</Text>
+//           <Typography className="text-[#7F8C8D] mt-2">Loading homework...</Typography> 
 //         </View>
 //       )}
 
 //       {/* Homework List */}
 //       {!isLoading && (
 //         <View className="px-4 mb-8">
-//           <Text className="text-xl font-bold text-[#2C3E50] mb-4">Assignments</Text>
+//           <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Assignments</Typography> 
 //           {filteredHomework.length > 0 ? (
 //             <View className="gap-4">
 //               {filteredHomework.map((homework) => {
@@ -303,12 +303,12 @@
 //                     <View className="flex-row items-center justify-between mb-3">
 //                       <View className="flex-row items-center flex-1">
 //                         <View className="flex-1">
-//                           <Text className="text-base font-bold text-[#2C3E50]" numberOfLines={2}>
+//                           <Typography className="text-base font-bold text-[#2C3E50]" numberOfLines={2}>
 //                             {homework.title}
-//                           </Text>
-//                           <Text className="text-sm text-[#7F8C8D]">
+//                           </Typography> 
+//                           <Typography className="text-sm text-[#7F8C8D]">
 //                             {homework.subject} • {homework.teacher_name || "Teacher"}
-//                           </Text>
+//                           </Typography> 
 //                         </View>
 //                       </View>
 //                       <View className="flex-row items-center">
@@ -317,44 +317,44 @@
 //                             className="px-2 py-1 rounded-lg mr-2"
 //                             style={{ backgroundColor: `${getPriorityColor(homework.priority)}20` }}
 //                           >
-//                             <Text className="text-[10px] font-bold" style={{ color: getPriorityColor(homework.priority) }}>
+//                             <Typography className="text-[10px] font-bold" style={{ color: getPriorityColor(homework.priority) }}>
 //                               {homework.priority}
-//                             </Text>
+//                             </Typography> 
 //                           </View>
 //                         )}
 //                         <View
 //                           className="px-2 py-1 rounded-lg"
 //                           style={{ backgroundColor: `${getStatusColor(homework.status)}20` }}
 //                         >
-//                           <Text className="text-[10px] font-bold" style={{ color: getStatusColor(homework.status) }}>
+//                           <Typography className="text-[10px] font-bold" style={{ color: getStatusColor(homework.status) }}>
 //                             {homework.status}
-//                           </Text>
+//                           </Typography> 
 //                         </View>
 //                       </View>
 //                     </View>
 
 //                     {/* Description */}
-//                     <Text className="text-sm text-[#7F8C8D] leading-5 mb-3" numberOfLines={2}>
+//                     <Typography className="text-sm text-[#7F8C8D] leading-5 mb-3" numberOfLines={2}>
 //                       {homework.description}
-//                     </Text>
+//                     </Typography> 
 
 //                     {/* Details */}
 //                     <View className="space-y-2">
 //                       <View className="flex-row justify-between items-center text-sm">
-//                         <Text className="text-[#7F8C8D]">Assigned:</Text>
-//                         <Text className="text-[#2C3E50] font-medium text-xs">{formatDate(homework.assigned_date)}</Text>
+//                         <Typography className="text-[#7F8C8D]">Assigned:</Typography> 
+//                         <Typography className="text-[#2C3E50] font-medium text-xs">{formatDate(homework.assigned_date)}</Typography> 
 //                       </View>
 //                       <View className={`flex-row justify-between items-center ${isHomeworkOverdue ? "text-red-500" : ""}`}>
-//                         <Text className="text-[#7F8C8D]">Due:</Text>
-//                         <Text className={`font-medium text-xs ${isHomeworkOverdue ? "text-[#E74C3C]" : "text-[#2C3E50]"}`}>
+//                         <Typography className="text-[#7F8C8D]">Due:</Typography> 
+//                         <Typography className={`font-medium text-xs ${isHomeworkOverdue ? "text-[#E74C3C]" : "text-[#2C3E50]"}`}>
 //                           {formatDate(homework.due_date)}
 //                           {isHomeworkOverdue && " (Overdue)"}
-//                         </Text>
+//                         </Typography> 
 //                       </View>
 //                       {homework.attachments && homework.attachments.length > 0 && (
 //                         <View className="flex-row items-center">
 //                           <Icon name="attachment" size={16} color="#7F8C8D" />
-//                           <Text className="text-xs text-[#7F8C8D] ml-1">{homework.attachments.length} attachment(s)</Text>
+//                           <Typography className="text-xs text-[#7F8C8D] ml-1">{homework.attachments.length} attachment(s)</Typography> 
 //                         </View>
 //                       )}
 //                     </View>
@@ -364,9 +364,9 @@
 //                       <View className="mt-3 pt-3 border-t border-[#EAECEE]">
 //                         <View className="flex-row items-center">
 //                           <Icon name="check-circle" size={16} color="#2ECC71" />
-//                           <Text className="text-xs text-[#2ECC71] ml-1">
+//                           <Typography className="text-xs text-[#2ECC71] ml-1">
 //                             Submitted on {formatDate(homework.submission_date)}
-//                           </Text>
+//                           </Typography> 
 //                         </View>
 //                       </View>
 //                     )}
@@ -377,11 +377,11 @@
 //           ) : (
 //             <View className="text-center py-8">
 //               <Icon name="assignment" size={48} color="#BDC3C7" />
-//               <Text className="text-[#7F8C8D] mt-4">
+//               <Typography className="text-[#7F8C8D] mt-4">
 //                 {searchTerm || selectedFilter !== "ALL"
 //                   ? "No homework found matching your criteria."
 //                   : "No homework assigned yet."}
-//               </Text>
+//               </Typography> 
 //             </View>
 //           )}
 //         </View>
@@ -397,7 +397,7 @@
 //         <View className="flex-1 bg-black/50 justify-end">
 //           <View className="bg-white rounded-t-[25px] p-5 max-h-[90%]">
 //             <View className="flex-row justify-between items-center mb-5">
-//               <Text className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Assignment Details</Text>
+//               <Typography className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Assignment Details</Typography> 
 //               <TouchableOpacity onPress={() => setShowSubmissionModal(false)}>
 //                 <Icon name="close" size={24} color="#2C3E50" />
 //               </TouchableOpacity>
@@ -413,43 +413,43 @@
 //                   >
 //                     <Icon name="assignment" size={32} color={getStatusColor(selectedAssignment.status)} />
 //                   </View>
-//                   <Text className="text-xl font-bold text-[#2C3E50] text-center mb-2">{selectedAssignment.title}</Text>
-//                   <Text className="text-sm text-[#7F8C8D] text-center">
+//                   <Typography className="text-xl font-bold text-[#2C3E50] text-center mb-2">{selectedAssignment.title}</Typography> 
+//                   <Typography className="text-sm text-[#7F8C8D] text-center">
 //                     {selectedAssignment.subject} • {selectedAssignment.teacher_name || "Teacher"}
-//                   </Text>
+//                   </Typography> 
 //                 </View>
 
 //                 {/* Assignment Info */}
 //                 <View className="bg-[#F8F9FA] rounded-2xl p-4 mb-6">
 //                   <View className="flex-row justify-between mb-3">
 //                     <View>
-//                       <Text className="text-xs text-[#7F8C8D] mb-1">Assigned Date</Text>
-//                       <Text className="text-sm font-semibold text-[#2C3E50]">
+//                       <Typography className="text-xs text-[#7F8C8D] mb-1">Assigned Date</Typography> 
+//                       <Typography className="text-sm font-semibold text-[#2C3E50]">
 //                         {formatDate(selectedAssignment.assigned_date)}
-//                       </Text>
+//                       </Typography> 
 //                     </View>
 //                     <View>
-//                       <Text className="text-xs text-[#7F8C8D] mb-1">Due Date</Text>
-//                       <Text className={`text-sm font-semibold ${
+//                       <Typography className="text-xs text-[#7F8C8D] mb-1">Due Date</Typography> 
+//                       <Typography className={`text-sm font-semibold ${
 //                         isOverdue(selectedAssignment.due_date, selectedAssignment.status) ? "text-[#E74C3C]" : "text-[#2C3E50]"
 //                       }`}>
 //                         {formatDate(selectedAssignment.due_date)}
-//                       </Text>
+//                       </Typography> 
 //                     </View>
 //                   </View>
 //                   <View className="flex-row justify-between">
 //                     <View>
-//                       <Text className="text-xs text-[#7F8C8D] mb-1">Status</Text>
-//                       <Text className="text-sm font-semibold" style={{ color: getStatusColor(selectedAssignment.status) }}>
+//                       <Typography className="text-xs text-[#7F8C8D] mb-1">Status</Typography> 
+//                       <Typography className="text-sm font-semibold" style={{ color: getStatusColor(selectedAssignment.status) }}>
 //                         {selectedAssignment.status}
-//                       </Text>
+//                       </Typography> 
 //                     </View>
 //                     {selectedAssignment.priority && (
 //                       <View>
-//                         <Text className="text-xs text-[#7F8C8D] mb-1">Priority</Text>
-//                         <Text className="text-sm font-semibold" style={{ color: getPriorityColor(selectedAssignment.priority) }}>
+//                         <Typography className="text-xs text-[#7F8C8D] mb-1">Priority</Typography> 
+//                         <Typography className="text-sm font-semibold" style={{ color: getPriorityColor(selectedAssignment.priority) }}>
 //                           {selectedAssignment.priority}
-//                         </Text>
+//                         </Typography> 
 //                       </View>
 //                     )}
 //                   </View>
@@ -457,19 +457,19 @@
 
 //                 {/* Description */}
 //                 <View className="mb-6">
-//                   <Text className="text-lg font-bold text-[#2C3E50] mb-3">Description</Text>
-//                   <Text className="text-sm text-[#2C3E50] leading-6">{selectedAssignment.description}</Text>
+//                   <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Description</Typography> 
+//                   <Typography className="text-sm text-[#2C3E50] leading-6">{selectedAssignment.description}</Typography> 
 //                 </View>
 
 //                 {/* Attachments */}
 //                 {selectedAssignment.attachments && selectedAssignment.attachments.length > 0 && (
 //                   <View className="mb-6">
-//                     <Text className="text-lg font-bold text-[#2C3E50] mb-3">Attachments</Text>
+//                     <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Attachments</Typography> 
 //                     <View className="gap-2">
 //                       {selectedAssignment.attachments.map((attachment: string, index: number) => (
 //                         <TouchableOpacity key={index} className="flex-row items-center p-3 bg-[#F8F9FA] rounded-xl">
 //                           <Icon name="attach-file" size={20} color="#6A5ACD" />
-//                           <Text className="text-sm text-[#2C3E50] ml-2 flex-1">{attachment}</Text>
+//                           <Typography className="text-sm text-[#2C3E50] ml-2 flex-1">{attachment}</Typography> 
 //                           <Icon name="download" size={16} color="#6A5ACD" />
 //                         </TouchableOpacity>
 //                       ))}
@@ -480,23 +480,23 @@
 //                 {/* Submission Status */}
 //                 {selectedAssignment.status === "COMPLETED" && selectedAssignment.submission_date ? (
 //                   <View className="mb-6">
-//                     <Text className="text-lg font-bold text-[#2C3E50] mb-3">Submission Details</Text>
+//                     <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Submission Details</Typography> 
 //                     <View className="bg-[#2ECC7110] border border-[#2ECC7130] rounded-2xl p-4">
 //                       <View className="flex-row items-center">
 //                         <Icon name="check-circle" size={20} color="#2ECC71" />
-//                         <Text className="text-sm font-semibold text-[#2ECC71] ml-2">
+//                         <Typography className="text-sm font-semibold text-[#2ECC71] ml-2">
 //                           Submitted on {formatDate(selectedAssignment.submission_date)}
-//                         </Text>
+//                         </Typography> 
 //                       </View>
 //                     </View>
 //                   </View>
 //                 ) : (
 //                   <View className="mb-6">
-//                     <Text className="text-lg font-bold text-[#2C3E50] mb-3">Submit Assignment</Text>
+//                     <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Submit Assignment</Typography> 
 //                     <TouchableOpacity className="border-2 border-dashed border-[#6A5ACD] rounded-xl p-6 items-center">
 //                       <Icon name="cloud-upload" size={32} color="#6A5ACD" />
-//                       <Text className="text-sm text-[#6A5ACD] mt-2">Click to upload your assignment</Text>
-//                       <Text className="text-xs text-[#7F8C8D] mt-1">PDF, DOC, DOCX, JPG, PNG (Max 10MB)</Text>
+//                       <Typography className="text-sm text-[#6A5ACD] mt-2">Click to upload your assignment</Typography> 
+//                       <Typography className="text-xs text-[#7F8C8D] mt-1">PDF, DOC, DOCX, JPG, PNG (Max 10MB)</Typography> 
 //                     </TouchableOpacity>
 //                   </View>
 //                 )}
@@ -522,6 +522,7 @@ import { Link } from "expo-router"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { getMyHomework } from "@/service/student/homework"
 import { AlertContext } from "@/context/Alert/context"
+import { Typography } from "@/components/Typography"
 
 interface Homework {
   _id: string
@@ -897,7 +898,7 @@ const HomeworkScreen: React.FC = () => {
           </TouchableOpacity>
         </Link>
         <View className="flex-1 items-center">
-          <Text className="text-xl font-bold text-white">Homework</Text>
+          <Typography className="text-xl font-bold text-white">Homework</Typography> 
         </View>
         <TouchableOpacity className="p-2" onPress={getHomeworkRequest}>
           <Icon name="refresh" size={20} color="white" />
@@ -911,29 +912,29 @@ const HomeworkScreen: React.FC = () => {
             <View className="w-12 h-12 bg-[#6A5ACD20] rounded-full items-center justify-center mb-2">
               <Icon name="assignment" size={24} color="#6A5ACD" />
             </View>
-            <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.total}</Text>
-            <Text className="text-xs text-[#7F8C8D] text-center">Total</Text>
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.total}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] text-center">Total</Typography> 
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#F39C1220] rounded-full items-center justify-center mb-2">
               <Icon name="pending-actions" size={24} color="#F39C12" />
             </View>
-            <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.pending}</Text>
-            <Text className="text-xs text-[#7F8C8D] text-center">Pending</Text>
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.pending}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] text-center">Pending</Typography> 
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#2ECC7120] rounded-full items-center justify-center mb-2">
               <Icon name="assignment-turned-in" size={24} color="#2ECC71" />
             </View>
-            <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.submitted}</Text>
-            <Text className="text-xs text-[#7F8C8D] text-center">Submitted</Text>
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.submitted}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] text-center">Submitted</Typography> 
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#E74C3C20] rounded-full items-center justify-center mb-2">
               <Icon name="assignment-late" size={24} color="#E74C3C" />
             </View>
-            <Text className="text-2xl font-extrabold text-[#2C3E50]">{stats.overdue}</Text>
-            <Text className="text-xs text-[#7F8C8D] text-center">Overdue</Text>
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.overdue}</Typography> 
+            <Typography className="text-xs text-[#7F8C8D] text-center">Overdue</Typography> 
           </View>
         </View>
       </View>
@@ -964,12 +965,12 @@ const HomeworkScreen: React.FC = () => {
               onPress={() => setSelectedFilter(subject.id)}
             >
               <Icon name={subject.icon} size={16} color={subject.color} />
-              <Text
+              <Typography
                 className={`text-sm font-semibold ml-2 ${selectedFilter === subject.id ? "text-[#2C3E50]" : "text-[#7F8C8D]"
                   }`}
               >
                 {subject.label}
-              </Text>
+              </Typography> 
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -979,16 +980,16 @@ const HomeworkScreen: React.FC = () => {
       {isLoading && (
         <View className="flex-1 items-center justify-center py-8">
           <Icon name="refresh" size={32} color="#6A5ACD" />
-          <Text className="text-[#7F8C8D] mt-2">Loading homework...</Text>
+          <Typography className="text-[#7F8C8D] mt-2">Loading homework...</Typography> 
         </View>
       )}
 
       {/* Homework List */}
       {!isLoading && (
         <View className="px-4 mb-8">
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">
+          <Typography className="text-xl font-bold text-[#2C3E50] mb-4">
             {selectedFilter === "all" ? "All Homework" : subjects.find((sub) => sub.id === selectedFilter)?.label}
-          </Text>
+          </Typography> 
           {filteredHomework.length > 0 ? (
             <View className="gap-4">
               {filteredHomework.map((homework) => {
@@ -1017,17 +1018,17 @@ const HomeworkScreen: React.FC = () => {
                           />
                         </View> */}
                         <View className="flex-1">
-                          <Text className="text-base font-bold text-[#2C3E50]" numberOfLines={1}>
+                          <Typography className="text-base font-bold text-[#2C3E50]" numberOfLines={1}>
                             {homework.title}
-                          </Text>
+                          </Typography> 
 
                           <View className="flex flex-row items-center">
-                            <Text className={`text-xs p-[2px] bg-gray-100  shadow-sm ring-gray-300 capitalize text-[#4d5965] rounded-md  `}>
+                            <Typography className={`text-xs p-[2px] bg-gray-100  shadow-sm ring-gray-300 capitalize text-[#4d5965] rounded-md  `}>
                               {homework.subject}
-                            </Text>
-                            <Text className={`text-xs p-[2px] text-[#4d5965] rounded-md  `}>
+                            </Typography> 
+                            <Typography className={`text-xs p-[2px] text-[#4d5965] rounded-md  `}>
                             |  {homework.teacher}
-                            </Text>
+                            </Typography> 
                           </View>
 
 
@@ -1041,26 +1042,26 @@ const HomeworkScreen: React.FC = () => {
                           className="px-2 py-1 rounded-lg mb-1"
                           style={{ backgroundColor: `${getStatusColor(homework.status)}20` }}
                         >
-                          <Text className="text-[10px] font-bold" style={{ color: getStatusColor(homework.status) }}>
+                          <Typography className="text-[10px] font-bold" style={{ color: getStatusColor(homework.status) }}>
                             {homework.status?.toUpperCase() || "PENDING"}
-                          </Text>
+                          </Typography> 
                         </View>
                         {daysUntilDue !== null && (
-                          <Text className={`text-xs ${daysUntilDue < 0 ? "text-[#E74C3C]" : "text-[#7F8C8D]"}`}>
+                          <Typography className={`text-xs ${daysUntilDue < 0 ? "text-[#E74C3C]" : "text-[#7F8C8D]"}`}>
                             {daysUntilDue < 0
                               ? `${Math.abs(daysUntilDue)} days overdue`
                               : daysUntilDue === 0
                                 ? "Due today"
                                 : `${daysUntilDue} days left`}
-                          </Text>
+                          </Typography> 
                         )}
                       </View>
                     </View>
 
                     {/* Content Preview */}
-                    <Text className="text-sm text-[#7F8C8D] leading-5 mb-3" numberOfLines={2}>
+                    <Typography className="text-sm text-[#7F8C8D] leading-5 mb-3" numberOfLines={2}>
                       {homework.description}
-                    </Text>
+                    </Typography> 
 
                     {/* Footer */}
                     <View className="flex-row items-center justify-between">
@@ -1069,21 +1070,21 @@ const HomeworkScreen: React.FC = () => {
                           className="px-2 py-1 rounded-lg mr-2"
                           style={{ backgroundColor: `${getPriorityColor(homework.priority)}20` }}
                         >
-                          <Text
+                          <Typography
                             className="text-[10px] font-bold"
                             style={{ color: getPriorityColor(homework.priority) }}
                           >
                             {homework.priority?.toUpperCase() || "MEDIUM"}
-                          </Text>
+                          </Typography> 
                         </View>
                         {homework.attachments && homework.attachments.length > 0 && (
                           <>
                             <Icon name="attachment" size={16} color="#6A5ACD" />
-                            <Text className="text-xs text-[#6A5ACD] ml-1">{homework.attachments.length}</Text>
+                            <Typography className="text-xs text-[#6A5ACD] ml-1">{homework.attachments.length}</Typography> 
                           </>
                         )}
                       </View>
-                      <Text className="text-xs text-[#7F8C8D]">Due: {formatDate(homework.due_date)}</Text>
+                      <Typography className="text-xs text-[#7F8C8D]">Due: {formatDate(homework.due_date)}</Typography> 
                     </View>
                   </TouchableOpacity>
                 )
@@ -1092,11 +1093,11 @@ const HomeworkScreen: React.FC = () => {
           ) : (
             <View className="text-center py-8">
               <Icon name="assignment" size={48} color="#BDC3C7" />
-              <Text className="text-[#7F8C8D] mt-4">
+              <Typography className="text-[#7F8C8D] mt-4">
                 {searchTerm || selectedFilter !== "all"
                   ? "No homework found matching your criteria."
                   : "No homework assignments yet."}
-              </Text>
+              </Typography> 
             </View>
           )}
         </View>
@@ -1112,7 +1113,7 @@ const HomeworkScreen: React.FC = () => {
         <View className="flex-1 bg-black/50 justify-end">
           <View className="bg-white rounded-t-[25px] p-5 max-h-[90%]">
             <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Assignment Details</Text>
+              <Typography className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Assignment Details</Typography> 
               <TouchableOpacity onPress={() => setShowSubmissionModal(false)}>
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
@@ -1128,52 +1129,52 @@ const HomeworkScreen: React.FC = () => {
                   >
                     <Icon name="assignment" size={32} color={getStatusColor(selectedHomework.status)} />
                   </View>
-                  <Text className="text-xl font-bold text-[#2C3E50] text-center mb-2">{selectedHomework.title}</Text>
-                  <Text className="text-sm text-[#7F8C8D] text-center">
+                  <Typography className="text-xl font-bold text-[#2C3E50] text-center mb-2">{selectedHomework.title}</Typography> 
+                  <Typography className="text-sm text-[#7F8C8D] text-center">
                     {selectedHomework.subject} • {selectedHomework.teacher || "Teacher"}
-                  </Text>
+                  </Typography> 
                 </View>
 
                 {/* Assignment Info */}
                 <View className="bg-[#F8F9FA] rounded-2xl p-4 mb-6">
                   <View className="flex-row justify-between mb-3">
                     <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Assigned Date</Text>
-                      <Text className="text-sm font-semibold text-[#2C3E50]">
+                      <Typography className="text-xs text-[#7F8C8D] mb-1">Assigned Date</Typography> 
+                      <Typography className="text-sm font-semibold text-[#2C3E50]">
                         {formatDate(selectedHomework.created_at)}
-                      </Text>
+                      </Typography> 
                     </View>
                     <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Due Date</Text>
-                      <Text
+                      <Typography className="text-xs text-[#7F8C8D] mb-1">Due Date</Typography> 
+                      <Typography
                         className={`text-sm font-semibold ${isOverdue(selectedHomework.due_date, selectedHomework.status)
                           ? "text-[#E74C3C]"
                           : "text-[#2C3E50]"
                           }`}
                       >
                         {formatDate(selectedHomework.due_date)}
-                      </Text>
+                      </Typography> 
                     </View>
                   </View>
                   <View className="flex-row justify-between">
                     <View>
-                      <Text className="text-xs text-[#7F8C8D] mb-1">Status</Text>
-                      <Text
+                      <Typography className="text-xs text-[#7F8C8D] mb-1">Status</Typography> 
+                      <Typography
                         className="text-sm font-semibold"
                         style={{ color: getStatusColor(selectedHomework.status) }}
                       >
                         {selectedHomework.status || "PENDING"}
-                      </Text>
+                      </Typography> 
                     </View>
                     {selectedHomework.priority && (
                       <View>
-                        <Text className="text-xs text-[#7F8C8D] mb-1">Priority</Text>
-                        <Text
+                        <Typography className="text-xs text-[#7F8C8D] mb-1">Priority</Typography> 
+                        <Typography
                           className="text-sm font-semibold"
                           style={{ color: getPriorityColor(selectedHomework.priority) }}
                         >
                           {selectedHomework.priority}
-                        </Text>
+                        </Typography> 
                       </View>
                     )}
                   </View>
@@ -1181,19 +1182,19 @@ const HomeworkScreen: React.FC = () => {
 
                 {/* Description */}
                 <View className="mb-6">
-                  <Text className="text-lg font-bold text-[#2C3E50] mb-3">Description</Text>
-                  <Text className="text-sm text-[#2C3E50] leading-6">{selectedHomework.description}</Text>
+                  <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Description</Typography> 
+                  <Typography className="text-sm text-[#2C3E50] leading-6">{selectedHomework.description}</Typography> 
                 </View>
 
                 {/* Attachments */}
                 {selectedHomework.attachments && selectedHomework.attachments.length > 0 && (
                   <View className="mb-6">
-                    <Text className="text-lg font-bold text-[#2C3E50] mb-3">Attachments</Text>
+                    <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Attachments</Typography> 
                     <View className="gap-2">
                       {selectedHomework.attachments.map((attachment: string, index: number) => (
                         <TouchableOpacity key={index} className="flex-row items-center p-3 bg-[#F8F9FA] rounded-xl">
                           <Icon name="attach-file" size={20} color="#6A5ACD" />
-                          <Text className="text-sm text-[#2C3E50] ml-2 flex-1">{attachment}</Text>
+                          <Typography className="text-sm text-[#2C3E50] ml-2 flex-1">{attachment}</Typography> 
                           <Icon name="download" size={16} color="#6A5ACD" />
                         </TouchableOpacity>
                       ))}
@@ -1204,23 +1205,23 @@ const HomeworkScreen: React.FC = () => {
                 {/* Submission Status */}
                 {selectedHomework.status === "SUBMITTED" && selectedHomework.submission_date ? (
                   <View className="mb-6">
-                    <Text className="text-lg font-bold text-[#2C3E50] mb-3">Submission Details</Text>
+                    <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Submission Details</Typography> 
                     <View className="bg-[#2ECC7110] border border-[#2ECC7130] rounded-2xl p-4">
                       <View className="flex-row items-center">
                         <Icon name="check-circle" size={20} color="#2ECC71" />
-                        <Text className="text-sm font-semibold text-[#2ECC71] ml-2">
+                        <Typography className="text-sm font-semibold text-[#2ECC71] ml-2">
                           Submitted on {formatDate(selectedHomework.submission_date)}
-                        </Text>
+                        </Typography> 
                       </View>
                     </View>
                   </View>
                 ) : (
                   <View className="mb-6">
-                    <Text className="text-lg font-bold text-[#2C3E50] mb-3">Submit Assignment</Text>
+                    <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Submit Assignment</Typography> 
                     <TouchableOpacity className="border-2 border-dashed border-[#6A5ACD] rounded-xl p-6 items-center">
                       <Icon name="cloud-upload" size={32} color="#6A5ACD" />
-                      <Text className="text-sm text-[#6A5ACD] mt-2">Click to upload your assignment</Text>
-                      <Text className="text-xs text-[#7F8C8D] mt-1">PDF, DOC, DOCX, JPG, PNG (Max 10MB)</Text>
+                      <Typography className="text-sm text-[#6A5ACD] mt-2">Click to upload your assignment</Typography> 
+                      <Typography className="text-xs text-[#7F8C8D] mt-1">PDF, DOC, DOCX, JPG, PNG (Max 10MB)</Typography> 
                     </TouchableOpacity>
                   </View>
                 )}
@@ -1228,17 +1229,17 @@ const HomeworkScreen: React.FC = () => {
                 {/* Grading Info */}
                 {selectedHomework.status === "GRADED" && selectedHomework.marks !== undefined && (
                   <View className="bg-[#6A5ACD10] border border-[#6A5ACD30] rounded-2xl p-4 mb-6">
-                    <Text className="text-lg font-bold text-[#2C3E50] mb-2">Grade</Text>
+                    <Typography className="text-lg font-bold text-[#2C3E50] mb-2">Grade</Typography> 
                     <View className="flex-row justify-between items-center mb-2">
-                      <Text className="text-sm text-[#7F8C8D]">Score:</Text>
-                      <Text className="text-lg font-bold text-[#6A5ACD]">
+                      <Typography className="text-sm text-[#7F8C8D]">Score:</Typography> 
+                      <Typography className="text-lg font-bold text-[#6A5ACD]">
                         {selectedHomework.marks}/{selectedHomework.total_marks || 100}
-                      </Text>
+                      </Typography> 
                     </View>
                     {selectedHomework.feedback && (
                       <View>
-                        <Text className="text-sm text-[#7F8C8D] mb-1">Feedback:</Text>
-                        <Text className="text-sm text-[#2C3E50]">{selectedHomework.feedback}</Text>
+                        <Typography className="text-sm text-[#7F8C8D] mb-1">Feedback:</Typography> 
+                        <Typography className="text-sm text-[#2C3E50]">{selectedHomework.feedback}</Typography> 
                       </View>
                     )}
                   </View>
