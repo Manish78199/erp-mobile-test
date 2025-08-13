@@ -1,15 +1,11 @@
 "use client"
+
+import type React from "react"
 import { TouchableOpacity, Alert } from "react-native"
-import { Ionicons } from "@expo/vector-icons"
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import Icon from "react-native-vector-icons/MaterialIcons"
 import { useRouter } from "expo-router"
 
-interface LogoutButtonProps {
-  color?: string
-  size?: number
-}
-
-export default function LogoutButton({ color = "white", size = 24 }: LogoutButtonProps) {
+const LogoutButton: React.FC = () => {
   const router = useRouter()
 
   const handleLogout = () => {
@@ -21,24 +17,30 @@ export default function LogoutButton({ color = "white", size = 24 }: LogoutButto
       {
         text: "Logout",
         style: "destructive",
-        onPress: async () => {
-          try {
-            // Clear access token from AsyncStorage
-            await AsyncStorage.removeItem("access_token")
-
-            // Redirect to home/login
-            router.replace("/")
-          } catch (error) {
-            console.error("Error during logout:", error)
-          }
+        onPress: () => {
+          // Add your logout logic here
+          console.log("User logged out")
+          // router.push("/login")
         },
       },
     ])
   }
 
   return (
-    <TouchableOpacity onPress={handleLogout} className="p-2">
-      <Ionicons name="log-out-outline" size={size} color={color} />
+    <TouchableOpacity
+      onPress={handleLogout}
+      className="bg-white/20 rounded-full p-2"
+      style={{
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 4,
+      }}
+    >
+      <Icon name="logout" size={20} color="white" />
     </TouchableOpacity>
   )
 }
+
+export default LogoutButton

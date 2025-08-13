@@ -1,6 +1,6 @@
 
-// const BASE_URL = "http://127.0.0.1:8000"
-const BASE_URL = "https://erp-demo-backend.vedatron.com"
+const BASE_URL = "https://erp-backend.vedatron.com"
+// const BASE_URL = "https://erp-demo-backend.vedatron.com"
 
 
 console.log("env_______________", { BASE_URL })

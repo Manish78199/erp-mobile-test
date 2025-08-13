@@ -4,14 +4,12 @@ import { createContext } from "react";
 
 
 interface StudentAppDataType {
-  profile:{
-    full_name:string,
-    class_name:string,
-    profileImage:string
-  } |null
+  profile: any | null
+  refresh: () => void 
 }
 const StudentAppDataContext = createContext<StudentAppDataType>({
-  profile: null
+  profile: null,
+  refresh: () => void 0 
 })
 
 export { StudentAppDataContext };

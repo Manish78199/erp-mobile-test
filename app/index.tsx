@@ -1,6 +1,6 @@
 
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import {
   View,
   TextInput,
@@ -27,6 +27,8 @@ import { studentLoginRequest } from "@/service/student/login"
 import { LoginSchema } from "@/schema/login"
 import { registerForPushNotificationsAsync } from "@/utils/notifications"
 import { savefcmToken } from "@/service/student/fcm"
+import { AlertContext } from "@/context/Alert/context"
+import { StudentAppDataContext } from "@/context/Student/context"
 // import { AlertContext } from '@/context/Alert/context';
 // import { UserTypeContext } from '@/context/RoleAuth/context';
 
@@ -40,7 +42,6 @@ interface LoginFormData {
 
 export default function Login() {
   const router = useRouter()
-  // const { showAlert } = useContext(AlertContext);
 
   const loginImage = require("@/assets/images/login/login_child.png")
 
@@ -50,6 +51,8 @@ export default function Login() {
   const [checked, setChecked] = useState(false)
 
 
+  const { refresh:refreshProfile } = useContext(StudentAppDataContext)
+  const {showAlert}=useContext(AlertContext)
 
 
   useEffect(() => {
@@ -92,6 +95,7 @@ export default function Login() {
 
             savefcmToken(token as string)
           })
+          refreshProfile()
             router.push("/student")
             return
           }
@@ -148,7 +152,7 @@ export default function Login() {
       router.push("/student")
     } catch (error: any) {
       console.log(error)
-      // showAlert("ERROR", error.response?.data?.message || "Login failed");
+      showAlert("ERROR", error.response?.data?.message || "Login failed");
     } finally {
       setRequesting(false)
     }

@@ -1,6 +1,7 @@
 
 import { StudentAppDataContext } from "@/context/Student/context"
 import { getEventActivity } from "@/service/student/eventActivity"
+import { getMyProfile } from "@/service/student/profile"
 import { useCallback, useContext, useEffect, useState } from "react"
 
 // Types
@@ -66,6 +67,7 @@ interface UseStudentDataReturn {
 
 
   // Actions
+
   refreshData: () => Promise<void>
   refreshActivities: () => Promise<void>
   markNotificationRead: (id: string) => Promise<void>
@@ -132,7 +134,7 @@ const DUMMY_NOTIFICATIONS: Notification[] = [
 export function useStudentData(): UseStudentDataReturn {
   
   // const [profile, setProfile] = useState<StudentProfile | null>(null)
-  const {profile}=useContext(StudentAppDataContext)
+  const {profile,refresh:refreshProfile}=useContext(StudentAppDataContext)
   const [activities, setActivities] = useState<Activity[]>([])
   const [bmiData, setBmiData] = useState<BMIData[]>([])
   const [stats, setStats] = useState<PerformanceStats | null>(null)
@@ -159,9 +161,7 @@ export function useStudentData(): UseStudentDataReturn {
       setNotifications(DUMMY_NOTIFICATIONS)
 
 
-      // getMyProfile().then((profile)=>{
-      //   setProfile(profile)
-      // })
+      refreshProfile()
       // Fetch activities from API
       setActivitiesLoading(true)
       getEventActivity().then((activity) => {
@@ -229,6 +229,7 @@ export function useStudentData(): UseStudentDataReturn {
 
 
     // Actions
+   
     refreshData,
     refreshActivities,
     markNotificationRead,

@@ -1,203 +1,130 @@
-import { Typography } from '@/components/Typography';
-import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, TextInput, Modal } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+"use client"
 
-interface ProfileScreenProps {
-  navigation: any;
+import type React from "react"
+import { useContext } from "react"
+import { View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView } from "react-native"
+import { StudentAppDataContext } from "@/context/Student/context"
+import MaterialIcons from "react-native-vector-icons/MaterialIcons"
+import { useRouter } from "expo-router"
+
+const ProfilePage: React.FC = () => {
+  const { profile: myProfile } = useContext(StudentAppDataContext)!
+
+  const InfoCard = ({ label, value, icon }: { label: string; value: string; icon: string }) => (
+    <View className="bg-white rounded-2xl p-4 shadow-lg border border-gray-100 flex-1 mx-1">
+      <View className="flex-row items-center mb-2">
+        <MaterialIcons name={icon} size={20} color="#3B82F6" style={{ marginRight: 8 }} />
+        <Text className="text-xs font-medium text-gray-500 uppercase tracking-wide">{label}</Text>
+      </View>
+      <Text className="text-lg font-semibold text-gray-900">{value}</Text>
+    </View>
+  )
+
+  const StatusBadge = () => (
+    <View className="flex-row items-center bg-green-100 px-3 py-2 rounded-full">
+      <MaterialIcons name="check-circle" size={16} color="#10B981" style={{ marginRight: 4 }} />
+      <Text className="text-green-800 font-medium text-sm">Active Student</Text>
+    </View>
+  )
+
+  const router=useRouter()
+  return (
+    <SafeAreaView className="flex-1 bg-gray-50">
+      <ScrollView className="flex-1 pt-8" showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View className="bg-white px-4 py-4 shadow-sm border-b border-gray-100">
+          <View className="flex-row items-center justify-between">
+            <TouchableOpacity onPress={()=>router.push("/student")} className="p-2">
+              <MaterialIcons name="arrow-back" size={24} color="#6B7280" />
+            </TouchableOpacity>
+            <Text className="text-lg font-semibold text-gray-900">My Profile</Text>
+            <View style={{ width: 24 }} />
+          </View>
+        </View>
+
+        {/* Profile Card */}
+        <View className="mx-4 mt-6 mb-8 bg-white rounded-3xl shadow-xl overflow-hidden">
+          {/* Profile Image Section */}
+          <View className="relative h-64">
+            <Image
+              source={{
+                uri:
+                  myProfile?.profileImage ||
+                  "https://img.freepik.com/free-vector/young-man-with-glasses-avatar_1308-173760.jpg",
+              }}
+              className="w-full h-full"
+              resizeMode="cover"
+            />
+            {/* Gradient Overlay */}
+            <View
+              className="absolute inset-0"
+              style={{
+                backgroundColor: "rgba(0,0,0,0.4)",
+              }}
+            />
+
+            {/* Profile Info Overlay */}
+            <View className="absolute bottom-4 left-4 right-4">
+              <Text className="text-white text-2xl font-bold mb-1">{myProfile?.full_name}</Text>
+              <Text className="text-white/80 text-sm">Student ID: {myProfile?.admission_no}</Text>
+            </View>
+          </View>
+
+          {/* Profile Details Section */}
+          <View className="p-6">
+            {/* First Row */}
+            <View className="flex-row mb-4">
+              <InfoCard label="Class" value={myProfile?.class_name || "N/A"} icon="school" />
+              <InfoCard label="Age" value={`${myProfile?.age} years`} icon="cake" />
+            </View>
+
+            {/* Second Row */}
+            <View className="flex-row mb-4">
+              <InfoCard label="Session" value={myProfile?.session || "2024-2025"} icon="event" />
+              <InfoCard label="Roll Number" value={myProfile?.roll_no || "N/A"} icon="format-list-numbered" />
+            </View>
+
+            {/* Third Row - Full Width */}
+            <View className="mb-4">
+              <View className="bg-white rounded-2xl p-4 shadow-lg border border-gray-100">
+                <View className="flex-row items-center mb-2">
+                  <MaterialIcons name="person" size={20} color="#3B82F6" style={{ marginRight: 8 }} />
+                  <Text className="text-xs font-medium text-gray-500 uppercase tracking-wide">Father's Name</Text>
+                </View>
+                <Text className="text-lg font-semibold text-gray-900">{myProfile?.father_name || "N/A"}</Text>
+              </View>
+            </View>
+
+            {/* Status */}
+            <View className="bg-white rounded-2xl p-4 shadow-lg border border-gray-100">
+              <View className="flex-row items-center mb-3">
+                <MaterialIcons name="verified" size={20} color="#10B981" style={{ marginRight: 8 }} />
+                <Text className="text-xs font-medium text-gray-500 uppercase tracking-wide">Status</Text>
+              </View>
+              <StatusBadge />
+            </View>
+          </View>
+        </View>
+
+        {/* Action Buttons - Student View (Read-only actions) */}
+        <View className="mx-4 mb-8">
+          <TouchableOpacity className="bg-blue-500 rounded-2xl p-4 shadow-lg mb-3">
+            <View className="flex-row items-center justify-center">
+              <MaterialIcons name="download" size={20} color="#FFFFFF" style={{ marginRight: 8 }} />
+              <Text className="text-white font-semibold text-lg">Download ID Card</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity className="bg-gray-100 rounded-2xl p-4 shadow-lg">
+            <View className="flex-row items-center justify-center">
+              <MaterialIcons name="contact-support" size={20} color="#6B7280" style={{ marginRight: 8 }} />
+              <Text className="text-gray-700 font-semibold text-lg">Contact Support</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  )
 }
 
-const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [showChangePassword, setShowChangePassword] = useState(false);
-
-  const studentProfile = {
-    name: "John Doe",
-    rollNumber: "2024001",
-    class: "Class 12-A",
-    section: "Science",
-    admissionNumber: "ADM2024001",
-    dateOfBirth: "15/03/2006",
-    gender: "Male",
-    bloodGroup: "O+",
-    address: "123 Main Street, City, State - 123456",
-    phone: "+91 9876543210",
-    email: "john.doe@school.edu",
-    parentName: "Robert Doe",
-    parentPhone: "+91 9876543211",
-    emergencyContact: "+91 9876543212"
-  };
-
-  const academicInfo = {
-    academicYear: "2024-25",
-    admissionDate: "01/04/2024",
-    house: "Red House",
-    transport: "Bus Route 5",
-    hostel: "Block A, Room 205"
-  };
-
-  return (
-    <ScrollView className="flex-1 bg-[#F0F4F8]" showsVerticalScrollIndicator={false}>
-      {/* Header */}
-      <View className="flex-row items-center justify-between bg-[#6A5ACD] pt-12 pb-5 px-4 rounded-b-[25px]">
-        <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
-          <Icon name="arrow-back" size={24} color="white" />
-        </TouchableOpacity>
-        <Typography className="text-xl font-bold text-white">Profile</Typography> 
-        <TouchableOpacity onPress={() => setIsEditing(!isEditing)} className="p-2">
-          <Icon name={isEditing ? "save" : "edit"} size={20} color="white" />
-        </TouchableOpacity>
-      </View>
-
-      {/* Profile Picture & Basic Info */}
-      <View className="items-center -mt-8 mb-6">
-        <View className="w-24 h-24 bg-white rounded-full items-center justify-center shadow-lg elevation-5 mb-4">
-          <Icon name="person" size={48} color="#6A5ACD" />
-        </View>
-        <Typography className="text-2xl font-bold text-[#2C3E50]">{studentProfile.name}</Typography> 
-        <Typography className="text-sm text-[#7F8C8D]">{studentProfile.class} • Roll: {studentProfile.rollNumber}</Typography> 
-      </View>
-
-      {/* Personal Information */}
-      <View className="px-4 mb-6">
-        <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Personal Information</Typography> 
-        <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-          <View className="space-y-4">
-            <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Typography className="text-sm text-[#7F8C8D]">Full Name</Typography> 
-              {isEditing ? (
-                <TextInput 
-                  className="text-sm font-semibold text-[#2C3E50] border-b border-[#6A5ACD] min-w-[150px] text-right"
-                  value={studentProfile.name}
-                />
-              ) : (
-                <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.name}</Typography> 
-              )}
-            </View>
-            <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Typography className="text-sm text-[#7F8C8D]">Date of Birth</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.dateOfBirth}</Typography> 
-            </View>
-            <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Typography className="text-sm text-[#7F8C8D]">Gender</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.gender}</Typography> 
-            </View>
-            <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Typography className="text-sm text-[#7F8C8D]">Blood Group</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.bloodGroup}</Typography> 
-            </View>
-            <View className="flex-row justify-between items-start py-3">
-              <Typography className="text-sm text-[#7F8C8D]">Address</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50] text-right flex-1 ml-4">{studentProfile.address}</Typography> 
-            </View>
-          </View>
-        </View>
-      </View>
-
-      {/* Contact Information */}
-      <View className="px-4 mb-6">
-        <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Contact Information</Typography> 
-        <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-          <View className="space-y-4">
-            <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Typography className="text-sm text-[#7F8C8D]">Phone</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.phone}</Typography> 
-            </View>
-            <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Typography className="text-sm text-[#7F8C8D]">Email</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.email}</Typography> 
-            </View>
-            <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Typography className="text-sm text-[#7F8C8D]">Parent Name</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.parentName}</Typography> 
-            </View>
-            <View className="flex-row justify-between items-center py-3">
-              <Typography className="text-sm text-[#7F8C8D]">Parent Phone</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.parentPhone}</Typography> 
-            </View>
-          </View>
-        </View>
-      </View>
-
-      {/* Academic Information */}
-      <View className="px-4 mb-6">
-        <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Academic Information</Typography> 
-        <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-          <View className="space-y-4">
-            <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Typography className="text-sm text-[#7F8C8D]">Academic Year</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50]">{academicInfo.academicYear}</Typography> 
-            </View>
-            <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Typography className="text-sm text-[#7F8C8D]">Admission Number</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50]">{studentProfile.admissionNumber}</Typography> 
-            </View>
-            <View className="flex-row justify-between items-center py-3 border-b border-[#EAECEE]">
-              <Typography className="text-sm text-[#7F8C8D]">House</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50]">{academicInfo.house}</Typography> 
-            </View>
-            <View className="flex-row justify-between items-center py-3">
-              <Typography className="text-sm text-[#7F8C8D]">Transport</Typography> 
-              <Typography className="text-sm font-semibold text-[#2C3E50]">{academicInfo.transport}</Typography> 
-            </View>
-          </View>
-        </View>
-      </View>
-
-      {/* Action Buttons */}
-      <View className="px-4 mb-8">
-        <TouchableOpacity 
-          className="bg-[#6A5ACD] rounded-xl py-4 items-center mb-3"
-          onPress={() => setShowChangePassword(true)}
-        >
-          <Typography className="text-base font-bold text-white">Change Password</Typography> 
-        </TouchableOpacity>
-        
-        <TouchableOpacity className="bg-white border border-[#E74C3C] rounded-xl py-4 items-center">
-          <Typography className="text-base font-bold text-[#E74C3C]">Logout</Typography> 
-        </TouchableOpacity>
-      </View>
-
-      {/* Change Password Modal */}
-      <Modal
-        visible={showChangePassword}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setShowChangePassword(false)}
-      >
-        <View className="flex-1 bg-black/50 justify-end">
-          <View className="bg-white rounded-t-[25px] p-5">
-            <View className="flex-row justify-between items-center mb-5">
-              <Typography className="text-xl font-bold text-[#2C3E50]">Change Password</Typography> 
-              <TouchableOpacity onPress={() => setShowChangePassword(false)}>
-                <Icon name="close" size={24} color="#2C3E50" />
-              </TouchableOpacity>
-            </View>
-
-            <TextInput
-              className="border border-[#DDE4EB] rounded-xl p-3 text-sm text-[#2C3E50] mb-4"
-              placeholder="Current Password"
-              secureTextEntry
-            />
-            <TextInput
-              className="border border-[#DDE4EB] rounded-xl p-3 text-sm text-[#2C3E50] mb-4"
-              placeholder="New Password"
-              secureTextEntry
-            />
-            <TextInput
-              className="border border-[#DDE4EB] rounded-xl p-3 text-sm text-[#2C3E50] mb-6"
-              placeholder="Confirm New Password"
-              secureTextEntry
-            />
-
-            <TouchableOpacity className="bg-[#6A5ACD] rounded-xl py-4 items-center">
-              <Typography className="text-base font-bold text-white">Update Password</Typography> 
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-    </ScrollView>
-  );
-};
-
-export default ProfileScreen;
+export default ProfilePage

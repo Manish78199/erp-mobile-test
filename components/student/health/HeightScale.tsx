@@ -1,6 +1,4 @@
-"use client"
 
-import { Typography } from "@/components/Typography"
 import type React from "react"
 import { useEffect, useRef } from "react"
 import { View, Text, Animated } from "react-native"
@@ -12,18 +10,24 @@ interface HeightScaleProps {
 const HeightScale: React.FC<HeightScaleProps> = ({ height = 0 }) => {
   const animatedHeight = useRef(new Animated.Value(0)).current
   const MAX_HEIGHT = 200 // cm, maximum scale for the ruler
-  const fillPercentage = Math.min((height / MAX_HEIGHT) * 100, 100)
+
+  const safeHeight = typeof height === "number" && !isNaN(height) && height > 0 ? height : 165
+  const fillPercentage = Math.min((safeHeight / MAX_HEIGHT) * 100, 100)
 
   useEffect(() => {
-    Animated.timing(animatedHeight, {
-      toValue: fillPercentage,
-      duration: 1200,
-      useNativeDriver: false,
-    }).start()
-  }, [height, fillPercentage])
+    try {
+      Animated.timing(animatedHeight, {
+        toValue: fillPercentage,
+        duration: 1200,
+        useNativeDriver: false,
+      }).start()
+    } catch (error) {
+      console.error("Animation error in HeightScale:", error)
+    }
+  }, [safeHeight, fillPercentage])
 
-  const heightInFeet = Math.floor(height / 30.48)
-  const heightInInches = Number((height % 30.48) / 2.54).toFixed(1)
+  const heightInFeet = Math.floor(safeHeight / 30.48)
+  const heightInInches = Number((safeHeight % 30.48) / 2.54).toFixed(1)
 
   return (
     <View className="flex-col items-center w-20">
@@ -46,7 +50,7 @@ const HeightScale: React.FC<HeightScaleProps> = ({ height = 0 }) => {
             return (
               <View key={i} className="flex-row items-center">
                 <View className="w-2 h-[1px] bg-[#7F8C8D]" />
-                <Typography className="text-xs text-[#7F8C8D] ml-1">{markerHeight}</Typography> 
+                <Text className="text-xs text-[#7F8C8D] ml-1">{markerHeight}</Text>
               </View>
             )
           })}
@@ -55,10 +59,10 @@ const HeightScale: React.FC<HeightScaleProps> = ({ height = 0 }) => {
 
       {/* Label for actual height */}
       <View className="mt-2 items-center">
-        <Typography className="text-sm font-semibold text-[#2C3E50]">{height} cm</Typography> 
-        <Typography className="text-xs text-[#7F8C8D]">
+        <Text className="text-sm font-semibold text-[#2C3E50]">{safeHeight} cm</Text>
+        <Text className="text-xs text-[#7F8C8D]">
           {heightInFeet}' {heightInInches}"
-        </Typography> 
+        </Text>
       </View>
     </View>
   )

@@ -24,7 +24,7 @@ const ChartCard: React.FC<{
   color: string
   chart: ChartData[]
 }> = ({ title, dataKey, color, chart }) => {
-  const data = chart.map((item, index) => ({
+  const data = chart?.map((item, index) => ({
     x: index,
     y: item[dataKey] as number,
     month: item.month,
@@ -37,7 +37,7 @@ const ChartCard: React.FC<{
       <Typography className="text-lg font-semibold text-[#2C3E50] mb-2">{title}</Typography> 
       {isActive && (
         <Typography className="text-sm text-[#7F8C8D] mb-2">
-          {chart[Math.round(state.x.value.value)]?.month}: {state.y.y.value.value.toFixed(1)}
+          {chart[Math.round(state?.x?.value?.value)]?.month}: {state?.y?.y?.value?.value.toFixed(1)}
         </Typography> 
       )}
       <View style={{ height: 200 }}>
@@ -78,3 +78,5 @@ const HealthCharts: React.FC<HealthChartsProps> = ({ chart }) => {
 }
 
 export default HealthCharts
+
+

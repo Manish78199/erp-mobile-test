@@ -16,7 +16,7 @@ export  function StudentAppDataProvider({ children }: { children: React.ReactNod
         fetchProfile()
     }, [])
     return (
-        <StudentAppDataContext.Provider value={{ profile }}>
+        <StudentAppDataContext.Provider value={{ profile ,refresh: fetchProfile}}>
 
             {children}
         </StudentAppDataContext.Provider>
