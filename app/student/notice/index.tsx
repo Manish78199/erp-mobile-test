@@ -421,6 +421,7 @@ const NoticesScreen: React.FC = () => {
         visible={showNoticeModal}
         animationType="slide"
         transparent={true}
+   
         onRequestClose={() => setShowNoticeModal(false)}
       >
         <View className="flex-1 bg-black/50 justify-end">
@@ -484,12 +485,12 @@ const NoticesScreen: React.FC = () => {
                       {formatDate(selectedNotice.created_at)}
                     </Typography> 
                   </View>
-                  <View className="flex-row justify-between">
+                  {/* <View className="flex-row justify-between">
                     <Typography className="text-sm text-[#7F8C8D]">Read by:</Typography> 
                     <Typography className="text-sm font-semibold text-[#6A5ACD]">
                       {selectedNotice.readBy || 0}/{selectedNotice.totalStudents || 300} students
                     </Typography> 
-                  </View>
+                  </View> */}
                 </View>
 
                 {/* Notice Content */}

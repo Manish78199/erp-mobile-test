@@ -7,6 +7,7 @@ console.log("env_______________", { BASE_URL })
 const ApiRoute = {
     BaseUrl: `${BASE_URL}`,
     ROLE_AUTH:`${BASE_URL}/authorize`,
+    app_check: `${BASE_URL}/public/check-update`,
     classService: {
         create: `${BASE_URL}/management/class`,
         getAllClass: `${BASE_URL}/management/class`
