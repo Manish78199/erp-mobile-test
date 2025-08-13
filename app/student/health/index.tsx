@@ -1234,7 +1234,7 @@ const HealthScreen: React.FC = () => {
         </View>
       )}
 
-   
+      
     </ScrollView>
   )
 }
