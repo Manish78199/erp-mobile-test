@@ -74,13 +74,13 @@ export default function StudentLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Dashboard",
+          title: "Home",
           tabBarIcon: ({ color, focused }) => (
             <TabIcon
               name="home-outline"
               color={color}
               focused={focused}
-              activeColor={activeColor}
+              activeColor={"royalblue"}
               inactiveColor="#9CA3AF"
             />
           ),
@@ -95,7 +95,7 @@ export default function StudentLayout() {
               name="calendar-outline"
               color={color}
               focused={focused}
-              activeColor={activeColor}
+              activeColor={"#10B981"}
               inactiveColor="#9CA3AF"
             />
           ),
@@ -110,7 +110,7 @@ export default function StudentLayout() {
               name="book-outline"
               color={color}
               focused={focused}
-              activeColor={activeColor}
+              activeColor={"orange"}
               inactiveColor="#9CA3AF"
             />
           ),
@@ -125,7 +125,7 @@ export default function StudentLayout() {
               name="medical-outline"
               color={color}
               focused={focused}
-              activeColor={activeColor}
+              activeColor={"red"}
               inactiveColor="#9CA3AF"
             />
           ),

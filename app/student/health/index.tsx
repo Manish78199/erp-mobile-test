@@ -907,16 +907,14 @@ const HealthScreen: React.FC = () => {
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
     >
       {/* Header */}
-      <View className="flex-row items-center justify-between bg-[#6A5ACD] pt-12 pb-5 px-4 rounded-b-[25px]">
+      <View className="flex-row items-center justify-between bg-[#6A5ACD] py-12 px-4 rounded-b-[25px]">
         <TouchableOpacity className="p-2" onPress={() => router.back()}>
           <Icon name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
         <View className="flex-1 items-center">
           <Text className="text-xl font-bold text-white">Health Records</Text>
         </View>
-        <TouchableOpacity className="p-2" onPress={() => setShowReportModal(true)}>
-          <Icon name="add" size={20} color="white" />
-        </TouchableOpacity>
+     
       </View>
 
       {/* Health Overview Cards */}
@@ -1236,72 +1234,7 @@ const HealthScreen: React.FC = () => {
         </View>
       )}
 
-      {/* Report Symptom Modal */}
-      <Modal
-        visible={showReportModal}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setShowReportModal(false)}
-      >
-        <View className="flex-1 bg-black/50 justify-end">
-          <View className="bg-white rounded-t-[25px] p-5 max-h-[80%]">
-            <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-xl font-bold text-[#2C3E50]">Report Health Issue</Text>
-              <TouchableOpacity onPress={() => setShowReportModal(false)}>
-                <Icon name="close" size={24} color="#2C3E50" />
-              </TouchableOpacity>
-            </View>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <View className="mb-4">
-                <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Symptom/Issue</Text>
-                <TextInput
-                  className="border border-[#DDE4EB] rounded-xl p-3 text-sm text-[#2C3E50]"
-                  placeholder="Describe your symptom or health issue"
-                  multiline
-                  numberOfLines={3}
-                  value={symptomForm.symptom}
-                  onChangeText={(text) => setSymptomForm({ ...symptomForm, symptom: text })}
-                />
-              </View>
-              <View className="mb-4">
-                <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Severity</Text>
-                <View className="flex-row gap-2">
-                  {["mild", "moderate", "severe"].map((severity) => (
-                    <TouchableOpacity
-                      key={severity}
-                      className={`flex-1 border rounded-xl p-3 items-center ${
-                        symptomForm.severity === severity ? "border-[#6A5ACD] bg-[#6A5ACD20]" : "border-[#DDE4EB]"
-                      }`}
-                      onPress={() => setSymptomForm({ ...symptomForm, severity })}
-                    >
-                      <Text
-                        className={`text-sm ${symptomForm.severity === severity ? "text-[#6A5ACD] font-semibold" : "text-[#2C3E50]"}`}
-                      >
-                        {severity.charAt(0).toUpperCase() + severity.slice(1)}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
-              <View className="mb-6">
-                <Text className="text-sm font-semibold text-[#2C3E50] mb-2">Additional Notes</Text>
-                <TextInput
-                  className="border border-[#DDE4EB] rounded-xl p-3 text-sm text-[#2C3E50] min-h-[80px]"
-                  placeholder="Any additional information..."
-                  multiline
-                  numberOfLines={4}
-                  textAlignVertical="top"
-                  value={symptomForm.notes}
-                  onChangeText={(text) => setSymptomForm({ ...symptomForm, notes: text })}
-                />
-              </View>
-              <TouchableOpacity className="bg-[#6A5ACD] rounded-xl py-4 items-center" onPress={handleSubmitSymptom}>
-                <Text className="text-base font-bold text-white">Submit Report</Text>
-              </TouchableOpacity>
-            </ScrollView>
-          </View>
-        </View>
-      </Modal>
+   
     </ScrollView>
   )
 }

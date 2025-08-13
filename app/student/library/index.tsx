@@ -284,6 +284,7 @@ import {
   // return_book,
 } from "@/service/student/library"
 import { Typography } from "@/components/Typography"
+import { Link } from "expo-router"
 
 // Types
 interface BorrowedBook {
@@ -369,7 +370,7 @@ const NoSearchResultsIllustration = () => (
   </View>
 )
 
-const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
+const LibraryScreen: React.FC<LibraryScreenProps> = () => {
   // State management
   const [selectedTab, setSelectedTab] = useState<TabType>("search")
   const [searchQuery, setSearchQuery] = useState("")
@@ -632,9 +633,9 @@ const LibraryScreen: React.FC<LibraryScreenProps> = ({ navigation }) => {
     >
       {/* Header */}
       <View className="flex-row items-center justify-between bg-[#6A5ACD] py-12 px-4 rounded-b-[25px]">
-        <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
+        <Link href={"/student"} className="p-2">
           <Icon name="arrow-back" size={24} color="white" />
-        </TouchableOpacity>
+        </Link>
         <Typography className="text-xl font-bold text-white">Library</Typography> 
         <TouchableOpacity className="p-2" onPress={onRefresh}>
           <Icon name="refresh" size={20} color="white" />
