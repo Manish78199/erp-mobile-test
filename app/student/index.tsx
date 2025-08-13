@@ -16,6 +16,7 @@ import { LinearGradient } from "expo-linear-gradient"
 import { check_update } from "@/service/mobile_app"
 
 
+// import RNFS from "react-native-fs";
 
 
 import RNFS from "react-native-fs";
