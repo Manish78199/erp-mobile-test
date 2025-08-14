@@ -117,7 +117,7 @@ export default function StudentLayout() {
         }}
       />
       <Tabs.Screen
-        name="health/index"
+        name="wellness/index"
         options={{
           title: "Health",
           tabBarIcon: ({ color, focused }) => (

@@ -89,7 +89,7 @@ const StudentDashboard: React.FC = () => {
       title: "Health",
       icon: "local-hospital",
       colors: ["#a1c4fd", "#c2e9fb"],
-      screen: "/student/health",
+      screen: "/student/wellness",
       description: "Medical records and checkups",
     },
     {
