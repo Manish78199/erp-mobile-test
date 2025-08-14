@@ -421,7 +421,7 @@ const NoticesScreen: React.FC = () => {
         visible={showNoticeModal}
         animationType="slide"
         transparent={true}
-   
+        statusBarTranslucent={true}
         onRequestClose={() => setShowNoticeModal(false)}
       >
         <View className="flex-1 bg-black/50 justify-end">

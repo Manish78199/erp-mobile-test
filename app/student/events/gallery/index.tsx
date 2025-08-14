@@ -512,6 +512,7 @@ const ActivityGalleryScreen: React.FC = () => {
         visible={showFilterModal}
         animationType="slide"
         transparent={true}
+        statusBarTranslucent={true}
         onRequestClose={() => setShowFilterModal(false)}
       >
         <View className="flex-1 bg-black/50 justify-end">
