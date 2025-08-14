@@ -16,11 +16,13 @@ import { LinearGradient } from "expo-linear-gradient"
 import { check_update } from "@/service/mobile_app"
 
 
+import * as FileSystem from "expo-file-system";
 // import RNFS from "react-native-fs";
 
 
-import RNFS from "react-native-fs";
+
 import { Linking, Platform, Alert } from "react-native";
+import { setParams } from "expo-router/build/global-state/routing"
 
 const { width, height } = Dimensions.get("window")
 
@@ -36,6 +38,8 @@ const StudentDashboard: React.FC = () => {
   const router = useRouter()
   const [refreshing, setRefreshing] = useState(false)
   const [recentModules, setRecentModules] = useState<RecentModule[]>([])
+
+  const [progress, setProgress] = useState(0)
 
   const { profile: Profile, refresh: refreshProfile } = useContext(StudentAppDataContext)
 
@@ -253,7 +257,6 @@ const StudentDashboard: React.FC = () => {
 
 
 
-
   const handleUpdateClick = async (apkUrl: string) => {
     if (Platform.OS !== "android") {
       Alert.alert("Not Supported", "App installation is only supported on Android.");
@@ -261,27 +264,34 @@ const StudentDashboard: React.FC = () => {
     }
 
     try {
-      const downloadDest = `${RNFS.DownloadDirectoryPath}/vedatron.apk`;
-      apkUrl  // Replace with your APK link
+      const downloadDest = FileSystem.cacheDirectory + "vedatron.apk";
 
-      // Download APK
-      const ret = RNFS.downloadFile({
-        fromUrl: apkUrl,
-        toFile: downloadDest,
-      });
+      const downloadResumable = FileSystem.createDownloadResumable(
+        apkUrl,
+        downloadDest,
+        {},
+        ({ totalBytesWritten, totalBytesExpectedToWrite }) => {
+          const progress = totalBytesWritten / totalBytesExpectedToWrite;
+          setProgress(progress);
+        }
+      );
 
-      const res = await ret.promise;
-      if (res.statusCode === 200) {
-        // Open install prompt
-        Linking.openURL(`file://${downloadDest}`);
+      const result = await downloadResumable.downloadAsync();
+
+      if (result && result.status === 200) {
+        const canOpen = await Linking.canOpenURL(result.uri);
+        if (canOpen) {
+          await Linking.openURL(result.uri); // Open Android installer
+        } else {
+          Alert.alert("Error", "Cannot open the downloaded APK.");
+        }
       } else {
         Alert.alert("Error", "Download failed.");
       }
-    } catch (err) {
+    } catch (err: any) {
       Alert.alert("Error", err?.message || "Failed");
     }
   };
-
 
 
 
