@@ -22,7 +22,8 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.vedatron.erp_mobile",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      
     },
     "web": {
       "bundler": "metro",

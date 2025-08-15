@@ -51,8 +51,8 @@ export default function Login() {
   const [checked, setChecked] = useState(false)
 
 
-  const { refresh:refreshProfile } = useContext(StudentAppDataContext)
-  const {showAlert}=useContext(AlertContext)
+  const { refresh: refreshProfile } = useContext(StudentAppDataContext)
+  const { showAlert } = useContext(AlertContext)
 
 
   useEffect(() => {
@@ -90,12 +90,12 @@ export default function Login() {
         console.log(role, "role")
         if (role) {
           if (role == "STUDENT") {
-            registerForPushNotificationsAsync().then((token) => {
-            console.log(token, "fcm token")
+            // registerForPushNotificationsAsync().then((token) => {
+            //   console.log(token, "fcm token")
 
-            savefcmToken(token as string)
-          })
-          refreshProfile()
+            //   savefcmToken(token as string)
+            // })
+            refreshProfile()
             router.push("/student")
             return
           }
@@ -113,18 +113,18 @@ export default function Login() {
   // FCM Token Save Function
   const saveFcmTokenRequest = async () => {
     try {
-        const newToken = await registerForPushNotificationsAsync();
-        console.log(newToken, 'newToken');
-        if (newToken) {
-            const savedToken = await savefcmToken(String(newToken));
-            console.log('FCM token saved successfully');
-        }
+      const newToken = await registerForPushNotificationsAsync();
+      console.log(newToken, 'newToken');
+      if (newToken) {
+        const savedToken = await savefcmToken(String(newToken));
+        console.log('FCM token saved successfully');
+      }
     } catch (error) {
-        console.log("FCM token save error", error);
+      console.log("FCM token save error", error);
     }
   }
 
-  
+
   // Submit Form Function
   const submitForm = async (values: LoginFormData) => {
     setRequesting(true)
@@ -157,6 +157,29 @@ export default function Login() {
     onSubmit: submitForm,
   })
 
+
+
+
+  useEffect(() => {
+    const subscription = Notifications.addNotificationReceivedListener(notification => {
+      console.log("Foreground notification received:", notification);
+    });
+
+    return () => subscription.remove();
+  }, []);
+
+
+
+
+  useEffect(() => {
+    const subscription = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log("Notification tapped / background:", response);
+    });
+
+    return () => subscription.remove();
+  }, []);
+
+
   // Show loading animation while verifying token
   if (loading || !checked) {
     return <LoadingAnimation />
@@ -167,20 +190,6 @@ export default function Login() {
 
 
 
-    useEffect(() => {
-        const foregroundSubscription = Notifications.addNotificationReceivedListener(notification => {
-            console.log("Foreground notification", notification);
-        });
-
-        const backgroundSubscription = Notifications.addNotificationResponseReceivedListener(response => {
-            console.log("Tapped notification", response);
-        });
-
-        return () => {
-            foregroundSubscription.remove();
-            backgroundSubscription.remove();
-        };
-    }, []);
 
 
 
@@ -260,9 +269,8 @@ export default function Login() {
                       value={values.school_code}
                       onChangeText={handleChange("school_code")}
                       onBlur={handleBlur("school_code")}
-                      className={`text-gray-900 py-3 px-4 rounded-lg text-base border ${
-                        errors.school_code && touched.school_code ? "border-red-500" : "border-gray-200"
-                      } bg-gray-50`}
+                      className={`text-gray-900 py-3 px-4 rounded-lg text-base border ${errors.school_code && touched.school_code ? "border-red-500" : "border-gray-200"
+                        } bg-gray-50`}
                       placeholder="Enter your school code"
                       placeholderTextColor="#9CA3AF"
                       autoCapitalize="none"
@@ -279,9 +287,8 @@ export default function Login() {
                       value={values.userId}
                       onChangeText={handleChange("userId")}
                       onBlur={handleBlur("userId")}
-                      className={`text-gray-900 py-3 px-4 rounded-lg text-base border ${
-                        errors.userId && touched.userId ? "border-red-500" : "border-gray-200"
-                      } bg-gray-50`}
+                      className={`text-gray-900 py-3 px-4 rounded-lg text-base border ${errors.userId && touched.userId ? "border-red-500" : "border-gray-200"
+                        } bg-gray-50`}
                       placeholder="Enter your user ID"
                       placeholderTextColor="#9CA3AF"
                       autoCapitalize="none"
@@ -300,9 +307,8 @@ export default function Login() {
                         onChangeText={handleChange("password")}
                         onBlur={handleBlur("password")}
                         secureTextEntry={!showPassword}
-                        className={`text-gray-900 py-3 px-4 pr-12 rounded-lg text-base border ${
-                          errors.password && touched.password ? "border-red-500" : "border-gray-200"
-                        } bg-gray-50`}
+                        className={`text-gray-900 py-3 px-4 pr-12 rounded-lg text-base border ${errors.password && touched.password ? "border-red-500" : "border-gray-200"
+                          } bg-gray-50`}
                         placeholder="Enter your password"
                         placeholderTextColor="#9CA3AF"
                       />
