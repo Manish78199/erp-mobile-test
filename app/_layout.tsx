@@ -20,8 +20,6 @@ import AlertProvider from "@/context/Alert/provider";
 
 
 
-
-
 export default function RootLayout() {
     const [fontsLoaded] = useFonts({
         Poppins_400Regular,
@@ -29,6 +27,7 @@ export default function RootLayout() {
         Poppins_700Bold,
     })
     if (!fontsLoaded) return null
+
 
 
 

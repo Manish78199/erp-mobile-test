@@ -162,6 +162,32 @@ export default function Login() {
     return <LoadingAnimation />
   }
 
+
+
+
+
+
+    useEffect(() => {
+        const foregroundSubscription = Notifications.addNotificationReceivedListener(notification => {
+            console.log("Foreground notification", notification);
+        });
+
+        const backgroundSubscription = Notifications.addNotificationResponseReceivedListener(response => {
+            console.log("Tapped notification", response);
+        });
+
+        return () => {
+            foregroundSubscription.remove();
+            backgroundSubscription.remove();
+        };
+    }, []);
+
+
+
+
+
+
+
   return (
     <SafeAreaView className="flex-1">
       <StatusBar barStyle="light-content" backgroundColor="#5B7FE5" />

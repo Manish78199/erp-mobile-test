@@ -4,11 +4,12 @@ import type React from "react"
 import { TouchableOpacity, Alert } from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 import { useRouter } from "expo-router"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const LogoutButton: React.FC = () => {
   const router = useRouter()
 
-  const handleLogout = () => {
+  const handleLogout =  () => {
     Alert.alert("Logout", "Are you sure you want to logout?", [
       {
         text: "Cancel",
@@ -17,10 +18,16 @@ const LogoutButton: React.FC = () => {
       {
         text: "Logout",
         style: "destructive",
-        onPress: () => {
+        onPress: async () => {
           // Add your logout logic here
-          console.log("User logged out")
-          // router.push("/login")
+         try {
+           await AsyncStorage.removeItem("access_token")
+           console.log("User logged out")
+           router.push("/")
+         } catch (error) {
+          console.log("Logout error:", error)
+           Alert.alert("Error", "Failed to logout. Please try again.")
+         }
         },
       },
     ])
