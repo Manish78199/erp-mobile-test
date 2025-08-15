@@ -63,7 +63,7 @@ const HealthScreen = () => {
           weight: Number(data?.current?.weight) || 58,
           bmi: Number(data?.current?.bmi) || 21.3,
           bloodGroup: String(data?.current?.bloodGroup || "B+"),
-          lastCheckup: String(data?.current?.lastCheckup || "2024-11-15"),
+          measure_date: String(data?.current?.lastCheckup || "2024-11-15"),
           allergies: Array.isArray(data?.current?.allergies) ? data.current.allergies : ["None"],
           medications: Array.isArray(data?.current?.medications) ? data.current.medications : ["None"],
           emergencyContact: String(data?.current?.emergencyContact || "+91 98765 43210"),
@@ -130,7 +130,7 @@ const HealthScreen = () => {
       weight: 58,
       bmi: 21.3,
       bloodGroup: "B+",
-      lastCheckup: "2024-11-15",
+      measure_date: "2024-11-15",
       allergies: ["Peanuts", "Dust"],
       medications: ["Vitamin D", "Iron Supplement"],
       emergencyContact: "+91 98765 43210",
@@ -342,13 +342,13 @@ const HealthScreen = () => {
             <Text className="text-lg font-bold text-[#2C3E50]">{healthData?.current?.bmi?.toFixed(1) || "21.3"}</Text>
             <Text className="text-xs text-[#7F8C8D] text-center">BMI Score</Text>
           </View>
-          <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
+          {/* <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#F39C1220] rounded-full items-center justify-center mb-2">
               <Icon name="event" size={24} color="#F39C12" />
             </View>
             <Text className="text-lg font-bold text-[#2C3E50]">{healthData?.appointments?.length || 0}</Text>
             <Text className="text-xs text-[#7F8C8D] text-center">Upcoming</Text>
-          </View>
+          </View> */}
         </View>
       </View>
 
@@ -421,7 +421,7 @@ const HealthScreen = () => {
               <View className="w-full mb-4">
                 <Text className="text-sm text-[#7F8C8D] mb-1">Last Checkup</Text>
                 <Text className="text-base font-semibold text-[#2C3E50]">
-                  {formatDate(healthData?.current?.lastCheckup || "2024-11-15")}
+                  {formatDate(healthData?.current?.measure_date || "2024-11-15")}
                 </Text>
               </View>
             </View>
@@ -462,7 +462,7 @@ const HealthScreen = () => {
           </View>
 
           {/* Vital Signs */}
-          <View className="bg-white rounded-2xl p-4 mb-5 shadow-lg elevation-5">
+          {/* <View className="bg-white rounded-2xl p-4 mb-5 shadow-lg elevation-5">
             <Text className="text-lg font-bold text-[#2C3E50] mb-4">Latest Vital Signs</Text>
             <View className="gap-3">
               {healthData?.vitals && Array.isArray(healthData.vitals) ? (
@@ -498,53 +498,16 @@ const HealthScreen = () => {
                 </View>
               )}
             </View>
-          </View>
+          </View> */}
         </View>
       )}
 
       {/* Records Tab */}
       {selectedTab === "records" && (
         <View className="px-4">
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Medical Records</Text>
+          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Coming Soon</Text>
           <View className="gap-4">
-            {healthData?.records && Array.isArray(healthData.records) && healthData.records.length > 0 ? (
-              healthData.records.map((record) => (
-                <View key={record.id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-                  <View className="flex-row items-center justify-between mb-3">
-                    <View className="flex-row items-center">
-                      <View
-                        className="w-10 h-10 rounded-full items-center justify-center mr-3"
-                        style={{ backgroundColor: `${getStatusColor(record.status)}20` }}
-                      >
-                        <Icon name={getTypeIcon(record.type)} size={20} color={getStatusColor(record.status)} />
-                      </View>
-                      <View>
-                        <Text className="text-base font-bold text-[#2C3E50]">{record.title}</Text>
-                        <Text className="text-sm text-[#7F8C8D]">{record.doctor}</Text>
-                      </View>
-                    </View>
-                    <View className="items-end">
-                      <Text className="text-sm text-[#7F8C8D]">{formatDate(record.date)}</Text>
-                      <View
-                        className="px-2 py-1 rounded-lg mt-1"
-                        style={{ backgroundColor: `${getStatusColor(record.status)}20` }}
-                      >
-                        <Text className="text-xs font-bold" style={{ color: getStatusColor(record.status) }}>
-                          {record.status.toUpperCase()}
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                  <Text className="text-sm text-[#7F8C8D] leading-5">{record.notes}</Text>
-                </View>
-              ))
-            ) : (
-              <View className="bg-white rounded-2xl p-8 items-center">
-                <Icon name="folder-open" size={48} color="#BDC3C7" />
-                <Text className="text-lg font-bold text-[#2C3E50] mt-4">No Records Found</Text>
-                <Text className="text-[#7F8C8D] text-center mt-2">Your medical records will appear here</Text>
-              </View>
-            )}
+
           </View>
         </View>
       )}
@@ -552,92 +515,16 @@ const HealthScreen = () => {
       {/* Appointments Tab */}
       {selectedTab === "appointments" && (
         <View className="px-4">
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Upcoming Appointments</Text>
-          <View className="gap-4">
-            {healthData?.appointments &&
-              Array.isArray(healthData.appointments) &&
-              healthData.appointments.length > 0 ? (
-              healthData.appointments.map((appointment) => (
-                <View key={appointment.id} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-                  <View className="flex-row items-center justify-between mb-3">
-                    <View className="flex-row items-center">
-                      <View className="w-10 h-10 rounded-full bg-[#6A5ACD20] items-center justify-center mr-3">
-                        <Icon name={getTypeIcon(appointment.type)} size={20} color="#6A5ACD" />
-                      </View>
-                      <View>
-                        <Text className="text-base font-bold text-[#2C3E50]">{appointment.type}</Text>
-                        <Text className="text-sm text-[#7F8C8D]">{appointment.doctor}</Text>
-                      </View>
-                    </View>
-                    <View className="items-end">
-                      <Text className="text-sm font-semibold text-[#2C3E50]">{formatDate(appointment.date)}</Text>
-                      <Text className="text-sm text-[#6A5ACD]">{appointment.time}</Text>
-                    </View>
-                  </View>
-                  <View className="flex-row justify-between items-center">
-                    <View
-                      className="px-3 py-1 rounded-xl"
-                      style={{ backgroundColor: `${getStatusColor(appointment.status)}20` }}
-                    >
-                      <Text className="text-xs font-bold" style={{ color: getStatusColor(appointment.status) }}>
-                        {appointment.status.toUpperCase()}
-                      </Text>
-                    </View>
-                    <View className="flex-row gap-2">
-                      <TouchableOpacity className="bg-[#6A5ACD] px-4 py-2 rounded-xl">
-                        <Text className="text-xs font-semibold text-white">Reschedule</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity className="bg-[#E74C3C] px-4 py-2 rounded-xl">
-                        <Text className="text-xs font-semibold text-white">Cancel</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-              ))
-            ) : (
-              <View className="bg-white rounded-2xl p-8 items-center">
-                <Icon name="event-available" size={48} color="#BDC3C7" />
-                <Text className="text-lg font-bold text-[#2C3E50] mt-4">No Appointments</Text>
-                <Text className="text-[#7F8C8D] text-center mt-2">Your upcoming appointments will appear here</Text>
-              </View>
-            )}
-          </View>
+          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Coming Soon</Text>
+         
         </View>
       )}
 
       {/* Symptoms Tab */}
       {selectedTab === "symptoms" && (
         <View className="px-4 mb-8">
-          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Reported Symptoms</Text>
-          <View className="gap-4">
-            {healthData?.symptoms && Array.isArray(healthData.symptoms) && healthData.symptoms.length > 0 ? (
-              healthData.symptoms.map((symptom, index) => (
-                <View key={index} className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-                  <View className="flex-row items-center justify-between mb-2">
-                    <Text className="text-base font-bold text-[#2C3E50]">{symptom.name}</Text>
-                    <View
-                      className="px-3 py-1 rounded-xl"
-                      style={{ backgroundColor: `${getSeverityColor(symptom.severity)}20` }}
-                    >
-                      <Text className="text-xs font-bold" style={{ color: getSeverityColor(symptom.severity) }}>
-                        {symptom.severity.toUpperCase()}
-                      </Text>
-                    </View>
-                  </View>
-                  <View className="flex-row justify-between">
-                    <Text className="text-sm text-[#7F8C8D]">Frequency: {symptom.frequency}</Text>
-                    <Text className="text-sm text-[#7F8C8D]">Last: {formatDate(symptom.lastReported)}</Text>
-                  </View>
-                </View>
-              ))
-            ) : (
-              <View className="bg-white rounded-2xl p-8 items-center">
-                <Icon name="healing" size={48} color="#BDC3C7" />
-                <Text className="text-lg font-bold text-[#2C3E50] mt-4">No Symptoms Reported</Text>
-                <Text className="text-[#7F8C8D] text-center mt-2">Your reported symptoms will appear here</Text>
-              </View>
-            )}
-          </View>
+          <Text className="text-xl font-bold text-[#2C3E50] mb-4">Coming Soon </Text>
+
         </View>
       )}
 

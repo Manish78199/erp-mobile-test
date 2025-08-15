@@ -556,17 +556,7 @@ const HomeworkScreen: React.FC = () => {
                     {/* Footer */}
                     <View className="flex-row items-center justify-between">
                       <View className="flex-row items-center">
-                        <View
-                          className="px-2 py-1 rounded-lg mr-2"
-                          style={{ backgroundColor: `${getPriorityColor(homework.priority)}20` }}
-                        >
-                          <Typography
-                            className="text-[10px] font-bold"
-                            style={{ color: getPriorityColor(homework.priority) }}
-                          >
-                            {homework.priority?.toUpperCase() || "MEDIUM"}
-                          </Typography>
-                        </View>
+
                         {homework.attachments && homework.attachments.length > 0 && (
                           <>
                             <Icon name="attachment" size={16} color="#6A5ACD" />
@@ -659,7 +649,7 @@ const HomeworkScreen: React.FC = () => {
                         {selectedHomework.status || "PENDING"}
                       </Typography>
                     </View>
-                    {selectedHomework.priority && (
+                    {/* {selectedHomework.priority && (
                       <View>
                         <Typography className="text-xs text-[#7F8C8D] mb-1">Priority</Typography>
                         <Typography
@@ -669,7 +659,7 @@ const HomeworkScreen: React.FC = () => {
                           {selectedHomework.priority}
                         </Typography>
                       </View>
-                    )}
+                    )} */}
                   </View>
                 </View>
 

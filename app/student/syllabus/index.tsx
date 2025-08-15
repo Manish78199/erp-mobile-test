@@ -260,6 +260,7 @@ import { getMySyllabus } from "@/service/student/syllabus"
 import { Typography } from "@/components/Typography"
 
 
+
 interface Syllabus {
   _id?: string
   path: string
@@ -627,14 +628,7 @@ const SyllabusScreen: React.FC = () => {
                       <Typography className="text-[#2C3E50] font-semibold ml-3 flex-1">Download PDF</Typography> 
                       <Icon name="chevron-right" size={20} color="#BDC3C7" />
                     </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => handlePdfAction("share")}
-                      className="flex-row items-center p-3 bg-[#F8F9FA] rounded-xl"
-                    >
-                      <Icon name="share" size={20} color="#6A5ACD" />
-                      <Typography className="text-[#2C3E50] font-semibold ml-3 flex-1">Share Document</Typography> 
-                      <Icon name="chevron-right" size={20} color="#BDC3C7" />
-                    </TouchableOpacity>
+                   
                     <TouchableOpacity
                       onPress={() => handlePdfAction("open")}
                       className="flex-row items-center p-3 bg-[#F8F9FA] rounded-xl"
@@ -687,99 +681,3 @@ const SyllabusScreen: React.FC = () => {
 
 export default SyllabusScreen
 
-
-  //  {/* Syllabus Info Card */}
-  //             <View className="px-4 -mt-8 mb-5">
-  //               <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-  //                 {/* Header */}
-  //                 <View className="flex-row items-center justify-between mb-4">
-  //                   <View className="flex-row items-center flex-1">
-  //                     <View className="w-12 h-12 bg-[#6A5ACD] rounded-xl items-center justify-center mr-3">
-  //                       <Icon name="description" size={24} color="white" />
-  //                     </View>
-  //                     <View className="flex-1">
-  //                       <Typography className="text-lg font-bold text-[#2C3E50]">
-  //                         {syllabus.title || `${syllabus.subject || "Course"} Syllabus`}
-  //                       </Typography> 
-  //                       {syllabus.description && (
-  //                         <Typography className="text-sm text-[#7F8C8D] mt-1">{syllabus.description}</Typography> 
-  //                       )}
-  //                     </View>
-  //                   </View>
-  //                   {syllabus.status && (
-  //                     <View
-  //                       className="px-3 py-1 rounded-xl"
-  //                       style={{ backgroundColor: `${getStatusColor(syllabus.status)}20` }}
-  //                     >
-  //                       <Typography className="text-xs font-bold" style={{ color: getStatusColor(syllabus.status) }}>
-  //                         {syllabus.status}
-  //                       </Typography> 
-  //                     </View>
-  //                   )}
-  //                 </View>
-
-  //                 {/* Details Grid */}
-  //                 <View className="bg-[#F8F9FA] rounded-xl p-4 mb-4">
-  //                   <View className="flex-row justify-between mb-3">
-  //                     <View className="flex-1">
-  //                       <Typography className="text-xs text-[#7F8C8D]">Subject</Typography> 
-  //                       <Typography className="text-sm font-semibold text-[#2C3E50]">
-  //                         {syllabus.subject || "Not specified"}
-  //                       </Typography> 
-  //                     </View>
-  //                     <View className="flex-1">
-  //                       <Typography className="text-xs text-[#7F8C8D]">Class</Typography> 
-  //                       <Typography className="text-sm font-semibold text-[#2C3E50]">
-  //                         {syllabus.class_name || "Not specified"}
-  //                       </Typography> 
-  //                     </View>
-  //                   </View>
-  //                   <View className="flex-row justify-between mb-3">
-  //                     <View className="flex-1">
-  //                       <Typography className="text-xs text-[#7F8C8D]">Session</Typography> 
-  //                       <Typography className="text-sm font-semibold text-[#2C3E50]">
-  //                         {syllabus.session || "Not specified"}
-  //                       </Typography> 
-  //                     </View>
-  //                     <View className="flex-1">
-  //                       <Typography className="text-xs text-[#7F8C8D]">File Size</Typography> 
-  //                       <Typography className="text-sm font-semibold text-[#2C3E50]">
-  //                         {formatFileSize(syllabus.file_size || 0)}
-  //                       </Typography> 
-  //                     </View>
-  //                   </View>
-  //                   <View className="flex-row justify-between">
-  //                     <View className="flex-1">
-  //                       <Typography className="text-xs text-[#7F8C8D]">Uploaded</Typography> 
-  //                       <Typography className="text-sm font-semibold text-[#2C3E50]">
-  //                         {formatDate(syllabus.uploaded_date)}
-  //                       </Typography> 
-  //                     </View>
-  //                     <View className="flex-1">
-  //                       <Typography className="text-xs text-[#7F8C8D]">Status</Typography> 
-  //                       <Typography className="text-sm font-semibold" style={{ color: pdfError ? "#E74C3C" : "#2ECC71" }}>
-  //                         {pdfError ? "Error Loading" : "Available"}
-  //                       </Typography> 
-  //                     </View>
-  //                   </View>
-  //                 </View>
-
-  //                 {/* Action Buttons */}
-  //                 <View className="flex-row gap-3">
-  //                   <TouchableOpacity
-  //                     onPress={() => handlePdfAction("open")}
-  //                     className="flex-1 bg-[#6A5ACD] py-3 rounded-xl items-center flex-row justify-center"
-  //                   >
-  //                     <Icon name="visibility" size={18} color="white" />
-  //                     <Typography className="text-white font-semibold ml-2">View PDF</Typography> 
-  //                   </TouchableOpacity>
-  //                   <TouchableOpacity
-  //                     onPress={() => handlePdfAction("download")}
-  //                     className="flex-1 bg-[#2ECC71] py-3 rounded-xl items-center flex-row justify-center"
-  //                   >
-  //                     <Icon name="download" size={18} color="white" />
-  //                     <Typography className="text-white font-semibold ml-2">Download</Typography> 
-  //                   </TouchableOpacity>
-  //                 </View>
-  //               </View>
-  //             </View>

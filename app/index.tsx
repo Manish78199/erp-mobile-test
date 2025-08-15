@@ -112,31 +112,19 @@ export default function Login() {
 
   // FCM Token Save Function
   const saveFcmTokenRequest = async () => {
-    // try {
-    //     const newToken = await useFcmToken();
-    //     console.log(newToken, 'newToken');
-    //     if (newToken) {
-    //         const savedToken = await savefcmToken({ fcm_token: String(newToken) });
-    //         console.log('FCM token saved successfully');
-    //     }
-    // } catch (error) {
-    //     console.log("FCM token save error", error);
-    // }
+    try {
+        const newToken = await registerForPushNotificationsAsync();
+        console.log(newToken, 'newToken');
+        if (newToken) {
+            const savedToken = await savefcmToken(String(newToken));
+            console.log('FCM token saved successfully');
+        }
+    } catch (error) {
+        console.log("FCM token save error", error);
+    }
   }
 
-  // Request notification permission on component mount
-  useEffect(() => {
-    const requestPermission = async () => {
-      try {
-        console.log("Requesting notification permission...")
-      } catch (error) {
-        console.log("Permission request error:", error)
-      }
-    }
-
-    requestPermission()
-  }, [])
-
+  
   // Submit Form Function
   const submitForm = async (values: LoginFormData) => {
     setRequesting(true)

@@ -758,7 +758,7 @@ const ExamScheduleScreen: React.FC = () => {
                 )}
 
                 {/* Actions */}
-                <View className="flex-row gap-3">
+                {/* <View className="flex-row gap-3">
                   <TouchableOpacity
                     className="flex-1 bg-[#6A5ACD] rounded-xl py-4 items-center"
                     onPress={() => handleDownloadAdmitCard(selectedExamDetail)}
@@ -771,7 +771,7 @@ const ExamScheduleScreen: React.FC = () => {
                   >
                     <Typography className="text-base font-bold text-[#2C3E50]">Set Reminder</Typography> 
                   </TouchableOpacity>
-                </View>
+                </View> */}
               </ScrollView>
             )}
           </View>

@@ -125,7 +125,7 @@ const NoticesScreen: React.FC = () => {
       const allNotices = await getAllNotice()
 
       // Enhance notices with UI-compatible fields
-      const enhancedNotices = allNotices.map((notice:any) => ({
+      const enhancedNotices = allNotices.map((notice: any) => ({
         ...notice,
         publishedBy: notice.author || "Administration",
         publishedDate: notice.created_at,
@@ -233,7 +233,7 @@ const NoticesScreen: React.FC = () => {
           </TouchableOpacity>
         </Link>
         <View className="flex-1 items-center">
-          <Typography className="text-xl font-bold text-white">Notice Board</Typography> 
+          <Typography className="text-xl font-bold text-white">Notice Board</Typography>
         </View>
         <TouchableOpacity className="p-2" onPress={getNoticeRequest}>
           <Icon name="refresh" size={20} color="white" />
@@ -247,29 +247,29 @@ const NoticesScreen: React.FC = () => {
             <View className="w-12 h-12 bg-[#6A5ACD20] rounded-full items-center justify-center mb-2">
               <Icon name="notifications" size={24} color="#6A5ACD" />
             </View>
-            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.total}</Typography> 
-            <Typography className="text-xs text-[#7F8C8D] text-center">Total</Typography> 
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.total}</Typography>
+            <Typography className="text-xs text-[#7F8C8D] text-center">Total</Typography>
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#E74C3C20] rounded-full items-center justify-center mb-2">
               <Icon name="mark-email-unread" size={24} color="#E74C3C" />
             </View>
-            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.unread}</Typography> 
-            <Typography className="text-xs text-[#7F8C8D] text-center">Unread</Typography> 
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.unread}</Typography>
+            <Typography className="text-xs text-[#7F8C8D] text-center">Unread</Typography>
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#F39C1220] rounded-full items-center justify-center mb-2">
               <Icon name="push-pin" size={24} color="#F39C12" />
             </View>
-            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.pinned}</Typography> 
-            <Typography className="text-xs text-[#7F8C8D] text-center">Pinned</Typography> 
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.pinned}</Typography>
+            <Typography className="text-xs text-[#7F8C8D] text-center">Pinned</Typography>
           </View>
           <View className="bg-white rounded-2xl p-4 items-center flex-1 mx-1 shadow-lg elevation-5">
             <View className="w-12 h-12 bg-[#E74C3C20] rounded-full items-center justify-center mb-2">
               <Icon name="priority-high" size={24} color="#E74C3C" />
             </View>
-            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.highPriority}</Typography> 
-            <Typography className="text-xs text-[#7F8C8D] text-center">Priority</Typography> 
+            <Typography className="text-2xl font-extrabold text-[#2C3E50]">{stats.highPriority}</Typography>
+            <Typography className="text-xs text-[#7F8C8D] text-center">Priority</Typography>
           </View>
         </View>
       </View>
@@ -294,20 +294,18 @@ const NoticesScreen: React.FC = () => {
           {categories.map((category) => (
             <TouchableOpacity
               key={category.id}
-              className={`flex-row items-center px-4 py-2.5 mr-3 rounded-[20px] border ${
-                selectedCategory === category.id ? "border-[#6A5ACD]" : "bg-white border-[#DDE4EB]"
-              }`}
+              className={`flex-row items-center px-4 py-2.5 mr-3 rounded-[20px] border ${selectedCategory === category.id ? "border-[#6A5ACD]" : "bg-white border-[#DDE4EB]"
+                }`}
               style={selectedCategory === category.id ? { backgroundColor: `${category.color}20` } : {}}
               onPress={() => setSelectedCategory(category.id)}
             >
               <Icon name={category.icon} size={16} color={category.color} />
               <Typography
-                className={`text-sm font-semibold ml-2 ${
-                  selectedCategory === category.id ? "text-[#2C3E50]" : "text-[#7F8C8D]"
-                }`}
+                className={`text-sm font-semibold ml-2 ${selectedCategory === category.id ? "text-[#2C3E50]" : "text-[#7F8C8D]"
+                  }`}
               >
                 {category.label}
-              </Typography> 
+              </Typography>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -317,7 +315,7 @@ const NoticesScreen: React.FC = () => {
       {isLoading && (
         <View className="flex-1 items-center justify-center py-8">
           <Icon name="refresh" size={32} color="#6A5ACD" />
-          <Typography className="text-[#7F8C8D] mt-2">Loading notices...</Typography> 
+          <Typography className="text-[#7F8C8D] mt-2">Loading notices...</Typography>
         </View>
       )}
 
@@ -326,7 +324,7 @@ const NoticesScreen: React.FC = () => {
         <View className="px-4 mb-8">
           <Typography className="text-xl font-bold text-[#2C3E50] mb-4">
             {selectedCategory === "all" ? "All Notices" : categories.find((cat) => cat.id === selectedCategory)?.label}
-          </Typography> 
+          </Typography>
           {filteredNotices.length > 0 ? (
             <View className="gap-4">
               {filteredNotices.map((notice) => {
@@ -360,9 +358,9 @@ const NoticesScreen: React.FC = () => {
                               numberOfLines={1}
                             >
                               {notice.title}
-                            </Typography> 
+                            </Typography>
                           </View>
-                          <Typography className="text-sm text-[#7F8C8D]">{notice.publishedBy}</Typography> 
+                          <Typography className="text-sm text-[#7F8C8D]">{notice.publishedBy}</Typography>
                         </View>
                       </View>
                       <View className="items-end">
@@ -372,16 +370,16 @@ const NoticesScreen: React.FC = () => {
                         >
                           <Typography className="text-[10px] font-bold" style={{ color: getPriorityColor(notice.priority) }}>
                             {(notice.priority || "MEDIUM").toUpperCase()}
-                          </Typography> 
+                          </Typography>
                         </View>
-                        <Typography className="text-xs text-[#7F8C8D]">{getTimeAgo(notice.created_at)}</Typography> 
+                        <Typography className="text-xs text-[#7F8C8D]">{getTimeAgo(notice.created_at)}</Typography>
                       </View>
                     </View>
 
                     {/* Content Preview */}
                     <Typography className="text-sm text-[#7F8C8D] leading-5 mb-3" numberOfLines={2}>
                       {notice.message}
-                    </Typography> 
+                    </Typography>
 
                     {/* Footer */}
                     <View className="flex-row items-center justify-between">
@@ -389,15 +387,15 @@ const NoticesScreen: React.FC = () => {
                         <Icon name="visibility" size={16} color="#7F8C8D" />
                         <Typography className="text-xs text-[#7F8C8D] ml-1">
                           {notice.readBy || 0}/{notice.totalStudents || 300} read
-                        </Typography> 
+                        </Typography>
                         {notice.attachments && notice.attachments.length > 0 && (
                           <>
                             <Icon name="attachment" size={16} color="#6A5ACD" style={{ marginLeft: 12 }} />
-                            <Typography className="text-xs text-[#6A5ACD] ml-1">{notice.attachments.length}</Typography> 
+                            <Typography className="text-xs text-[#6A5ACD] ml-1">{notice.attachments.length}</Typography>
                           </>
                         )}
                       </View>
-                      <Typography className="text-xs text-[#7F8C8D]">{formatDate(notice.created_at)}</Typography> 
+                      <Typography className="text-xs text-[#7F8C8D]">{formatDate(notice.created_at)}</Typography>
                     </View>
                   </TouchableOpacity>
                 )
@@ -410,7 +408,7 @@ const NoticesScreen: React.FC = () => {
                 {searchTerm || selectedCategory !== "all"
                   ? "No notices found matching your criteria."
                   : "No announcements yet."}
-              </Typography> 
+              </Typography>
             </View>
           )}
         </View>
@@ -427,7 +425,7 @@ const NoticesScreen: React.FC = () => {
         <View className="flex-1 bg-black/50 justify-end">
           <View className="bg-white rounded-t-[25px] p-5 max-h-[90%]">
             <View className="flex-row justify-between items-center mb-5">
-              <Typography className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Notice Details</Typography> 
+              <Typography className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Notice Details</Typography>
               <TouchableOpacity onPress={() => setShowNoticeModal(false)}>
                 <Icon name="close" size={24} color="#2C3E50" />
               </TouchableOpacity>
@@ -451,7 +449,7 @@ const NoticesScreen: React.FC = () => {
                     {selectedNotice.isPinned && (
                       <Icon name="push-pin" size={16} color="#F39C12" style={{ marginRight: 8 }} />
                     )}
-                    <Typography className="text-xl font-bold text-[#2C3E50] text-center">{selectedNotice.title}</Typography> 
+                    <Typography className="text-xl font-bold text-[#2C3E50] text-center">{selectedNotice.title}</Typography>
                   </View>
                   <View className="flex-row items-center">
                     <View
@@ -460,7 +458,7 @@ const NoticesScreen: React.FC = () => {
                     >
                       <Typography className="text-sm font-bold" style={{ color: getPriorityColor(selectedNotice.priority) }}>
                         {(selectedNotice.priority || "MEDIUM").toUpperCase()}
-                      </Typography> 
+                      </Typography>
                     </View>
                     <View
                       className="px-3 py-1 rounded-xl"
@@ -468,7 +466,7 @@ const NoticesScreen: React.FC = () => {
                     >
                       <Typography className="text-sm font-bold" style={{ color: getCategoryColor(selectedNotice.category) }}>
                         {(selectedNotice.category || "GENERAL").toUpperCase()}
-                      </Typography> 
+                      </Typography>
                     </View>
                   </View>
                 </View>
@@ -476,14 +474,14 @@ const NoticesScreen: React.FC = () => {
                 {/* Notice Info */}
                 <View className="bg-[#F8F9FA] rounded-2xl p-4 mb-6">
                   <View className="flex-row justify-between mb-2">
-                    <Typography className="text-sm text-[#7F8C8D]">Published by:</Typography> 
-                    <Typography className="text-sm font-semibold text-[#2C3E50]">{selectedNotice.publishedBy}</Typography> 
+                    <Typography className="text-sm text-[#7F8C8D]">Published by:</Typography>
+                    <Typography className="text-sm font-semibold text-[#2C3E50]">{selectedNotice.publishedBy}</Typography>
                   </View>
                   <View className="flex-row justify-between mb-2">
-                    <Typography className="text-sm text-[#7F8C8D]">Published on:</Typography> 
+                    <Typography className="text-sm text-[#7F8C8D]">Published on:</Typography>
                     <Typography className="text-sm font-semibold text-[#2C3E50]">
                       {formatDate(selectedNotice.created_at)}
-                    </Typography> 
+                    </Typography>
                   </View>
                   {/* <View className="flex-row justify-between">
                     <Typography className="text-sm text-[#7F8C8D]">Read by:</Typography> 
@@ -495,19 +493,19 @@ const NoticesScreen: React.FC = () => {
 
                 {/* Notice Content */}
                 <View className="mb-6">
-                  <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Notice Content</Typography> 
-                  <Typography className="text-sm text-[#2C3E50] leading-6">{selectedNotice.message}</Typography> 
+                  <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Notice Content</Typography>
+                  <Typography className="text-sm text-[#2C3E50] leading-6">{selectedNotice.message}</Typography>
                 </View>
 
                 {/* Attachments */}
                 {selectedNotice.attachments && selectedNotice.attachments.length > 0 && (
                   <View className="mb-6">
-                    <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Attachments</Typography> 
+                    <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Attachments</Typography>
                     <View className="gap-2">
                       {selectedNotice.attachments.map((attachment: string, index: number) => (
                         <TouchableOpacity key={index} className="flex-row items-center p-3 bg-[#F8F9FA] rounded-xl">
                           <Icon name="attach-file" size={20} color="#6A5ACD" />
-                          <Typography className="text-sm text-[#2C3E50] ml-2 flex-1">{attachment}</Typography> 
+                          <Typography className="text-sm text-[#2C3E50] ml-2 flex-1">{attachment}</Typography>
                           <Icon name="download" size={16} color="#6A5ACD" />
                         </TouchableOpacity>
                       ))}
@@ -516,14 +514,14 @@ const NoticesScreen: React.FC = () => {
                 )}
 
                 {/* Actions */}
-                <View className="flex-row gap-3">
+                {/* <View className="flex-row gap-3">
                   <TouchableOpacity className="flex-1 bg-[#6A5ACD] rounded-xl py-4 items-center">
-                    <Typography className="text-base font-bold text-white">Mark as Read</Typography> 
+                    <Typography className="text-base font-bold text-white">Mark as Read</Typography>
                   </TouchableOpacity>
                   <TouchableOpacity className="flex-1 bg-[#F8F9FA] border border-[#DDE4EB] rounded-xl py-4 items-center">
-                    <Typography className="text-base font-bold text-[#2C3E50]">Share</Typography> 
+                    <Typography className="text-base font-bold text-[#2C3E50]">Share</Typography>
                   </TouchableOpacity>
-                </View>
+                </View> */}
               </ScrollView>
             )}
           </View>

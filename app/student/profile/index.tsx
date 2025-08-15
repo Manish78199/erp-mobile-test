@@ -106,22 +106,7 @@ const ProfilePage: React.FC = () => {
           </View>
         </View>
 
-        {/* Action Buttons - Student View (Read-only actions) */}
-        <View className="mx-4 mb-8">
-          <TouchableOpacity className="bg-blue-500 rounded-2xl p-4 shadow-lg mb-3">
-            <View className="flex-row items-center justify-center">
-              <MaterialIcons name="download" size={20} color="#FFFFFF" style={{ marginRight: 8 }} />
-              <Text className="text-white font-semibold text-lg">Download ID Card</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity className="bg-gray-100 rounded-2xl p-4 shadow-lg">
-            <View className="flex-row items-center justify-center">
-              <MaterialIcons name="contact-support" size={20} color="#6B7280" style={{ marginRight: 8 }} />
-              <Text className="text-gray-700 font-semibold text-lg">Contact Support</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+     
       </ScrollView>
     </SafeAreaView>
   )

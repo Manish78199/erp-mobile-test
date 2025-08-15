@@ -1,6 +1,6 @@
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import {
   View,
   Text,
@@ -36,7 +36,7 @@ interface EventActivity {
   category?: string
 }
 
-type FilterType = "ALL" | "SPORTS" | "CULTURAL" | "ACADEMIC" | "SOCIAL"
+
 type ViewType = "MASONRY" | "GRID"
 
 // Get screen dimensions
@@ -50,7 +50,7 @@ const NoPhotosIllustration = () => (
         <Icon name="photo-library" size={32} color="#BDC3C7" />
       </View>
       <View className="absolute -top-2 -right-2 w-8 h-8 bg-purple-400 rounded-full items-center justify-center">
-        <Typography className="text-white font-bold text-sm">0</Typography> 
+        <Typography className="text-white font-bold text-sm">0</Typography>
       </View>
       <View className="absolute -left-3 top-3 w-2 h-2 bg-blue-300 rounded-full opacity-60" />
       <View className="absolute -right-1 bottom-2 w-1.5 h-1.5 bg-green-300 rounded-full opacity-60" />
@@ -76,16 +76,15 @@ const LoadingPhotosIllustration = () => (
 const ActivityGalleryScreen: React.FC = () => {
   // State management
   const [activities, setActivities] = useState<EventActivity[]>([])
-  const [filteredActivities, setFilteredActivities] = useState<EventActivity[]>([])
+  // const [filteredActivities, setFilteredActivities] = useState<EventActivity[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
-  const [selectedFilter, setSelectedFilter] = useState<FilterType>("ALL")
+
   const [viewType, setViewType] = useState<ViewType>("MASONRY")
 
   // Modal states
   const [activePhoto, setActivePhoto] = useState<EventActivity | null>(null)
   const [showPhotoModal, setShowPhotoModal] = useState(false)
-  const [showFilterModal, setShowFilterModal] = useState(false)
   const [imageLoading, setImageLoading] = useState<{ [key: string]: boolean }>({})
 
   // Safe date parsing
@@ -120,7 +119,7 @@ const ActivityGalleryScreen: React.FC = () => {
     try {
       const activityData = await getAllEventActivity()
       setActivities(activityData)
-      setFilteredActivities(activityData)
+      // setFilteredActivities(activityData)
     } catch (error) {
       console.error("Error fetching activities:", error)
       Alert.alert("Error", "Failed to fetch activity photos")
@@ -136,32 +135,7 @@ const ActivityGalleryScreen: React.FC = () => {
     setRefreshing(false)
   }
 
-  // Filter activities
-  const filterActivities = async (filterType: FilterType) => {
-    // setSelectedFilter(filterType)
 
-    // if (filterType === "ALL") {
-    //   setFilteredActivities(activities)
-    //   return
-    // }
-
-    // try {
-    //   // You can either filter locally or fetch from API
-    //   const filtered = activities.filter(
-    //     (activity) =>
-    //       activity.category?.toUpperCase() === filterType || activity.event_type?.toUpperCase() === filterType,
-    //   )
-    //   setFilteredActivities(filtered)
-    // } catch (error) {
-    //   console.error("Error filtering activities:", error)
-    //   // Fallback to local filtering
-    //   const filtered = activities.filter(
-    //     (activity) =>
-    //       activity.category?.toUpperCase() === filterType || activity.event_type?.toUpperCase() === filterType,
-    //   )
-    //   setFilteredActivities(filtered)
-    // }
-  }
 
   // Handle photo press
   const handlePhotoPress = (photo: EventActivity) => {
@@ -169,15 +143,20 @@ const ActivityGalleryScreen: React.FC = () => {
     setShowPhotoModal(true)
   }
 
-  // Handle image load start
   const handleImageLoadStart = (photoId: string) => {
-    setImageLoading((prev) => ({ ...prev, [photoId]: true }))
+    setImageLoading((prev) => {
+      if (prev[photoId]) return prev // already loading
+      return { ...prev, [photoId]: true }
+    })
   }
 
-  // Handle image load end
   const handleImageLoadEnd = (photoId: string) => {
-    setImageLoading((prev) => ({ ...prev, [photoId]: false }))
+    setImageLoading((prev) => {
+      if (prev[photoId] === false) return prev // already done
+      return { ...prev, [photoId]: false }
+    })
   }
+
 
   // Share photo
   const sharePhoto = async (photo: EventActivity) => {
@@ -203,19 +182,7 @@ const ActivityGalleryScreen: React.FC = () => {
     }
   }
 
-  // Get statistics
-  const getStats = () => {
-    const total = activities.length
-    const categories = [...new Set(activities.map((a) => a.category || a.event_type).filter(Boolean))]
-    const recent = activities.filter((a) => {
-      const date = safeParseDateString(a.event_date || a.created_at)
-      if (!date) return false
-      const daysDiff = Math.floor((new Date().getTime() - date.getTime()) / (1000 * 60 * 60 * 24))
-      return daysDiff <= 30
-    }).length
 
-    return { total, categories: categories.length, recent }
-  }
 
   // Calculate image dimensions for masonry layout
   const getImageDimensions = (index: number) => {
@@ -227,46 +194,18 @@ const ActivityGalleryScreen: React.FC = () => {
     }
   }
 
+  // const dimensions = useMemo(() => getImageDimensions(actualIndex), [actualIndex])
+
+
+
   useEffect(() => {
     fetchActivities()
   }, [])
 
-  const stats = getStats()
-  const filterOptions = [
-    { id: "ALL", label: "All Photos", icon: "photo-library", count: activities.length },
-    {
-      id: "SPORTS",
-      label: "Sports",
-      icon: "sports",
-      count: activities.filter(
-        (a) => a.category?.toUpperCase() === "SPORTS" || a.event_type?.toUpperCase() === "SPORTS",
-      ).length,
-    },
-    {
-      id: "CULTURAL",
-      label: "Cultural",
-      icon: "theater-comedy",
-      count: activities.filter(
-        (a) => a.category?.toUpperCase() === "CULTURAL" || a.event_type?.toUpperCase() === "CULTURAL",
-      ).length,
-    },
-    {
-      id: "ACADEMIC",
-      label: "Academic",
-      icon: "school",
-      count: activities.filter(
-        (a) => a.category?.toUpperCase() === "ACADEMIC" || a.event_type?.toUpperCase() === "ACADEMIC",
-      ).length,
-    },
-    {
-      id: "SOCIAL",
-      label: "Social",
-      icon: "groups",
-      count: activities.filter(
-        (a) => a.category?.toUpperCase() === "SOCIAL" || a.event_type?.toUpperCase() === "SOCIAL",
-      ).length,
-    },
-  ]
+
+  useEffect(()=>{
+    console.log("render")
+  },[])
 
   return (
     <ScrollView
@@ -282,7 +221,8 @@ const ActivityGalleryScreen: React.FC = () => {
           </TouchableOpacity>
         </Link>
         <View className="flex-1 items-center">
-          <Typography className="text-xl font-bold text-white">Event Gallery</Typography> 
+          
+          <Typography className="text-xl font-bold text-white">Event Gallery</Typography>
         </View>
         <TouchableOpacity className="p-2" onPress={onRefresh}>
           <Icon name="refresh" size={20} color="white" />
@@ -292,44 +232,16 @@ const ActivityGalleryScreen: React.FC = () => {
       {/* Stats Overview */}
       <View className="px-4 -mt-8 mb-5">
         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-          <Typography className="text-lg font-bold text-[#2C3E50] mb-4">Photo Gallery</Typography> 
-          <Typography className="text-sm text-[#7F8C8D] mb-4">Your event's photos and memories</Typography> 
-          <View className="flex-row justify-between">
-            <View className="items-center">
-              <Typography className="text-2xl font-bold text-[#8B5CF6]">{stats.total}</Typography> 
-              <Typography className="text-xs text-[#7F8C8D]">Total Photos</Typography> 
-            </View>
-            <View className="items-center">
-              <Typography className="text-2xl font-bold text-[#10B981]">{stats.categories}</Typography> 
-              <Typography className="text-xs text-[#7F8C8D]">Categories</Typography> 
-            </View>
-            <View className="items-center">
-              <Typography className="text-2xl font-bold text-[#F59E0B]">{stats.recent}</Typography> 
-              <Typography className="text-xs text-[#7F8C8D]">Recent</Typography> 
-            </View>
-            <View className="items-center">
-              <Typography className="text-2xl font-bold text-[#EF4444]">{filteredActivities.length}</Typography> 
-              <Typography className="text-xs text-[#7F8C8D]">Filtered</Typography> 
-            </View>
-          </View>
+          <Typography className="text-lg font-bold text-[#2C3E50] mb-4">Photo Gallery</Typography>
+          <Typography className="text-sm text-[#7F8C8D] mb-4">Your event's photos and memories</Typography>
+
         </View>
       </View>
 
       {/* Filter and View Controls */}
       <View className="px-4 mb-5">
         <View className="flex-row justify-between items-center">
-          <TouchableOpacity
-            className="bg-white rounded-xl p-3 shadow-lg elevation-5 flex-row items-center flex-1 mr-3"
-            onPress={() => setShowFilterModal(true)}
-          >
-            <Icon name="filter-list" size={20} color="#8B5CF6" />
-            <Typography className="text-sm font-semibold text-[#2C3E50] ml-2">
-              {filterOptions.find((f) => f.id === selectedFilter)?.label || "All Photos"}
-            </Typography> 
-            <View className="ml-auto">
-              <Icon name="expand-more" size={20} color="#7F8C8D" />
-            </View>
-          </TouchableOpacity>
+
 
           <TouchableOpacity
             className="bg-white rounded-xl p-3 shadow-lg elevation-5"
@@ -345,10 +257,10 @@ const ActivityGalleryScreen: React.FC = () => {
         <View className="px-4">
           <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5 items-center">
             <LoadingPhotosIllustration />
-            <Typography className="text-lg font-semibold text-[#2C3E50] mt-4">Loading Photos...</Typography> 
+            <Typography className="text-lg font-semibold text-[#2C3E50] mt-4">Loading Photos...</Typography>
             <Typography className="text-sm text-[#7F8C8D] mt-2 text-center">
               Please wait while we fetch your activity photos
-            </Typography> 
+            </Typography>
           </View>
         </View>
       )}
@@ -356,13 +268,13 @@ const ActivityGalleryScreen: React.FC = () => {
       {/* Photo Gallery */}
       {!isLoading && (
         <View className="px-4">
-          {filteredActivities.length > 0 ? (
+          {activities.length > 0 ? (
             <View>
               {viewType === "MASONRY" ? (
                 // Masonry Layout
                 <View className="flex-row justify-between">
                   <View className="flex-1 mr-2">
-                    {filteredActivities
+                    {activities
                       .filter((_, index) => index % 2 === 0)
                       .map((photo, index) => {
                         const actualIndex = index * 2
@@ -391,11 +303,11 @@ const ActivityGalleryScreen: React.FC = () => {
                                 <View className="absolute bottom-0 left-0 right-0 bg-black/50 p-2">
                                   <Typography className="text-white text-xs font-semibold" numberOfLines={1}>
                                     {photo.title}
-                                  </Typography> 
+                                  </Typography>
                                   {photo.event_date && (
                                     <Typography className="text-white text-xs opacity-80">
                                       {formatDateDisplay(photo.event_date)}
-                                    </Typography> 
+                                    </Typography>
                                   )}
                                 </View>
                               )}
@@ -405,7 +317,7 @@ const ActivityGalleryScreen: React.FC = () => {
                       })}
                   </View>
                   <View className="flex-1 ml-2">
-                    {filteredActivities
+                    {activities
                       .filter((_, index) => index % 2 === 1)
                       .map((photo, index) => {
                         const actualIndex = index * 2 + 1
@@ -434,11 +346,11 @@ const ActivityGalleryScreen: React.FC = () => {
                                 <View className="absolute bottom-0 left-0 right-0 bg-black/50 p-2">
                                   <Typography className="text-white text-xs font-semibold" numberOfLines={1}>
                                     {photo.title}
-                                  </Typography> 
+                                  </Typography>
                                   {photo.event_date && (
                                     <Typography className="text-white text-xs opacity-80">
                                       {formatDateDisplay(photo.event_date)}
-                                    </Typography> 
+                                    </Typography>
                                   )}
                                 </View>
                               )}
@@ -451,7 +363,7 @@ const ActivityGalleryScreen: React.FC = () => {
               ) : (
                 // Grid Layout
                 <View className="flex-row flex-wrap justify-between">
-                  {filteredActivities.map((photo) => (
+                  {activities.map((photo) => (
                     <TouchableOpacity
                       key={photo._id}
                       className="w-[48%] mb-4 bg-white rounded-2xl overflow-hidden shadow-lg elevation-5"
@@ -462,8 +374,8 @@ const ActivityGalleryScreen: React.FC = () => {
                           source={{ uri: photo.image_path }}
                           className="w-full h-40"
                           resizeMode="cover"
-                          onLoadStart={() => handleImageLoadStart(photo._id)}
-                          onLoadEnd={() => handleImageLoadEnd(photo._id)}
+                          onLoadStart={() => handleImageLoadStart(photo?._id)}
+                          onLoadEnd={() => handleImageLoadEnd(photo?._id)}
                         />
                         {imageLoading[photo._id] && (
                           <View className="absolute inset-0 bg-gray-200 items-center justify-center">
@@ -474,11 +386,11 @@ const ActivityGalleryScreen: React.FC = () => {
                           <View className="absolute bottom-0 left-0 right-0 bg-black/50 p-2">
                             <Typography className="text-white text-xs font-semibold" numberOfLines={1}>
                               {photo.title}
-                            </Typography> 
+                            </Typography>
                             {photo.event_date && (
                               <Typography className="text-white text-xs opacity-80">
                                 {formatDateDisplay(photo.event_date)}
-                              </Typography> 
+                              </Typography>
                             )}
                           </View>
                         )}
@@ -491,78 +403,19 @@ const ActivityGalleryScreen: React.FC = () => {
           ) : (
             <View className="bg-white rounded-2xl p-6 shadow-lg elevation-5 items-center">
               <NoPhotosIllustration />
-              <Typography className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">No Photos Found</Typography> 
+              <Typography className="text-lg font-bold text-[#2C3E50] mt-4 mb-2">No Photos Found</Typography>
               <Typography className="text-sm text-[#7F8C8D] text-center mb-4">
-                {selectedFilter === "ALL"
-                  ? "No activity photos are available at the moment."
-                  : `No photos found for ${filterOptions.find((f) => f.id === selectedFilter)?.label.toLowerCase()}.`}
-              </Typography> 
-              {selectedFilter !== "ALL" && (
-                <TouchableOpacity className="bg-[#8B5CF6] px-6 py-3 rounded-xl" onPress={() => filterActivities("ALL")}>
-                  <Typography className="text-white font-semibold">View All Photos</Typography> 
-                </TouchableOpacity>
-              )}
+
+                No activity photos are available at the moment
+
+              </Typography>
+
             </View>
           )}
         </View>
       )}
 
-      {/* Filter Modal */}
-      <Modal
-        visible={showFilterModal}
-        animationType="slide"
-        transparent={true}
-        statusBarTranslucent={true}
-        onRequestClose={() => setShowFilterModal(false)}
-      >
-        <View className="flex-1 bg-black/50 justify-end">
-          <View className="bg-white rounded-t-[25px] p-5 max-h-[60%]">
-            <View className="flex-row justify-between items-center mb-5">
-              <Typography className="text-xl font-bold text-[#2C3E50]">Filter Photos</Typography> 
-              <TouchableOpacity onPress={() => setShowFilterModal(false)}>
-                <Icon name="close" size={24} color="#2C3E50" />
-              </TouchableOpacity>
-            </View>
 
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {filterOptions.map((filter) => (
-                <TouchableOpacity
-                  key={filter.id}
-                  className={`p-4 rounded-xl mb-3 flex-row items-center justify-between ${
-                    selectedFilter === filter.id ? "bg-[#8B5CF6]" : "bg-[#F8F9FA]"
-                  }`}
-                  onPress={() => {
-                    filterActivities(filter.id as FilterType)
-                    setShowFilterModal(false)
-                  }}
-                >
-                  <View className="flex-row items-center">
-                    <Icon name={filter.icon} size={20} color={selectedFilter === filter.id ? "white" : "#8B5CF6"} />
-                    <Typography
-                      className={`text-base font-semibold ml-3 ${
-                        selectedFilter === filter.id ? "text-white" : "text-[#2C3E50]"
-                      }`}
-                    >
-                      {filter.label}
-                    </Typography> 
-                  </View>
-                  <View
-                    className={`px-2 py-1 rounded-lg ${
-                      selectedFilter === filter.id ? "bg-white/20" : "bg-[#8B5CF6]/20"
-                    }`}
-                  >
-                    <Typography
-                      className={`text-xs font-bold ${selectedFilter === filter.id ? "text-white" : "text-[#8B5CF6]"}`}
-                    >
-                      {filter.count}
-                    </Typography> 
-                  </View>
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-          </View>
-        </View>
-      </Modal>
 
       {/* Photo Detail Modal */}
       <Modal
@@ -601,19 +454,19 @@ const ActivityGalleryScreen: React.FC = () => {
           {/* Photo Info */}
           {activePhoto && (activePhoto.title || activePhoto.description || activePhoto.event_date) && (
             <View className="bg-black/80 p-4">
-              {activePhoto.title && <Typography className="text-white text-lg font-bold mb-2">{activePhoto.title}</Typography> }
-              {activePhoto.description && <Typography className="text-white text-sm mb-2">{activePhoto.description}</Typography> }
+              {activePhoto.title && <Typography className="text-white text-lg font-bold mb-2">{activePhoto.title}</Typography>}
+              {activePhoto.description && <Typography className="text-white text-sm mb-2">{activePhoto.description}</Typography>}
               <View className="flex-row items-center justify-between">
                 {activePhoto.event_date && (
-                  <Typography className="text-white text-xs opacity-80">{formatDateDisplay(activePhoto.event_date)}</Typography> 
+                  <Typography className="text-white text-xs opacity-80">{formatDateDisplay(activePhoto.event_date)}</Typography>
                 )}
-                {activePhoto.location && <Typography className="text-white text-xs opacity-80">{activePhoto.location}</Typography> }
+                {activePhoto.location && <Typography className="text-white text-xs opacity-80">{activePhoto.location}</Typography>}
               </View>
               {activePhoto.tags && activePhoto.tags.length > 0 && (
                 <View className="flex-row flex-wrap mt-2">
                   {activePhoto.tags.map((tag, index) => (
                     <View key={index} className="bg-white/20 rounded-full px-2 py-1 mr-2 mb-1">
-                      <Typography className="text-white text-xs">#{tag}</Typography> 
+                      <Typography className="text-white text-xs">#{tag}</Typography>
                     </View>
                   ))}
                 </View>
@@ -623,33 +476,7 @@ const ActivityGalleryScreen: React.FC = () => {
         </View>
       </Modal>
 
-      {/* Photo Tips */}
-      {filteredActivities.length > 0 && (
-        <View className="mx-4 mt-6 mb-8 bg-white rounded-2xl p-4 shadow-lg elevation-5">
-          <Typography className="text-lg font-bold text-[#2C3E50] mb-3 flex-row items-center">
-            <Icon name="info" size={20} color="#8B5CF6" />
-            <Typography className="ml-2">Photo Gallery Tips</Typography> 
-          </Typography> 
-          <View className="gap-2">
-            <View className="flex-row items-center">
-              <Icon name="touch-app" size={16} color="#10B981" />
-              <Typography className="text-sm text-[#7F8C8D] ml-2">Tap any photo to view in full screen</Typography> 
-            </View>
-            <View className="flex-row items-center">
-              <Icon name="share" size={16} color="#3B82F6" />
-              <Typography className="text-sm text-[#7F8C8D] ml-2">Share photos with friends and family</Typography> 
-            </View>
-            <View className="flex-row items-center">
-              <Icon name="download" size={16} color="#F59E0B" />
-              <Typography className="text-sm text-[#7F8C8D] ml-2">Download photos to your device</Typography> 
-            </View>
-            <View className="flex-row items-center">
-              <Icon name="filter-list" size={16} color="#8B5CF6" />
-              <Typography className="text-sm text-[#7F8C8D] ml-2">Use filters to find specific event photos</Typography> 
-            </View>
-          </View>
-        </View>
-      )}
+
     </ScrollView>
   )
 }

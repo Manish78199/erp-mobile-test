@@ -1,496 +1,3 @@
-// "use client"
-
-// import type React from "react"
-// import { useState } from "react"
-// import { View, Text, ScrollView, TouchableOpacity, Modal } from "react-native"
-// import Icon from "react-native-vector-icons/MaterialIcons"
-// import { Link } from "expo-router"
-
-// const ResultScreen: React.FC = () => {
-//   const [selectedExam, setSelectedExam] = useState("mid-term")
-//   const [showResultModal, setShowResultModal] = useState(false)
-//   const [selectedResult, setSelectedResult] = useState<any>(null)
-
-//   const resultData = {
-//     "mid-term": {
-//       name: "Mid-Term Examination",
-//       date: "December 2024",
-//       status: "published",
-//       overallGrade: "A-",
-//       percentage: 85.5,
-//       totalMarks: 600,
-//       obtainedMarks: 513,
-//       rank: 5,
-//       totalStudents: 120,
-//       subjects: [
-//         {
-//           subject: "Mathematics",
-//           obtainedMarks: 88,
-//           totalMarks: 100,
-//           grade: "A",
-//           percentage: 88,
-//           teacher: "Mrs. Sarah Johnson",
-//           remarks: "Excellent performance in algebra",
-//           color: "#6A5ACD",
-//         },
-//         {
-//           subject: "Physics",
-//           obtainedMarks: 82,
-//           totalMarks: 100,
-//           grade: "A",
-//           percentage: 82,
-//           teacher: "Dr. Michael Brown",
-//           remarks: "Good understanding of concepts",
-//           color: "#00BCD4",
-//         },
-//         {
-//           subject: "Chemistry",
-//           obtainedMarks: 90,
-//           totalMarks: 100,
-//           grade: "A+",
-//           percentage: 90,
-//           teacher: "Prof. Lisa Anderson",
-//           remarks: "Outstanding work in organic chemistry",
-//           color: "#2ECC71",
-//         },
-//         {
-//           subject: "Biology",
-//           obtainedMarks: 85,
-//           totalMarks: 100,
-//           grade: "A",
-//           percentage: 85,
-//           teacher: "Dr. Robert Wilson",
-//           remarks: "Strong grasp of biological processes",
-//           color: "#FFC107",
-//         },
-//         {
-//           subject: "English",
-//           obtainedMarks: 87,
-//           totalMarks: 100,
-//           grade: "A",
-//           percentage: 87,
-//           teacher: "Ms. Emily Davis",
-//           remarks: "Excellent essay writing skills",
-//           color: "#E91E63",
-//         },
-//         {
-//           subject: "History",
-//           obtainedMarks: 81,
-//           totalMarks: 100,
-//           grade: "A",
-//           percentage: 81,
-//           teacher: "Mr. James Smith",
-//           remarks: "Good analytical skills",
-//           color: "#795548",
-//         },
-//       ],
-//     },
-//     "unit-test": {
-//       name: "Unit Test",
-//       date: "November 2024",
-//       status: "published",
-//       overallGrade: "B+",
-//       percentage: 78.2,
-//       totalMarks: 250,
-//       obtainedMarks: 195,
-//       rank: 8,
-//       totalStudents: 120,
-//       subjects: [
-//         {
-//           subject: "Mathematics",
-//           obtainedMarks: 42,
-//           totalMarks: 50,
-//           grade: "A",
-//           percentage: 84,
-//           teacher: "Mrs. Sarah Johnson",
-//           remarks: "Good progress",
-//           color: "#6A5ACD",
-//         },
-//         {
-//           subject: "Physics",
-//           obtainedMarks: 38,
-//           totalMarks: 50,
-//           grade: "B+",
-//           percentage: 76,
-//           teacher: "Dr. Michael Brown",
-//           remarks: "Need more practice",
-//           color: "#00BCD4",
-//         },
-//         {
-//           subject: "Chemistry",
-//           obtainedMarks: 45,
-//           totalMarks: 50,
-//           grade: "A+",
-//           percentage: 90,
-//           teacher: "Prof. Lisa Anderson",
-//           remarks: "Excellent work",
-//           color: "#2ECC71",
-//         },
-//         {
-//           subject: "Biology",
-//           obtainedMarks: 35,
-//           totalMarks: 50,
-//           grade: "B",
-//           percentage: 70,
-//           teacher: "Dr. Robert Wilson",
-//           remarks: "Average performance",
-//           color: "#FFC107",
-//         },
-//         {
-//           subject: "English",
-//           obtainedMarks: 35,
-//           totalMarks: 50,
-//           grade: "B",
-//           percentage: 70,
-//           teacher: "Ms. Emily Davis",
-//           remarks: "Focus on grammar",
-//           color: "#E91E63",
-//         },
-//       ],
-//     },
-//     final: {
-//       name: "Final Examination",
-//       date: "March 2024",
-//       status: "awaited",
-//       overallGrade: "-",
-//       percentage: 0,
-//       totalMarks: 800,
-//       obtainedMarks: 0,
-//       rank: 0,
-//       totalStudents: 120,
-//       subjects: [],
-//     },
-//   }
-
-//   const examTypes = [
-//     { id: "mid-term", label: "Mid-Term", icon: "quiz", color: "#6A5ACD" },
-//     { id: "unit-test", label: "Unit Test", icon: "assignment", color: "#F39C12" },
-//     { id: "final", label: "Final", icon: "school", color: "#E74C3C" },
-//   ]
-
-//   const getGradeColor = (grade: string) => {
-//     if (grade.includes("A")) return "#2ECC71"
-//     if (grade.includes("B")) return "#F39C12"
-//     if (grade.includes("C")) return "#FF9800"
-//     if (grade.includes("D")) return "#E74C3C"
-//     return "#BDC3C7"
-//   }
-
-//   const getStatusColor = (status: string) => {
-//     switch (status) {
-//       case "published":
-//         return "#2ECC71"
-//       case "awaited":
-//         return "#F39C12"
-//       case "pending":
-//         return "#6A5ACD"
-//       default:
-//         return "#BDC3C7"
-//     }
-//   }
-
-//   const getPerformanceLevel = (percentage: number) => {
-//     if (percentage >= 90) return { level: "Excellent", color: "#2ECC71" }
-//     if (percentage >= 80) return { level: "Very Good", color: "#6A5ACD" }
-//     if (percentage >= 70) return { level: "Good", color: "#F39C12" }
-//     if (percentage >= 60) return { level: "Average", color: "#FF9800" }
-//     return { level: "Needs Improvement", color: "#E74C3C" }
-//   }
-
-//   const currentResult = resultData[selectedExam as keyof typeof resultData]
-//   const performance = getPerformanceLevel(currentResult.percentage)
-
-//   return (
-//     <ScrollView className="flex-1 bg-[#F0F4F8]" showsVerticalScrollIndicator={false}>
-//       {/* Header */}
-//       <View className="flex-row items-center justify-between bg-[#6A5ACD] pt-12 pb-5 px-4 rounded-b-[25px]">
-//         <Link href="/student" asChild>
-//           <TouchableOpacity className="p-2">
-//             <Icon name="arrow-back" size={24} color="white" />
-//           </TouchableOpacity>
-//         </Link>
-//         <View className="flex-1 items-center">
-//           <Typography className="text-xl font-bold text-white">Results</Typography> 
-//         </View>
-//         <TouchableOpacity className="p-2">
-//           <Icon name="download" size={20} color="white" />
-//         </TouchableOpacity>
-//       </View>
-
-//       {/* Result Overview Card */}
-//       <View className="px-4 -mt-8 mb-5">
-//         <View className="bg-white rounded-2xl p-4 shadow-lg elevation-5">
-//           <View className="flex-row items-center justify-between mb-4">
-//             <View>
-//               <Typography className="text-lg font-bold text-[#2C3E50]">{currentResult.name}</Typography> 
-//               <Typography className="text-sm text-[#7F8C8D]">{currentResult.date}</Typography> 
-//             </View>
-//             <View
-//               className="px-4 py-2 rounded-xl"
-//               style={{ backgroundColor: `${getStatusColor(currentResult.status)}20` }}
-//             >
-//               <Typography className="text-sm font-bold" style={{ color: getStatusColor(currentResult.status) }}>
-//                 {currentResult.status.toUpperCase()}
-//               </Typography> 
-//             </View>
-//           </View>
-
-//           {currentResult.status === "published" ? (
-//             <>
-//               <View className="flex-row justify-between items-center mb-4">
-//                 <View className="items-center">
-//                   <Typography className="text-3xl font-bold text-[#6A5ACD]">{currentResult.percentage}%</Typography> 
-//                   <Typography className="text-xs text-[#7F8C8D]">Overall</Typography> 
-//                 </View>
-//                 <View className="items-center">
-//                   <Typography className="text-3xl font-bold" style={{ color: getGradeColor(currentResult.overallGrade) }}>
-//                     {currentResult.overallGrade}
-//                   </Typography> 
-//                   <Typography className="text-xs text-[#7F8C8D]">Grade</Typography> 
-//                 </View>
-//                 <View className="items-center">
-//                   <Typography className="text-3xl font-bold text-[#F39C12]">#{currentResult.rank}</Typography> 
-//                   <Typography className="text-xs text-[#7F8C8D]">Rank</Typography> 
-//                 </View>
-//               </View>
-
-//               <View className="bg-[#F8F9FA] rounded-xl p-3">
-//                 <View className="flex-row justify-between items-center mb-2">
-//                   <Typography className="text-sm text-[#7F8C8D]">Marks Obtained:</Typography> 
-//                   <Typography className="text-sm font-bold text-[#2C3E50]">
-//                     {currentResult.obtainedMarks}/{currentResult.totalMarks}
-//                   </Typography> 
-//                 </View>
-//                 <View className="flex-row justify-between items-center mb-2">
-//                   <Typography className="text-sm text-[#7F8C8D]">Class Rank:</Typography> 
-//                   <Typography className="text-sm font-bold text-[#6A5ACD]">
-//                     {currentResult.rank} out of {currentResult.totalStudents}
-//                   </Typography> 
-//                 </View>
-//                 <View className="flex-row justify-between items-center">
-//                   <Typography className="text-sm text-[#7F8C8D]">Performance:</Typography> 
-//                   <Typography className="text-sm font-bold" style={{ color: performance.color }}>
-//                     {performance.level}
-//                   </Typography> 
-//                 </View>
-//               </View>
-//             </>
-//           ) : (
-//             <View className="items-center py-8">
-//               <Icon name="schedule" size={48} color="#F39C12" />
-//               <Typography className="text-lg font-bold text-[#F39C12] mt-3">Results Awaited</Typography> 
-//               <Typography className="text-sm text-[#7F8C8D] text-center mt-2">
-//                 Results will be published soon. You will be notified once available.
-//               </Typography> 
-//             </View>
-//           )}
-//         </View>
-//       </View>
-
-//       {/* Exam Type Selector */}
-//       <View className="px-4 mb-5">
-//         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-//           {examTypes.map((exam) => (
-//             <TouchableOpacity
-//               key={exam.id}
-//               className={`flex-row items-center px-4 py-2.5 mr-3 rounded-[20px] border ${
-//                 selectedExam === exam.id ? "border-[#6A5ACD]" : "bg-white border-[#DDE4EB]"
-//               }`}
-//               style={selectedExam === exam.id ? { backgroundColor: `${exam.color}20` } : {}}
-//               onPress={() => setSelectedExam(exam.id)}
-//             >
-//               <Icon name={exam.icon} size={16} color={exam.color} />
-//               <Text
-//                 className={`text-sm font-semibold ml-2 ${
-//                   selectedExam === exam.id ? "text-[#2C3E50]" : "text-[#7F8C8D]"
-//                 }`}
-//               >
-//                 {exam.label}
-//               </Typography> 
-//             </TouchableOpacity>
-//           ))}
-//         </ScrollView>
-//       </View>
-
-//       {/* Subject-wise Results */}
-//       {currentResult.status === "published" && currentResult.subjects.length > 0 && (
-//         <View className="px-4 mb-8">
-//           <Typography className="text-xl font-bold text-[#2C3E50] mb-4">Subject-wise Performance</Typography> 
-//           <View className="gap-4">
-//             {currentResult.subjects.map((subject, index) => (
-//               <TouchableOpacity
-//                 key={index}
-//                 className="bg-white rounded-2xl p-4 shadow-lg elevation-5"
-//                 onPress={() => {
-//                   setSelectedResult(subject)
-//                   setShowResultModal(true)
-//                 }}
-//               >
-//                 {/* Header */}
-//                 <View className="flex-row items-center justify-between mb-3">
-//                   <View className="flex-row items-center flex-1">
-//                     <View className="w-4 h-4 rounded-full mr-3" style={{ backgroundColor: subject.color }} />
-//                     <View className="flex-1">
-//                       <Typography className="text-base font-bold text-[#2C3E50]">{subject.subject}</Typography> 
-//                       <Typography className="text-sm text-[#7F8C8D]">{subject.teacher}</Typography> 
-//                     </View>
-//                   </View>
-//                   <View className="items-end">
-//                     <View
-//                       className="px-3 py-1 rounded-xl mb-1"
-//                       style={{ backgroundColor: `${getGradeColor(subject.grade)}20` }}
-//                     >
-//                       <Typography className="text-sm font-bold" style={{ color: getGradeColor(subject.grade) }}>
-//                         {subject.grade}
-//                       </Typography> 
-//                     </View>
-//                     <Typography className="text-xs text-[#7F8C8D]">{subject.percentage}%</Typography> 
-//                   </View>
-//                 </View>
-
-//                 {/* Marks */}
-//                 <View className="flex-row justify-between items-center mb-3">
-//                   <Typography className="text-lg font-bold text-[#2C3E50]">
-//                     {subject.obtainedMarks}/{subject.totalMarks}
-//                   </Typography> 
-//                   <Typography className="text-sm text-[#6A5ACD] font-semibold">{subject.percentage}%</Typography> 
-//                 </View>
-
-//                 {/* Progress Bar */}
-//                 <View className="h-2 bg-[#EAECEE] rounded-full overflow-hidden mb-2">
-//                   <View
-//                     className="h-full rounded-full"
-//                     style={{
-//                       width: `${subject.percentage}%`,
-//                       backgroundColor: getGradeColor(subject.grade),
-//                     }}
-//                   />
-//                 </View>
-
-//                 {/* Remarks */}
-//                 <Typography className="text-sm text-[#7F8C8D] italic">{subject.remarks}</Typography> 
-//               </TouchableOpacity>
-//             ))}
-//           </View>
-//         </View>
-//       )}
-
-//       {/* Result Detail Modal */}
-//       <Modal
-//         visible={showResultModal}
-//         animationType="slide"
-//         transparent={true}
-//         onRequestClose={() => setShowResultModal(false)}
-//       >
-//         <View className="flex-1 bg-black/50 justify-end">
-//           <View className="bg-white rounded-t-[25px] p-5 max-h-[80%]">
-//             <View className="flex-row justify-between items-center mb-5">
-//               <Typography className="text-xl font-bold text-[#2C3E50] flex-1 mr-4">Subject Details</Typography> 
-//               <TouchableOpacity onPress={() => setShowResultModal(false)}>
-//                 <Icon name="close" size={24} color="#2C3E50" />
-//               </TouchableOpacity>
-//             </View>
-
-//             {selectedResult && (
-//               <ScrollView showsVerticalScrollIndicator={false}>
-//                 {/* Subject Header */}
-//                 <View className="items-center mb-6">
-//                   <View
-//                     className="w-16 h-16 rounded-full items-center justify-center mb-3"
-//                     style={{ backgroundColor: `${selectedResult.color}20` }}
-//                   >
-//                     <Icon name="grade" size={32} color={selectedResult.color} />
-//                   </View>
-//                   <Typography className="text-xl font-bold text-[#2C3E50] text-center mb-2">{selectedResult.subject}</Typography> 
-//                   <Typography className="text-sm text-[#7F8C8D] text-center">{selectedResult.teacher}</Typography> 
-//                 </View>
-
-//                 {/* Grade & Marks */}
-//                 <View className="bg-[#F8F9FA] rounded-2xl p-4 mb-6">
-//                   <View className="flex-row justify-between items-center mb-4">
-//                     <View className="items-center">
-//                       <Typography className="text-3xl font-bold" style={{ color: getGradeColor(selectedResult.grade) }}>
-//                         {selectedResult.grade}
-//                       </Typography> 
-//                       <Typography className="text-xs text-[#7F8C8D]">Grade</Typography> 
-//                     </View>
-//                     <View className="items-center">
-//                       <Typography className="text-3xl font-bold text-[#6A5ACD]">{selectedResult.percentage}%</Typography> 
-//                       <Typography className="text-xs text-[#7F8C8D]">Percentage</Typography> 
-//                     </View>
-//                     <View className="items-center">
-//                       <Typography className="text-3xl font-bold text-[#2C3E50]">
-//                         {selectedResult.obtainedMarks}/{selectedResult.totalMarks}
-//                       </Typography> 
-//                       <Typography className="text-xs text-[#7F8C8D]">Marks</Typography> 
-//                     </View>
-//                   </View>
-
-//                   {/* Progress Bar */}
-//                   <View className="h-3 bg-[#EAECEE] rounded-full overflow-hidden">
-//                     <View
-//                       className="h-full rounded-full"
-//                       style={{
-//                         width: `${selectedResult.percentage}%`,
-//                         backgroundColor: getGradeColor(selectedResult.grade),
-//                       }}
-//                     />
-//                   </View>
-//                 </View>
-
-//                 {/* Teacher's Remarks */}
-//                 <View className="mb-6">
-//                   <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Teacher's Remarks</Typography> 
-//                   <View className="bg-[#F8F9FA] rounded-2xl p-4">
-//                     <Typography className="text-sm text-[#2C3E50] leading-6 italic">"{selectedResult.remarks}"</Typography> 
-//                   </View>
-//                 </View>
-
-//                 {/* Performance Analysis */}
-//                 <View className="mb-6">
-//                   <Typography className="text-lg font-bold text-[#2C3E50] mb-3">Performance Analysis</Typography> 
-//                   <View className="gap-3">
-//                     <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-//                       <Typography className="text-sm text-[#7F8C8D]">Marks Obtained</Typography> 
-//                       <Typography className="text-sm font-bold text-[#2C3E50]">{selectedResult.obtainedMarks}</Typography> 
-//                     </View>
-//                     <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-//                       <Typography className="text-sm text-[#7F8C8D]">Total Marks</Typography> 
-//                       <Typography className="text-sm font-bold text-[#2C3E50]">{selectedResult.totalMarks}</Typography> 
-//                     </View>
-//                     <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-//                       <Typography className="text-sm text-[#7F8C8D]">Percentage</Typography> 
-//                       <Typography className="text-sm font-bold text-[#6A5ACD]">{selectedResult.percentage}%</Typography> 
-//                     </View>
-//                     <View className="flex-row items-center justify-between p-3 bg-[#F8F9FA] rounded-xl">
-//                       <Typography className="text-sm text-[#7F8C8D]">Grade</Typography> 
-//                       <Typography className="text-sm font-bold" style={{ color: getGradeColor(selectedResult.grade) }}>
-//                         {selectedResult.grade}
-//                       </Typography> 
-//                     </View>
-//                   </View>
-//                 </View>
-
-//                 {/* Actions */}
-//                 <View className="flex-row gap-3">
-//                   <TouchableOpacity className="flex-1 bg-[#6A5ACD] rounded-xl py-4 items-center">
-//                     <Typography className="text-base font-bold text-white">Download Report</Typography> 
-//                   </TouchableOpacity>
-//                   <TouchableOpacity className="flex-1 bg-[#F8F9FA] border border-[#DDE4EB] rounded-xl py-4 items-center">
-//                     <Typography className="text-base font-bold text-[#2C3E50]">Share</Typography> 
-//                   </TouchableOpacity>
-//                 </View>
-//               </ScrollView>
-//             )}
-//           </View>
-//         </View>
-//       </Modal>
-//     </ScrollView>
-//   )
-// }
-
-// export default ResultScreen
-
 
 
 import type React from "react"
@@ -618,7 +125,7 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
 
   const getPercentage = () => {
     if (!result) return 0
-    return Math.round((result.total_obtained / result.total_max) * 100)
+    return Math.round(((result?.total_obtained || 0)/ (result?.total_max || 0)) * 100)
   }
 
   const getStatusColor = (status: string) => {
@@ -634,10 +141,10 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
               <Icon name="assessment" size={20} color="#6366F1" />
             </View>
             <View className="flex-1">
-              <Typography className="text-base font-bold text-[#2C3E50]">{exam.name}</Typography> 
+              <Typography className="text-base font-bold text-[#2C3E50]">{exam?.name}</Typography> 
               {result && (
                 <Typography className="text-sm text-[#7F8C8D] mt-1">
-                  {result.total_obtained}/{result.total_max} ({getPercentage()}%)
+                  {(result?.total_obtained || 0)}/{(result?.total_max || 0)} ({getPercentage()}%)
                 </Typography> 
               )}
             </View>
@@ -646,10 +153,10 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
             {result && (
               <View
                 className="px-3 py-1 rounded-lg mr-2"
-                style={{ backgroundColor: `${getGradeColor(result.final_result.grade)}20` }}
+                style={{ backgroundColor: `${getGradeColor(result?.final_result?.grade)}20` }}
               >
-                <Typography className="text-xs font-bold" style={{ color: getGradeColor(result.final_result.grade) }}>
-                  Grade {result.final_result.grade}
+                <Typography className="text-xs font-bold" style={{ color: getGradeColor(result?.final_result?.grade) }}>
+                  Grade {result?.final_result?.grade || "--"}
                 </Typography> 
               </View>
             )}
@@ -674,21 +181,21 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
                 <View className="bg-[#F8F9FA] rounded-xl p-3 flex-1 mr-2 items-center">
                   <Icon name="moving" size={20} color="#3B82F6" />
                   <Typography className="text-lg font-bold text-[#2C3E50] mt-1">
-                    {result.total_obtained}/{result.total_max}
+                    {result?.total_obtained || 0}/{result?.total_max || 0}
                   </Typography> 
                   <Typography className="text-xs text-[#7F8C8D]">Total Score</Typography> 
                   <Typography className="text-xs text-[#7F8C8D]">{getPercentage()}%</Typography> 
                 </View>
                 <View className="bg-[#F8F9FA] rounded-xl p-3 flex-1 mx-1 items-center">
                   <Icon name="grade" size={20} color="#10B981" />
-                  <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{result.final_result.grade}</Typography> 
+                  <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{result?.final_result?.grade}</Typography> 
                   <Typography className="text-xs text-[#7F8C8D]">Final Grade</Typography> 
-                  <Typography className="text-xs text-[#10B981]">{result.final_result.remark}</Typography> 
+                  <Typography className="text-xs text-[#10B981]">{result?.final_result?.remark}</Typography> 
                 </View>
                 <View className="bg-[#F8F9FA] rounded-xl p-3 flex-1 ml-2 items-center">
                   <Icon name="emoji-events" size={20} color="#F59E0B" />
-                  <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{result.final_result.value}</Typography> 
-                  <Typography className="text-xs text-[#7F8C8D]">{result.final_result.result_type}</Typography> 
+                  <Typography className="text-lg font-bold text-[#2C3E50] mt-1">{result?.final_result?.value}</Typography> 
+                  <Typography className="text-xs text-[#7F8C8D]">{result?.final_result?.result_type}</Typography> 
                   <Typography className="text-xs text-[#7F8C8D]">Performance</Typography> 
                 </View>
               </View>
@@ -697,28 +204,28 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
               <View className="mb-4">
                 <Typography className="text-base font-bold text-[#2C3E50] mb-3">Subject-wise Results</Typography> 
                 <View className="gap-3">
-                  {result.subjects.map((subject, idx) => (
+                  {result?.subjects?.map((subject, idx) => (
                     <View key={idx} className="bg-[#F8F9FA] rounded-xl p-3">
                       <View className="flex-row items-center justify-between mb-2">
                         <View className="flex-1">
-                          <Typography className="text-sm font-semibold text-[#2C3E50]">{subject.subject_name}</Typography> 
-                          <Typography className="text-xs text-[#7F8C8D]">{subject.subject_type}</Typography> 
+                          <Typography className="text-sm font-semibold text-[#2C3E50]">{subject?.subject_name}</Typography> 
+                          <Typography className="text-xs text-[#7F8C8D]">{subject?.subject_type}</Typography> 
                         </View>
                         <View className="items-end">
                           <View
                             className="px-2 py-1 rounded-lg mb-1"
-                            style={{ backgroundColor: `${getGradeColor(subject.grade)}20` }}
+                            style={{ backgroundColor: `${getGradeColor(subject?.grade)}20` }}
                           >
-                            <Typography className="text-xs font-bold" style={{ color: getGradeColor(subject.grade) }}>
-                              {subject.grade}
+                            <Typography className="text-xs font-bold" style={{ color: getGradeColor(subject?.grade) }}>
+                              {subject?.grade}
                             </Typography> 
                           </View>
                           <View
                             className="px-2 py-1 rounded-lg"
-                            style={{ backgroundColor: `${getStatusColor(subject.status)}20` }}
+                            style={{ backgroundColor: `${getStatusColor(subject?.status)}20` }}
                           >
-                            <Typography className="text-xs font-bold" style={{ color: getStatusColor(subject.status) }}>
-                              {subject.status}
+                            <Typography className="text-xs font-bold" style={{ color: getStatusColor(subject?.status) }}>
+                              {subject?.status}
                             </Typography> 
                           </View>
                         </View>
@@ -726,25 +233,25 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
 
                       <View className="flex-row justify-between items-center">
                         <View className="flex-row gap-4">
-                          {["THEORETICAL", "BOTH"].includes(subject.subject_type) && (
+                          {["THEORETICAL", "BOTH"].includes(subject?.subject_type) && (
                             <View>
                               <Typography className="text-xs text-[#7F8C8D]">Theory</Typography> 
                               <Typography className="text-sm font-semibold text-[#2C3E50]">
-                                {subject.absent ? "AB" : subject.marks_obtained.written || "--"}
+                                {subject.absent ? "AB" : subject?.marks_obtained?.written || "--"}
                               </Typography> 
                             </View>
                           )}
-                          {["PRACTICAL", "BOTH"].includes(subject.subject_type) && (
+                          {["PRACTICAL", "BOTH"].includes(subject?.subject_type) && (
                             <View>
                               <Typography className="text-xs text-[#7F8C8D]">Practical</Typography> 
                               <Typography className="text-sm font-semibold text-[#2C3E50]">
-                                {subject.marks_obtained.practical || "--"}
+                                {subject?.marks_obtained?.practical || "--"}
                               </Typography> 
                             </View>
                           )}
                           <View>
                             <Typography className="text-xs text-[#7F8C8D]">Total</Typography> 
-                            <Typography className="text-sm font-bold text-[#6A5ACD]">{subject.marks_obtained.total}</Typography> 
+                            <Typography className="text-sm font-bold text-[#6A5ACD]">{subject?.marks_obtained?.total}</Typography> 
                           </View>
                         </View>
                       </View>
@@ -762,7 +269,7 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
                 <View className="flex-row justify-between mb-2">
                   <Typography className="text-sm text-[#7F8C8D]">Total Marks:</Typography> 
                   <Typography className="text-sm font-semibold text-[#2C3E50]">
-                    {result.total_obtained}/{result.total_max}
+                    {result?.total_obtained || 0}/{result?.total_max || 0}
                   </Typography> 
                 </View>
                 <View className="flex-row justify-between mb-2">
@@ -771,11 +278,11 @@ const ResultGrid: React.FC<{ exam: Exam; onResultLoad?: (result: ExamResult) => 
                 </View>
                 <View className="flex-row justify-between mb-2">
                   <Typography className="text-sm text-[#7F8C8D]">Grade:</Typography> 
-                  <Typography className="text-sm font-semibold text-[#2C3E50]">{result.final_result.grade}</Typography> 
+                  <Typography className="text-sm font-semibold text-[#2C3E50]">{result?.final_result?.grade}</Typography> 
                 </View>
                 <View className="flex-row justify-between">
                   <Typography className="text-sm text-[#7F8C8D]">Remark:</Typography> 
-                  <Typography className="text-sm font-semibold text-[#2C3E50]">{result.final_result.remark}</Typography> 
+                  <Typography className="text-sm font-semibold text-[#2C3E50]">{result?.final_result?.remark}</Typography> 
                 </View>
               </View>
             </View>
@@ -821,7 +328,7 @@ const ResultScreen: React.FC = () => {
   // Handle result load
   const handleResultLoad = (result: ExamResult) => {
     setLoadedResults((prev) => {
-      const exists = prev.find((r) => r.final_result.value === result.final_result.value)
+      const exists = prev.find((r) => r?.final_result?.value === result?.final_result?.value)
       if (!exists) {
         return [...prev, result]
       }
@@ -847,8 +354,8 @@ const ResultScreen: React.FC = () => {
     let totalSubjects = 0
 
     loadedResults.forEach((result) => {
-      totalPercentage += Math.round((result.total_obtained / result.total_max) * 100)
-      totalSubjects += result.subjects.length
+      totalPercentage += Math.round(((result?.total_obtained || 0) / (result?.total_max || 0)) * 100)
+      totalSubjects += result?.subjects?.length
     })
 
     const avgPercentage = loadedResults.length > 0 ? Math.round(totalPercentage / loadedResults.length) : 0

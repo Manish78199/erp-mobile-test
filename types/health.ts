@@ -3,7 +3,7 @@ export interface HealthProfile {
   weight: number
   bmi: number
   bloodGroup: string
-  lastCheckup: string
+  measure_date: string
   allergies: string[]
   medications: string[]
   emergencyContact: string
