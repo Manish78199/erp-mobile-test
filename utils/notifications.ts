@@ -29,7 +29,7 @@ export async function registerForPushNotificationsAsync() {
       return null;
     }
 
-    const expoTokenResponse = await Notifications.getExpoPushTokenAsync();
+    const expoTokenResponse = await Notifications.getDevicePushTokenAsync();
     token = expoTokenResponse.data;
     console.log('Expo Push Token:', token);
 
@@ -39,11 +39,12 @@ export async function registerForPushNotificationsAsync() {
         importance: Notifications.AndroidImportance.MAX,
         vibrationPattern: [0, 250, 250, 250],
         lightColor: '#FF231F7C',
+        sound: "default",
       });
     }
   } catch (error) {
     console.error('Error while registering for push notifications:', error);
-   return null
+    return null
   }
 
   return token;

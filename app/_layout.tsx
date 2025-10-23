@@ -15,9 +15,7 @@ import {
 import { StudentAppDataProvider } from "@/context/Student/provider";
 import UserTypeProvider from "@/context/RoleAuth/proider";
 import AlertProvider from "@/context/Alert/provider";
-
-
-
+import { useEffect } from "react";
 
 
 export default function RootLayout() {

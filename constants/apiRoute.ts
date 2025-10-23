@@ -2,11 +2,12 @@
 // const BASE_URL = "https://erp-backend.vedatron.com"
 const BASE_URL = "https://erp-demo-backend.vedatron.com"
 
+// const BASE_URL = "http://127.0.0.1:8000"
 
 console.log("env_______________", { BASE_URL })
 const ApiRoute = {
     BaseUrl: `${BASE_URL}`,
-    ROLE_AUTH:`${BASE_URL}/authorize`,
+    ROLE_AUTH: `${BASE_URL}/authorize`,
     app_check: `${BASE_URL}/public/check-update`,
     classService: {
         create: `${BASE_URL}/management/class`,
@@ -87,10 +88,10 @@ const ApiRoute = {
         save_result_setting: `${BASE_URL}/management/result/config`,
         declare: `${BASE_URL}/management/result/declare`,
         view_marksheet: `${BASE_URL}/management/result/marksheet`,
-        get_class_summary:`${BASE_URL}/management/result/summary`
+        get_class_summary: `${BASE_URL}/management/result/summary`
     },
-    TRANSPORT:{
-        vehicle:`${BASE_URL}/management/transport/vehicle`
+    TRANSPORT: {
+        vehicle: `${BASE_URL}/management/transport/vehicle`
     },
     fee: {
         getStudentFeeDetails: `${BASE_URL}/management/fee/student`,
@@ -121,10 +122,10 @@ const ApiRoute = {
     },
     LIBRARY: {
         book_crud: `${BASE_URL}/management/library/book`,
-        search_book:`${BASE_URL}/management/library/search`,
+        search_book: `${BASE_URL}/management/library/search`,
         assignBook: `${BASE_URL}/management/library/assign`,
         returnBook: `${BASE_URL}/management/library/return`,
-        getBorrowedBook:`${BASE_URL}/management/library/borrowed`,
+        getBorrowedBook: `${BASE_URL}/management/library/borrowed`,
         dueBooks: `${BASE_URL}/management/library/due`,
         feeDue: `${BASE_URL}/management/library/fee-due`,
     },
@@ -148,16 +149,16 @@ const ApiRoute = {
         getAllnotice: `${BASE_URL}/student/notice`,
         exam: {
             get_all: `${BASE_URL}/student/exam`,
-            schedule:`${BASE_URL}/student/exam/schedule`,
+            schedule: `${BASE_URL}/student/exam/schedule`,
             result: `${BASE_URL}/student/result`
         },
         health: `${BASE_URL}/student/health`,
-        library:{
-            get_borrowed_book:`${BASE_URL}/student/library/borrowed-books`
+        library: {
+            get_borrowed_book: `${BASE_URL}/student/library/borrowed-books`
         },
-        RESULT:{
-            get_sessional_exams:`${BASE_URL}/student/result/session-exams`,
-            get_exam_result:`${BASE_URL}/student/result`,
+        RESULT: {
+            get_sessional_exams: `${BASE_URL}/student/result/session-exams`,
+            get_exam_result: `${BASE_URL}/student/result`,
 
         },
         TRANSPORT: {

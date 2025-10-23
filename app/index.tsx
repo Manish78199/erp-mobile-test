@@ -40,6 +40,18 @@ interface LoginFormData {
   password: string
 }
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+
+    shouldSetBadge: true,    
+    shouldShowBanner: true,  
+    shouldShowList: true,
+    shouldPlaySound: true,
+  }),
+});
+
+
+
 export default function Login() {
   const router = useRouter()
 
@@ -55,16 +67,6 @@ export default function Login() {
   const { showAlert } = useContext(AlertContext)
 
 
-  useEffect(() => {
-    const subscription = Notifications.addNotificationReceivedListener(notification => {
-      console.log("Received foreground notification:", notification);
-
-    });
-
-    return () => {
-      subscription.remove(); // Clean up on unmount
-    };
-  }, []);
 
   // Mock token verification function
   const VerifyToken = async () => {
@@ -160,7 +162,9 @@ export default function Login() {
 
 
 
+
   useEffect(() => {
+
     const subscription = Notifications.addNotificationReceivedListener(notification => {
       console.log("Foreground notification received:", notification);
     });
