@@ -29,6 +29,7 @@ import { registerForPushNotificationsAsync } from "@/utils/notifications"
 import { savefcmToken } from "@/service/student/fcm"
 import { AlertContext } from "@/context/Alert/context"
 import { StudentAppDataContext } from "@/context/Student/context"
+import { EmployeeLoginRequest } from "@/service/management/login"
 // import { AlertContext } from '@/context/Alert/context';
 // import { UserTypeContext } from '@/context/RoleAuth/context';
 
@@ -43,8 +44,8 @@ interface LoginFormData {
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
 
-    shouldSetBadge: true,    
-    shouldShowBanner: true,  
+    shouldSetBadge: true,
+    shouldShowBanner: true,
     shouldShowList: true,
     shouldPlaySound: true,
   }),
@@ -56,6 +57,8 @@ export default function Login() {
   const router = useRouter()
 
   const loginImage = require("@/assets/images/login/login_child.png")
+
+  const [userRole, setUserRole] = useState<"STUDENT" | "MANAGEMENT">("MANAGEMENT")
 
   const [requesting, setRequesting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -75,7 +78,7 @@ export default function Login() {
       if (token) {
         // Here you would verify the token with your backend
         // For now, we'll just return "STUDENT" if token exists
-        return "STUDENT"
+        return "MANAGEMENT"
       }
       return null
     } catch (error) {
@@ -85,35 +88,31 @@ export default function Login() {
   }
 
   useEffect(() => {
-    const checkLoged = async () => {
+    const checkLogged = async () => {
       setLoading(true)
       try {
         const role = await VerifyToken()
-        console.log(role, "role")
-        if (role) {
-          if (role == "STUDENT") {
-            // registerForPushNotificationsAsync().then((token) => {
-            //   console.log(token, "fcm token")
-
-            //   savefcmToken(token as string)
-            // })
-            refreshProfile()
-            router.push("/student")
-            return
-          }
-          if(role=="MANAGEMENT"){
-
-          }
+        if (role === "STUDENT") {
+          // refreshProfile()
+          router.replace("/student") 
+        } else if (role === "MANAGEMENT") {
+          router.replace("/management")
+        } else {
+          setChecked(true)
+          setLoading(false)
+          return
         }
       } catch (error) {
         console.error("Login check error:", error)
       } finally {
-        setLoading(false)
         setChecked(true)
+        setLoading(false)
       }
     }
-    checkLoged()
+
+    checkLogged()
   }, [])
+
 
   // FCM Token Save Function
   const saveFcmTokenRequest = async () => {
@@ -130,19 +129,21 @@ export default function Login() {
   }
 
 
-  // Submit Form Function
+
   const submitForm = async (values: LoginFormData) => {
     setRequesting(true)
     try {
-      const response = await studentLoginRequest(values)
+      if (userRole === "STUDENT") {
+        const response = await studentLoginRequest(values)
+        await AsyncStorage.setItem("access_token", response?.data?.data.access_token)
+        await saveFcmTokenRequest()
+        router.push("/student")
 
-      // showAlert("SUCCESS", response?.data.message);
-      await AsyncStorage.setItem("access_token", response?.data?.data.access_token)
-
-      // Save FCM token after successful login
-      await saveFcmTokenRequest()
-
-      router.push("/student")
+      } else if (userRole === "MANAGEMENT") {
+        const response = await EmployeeLoginRequest(values)
+        await AsyncStorage.setItem("access_token", response?.data?.data.access_token)
+        router.push("/management")
+      }
     } catch (error: any) {
       console.log(error)
       showAlert("ERROR", error.response?.data?.message || "Login failed");

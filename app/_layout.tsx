@@ -33,9 +33,9 @@ export default function RootLayout() {
         <SafeAreaProvider>
             <UserTypeProvider>
                 <AlertProvider>
-                    <StudentAppDataProvider>
+                    {/* <StudentAppDataProvider> */}
                         <Stack screenOptions={{ headerShown: false, animation: "none" }} />
-                    </StudentAppDataProvider>
+                    {/* </StudentAppDataProvider> */}
                 </AlertProvider>
             </UserTypeProvider>
         </SafeAreaProvider>

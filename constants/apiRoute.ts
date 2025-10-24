@@ -73,6 +73,12 @@ const ApiRoute = {
 
 
     },
+        section:{
+        create:`${BASE_URL}/management/section`,
+        get_all:`${BASE_URL}/management/section`,
+        get_class_section:`${BASE_URL}/management/section/get_class_section`,
+
+    },
     EXAM: {
         create: `${BASE_URL}/management/exam`,
         get_all: `${BASE_URL}/management/exam`,
@@ -113,12 +119,19 @@ const ApiRoute = {
     // by management 
     employeeRoutes: {
         create: `${BASE_URL}/management/employee/create`,
+        update_password:`${BASE_URL}/management/employee/update_password`,
         getAll: `${BASE_URL}/management/employee/getAll`,
+        getStaffDetails: `${BASE_URL}/management/employee/get`,
+
         attendance: {
             getAllEmployeeForAttendance: `${BASE_URL}/management/employee/employee_attendance`,
             markAttendance: `${BASE_URL}/management/employee/attendance/mark`
 
         }
+    },
+    
+    CLASS_PERIOD_SCHEDULE:{
+        timetable:`${BASE_URL}/management/timetable`
     },
     LIBRARY: {
         book_crud: `${BASE_URL}/management/library/book`,
