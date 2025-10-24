@@ -181,28 +181,47 @@ export default function NewTimetablePage() {
   }
 
   return (
-    <ScrollView className="flex-1 bg-background">
+    <ScrollView className="flex-1" style={{ backgroundColor: "var(--background-color)" }}>
       <View className="p-4">
         {/* Header */}
-        <Text className="text-2xl font-bold text-foreground mb-6">Create New Timetable</Text>
+        <Text className="text-2xl font-bold mb-6" style={{ color: "var(--text-color)" }}>
+          Create New Timetable
+        </Text>
 
         {/* Basic Information Card */}
-        <View className="bg-card border border-border rounded-lg p-4 mb-6">
-          <Text className="text-lg font-semibold text-foreground mb-4">Basic Information</Text>
+        <View
+          className="border rounded-lg p-4 mb-6"
+          style={{
+            backgroundColor: "var(--card-background-color)",
+            borderColor: "var(--card-border-color)",
+          }}
+        >
+          <Text className="text-lg font-semibold mb-4" style={{ color: "var(--text-color)" }}>
+            Basic Information
+          </Text>
 
           {/* Class Select */}
           <View className="mb-4">
-            <Text className="text-sm font-medium text-foreground mb-2">Class *</Text>
+            <Text className="text-sm font-medium mb-2" style={{ color: "var(--text-color)" }}>
+              Class *
+            </Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row gap-2">
               {classes.map((item) => (
                 <TouchableOpacity
                   key={item._id}
                   onPress={() => handleInputChange("class_id", item._id)}
-                  className={`px-4 py-2 rounded-lg border ${
-                    formData.class_id === item._id ? "bg-primary border-primary" : "bg-card border-border"
-                  }`}
+                  className="px-4 py-2 rounded-lg border"
+                  style={{
+                    backgroundColor: formData.class_id === item._id ? "#2563eb" : "var(--card-background-color)",
+                    borderColor: formData.class_id === item._id ? "#2563eb" : "var(--card-border-color)",
+                  }}
                 >
-                  <Text className={formData.class_id === item._id ? "text-primary-foreground" : "text-foreground"}>
+                  <Text
+                    className="text-sm font-medium"
+                    style={{
+                      color: formData.class_id === item._id ? "#ffffff" : "var(--text-color)",
+                    }}
+                  >
                     {item?.name} ({item?.classCode})
                   </Text>
                 </TouchableOpacity>
@@ -212,17 +231,26 @@ export default function NewTimetablePage() {
 
           {/* Section Select */}
           <View>
-            <Text className="text-sm font-medium text-foreground mb-2">Section *</Text>
+            <Text className="text-sm font-medium mb-2" style={{ color: "var(--text-color)" }}>
+              Section *
+            </Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row gap-2">
               {sections?.map((item: any) => (
                 <TouchableOpacity
                   key={item._id}
                   onPress={() => handleInputChange("section_id", item._id)}
-                  className={`px-4 py-2 rounded-lg border ${
-                    formData.section_id === item._id ? "bg-primary border-primary" : "bg-card border-border"
-                  }`}
+                  className="px-4 py-2 rounded-lg border"
+                  style={{
+                    backgroundColor: formData.section_id === item._id ? "#2563eb" : "var(--card-background-color)",
+                    borderColor: formData.section_id === item._id ? "#2563eb" : "var(--card-border-color)",
+                  }}
                 >
-                  <Text className={formData.section_id === item._id ? "text-primary-foreground" : "text-foreground"}>
+                  <Text
+                    className="text-sm font-medium"
+                    style={{
+                      color: formData.section_id === item._id ? "#ffffff" : "var(--text-color)",
+                    }}
+                  >
                     {item?.name}
                   </Text>
                 </TouchableOpacity>
@@ -232,15 +260,26 @@ export default function NewTimetablePage() {
         </View>
 
         {/* Time Slots Card */}
-        <View className="bg-card border border-border rounded-lg p-4 mb-6">
+        <View
+          className="border rounded-lg p-4 mb-6"
+          style={{
+            backgroundColor: "var(--card-background-color)",
+            borderColor: "var(--card-border-color)",
+          }}
+        >
           <View className="flex-row justify-between items-center mb-4">
-            <Text className="text-lg font-semibold text-foreground">Time Slots</Text>
+            <Text className="text-lg font-semibold" style={{ color: "var(--text-color)" }}>
+              Time Slots
+            </Text>
             <TouchableOpacity
               onPress={addTimeSlot}
-              className="bg-primary px-3 py-2 rounded-lg flex-row items-center gap-1"
+              className="px-3 py-2 rounded-lg flex-row items-center gap-1"
+              style={{ backgroundColor: "#2563eb" }}
             >
               <Plus size={16} color="white" />
-              <Text className="text-primary-foreground text-sm font-medium">Add</Text>
+              <Text className="text-sm font-medium" style={{ color: "#ffffff" }}>
+                Add
+              </Text>
             </TouchableOpacity>
           </View>
 
@@ -249,10 +288,22 @@ export default function NewTimetablePage() {
             keyExtractor={(item) => item.id}
             scrollEnabled={false}
             renderItem={({ item: slot, index }) => (
-              <View className="p-3 border border-border rounded-lg bg-muted mb-3">
+              <View
+                className="p-3 border rounded-lg mb-3"
+                style={{
+                  backgroundColor: "var(--field-background-color)",
+                  borderColor: "var(--card-border-color)",
+                }}
+              >
                 <View className="flex-row justify-between items-center mb-3">
-                  <Text className="text-sm font-medium text-foreground">Period {index + 1}</Text>
-                  <TouchableOpacity onPress={() => removeTimeSlot(slot.id)} className="bg-destructive p-2 rounded-lg">
+                  <Text className="text-sm font-medium" style={{ color: "var(--text-color)" }}>
+                    Period {index + 1}
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() => removeTimeSlot(slot.id)}
+                    className="p-2 rounded-lg"
+                    style={{ backgroundColor: "#dc2626" }}
+                  >
                     <Trash2 size={14} color="white" />
                   </TouchableOpacity>
                 </View>
@@ -265,9 +316,17 @@ export default function NewTimetablePage() {
                         value={slot.start_time}
                         onChangeText={(value) => handleTimeSlotEdit(slot.id, "start_time", value)}
                         placeholder="HH:MM"
-                        className="flex-1 border border-border rounded px-2 py-1 text-foreground"
+                        className="flex-1 border rounded px-2 py-1"
+                        style={{
+                          borderColor: "var(--card-border-color)",
+                          color: "var(--text-color)",
+                        }}
                       />
-                      <TouchableOpacity onPress={() => setEditingTimeSlot(null)} className="bg-primary p-2 rounded">
+                      <TouchableOpacity
+                        onPress={() => setEditingTimeSlot(null)}
+                        className="p-2 rounded"
+                        style={{ backgroundColor: "#2563eb" }}
+                      >
                         <Check size={14} color="white" />
                       </TouchableOpacity>
                     </View>
@@ -276,13 +335,17 @@ export default function NewTimetablePage() {
                       onPress={() => setEditingTimeSlot(`${slot.id}-start`)}
                       className="flex-row items-center gap-2 p-2"
                     >
-                      <Text className="text-sm font-mono text-foreground">{slot.start_time}</Text>
+                      <Text className="text-sm font-mono" style={{ color: "var(--text-color)" }}>
+                        {slot.start_time}
+                      </Text>
                       <Edit2 size={12} color="gray" />
                     </TouchableOpacity>
                   )}
                 </View>
 
-                <Text className="text-xs text-muted-foreground text-center mb-2">to</Text>
+                <Text className="text-xs text-center mb-2" style={{ color: "var(--nav-text-color)" }}>
+                  to
+                </Text>
 
                 {/* End Time */}
                 <View>
@@ -292,9 +355,17 @@ export default function NewTimetablePage() {
                         value={slot.end_time}
                         onChangeText={(value) => handleTimeSlotEdit(slot.id, "end_time", value)}
                         placeholder="HH:MM"
-                        className="flex-1 border border-border rounded px-2 py-1 text-foreground"
+                        className="flex-1 border rounded px-2 py-1"
+                        style={{
+                          borderColor: "var(--card-border-color)",
+                          color: "var(--text-color)",
+                        }}
                       />
-                      <TouchableOpacity onPress={() => setEditingTimeSlot(null)} className="bg-primary p-2 rounded">
+                      <TouchableOpacity
+                        onPress={() => setEditingTimeSlot(null)}
+                        className="p-2 rounded"
+                        style={{ backgroundColor: "#2563eb" }}
+                      >
                         <Check size={14} color="white" />
                       </TouchableOpacity>
                     </View>
@@ -303,7 +374,9 @@ export default function NewTimetablePage() {
                       onPress={() => setEditingTimeSlot(`${slot.id}-end`)}
                       className="flex-row items-center gap-2 p-2"
                     >
-                      <Text className="text-sm font-mono text-foreground">{slot.end_time}</Text>
+                      <Text className="text-sm font-mono" style={{ color: "var(--text-color)" }}>
+                        {slot.end_time}
+                      </Text>
                       <Edit2 size={12} color="gray" />
                     </TouchableOpacity>
                   )}
@@ -320,14 +393,17 @@ export default function NewTimetablePage() {
               <View key={day.id} className="relative">
                 <TouchableOpacity
                   onPress={() => setSelectedDay(day.id)}
-                  className={`px-4 py-2 rounded-lg border min-w-20 items-center ${
-                    selectedDay === day.id ? "bg-primary border-primary" : "bg-card border-border"
-                  }`}
+                  className="px-4 py-2 rounded-lg border min-w-20 items-center"
+                  style={{
+                    backgroundColor: selectedDay === day.id ? "#2563eb" : "var(--card-background-color)",
+                    borderColor: selectedDay === day.id ? "#2563eb" : "var(--card-border-color)",
+                  }}
                 >
                   <Text
-                    className={`text-xs font-medium ${
-                      selectedDay === day.id ? "text-primary-foreground" : "text-foreground"
-                    }`}
+                    className="text-xs font-medium"
+                    style={{
+                      color: selectedDay === day.id ? "#ffffff" : "var(--text-color)",
+                    }}
                   >
                     {day.name.slice(0, 3)}
                   </Text>
@@ -349,7 +425,8 @@ export default function NewTimetablePage() {
                       setSelectedDay(remainingDays[0].id)
                     }
                   }}
-                  className="absolute -top-2 -right-2 w-5 h-5 bg-destructive rounded-full items-center justify-center"
+                  className="absolute -top-2 -right-2 w-5 h-5 rounded-full items-center justify-center"
+                  style={{ backgroundColor: "#dc2626" }}
                 >
                   <Text className="text-white text-xs font-bold">×</Text>
                 </TouchableOpacity>
@@ -363,23 +440,37 @@ export default function NewTimetablePage() {
           {selectedDay > 1 && (
             <TouchableOpacity
               onPress={copyPreviousDay}
-              className="bg-secondary px-3 py-2 rounded-lg flex-row items-center gap-1"
+              className="px-3 py-2 rounded-lg flex-row items-center gap-1"
+              style={{ backgroundColor: "var(--field-background-color)" }}
             >
-              <Copy size={14} color="black" />
-              <Text className="text-secondary-foreground text-xs font-medium">Copy Prev</Text>
+              <Copy size={14} color="var(--text-color)" />
+              <Text className="text-xs font-medium" style={{ color: "var(--text-color)" }}>
+                Copy Prev
+              </Text>
             </TouchableOpacity>
           )}
           <TouchableOpacity
             onPress={fillAllDaysLikeCurrent}
-            className="bg-secondary px-3 py-2 rounded-lg flex-row items-center gap-1"
+            className="px-3 py-2 rounded-lg flex-row items-center gap-1"
+            style={{ backgroundColor: "var(--field-background-color)" }}
           >
-            <Text className="text-secondary-foreground text-xs font-medium">Apply All</Text>
+            <Text className="text-xs font-medium" style={{ color: "var(--text-color)" }}>
+              Apply All
+            </Text>
           </TouchableOpacity>
         </View>
 
         {/* Periods Card */}
-        <View className="bg-card border border-border rounded-lg p-4 mb-6">
-          <Text className="text-lg font-semibold text-foreground mb-4">Periods</Text>
+        <View
+          className="border rounded-lg p-4 mb-6"
+          style={{
+            backgroundColor: "var(--card-background-color)",
+            borderColor: "var(--card-border-color)",
+          }}
+        >
+          <Text className="text-lg font-semibold mb-4" style={{ color: "var(--text-color)" }}>
+            Periods
+          </Text>
 
           <FlatList
             data={timeSlots}
@@ -390,8 +481,8 @@ export default function NewTimetablePage() {
               const entry = timetableEntries[key]
 
               return (
-                <View className="border border-border rounded-lg p-3 mb-3">
-                  <Text className="text-xs font-medium text-foreground mb-3">
+                <View className="border rounded-lg p-3 mb-3" style={{ borderColor: "var(--card-border-color)" }}>
+                  <Text className="text-xs font-medium mb-3" style={{ color: "var(--text-color)" }}>
                     Period {index + 1}: {slot.start_time} - {slot.end_time}
                   </Text>
 
@@ -402,17 +493,19 @@ export default function NewTimetablePage() {
                         <TouchableOpacity
                           key={s.id ?? s._id}
                           onPress={() => handleEntryChange(selectedDay, slot.id, "subject_id", s.id ?? s._id)}
-                          className={`px-3 py-2 rounded-lg border flex-row items-center gap-1 ${
-                            entry?.subject_id === (s.id ?? s._id)
-                              ? "bg-primary border-primary"
-                              : "bg-card border-border"
-                          }`}
+                          className="px-3 py-2 rounded-lg border flex-row items-center gap-1"
+                          style={{
+                            backgroundColor:
+                              entry?.subject_id === (s.id ?? s._id) ? "#2563eb" : "var(--card-background-color)",
+                            borderColor: entry?.subject_id === (s.id ?? s._id) ? "#2563eb" : "var(--card-border-color)",
+                          }}
                         >
                           <View className="w-2 h-2 rounded-full" style={{ backgroundColor: s.color ?? "#666" }} />
                           <Text
-                            className={`text-xs font-medium ${
-                              entry?.subject_id === (s.id ?? s._id) ? "text-primary-foreground" : "text-foreground"
-                            }`}
+                            className="text-xs font-medium"
+                            style={{
+                              color: entry?.subject_id === (s.id ?? s._id) ? "#ffffff" : "var(--text-color)",
+                            }}
                           >
                             {s.name}
                           </Text>
@@ -427,14 +520,17 @@ export default function NewTimetablePage() {
                       <TouchableOpacity
                         key={t._id}
                         onPress={() => handleEntryChange(selectedDay, slot.id, "teacher_id", t._id)}
-                        className={`px-3 py-2 rounded-lg border ${
-                          entry?.teacher_id === t._id ? "bg-primary border-primary" : "bg-card border-border"
-                        }`}
+                        className="px-3 py-2 rounded-lg border"
+                        style={{
+                          backgroundColor: entry?.teacher_id === t._id ? "#2563eb" : "var(--card-background-color)",
+                          borderColor: entry?.teacher_id === t._id ? "#2563eb" : "var(--card-border-color)",
+                        }}
                       >
                         <Text
-                          className={`text-xs font-medium ${
-                            entry?.teacher_id === t._id ? "text-primary-foreground" : "text-foreground"
-                          }`}
+                          className="text-xs font-medium"
+                          style={{
+                            color: entry?.teacher_id === t._id ? "#ffffff" : "var(--text-color)",
+                          }}
                         >
                           {t.name}
                         </Text>
@@ -448,20 +544,48 @@ export default function NewTimetablePage() {
         </View>
 
         {/* Preview Table */}
-        <View className="bg-card border border-border rounded-lg p-4 mb-6">
-          <Text className="text-lg font-semibold text-foreground mb-4">Preview Timetable</Text>
+        <View
+          className="border rounded-lg p-4 mb-6"
+          style={{
+            backgroundColor: "var(--card-background-color)",
+            borderColor: "var(--card-border-color)",
+          }}
+        >
+          <Text className="text-lg font-semibold mb-4" style={{ color: "var(--text-color)" }}>
+            Preview Timetable
+          </Text>
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View>
               {/* Table Header */}
-              <View className="flex-row border-b border-border">
-                <View className="w-20 p-2 border-r border-border">
-                  <Text className="text-xs font-bold text-foreground">Day</Text>
+              <View
+                className="flex-row"
+                style={{ borderBottomColor: "var(--card-border-color)", borderBottomWidth: 1 }}
+              >
+                <View
+                  className="w-20 p-2"
+                  style={{
+                    borderRightColor: "var(--card-border-color)",
+                    borderRightWidth: 1,
+                  }}
+                >
+                  <Text className="text-xs font-bold" style={{ color: "var(--text-color)" }}>
+                    Day
+                  </Text>
                 </View>
                 {timeSlots.map((slot, i) => (
-                  <View key={slot.id} className="w-24 p-2 border-r border-border items-center">
-                    <Text className="text-xs font-bold text-foreground">Period {i + 1}</Text>
-                    <Text className="text-[10px] text-muted-foreground">
+                  <View
+                    key={slot.id}
+                    className="w-24 p-2 items-center"
+                    style={{
+                      borderRightColor: "var(--card-border-color)",
+                      borderRightWidth: 1,
+                    }}
+                  >
+                    <Text className="text-xs font-bold" style={{ color: "var(--text-color)" }}>
+                      Period {i + 1}
+                    </Text>
+                    <Text className="text-[10px]" style={{ color: "var(--nav-text-color)" }}>
                       {slot.start_time} - {slot.end_time}
                     </Text>
                   </View>
@@ -470,9 +594,24 @@ export default function NewTimetablePage() {
 
               {/* Table Body */}
               {daysOfWeek.map((day) => (
-                <View key={day.id} className="flex-row border-b border-border">
-                  <View className="w-20 p-2 border-r border-border justify-center">
-                    <Text className="text-xs font-medium text-foreground">{day.name.slice(0, 3)}</Text>
+                <View
+                  key={day.id}
+                  className="flex-row"
+                  style={{
+                    borderBottomColor: "var(--card-border-color)",
+                    borderBottomWidth: 1,
+                  }}
+                >
+                  <View
+                    className="w-20 p-2 justify-center"
+                    style={{
+                      borderRightColor: "var(--card-border-color)",
+                      borderRightWidth: 1,
+                    }}
+                  >
+                    <Text className="text-xs font-medium" style={{ color: "var(--text-color)" }}>
+                      {day.name.slice(0, 3)}
+                    </Text>
                   </View>
                   {timeSlots.map((slot) => {
                     const key = `${day.id}-${slot.id}`
@@ -481,14 +620,27 @@ export default function NewTimetablePage() {
                     const teacher = teachers.find((t) => t._id === entry?.teacher_id)
 
                     return (
-                      <View key={key} className="w-24 p-2 border-r border-border items-center justify-center">
+                      <View
+                        key={key}
+                        className="w-24 p-2 items-center justify-center"
+                        style={{
+                          borderRightColor: "var(--card-border-color)",
+                          borderRightWidth: 1,
+                        }}
+                      >
                         {entry ? (
                           <View className="items-center gap-1">
-                            <Text className="text-[10px] font-medium text-foreground">{subject?.name ?? "—"}</Text>
-                            <Text className="text-[8px] text-muted-foreground">{teacher?.name ?? "—"}</Text>
+                            <Text className="text-[10px] font-medium" style={{ color: "var(--text-color)" }}>
+                              {subject?.name ?? "—"}
+                            </Text>
+                            <Text className="text-[8px]" style={{ color: "var(--nav-text-color)" }}>
+                              {teacher?.name ?? "—"}
+                            </Text>
                           </View>
                         ) : (
-                          <Text className="text-xs text-muted-foreground">—</Text>
+                          <Text className="text-xs" style={{ color: "var(--nav-text-color)" }}>
+                            —
+                          </Text>
                         )}
                       </View>
                     )
@@ -503,24 +655,30 @@ export default function NewTimetablePage() {
         <View className="flex-row gap-3 mb-6">
           <TouchableOpacity
             onPress={() => router.back()}
-            className="flex-1 border border-border rounded-lg py-3 items-center"
+            className="flex-1 border rounded-lg py-3 items-center"
+            style={{ borderColor: "var(--card-border-color)" }}
           >
-            <Text className="text-foreground font-medium">Cancel</Text>
+            <Text className="font-medium" style={{ color: "var(--text-color)" }}>
+              Cancel
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={handleSubmit}
             disabled={isSubmitting || !formData.class_id || !formData.section_id}
-            className={`flex-1 rounded-lg py-3 items-center flex-row justify-center gap-2 ${
-              isSubmitting || !formData.class_id || !formData.section_id ? "bg-muted" : "bg-primary"
-            }`}
+            className="flex-1 rounded-lg py-3 items-center flex-row justify-center gap-2"
+            style={{
+              backgroundColor:
+                isSubmitting || !formData.class_id || !formData.section_id
+                  ? "var(--field-background-color)"
+                  : "#2563eb",
+            }}
           >
             <Save size={16} color={isSubmitting || !formData.class_id || !formData.section_id ? "gray" : "white"} />
             <Text
-              className={
-                isSubmitting || !formData.class_id || !formData.section_id
-                  ? "text-muted-foreground font-medium"
-                  : "text-primary-foreground font-medium"
-              }
+              className="font-medium"
+              style={{
+                color: isSubmitting || !formData.class_id || !formData.section_id ? "var(--nav-text-color)" : "#ffffff",
+              }}
             >
               {isSubmitting ? "Creating..." : "Create Timetable"}
             </Text>

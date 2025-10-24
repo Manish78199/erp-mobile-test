@@ -120,7 +120,7 @@ const ManagementDashboard: React.FC = () => {
           title: "Homework",
           icon: "assignment",
           colors: ["#f093fb", "#f5576c"],
-          screen: "/management/workspace/homework",
+          screen: "/management/homework",
           description: "Manage assignments",
         },
         {

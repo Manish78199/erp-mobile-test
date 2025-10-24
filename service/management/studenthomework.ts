@@ -1,10 +1,11 @@
 import axios from "axios";
-import routes from "@/config/route"
+import {ApiRoute} from "@/constants/apiRoute"
+import { get_access_token } from "@/utils/accessToken";
 
 
 const createStudentHomework = async (homeworkDetails: any) => {
-    const access_token = localStorage.getItem("access_token")
-    return await axios.post(routes.stuentHomeWork.create,
+    const access_token = await get_access_token()
+    return await axios.post(ApiRoute.stuentHomeWork.create,
         homeworkDetails,
         {
             headers: {
@@ -19,9 +20,9 @@ const createStudentHomework = async (homeworkDetails: any) => {
 
 
 const getHomeWorkByClassId = async (classId: string) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
     try {
-        const res = await axios.get(`${routes.stuentHomeWork.getByClass}/${classId}`,
+        const res = await axios.get(`${ApiRoute.stuentHomeWork.getByClass}/${classId}`,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -41,8 +42,8 @@ const getHomeWorkByClassId = async (classId: string) => {
 
 
 const deletStudentHomework = async (homeWorkId: string) => {
-    const access_token = localStorage.getItem("access_token")
-    return await axios.delete(`${routes.stuentHomeWork.deleteHomeWork}/${homeWorkId}`,
+    const access_token = await get_access_token()
+    return await axios.delete(`${ApiRoute.stuentHomeWork.deleteHomeWork}/${homeWorkId}`,
         {
             headers: {
                 "Content-Type": "application/json",
@@ -56,9 +57,9 @@ const deletStudentHomework = async (homeWorkId: string) => {
 
 
 const getHomeWorkById = async (homeWorkId: string) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
     try {
-        const res = await axios.get(`${routes.stuentHomeWork.create}/${homeWorkId}`,
+        const res = await axios.get(`${ApiRoute.stuentHomeWork.create}/${homeWorkId}`,
             {
                 headers: {
                     "Content-Type": "application/json",
