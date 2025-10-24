@@ -101,6 +101,9 @@ export default function Login() {
             router.push("/student")
             return
           }
+          if(role=="MANAGEMENT"){
+
+          }
         }
       } catch (error) {
         console.error("Login check error:", error)
