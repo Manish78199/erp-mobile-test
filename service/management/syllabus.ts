@@ -1,10 +1,11 @@
-import routes from "@/config/route";
+import {ApiRoute} from "@/constants/apiRoute";
+import { get_access_token } from "@/utils/accessToken";
 import axios from "axios";
 
 const getAllSylllabus = async () => {
-    const access_token = localStorage.getItem("access_token")
+   const access_token = await get_access_token()
     try {
-        const response = await axios.get(routes.syllabus.getAllSylllabus,
+        const response = await axios.get(ApiRoute.syllabus.getAllSylllabus,
 
             {
                 headers: {
@@ -28,9 +29,9 @@ const addSyllabus = async (data: { description: string, class_id: string, file: 
     formData.append('class_id', data?.class_id)
     formData.append('file', data?.file)
 
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
-    const response = await axios.post(routes.syllabus.create,
+    const response = await axios.post(ApiRoute.syllabus.create,
         formData,
         {
             headers: {

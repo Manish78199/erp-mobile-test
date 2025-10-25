@@ -78,7 +78,7 @@ export default function Login() {
       if (token) {
         // Here you would verify the token with your backend
         // For now, we'll just return "STUDENT" if token exists
-        return "MANAGEMENT"
+        return null
       }
       return null
     } catch (error) {

@@ -1,9 +1,10 @@
 import axios from "axios";
-import routes from "@/config/route"
+import {ApiRoute} from "@/constants/apiRoute"
+import { get_access_token } from "@/utils/accessToken";
 
 const createClass = async (classDetails: { name: string, section: Array<string> }) => {
-    const access_token = localStorage.getItem("access_token")
-    return await axios.post(routes.classService.create,
+    const access_token = await get_access_token()
+    return await axios.post(ApiRoute.classService.create,
         classDetails,
         {
             headers: {
@@ -17,9 +18,9 @@ const createClass = async (classDetails: { name: string, section: Array<string> 
 }
 
 const getAllClass = async () => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
     try {
-        const allClass = await axios.get(routes.classService.getAllClass,
+        const allClass = await axios.get(ApiRoute.classService.getAllClass,
             {
                 headers: {
                     "Content-Type": "application/json",

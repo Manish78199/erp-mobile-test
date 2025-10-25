@@ -1,11 +1,12 @@
 import axios from "axios";
-import routes from "@/config/route"
+import {ApiRoute} from "@/constants/apiRoute"
+import { get_access_token } from "@/utils/accessToken";
 
 const uploadImage = async (image: File) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
     const formData = new FormData()
     formData.append("file", image)
-    return await axios.post(routes.uploader.image,
+    return await axios.post(ApiRoute.uploader.image,
         formData,
         {
             headers: {
@@ -20,14 +21,14 @@ const uploadImage = async (image: File) => {
 
 
 const uploadMultipleImages = async (images: [File]) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
     const formData = new FormData()
     for (let file of images){
         formData.append("files", file)
 
     }
 
-    return await axios.post(routes.uploader.multipleImages,
+    return await axios.post(ApiRoute.uploader.multipleImages,
         formData,
         {
             headers: {

@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons"
 
 import { View } from "react-native"
 import { ClassProvider } from "@/context/management/classes/provider"
+import ManagementAuthorization from "@/context/Access/provider"
 
 const TabIcon = ({
   name,
@@ -32,12 +33,12 @@ const TabIcon = ({
 }
 
 function ManagementLayout() {
-  const activeColor = "black" 
+  const activeColor = "black"
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor:activeColor,
+        tabBarActiveTintColor: activeColor,
         tabBarInactiveTintColor: "#9CA3AF",
         tabBarStyle: {
           backgroundColor: "#FFFFFF",
@@ -56,7 +57,7 @@ function ManagementLayout() {
           elevation: 20,
           borderTopLeftRadius: 25,
           borderTopRightRadius: 25,
-         
+
         },
         tabBarLabelStyle: {
           fontSize: 11,
@@ -153,8 +154,10 @@ function ManagementLayout() {
 
 export default function RootLayout() {
   return (
-    <ClassProvider>
-      <ManagementLayout />
-    </ClassProvider>
+    <ManagementAuthorization>
+      <ClassProvider>
+        <ManagementLayout />
+      </ClassProvider>
+    </ManagementAuthorization>
   )
 }

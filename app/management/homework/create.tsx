@@ -230,7 +230,7 @@ export default function CreateHomework() {
         </View>
 
         {/* Card Container */}
-        <View className="bg-card rounded-lg border border-border p-6 gap-6">
+        <View className="bg-white rounded-lg border border-border p-6 gap-6">
           {/* Card Header */}
           <View className="gap-2 border-b border-border pb-4">
             <View className="flex-row items-center gap-2">

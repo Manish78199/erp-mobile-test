@@ -1,12 +1,13 @@
-import routes from "@/config/route";
+import {ApiRoute} from "@/constants/apiRoute";
+import { get_access_token } from "@/utils/accessToken";
 import axios from "axios";
 
 const get_all_auth_user = async () => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
 
     try {
-        const res = await axios.get(routes.AUTHORIZATION.get_all_auth_user,
+        const res = await axios.get(ApiRoute.AUTHORIZATION.get_all_auth_user,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -27,11 +28,11 @@ const get_all_auth_user = async () => {
 
 
 const get_all_permission = async () => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
 
     try {
-        const res = await axios.get(routes.AUTHORIZATION.get_all_permission,
+        const res = await axios.get(ApiRoute.AUTHORIZATION.get_all_permission,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -50,11 +51,11 @@ const get_all_permission = async () => {
 
 
 const get_all_roles = async () => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
 
     try {
-        const res = await axios.get(routes.AUTHORIZATION.get_all_roles,
+        const res = await axios.get(ApiRoute.AUTHORIZATION.get_all_roles,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -72,9 +73,9 @@ const get_all_roles = async () => {
 
 
 const create_role = async (roleDetails: any) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
-    return await axios.post(routes.AUTHORIZATION.create_role,
+    return await axios.post(ApiRoute.AUTHORIZATION.create_role,
         roleDetails,
         {
             headers: {
@@ -88,11 +89,11 @@ const create_role = async (roleDetails: any) => {
 }
 
 const get_role = async (roleId: string) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
 
     try {
-        const res = await axios.get(`${routes.AUTHORIZATION.get_all_roles}/${roleId}`,
+        const res = await axios.get(`${ApiRoute.AUTHORIZATION.get_all_roles}/${roleId}`,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -110,10 +111,10 @@ const get_role = async (roleId: string) => {
 
 
 const delete_role = async (roleId: string) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
 
-    return await axios.delete(`${routes.AUTHORIZATION.create_role}/${roleId}`,
+    return await axios.delete(`${ApiRoute.AUTHORIZATION.create_role}/${roleId}`,
         {
             headers: {
                 "Content-Type": "application/json",
@@ -126,9 +127,9 @@ const delete_role = async (roleId: string) => {
 }
 
 const update_role = async (roleId: string, roleDetails: any) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
-    return await axios.put(`${routes.AUTHORIZATION.create_role}/${roleId}`,
+    return await axios.put(`${ApiRoute.AUTHORIZATION.create_role}/${roleId}`,
         roleDetails,
         {
             headers: {
@@ -142,11 +143,11 @@ const update_role = async (roleId: string, roleDetails: any) => {
 
 
 const get_my_auth_profile = async () => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
 
     try {
-        const res = await axios.get(routes.AUTHORIZATION.get_my_auth_profile,
+        const res = await axios.get(ApiRoute.AUTHORIZATION.get_my_auth_profile,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -166,11 +167,10 @@ const get_my_auth_profile = async () => {
 
 
 const get_user_permission_and_role = async (employee_id: string) => {
-    const access_token = localStorage.getItem("access_token")
-
+    const access_token = await get_access_token()
 
     try {
-        const res = await axios.get(`${routes.AUTHORIZATION.get_user_permission_and_role}?employee_id=${employee_id}`,
+        const res = await axios.get(`${ApiRoute.AUTHORIZATION.get_user_permission_and_role}?employee_id=${employee_id}`,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -189,9 +189,9 @@ const get_user_permission_and_role = async (employee_id: string) => {
 
 
 const assign_role_and_permission = async (assignDetails: any) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
-    return await axios.put(routes.AUTHORIZATION.assign_role_and_permission,
+    return await axios.put(ApiRoute.AUTHORIZATION.assign_role_and_permission,
         assignDetails,
         {
             headers: {
