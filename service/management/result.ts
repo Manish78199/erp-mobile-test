@@ -1,11 +1,12 @@
-import routes from "@/config/route";
+import {ApiRoute} from "@/constants/apiRoute";
+import { get_access_token } from "@/utils/accessToken";
 import axios from "axios";
 
 
 const get_exam_student_list = async (exam_id: string) => {
-    let route = `${routes.RESULT.get_exam_student_list}/${exam_id}`
+    let route = `${ApiRoute.RESULT.get_exam_student_list}/${exam_id}`
 
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
     try {
         const examDetails = await axios.get(route,
@@ -25,9 +26,9 @@ const get_exam_student_list = async (exam_id: string) => {
 }
 
 const get_exam_student_detials = async (exam_id: string, student_id: string) => {
-    let route = `${routes.RESULT.get_student_details}/${exam_id}?student_id=${student_id}`
+    let route = `${ApiRoute.RESULT.get_student_details}/${exam_id}?student_id=${student_id}`
 
-    const access_token = localStorage.getItem("access_token")
+        const access_token = await get_access_token()
     try {
 
         const examDetails = await axios.get(route,
@@ -47,9 +48,9 @@ const get_exam_student_detials = async (exam_id: string, student_id: string) => 
 }
 
 const markSubmitting = async (markDetails: any) => {
-    let route = routes.RESULT.mark_submit
+    let route = ApiRoute.RESULT.mark_submit
 
-    const access_token = localStorage.getItem("access_token")
+        const access_token = await get_access_token()
 
     const examDetails = await axios.post(route,
         markDetails,
@@ -68,9 +69,9 @@ const markSubmitting = async (markDetails: any) => {
 
 
 const result_declare = async (exam_id: any) => {
-    let route = `${routes.RESULT.declare}/${exam_id}`
+    let route = `${ApiRoute.RESULT.declare}/${exam_id}`
 
-    const access_token = localStorage.getItem("access_token")
+        const access_token = await get_access_token()
 
     const examDetails = await axios.post(route,
         null,
@@ -88,9 +89,9 @@ const result_declare = async (exam_id: any) => {
 
 const save_result_setting = async (details: any) => {
 
-    const route = routes.RESULT.save_result_setting
+    const route = ApiRoute.RESULT.save_result_setting
 
-    const access_token = localStorage.getItem("access_token")
+        const access_token = await get_access_token()
 
     const examDetails = await axios.post(route,
         details,
@@ -107,9 +108,9 @@ const save_result_setting = async (details: any) => {
 
 
 const get_marksheet = async (student_id: string) => {
-    let route = `${routes.RESULT.view_marksheet}/${student_id}`
+    let route = `${ApiRoute.RESULT.view_marksheet}/${student_id}`
 
-    const access_token = localStorage.getItem("access_token")
+        const access_token = await get_access_token()
     try {
 
         const examDetails = await axios.get(route,
@@ -132,11 +133,11 @@ const get_marksheet = async (student_id: string) => {
 
 
 const get_result_summary = async (exam_id: string) => {
-    const access_token = localStorage.getItem("access_token")
+        const access_token = await get_access_token()
 
     try {
 
-        const examDetails = await axios.get(`${routes.RESULT.get_class_summary}/${exam_id}`,
+        const examDetails = await axios.get(`${ApiRoute.RESULT.get_class_summary}/${exam_id}`,
             {
                 headers: {
                     "Content-Type": "application/json",

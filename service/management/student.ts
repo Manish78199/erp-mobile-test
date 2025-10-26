@@ -1,12 +1,12 @@
 
 import axios from "axios";
-import routes from "@/config/route"
+import {ApiRoute} from "@/constants/apiRoute"
 
 import StudentRegistrationSchema from "@/schema/admission"
 
 const createAdmission = async (admissionDetials: any) => {
     const access_token = localStorage.getItem("access_token")
-    return await axios.post(routes.studentService.addmission,
+    return await axios.post(ApiRoute.studentService.addmission,
         admissionDetials,
         {
             headers: {
@@ -22,7 +22,7 @@ const createAdmission = async (admissionDetials: any) => {
 const getAdmissionDetails = async (studentId: string) => {
     const access_token = localStorage.getItem("access_token")
     try {
-        const response = await axios.get(`${routes.studentService.get_admission_student_details}/${studentId}`,
+        const response = await axios.get(`${ApiRoute.studentService.get_admission_student_details}/${studentId}`,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const getAdmissionDetails = async (studentId: string) => {
 const getAllSchoolStudent = async () => {
     const access_token = localStorage.getItem("access_token")
     try {
-        const response = await axios.get(routes.studentService.getAllSchoolStudent,
+        const response = await axios.get(ApiRoute.studentService.getAllSchoolStudent,
 
             {
                 headers: {
@@ -60,7 +60,7 @@ const getAllSchoolStudent = async () => {
 const getClassStudents = async (classId: string) => {
     const access_token = localStorage.getItem("access_token")
     try {
-        const response = await axios.get(`${routes.studentService.getByClass}/${classId}`,
+        const response = await axios.get(`${ApiRoute.studentService.getByClass}/${classId}`,
 
             {
                 headers: {
@@ -80,7 +80,7 @@ const getStudentForAttendance = async (class_id: string, date?: string) => {
 
     const access_token = localStorage.getItem("access_token")
     try {
-        const response = await axios.get(`${routes.studentService.getStudentForAttendance}/${class_id}?attendanceDate=${date}`,
+        const response = await axios.get(`${ApiRoute.studentService.getStudentForAttendance}/${class_id}?attendanceDate=${date}`,
 
             {
                 headers: {
@@ -105,7 +105,7 @@ const markStudentAttendance = async (data: {
 }[]) => {
 
     const access_token = localStorage.getItem("access_token")
-    return await axios.post(routes.studentAttendance.mark,
+    return await axios.post(ApiRoute.studentAttendance.mark,
         data,
         {
             headers: {
@@ -122,7 +122,7 @@ const markStudentAttendance = async (data: {
 const getStudentProfileById = async (student_id: string) => {
     const access_token = localStorage.getItem("access_token")
     try {
-        const response = await axios.get(`${routes.studentService.getStudentProfile}?student_id=${student_id}`,
+        const response = await axios.get(`${ApiRoute.studentService.getStudentProfile}?student_id=${student_id}`,
 
             {
                 headers: {
@@ -144,7 +144,7 @@ const changeStudentProfileImage = async (student_id: string, image: File) => {
     formData.append("image", image)
     const access_token = localStorage.getItem("access_token")
 
-    const response = await axios.post(`${routes.studentService.changeStudentProfileimage}?student_id=${student_id}`,
+    const response = await axios.post(`${ApiRoute.studentService.changeStudentProfileimage}?student_id=${student_id}`,
         formData,
         {
             headers: {
