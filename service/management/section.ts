@@ -2,8 +2,8 @@ import { get_headers } from "@/utils/Authentication/getApiHeader"
 import {ApiRoute} from "@/constants/apiRoute"
 import axios from "axios"
 
-const createSection = (sectionDetails: any) => {
-    return axios.post(ApiRoute?.section.create, sectionDetails, { headers: get_headers() })
+const createSection =async (sectionDetails: any) => {
+    return axios.post(ApiRoute?.section.create, sectionDetails, { headers:await get_headers() })
 }
 
 const get_class_section = async (class_id: string) => {

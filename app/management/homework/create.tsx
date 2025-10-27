@@ -24,6 +24,8 @@ import { getClassSubject } from "@/service/management/subject"
 import { New_HomeWork } from "@/schema/homework"
 import { createStudentHomework } from "@/service/management/studenthomework"
 import { uploadImage } from "@/service/management/uploader"
+import { Typography } from "@/components/Typography"
+import { useClasses } from "@/hooks/management/classes"
 
 const today = new Date()
 today.setMinutes(today.getMinutes() - today.getTimezoneOffset())
@@ -44,31 +46,13 @@ export default function CreateHomework() {
   const [showAssignedDatePicker, setShowAssignedDatePicker] = useState(false)
   const [showDueDatePicker, setShowDueDatePicker] = useState(false)
 
-  // Get all classes
-  const getAllClassRequest = async () => {
-    setFetchingClasses(true)
-    try {
-      const allClass = await getAllClass()
-      setAllDataClass(allClass)
-      const filteredClass = allClass.map((item: any) => ({
-        label: item.name,
-        value: item._id,
-      }))
-      setClass(filteredClass)
-      if (filteredClass.length) {
-        setFieldValue("class_id", filteredClass[0].value)
-      }
-    } catch (error) {
-      Alert.alert("Error", "Failed to fetch classes")
-    } finally {
-      setFetchingClasses(false)
-    }
-  }
+  const {classes} =  useClasses()
+
 
   // Select sections based on class
   const selectSection = () => {
-    if (allDataClass?.length && allDataClass[0]?.section) {
-      const allclasssection = allDataClass[0].section.map((item: any) => ({
+    if (classes?.length && classes[0]?.section) {
+      const allclasssection = classes[0].section.map((item: any) => ({
         label: item?.name,
         value: item?._id,
       }))
@@ -141,10 +125,8 @@ export default function CreateHomework() {
     }
   }, [values.class_id])
 
-  // Initialize classes
-  useEffect(() => {
-    getAllClassRequest()
-  }, [])
+
+ 
 
   // Handle file upload
   const uploadImageRequest = async (image: any) => {
@@ -222,7 +204,18 @@ export default function CreateHomework() {
         </Modal>
       )}
 
-      <View className="flex-1 px-4 py-6">
+      <View className="flex-row items-center p-4">
+        <TouchableOpacity
+          onPress={() => router.back()}
+          className="flex-row items-center bg-input border border-border rounded-lg px-3 py-2 mr-2"
+        >
+          <Typography className="text-primary font-semibold">←</Typography>
+        </TouchableOpacity>
+
+        <Typography className=" font-bold text-foreground">New Homework</Typography>
+      </View>
+
+      <View className="flex-1 px-4  pb-6">
         {/* Header */}
         <View className="mb-6">
           <Text className="text-2xl font-bold text-foreground">Create Homework</Text>
@@ -254,7 +247,7 @@ export default function CreateHomework() {
               </View>
               <RNPickerSelect
                 onValueChange={(value) => setFieldValue("class_id", value)}
-                items={allClass}
+                items={classes?.map((item) => ({ label: `${item.name} (${item.classCode})`, value: item._id })) || []}
                 value={values.class_id}
                 placeholder={{ label: fetchingClasses ? "Loading classes..." : "-- Select Class --", value: null }}
                 disabled={fetchingClasses || loading}

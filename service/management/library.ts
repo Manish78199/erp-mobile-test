@@ -1,4 +1,4 @@
-import routes from "@/config/route";
+import {ApiRoute} from "@/constants/apiRoute";
 import axios from "axios";
 
 const get_headers = () => {
@@ -9,16 +9,16 @@ const get_headers = () => {
     };
 };
 
-const add_book = (data: any) => {
-    return axios.post(routes.LIBRARY.book_crud, data, {
-        headers: get_headers(),
+const add_book =async (data: any) => {
+    return axios.post(ApiRoute.LIBRARY.book_crud, data, {
+        headers:await get_headers(),
     });
 };
 
 const get_books = async () => {
     try {
-        const res = await axios.get(routes.LIBRARY.book_crud, {
-            headers: get_headers(),
+        const res = await axios.get(ApiRoute.LIBRARY.book_crud, {
+            headers:await get_headers(),
         });
         return res.data.data;
     } catch (error) {
@@ -28,13 +28,13 @@ const get_books = async () => {
 
 
 const search_books = async (query: string) => {
-    let route = routes.LIBRARY.search_book
+    let route = ApiRoute.LIBRARY.search_book
     if (query) {
-        route = `${routes.LIBRARY.search_book}?q=${query}`
+        route = `${ApiRoute.LIBRARY.search_book}?q=${query}`
     }
     try {
-        const res = await axios.get(routes.LIBRARY.search_book, {
-            headers: get_headers(),
+        const res = await axios.get(ApiRoute.LIBRARY.search_book, {
+            headers:await get_headers(),
         });
         return res.data.data;
     } catch (error) {
@@ -42,34 +42,34 @@ const search_books = async (query: string) => {
     }
 };
 
-const delete_book = (bookId: string) => {
-    return axios.delete(`${routes.LIBRARY.book_crud}/${bookId}`, {
-        headers: get_headers(),
+const delete_book = async (bookId: string) => {
+    return axios.delete(`${ApiRoute.LIBRARY.book_crud}/${bookId}`, {
+        headers:await get_headers(),
     });
 };
 
-const update_book = (bookId: string, data: any) => {
-    return axios.put(`${routes.LIBRARY.book_crud}/${bookId}`, data, {
-        headers: get_headers(),
+const update_book = async (bookId: string, data: any) => {
+    return axios.put(`${ApiRoute.LIBRARY.book_crud}/${bookId}`, data, {
+        headers:await get_headers(),
     });
 };
 
-const assign_book = (data:any) => {
-    return axios.post(routes.LIBRARY.assignBook, data, {
-        headers: get_headers(),
+const assign_book = async (data:any) => {
+    return axios.post(ApiRoute.LIBRARY.assignBook, data, {
+        headers:await get_headers(),
     });
 };
 
-const return_book = (data: any) => {
-    return axios.post(routes.LIBRARY.returnBook, data, {
-        headers: get_headers(),
+const return_book = async (data: any) => {
+    return axios.post(ApiRoute.LIBRARY.returnBook, data, {
+        headers:await get_headers(),
     });
 };
 
 const get_due_books = async () => {
     try {
-        const res = await axios.get(routes.LIBRARY.dueBooks, {
-            headers: get_headers(),
+        const res = await axios.get(ApiRoute.LIBRARY.dueBooks, {
+            headers:await get_headers(),
         });
         return res.data.data;
     } catch (error) {
@@ -81,8 +81,8 @@ const get_due_books = async () => {
 
 const get_borrowed_books = async (student_id:string) => {
     try {
-        const res = await axios.get(`${routes.LIBRARY.getBorrowedBook}/${student_id}`, {
-            headers: get_headers(),
+        const res = await axios.get(`${ApiRoute.LIBRARY.getBorrowedBook}/${student_id}`, {
+            headers:await get_headers(),
         });
         return res.data.data;
     } catch (error) {

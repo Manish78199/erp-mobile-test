@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import { ClassContext } from "./context"
 import axios from "axios"
 import {ApiRoute} from "@/constants/apiRoute"
+import { get_access_token } from "@/utils/accessToken"
 
 export interface SchoolClass {
      _id: string
@@ -10,6 +11,7 @@ export interface SchoolClass {
     classCode: string
     studentCount: number,
     subjectCount: number
+    section:any[]
 }
 export const ClassProvider = ({ children }: { children: React.ReactNode }) => {
     const [classes, setClasses] = useState<SchoolClass[]>([])
@@ -19,7 +21,7 @@ export const ClassProvider = ({ children }: { children: React.ReactNode }) => {
     const fetchClasses = async () => {
         setLoading(true)
         try {
-            const token = localStorage.getItem("access_token")
+            const token = await get_access_token()
             const res = await axios.get(ApiRoute.classService.getAllClass, {
                 headers: {
                     Authorization: `Bearer ${token}`,

@@ -1,8 +1,10 @@
-import routes from "@/config/route"
+import {ApiRoute} from "@/constants/apiRoute"
+import { get_access_token } from "@/utils/accessToken"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import axios from "axios"
 
-const get_headers = () => {
-  const access_token = localStorage.getItem("access_token")
+const get_headers = async () => {
+  const access_token =await get_access_token()
   return {
     "Content-Type": "application/json",
     Authorization: `Bearer ${access_token}`,
@@ -27,10 +29,10 @@ const get_dashboard_data = async (params?: {
       params.class_ids.forEach((id) => queryParams.append("class_ids", id))
     }
 
-    const url = queryParams.toString() ? `${routes.DASHBOARD.main}?${queryParams.toString()}` : routes.DASHBOARD.main
+    const url = queryParams.toString() ? `${ApiRoute.DASHBOARD.main}?${queryParams.toString()}` : ApiRoute.DASHBOARD.main
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -57,11 +59,11 @@ const get_fee_analytics = async (params?: {
     }
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.fee_analytics}?${queryParams.toString()}`
-      : routes.DASHBOARD.fee_analytics
+      ? `${ApiRoute.DASHBOARD.fee_analytics}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.fee_analytics
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -84,11 +86,11 @@ const get_transport_tracking = async (params?: {
     if (params?.live_tracking !== undefined) queryParams.append("live_tracking", params.live_tracking.toString())
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.transport_tracking}?${queryParams.toString()}`
-      : routes.DASHBOARD.transport_tracking
+      ? `${ApiRoute.DASHBOARD.transport_tracking}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.transport_tracking
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -113,11 +115,11 @@ const get_academic_summary = async (params?: {
     }
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.academic_summary}?${queryParams.toString()}`
-      : routes.DASHBOARD.academic_summary
+      ? `${ApiRoute.DASHBOARD.academic_summary}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.academic_summary
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -139,11 +141,11 @@ const get_hostel_management = async (params?: {
       queryParams.append("include_mess_data", params.include_mess_data.toString())
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.hostel_management}?${queryParams.toString()}`
-      : routes.DASHBOARD.hostel_management
+      ? `${ApiRoute.DASHBOARD.hostel_management}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.hostel_management
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -166,11 +168,11 @@ const get_employee_attendance = async (params?: {
     if (params?.employee_type) queryParams.append("employee_type", params.employee_type)
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.employee_attendance}?${queryParams.toString()}`
-      : routes.DASHBOARD.employee_attendance
+      ? `${ApiRoute.DASHBOARD.employee_attendance}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.employee_attendance
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -192,11 +194,11 @@ const get_inventory_status = async (params?: {
       queryParams.append("include_valuation", params.include_valuation.toString())
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.inventory_status}?${queryParams.toString()}`
-      : routes.DASHBOARD.inventory_status
+      ? `${ApiRoute.DASHBOARD.inventory_status}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.inventory_status
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -218,11 +220,11 @@ const get_health_medical_data = async (params?: {
       queryParams.append("include_medicine_stock", params.include_medicine_stock.toString())
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.health_medical}?${queryParams.toString()}`
-      : routes.DASHBOARD.health_medical
+      ? `${ApiRoute.DASHBOARD.health_medical}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.health_medical
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -247,11 +249,11 @@ const get_examination_analytics = async (params?: {
     }
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.examination_analytics}?${queryParams.toString()}`
-      : routes.DASHBOARD.examination_analytics
+      ? `${ApiRoute.DASHBOARD.examination_analytics}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.examination_analytics
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -274,11 +276,11 @@ const get_events_activities = async (params?: {
     if (params?.status_filter) queryParams.append("status_filter", params.status_filter)
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.events_activities}?${queryParams.toString()}`
-      : routes.DASHBOARD.events_activities
+      ? `${ApiRoute.DASHBOARD.events_activities}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.events_activities
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -303,11 +305,11 @@ const get_recent_activities = async (params?: {
     }
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.recent_activities}?${queryParams.toString()}`
-      : routes.DASHBOARD.recent_activities
+      ? `${ApiRoute.DASHBOARD.recent_activities}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.recent_activities
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -318,8 +320,8 @@ const get_recent_activities = async (params?: {
 // Quick Stats
 const get_quick_stats = async () => {
   try {
-    const res = await axios.get(routes.DASHBOARD.quick_stats, {
-      headers: get_headers(),
+    const res = await axios.get(ApiRoute.DASHBOARD.quick_stats, {
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -340,11 +342,11 @@ const get_performance_metrics = async (params?: {
     if (params?.comparison_period) queryParams.append("comparison_period", params.comparison_period)
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.performance_metrics}?${queryParams.toString()}`
-      : routes.DASHBOARD.performance_metrics
+      ? `${ApiRoute.DASHBOARD.performance_metrics}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.performance_metrics
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {
@@ -353,14 +355,14 @@ const get_performance_metrics = async (params?: {
 }
 
 // Export Dashboard Data
-const export_dashboard_data = (data: {
+const export_dashboard_data = async (data: {
   export_format?: string
   modules?: string[]
   start_date?: string
   end_date?: string
 }) => {
-  return axios.post(routes.DASHBOARD.export_data, data, {
-    headers: get_headers(),
+  return axios.post(ApiRoute.DASHBOARD.export_data, data, {
+    headers:await get_headers(),
   })
 }
 
@@ -379,11 +381,11 @@ const get_alerts_notifications = async (params?: {
     if (params?.limit) queryParams.append("limit", params.limit.toString())
 
     const url = queryParams.toString()
-      ? `${routes.DASHBOARD.alerts_notifications}?${queryParams.toString()}`
-      : routes.DASHBOARD.alerts_notifications
+      ? `${ApiRoute.DASHBOARD.alerts_notifications}?${queryParams.toString()}`
+      : ApiRoute.DASHBOARD.alerts_notifications
 
     const res = await axios.get(url, {
-      headers: get_headers(),
+      headers:await get_headers(),
     })
     return res.data.data
   } catch (error) {

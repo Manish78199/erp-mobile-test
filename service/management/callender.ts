@@ -1,12 +1,13 @@
-import routes from "@/config/route";
+import {ApiRoute} from "@/constants/apiRoute";
+import { get_access_token } from "@/utils/accessToken";
 import axios from "axios";
 
 
 
 
 const setCallenderEvent = async (eventDetails: any) => {
-    const access_token = localStorage.getItem("access_token")
-    return await axios.post(routes.callender.set_callender_event,
+    const access_token = await get_access_token()
+    return await axios.post(ApiRoute.callender.set_callender_event,
         eventDetails,
         {
             headers: {
@@ -30,12 +31,12 @@ const setCallenderEvent = async (eventDetails: any) => {
 
 
 const getCallenderEvent = async (year: any, month: any = null) => {
-    let url = `${routes.callender.yearly_callender_event}?year=${year}`
+    let url = `${ApiRoute.callender.yearly_callender_event}?year=${year}`
     if (month) {
-        url = `${routes.callender.yearly_callender_event}?year=${year}&month=${month}`
+        url = `${ApiRoute.callender.yearly_callender_event}?year=${year}&month=${month}`
 
     }
-    const access_token = localStorage.getItem("access_token")
+    const access_token =  await get_access_token()
     try {
         const allClass = await axios.get(url,
             {

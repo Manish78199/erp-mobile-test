@@ -1,9 +1,10 @@
-import routes from "@/config/route";
+import {ApiRoute} from "@/constants/apiRoute";
+import { get_access_token } from "@/utils/accessToken";
 import axios from "axios";
 
 const uploadEventActivityImage = async (eventActivityDetials: any) => {
-    const access_token = localStorage.getItem("access_token")
-    return await axios.post(routes.event.uploadEventImages,
+    const access_token = await get_access_token()
+    return await axios.post(ApiRoute.event.uploadEventImages,
         eventActivityDetials,
         {
             headers: {
@@ -19,9 +20,9 @@ const uploadEventActivityImage = async (eventActivityDetials: any) => {
 
 
 const getEventActivityImages = async () => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
     try {
-        const allImages = await axios.get(routes.event.get_activity_image,
+        const allImages = await axios.get(ApiRoute.event.get_activity_image,
             
             {
                 headers: {

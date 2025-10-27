@@ -73,10 +73,10 @@ const ApiRoute = {
 
 
     },
-        section:{
-        create:`${BASE_URL}/management/section`,
-        get_all:`${BASE_URL}/management/section`,
-        get_class_section:`${BASE_URL}/management/section/get_class_section`,
+    section: {
+        create: `${BASE_URL}/management/section`,
+        get_all: `${BASE_URL}/management/section`,
+        get_class_section: `${BASE_URL}/management/section/get_class_section`,
 
     },
     EXAM: {
@@ -97,12 +97,51 @@ const ApiRoute = {
         get_class_summary: `${BASE_URL}/management/result/summary`
     },
     TRANSPORT: {
-        vehicle: `${BASE_URL}/management/transport/vehicle`
+        vehicle: `${BASE_URL}/management/transport/vehicle`,
+        searchPickUpPoint: `${BASE_URL}/management/transport/search-pickup-point`,
+        route: `${BASE_URL}/management/transport/route`,
+        assignToStudent: `${BASE_URL}/management/transport/assign-to-student`,
+        getAssignTransport: `${BASE_URL}/management/transport/assigned-transport`,
+        releaseTransport: `${BASE_URL}/management/transport/release-transport`,
+        // vehicle and routes
+        assign_vehicle_route: `${BASE_URL}/management/transport/assign-vehicle-route`,
+        get_route_vehicles: `${BASE_URL}/management/transport/get-route-vehicles`,
+
+
+    },
+
+        DASHBOARD: {
+        main: `${BASE_URL}/management/dashboard`,
+        fee_analytics: `${BASE_URL}/management/dashboard/fee-analytics`,
+        transport_tracking: `${BASE_URL}/management/dashboard/transport-tracking`,
+        academic_summary: `${BASE_URL}/management/dashboard/academic-summary`,
+        hostel_management: `${BASE_URL}/management/dashboard/hostel-management`,
+        employee_attendance: `${BASE_URL}/management/dashboard/employee-attendance`,
+        inventory_status: `${BASE_URL}/management/dashboard/inventory-status`,
+        health_medical: `${BASE_URL}/management/dashboard/health-medical`,
+        examination_analytics: `${BASE_URL}/management/dashboard/examination-analytics`,
+        events_activities: `${BASE_URL}/management/dashboard/events-activities`,
+        recent_activities: `${BASE_URL}/management/dashboard/recent-activity`,
+        quick_stats: `${BASE_URL}/management/dashboard/quick-stats`,
+        performance_metrics: `${BASE_URL}/management/dashboard/performance-metrics`,
+        export_data: `${BASE_URL}/management/dashboard/export-data`,
+        alerts_notifications: `${BASE_URL}/management/dashboard/alerts-notifications`,
     },
     fee: {
         getStudentFeeDetails: `${BASE_URL}/management/fee/student`,
         deposit: `${BASE_URL}/management/fee/deposit`,
         history: `${BASE_URL}/management/fee/history`,
+
+
+    },
+       HOSTEL: {
+        add_hostel: `${BASE_URL}/management/hostel/add-hostel`,
+        get_hostel_list: `${BASE_URL}/management/hostel/hostel-list`,
+        room: `${BASE_URL}/management/hostel/room`,
+        room_assign: `${BASE_URL}/management/hostel/assign`,
+        asssigned_room: `${BASE_URL}/management/hostel/assigned-room`,
+
+        room_vacant: `${BASE_URL}/management/hostel/vacant`,
 
 
     },
@@ -119,7 +158,7 @@ const ApiRoute = {
     // by management 
     employeeRoutes: {
         create: `${BASE_URL}/management/employee/create`,
-        update_password:`${BASE_URL}/management/employee/update_password`,
+        update_password: `${BASE_URL}/management/employee/update_password`,
         getAll: `${BASE_URL}/management/employee/getAll`,
         getStaffDetails: `${BASE_URL}/management/employee/get`,
 
@@ -129,9 +168,9 @@ const ApiRoute = {
 
         }
     },
-    
-    CLASS_PERIOD_SCHEDULE:{
-        timetable:`${BASE_URL}/management/timetable`
+
+    CLASS_PERIOD_SCHEDULE: {
+        timetable: `${BASE_URL}/management/timetable`
     },
     LIBRARY: {
         book_crud: `${BASE_URL}/management/library/book`,

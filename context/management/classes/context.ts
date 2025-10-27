@@ -6,7 +6,8 @@ export interface SchoolClass {
     name: string
     classCode: string
     studentCount: number,
-    subjectCount: number
+    subjectCount: number,
+    section:any[]
 }
 
 interface ClassContextType {

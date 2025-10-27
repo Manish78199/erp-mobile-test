@@ -1,4 +1,3 @@
-"use client"
 
 import type React from "react"
 import { useContext, useEffect, useState } from "react"
@@ -13,6 +12,8 @@ import {
   ScrollView,
   RefreshControl,
 } from "react-native"
+
+import { SafeAreaView } from "react-native-safe-area-context"
 import { useRouter } from "expo-router"
 import { useClasses } from "@/hooks/management/classes"
 import { getHomeWorkByClassId, deletStudentHomework } from "@/service/management/studenthomework"
@@ -30,11 +31,12 @@ import {
   ChevronDown,
 } from "lucide-react-native"
 import { cn } from "@/utils/cn"
+import { Typography } from "@/components/Typography"
 
 export default function HomeworkPage() {
   const router = useRouter()
   const { showAlert } = useContext(AlertContext)
-  const [allHomework, setHomework] = useState([])
+  const [allHomework, setHomework] = useState<any[]>([])
   const [currentClass, setCurrentClass] = useState<string | null>(null)
   const [currentClassName, setClassName] = useState<string>("")
   const [searchTerm, setSearchTerm] = useState<string>("")
@@ -79,7 +81,7 @@ export default function HomeworkPage() {
 
   const deleteHomeWork = (homeWorkId: string) => {
     Alert.alert("Delete Homework", "Are you sure you want to delete this homework?", [
-      { text: "Cancel", onPress: () => {} },
+      { text: "Cancel", onPress: () => { } },
       {
         text: "Delete",
         onPress: async () => {
@@ -90,7 +92,7 @@ export default function HomeworkPage() {
           try {
             await deletStudentHomework(homeWorkId)
             showAlert("SUCCESS", "Homework deleted successfully.")
-          } catch (error) {
+          } catch (error: any) {
             setHomework(previousHomeWorks)
             showAlert("ERROR", error?.response?.data?.message || "Error in deleting homework.")
           }
@@ -119,8 +121,8 @@ export default function HomeworkPage() {
       <View className="flex-row items-center">
         <View className="mr-3">{icon}</View>
         <View className="flex-1">
-          <Text className="text-2xl font-bold text-foreground">{value}</Text>
-          <Text className="text-xs text-muted-foreground">{label}</Text>
+          <Typography className="text-2xl font-bold text-foreground">{value}</Typography>
+          <Typography className="text-xs text-muted-foreground">{label}</Typography>
         </View>
       </View>
     </View>
@@ -132,11 +134,11 @@ export default function HomeworkPage() {
     const isDueSoon = !isOverdue && dueDate <= new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
 
     return (
-      <View className="bg-card border border-border rounded-lg p-4 mb-3">
+      <View className="bg-white border border-border rounded-lg p-4 mb-3">
         <View className="flex-row justify-between items-start mb-3">
           <View className="flex-1">
-            <Text className="text-base font-semibold text-foreground">{item.title}</Text>
-            <Text className="text-sm text-muted-foreground mt-1">{item.subject}</Text>
+            <Typography className="text-base font-semibold text-foreground capitalize">{item.title}</Typography>
+            <Typography className="text-sm text-muted-foreground mt-1 capitalize">{item.subject}</Typography>
           </View>
           <TouchableOpacity
             onPress={() => {
@@ -150,26 +152,26 @@ export default function HomeworkPage() {
                   onPress: () => deleteHomeWork(item?._id),
                   style: "destructive",
                 },
-                { text: "Cancel", onPress: () => {} },
+                { text: "Cancel", onPress: () => { } },
               ])
             }}
             className="p-2"
           >
-            <Text className="text-primary font-semibold">⋮</Text>
+            <Typography className="text-primary font-semibold">⋮</Typography>
           </TouchableOpacity>
         </View>
 
         <View className="flex-row items-center mb-2">
           <Users size={14} className="text-muted-foreground mr-2" />
-          <Text className="text-xs text-muted-foreground">{item.assigned_to}</Text>
+          <Typography className="text-xs text-muted-foreground">{item.assigned_to}</Typography>
         </View>
 
         <View className="flex-row justify-between items-center">
           <View className="flex-row items-center">
             <Calendar size={14} className="text-muted-foreground mr-1" />
-            <Text className="text-xs text-muted-foreground">
+            <Typography className="text-xs text-muted-foreground">
               {dueDate.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-            </Text>
+            </Typography>
           </View>
 
           <View
@@ -178,14 +180,14 @@ export default function HomeworkPage() {
               isOverdue ? "bg-destructive/10" : isDueSoon ? "bg-yellow-100" : "bg-green-100",
             )}
           >
-            <Text
+            <Typography
               className={cn(
                 "text-xs font-medium",
                 isOverdue ? "text-destructive" : isDueSoon ? "text-yellow-700" : "text-green-700",
               )}
             >
               {isOverdue ? "Overdue" : isDueSoon ? "Due Soon" : "On Track"}
-            </Text>
+            </Typography>
           </View>
         </View>
       </View>
@@ -193,151 +195,164 @@ export default function HomeworkPage() {
   }
 
   return (
-    <View className="flex-1 bg-background">
-      <ScrollView className="flex-1" refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-        {/* Hero Section */}
-        <View className="bg-primary rounded-2xl p-6 m-4 mb-6">
-          <View className="flex-row items-center  mb-3">
-            <View className="bg-white/20 rounded-lg p-3 mr-3">
-              <GraduationCap size={24} className="text-primary-foreground" />
-            </View>
-            <View className="flex-1">
-              <Text className="text-2xl font-bold text-primary-foreground">Homework Management</Text>
-              <Text className="text-sm text-primary-foreground/80 mt-1">
-                Streamline assignments and track student progress
-              </Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Class Selection */}
-        <View className="px-4 mb-6">
-          <View className="bg-white border border-border rounded-lg p-4 mb-4">
-            <View className="flex-row items-center mb-2">
-              <BookOpen size={18} className="text-primary mr-2" />
-              <Text className="text-lg font-semibold text-foreground">Select Class</Text>
-            </View>
-            <Text className="text-sm text-muted-foreground mb-3">Choose a class to manage homework assignments</Text>
-
+    <SafeAreaView className="flex-1">
+      <View className="flex-1 bg-background">
+        <ScrollView className="flex-1" refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+          {/* Hero Section */}
+          <View className="flex-row items-center p-4">
             <TouchableOpacity
-              onPress={() => setShowClassPicker(!showClassPicker)}
-              className="border border-border rounded-lg p-3 flex-row items-center justify-between bg-input"
+              onPress={() => router.back()}
+              className="flex-row items-center bg-input border border-border rounded-lg px-3 py-2 mr-2"
             >
-              <Text className={cn("text-base", currentClassName ? "text-foreground" : "text-muted-foreground")}>
-                {currentClassName || "Choose a class to get started"}
-              </Text>
-              <ChevronDown size={20} className="text-muted-foreground" />
+              <Typography className="text-primary font-semibold">← Back</Typography>
             </TouchableOpacity>
 
-            {showClassPicker && (
-              <View className="mt-2 border border-border rounded-lg bg-card">
-                {allClass.map((item) => (
-                  <TouchableOpacity
-                    key={item._id}
-                    onPress={() => selectClass(item._id)}
-                    className="p-3 border-b border-border flex-row items-center justify-between"
-                  >
-                    <View className="flex-1">
-                      <Text className="font-semibold text-foreground">{item.name}</Text>
-                      <Text className="text-xs text-muted-foreground">Code: {item.classCode}</Text>
-                    </View>
-                    {currentClass === item._id && <View className="w-2 h-2 bg-primary rounded-full" />}
-                  </TouchableOpacity>
-                ))}
-              </View>
-            )}
+            <Typography className="text-xl font-bold text-foreground">Homework</Typography>
           </View>
 
-          {/* Stats */}
-          <View className="flex-row mb-4">
-            <View className="flex-1 mr-2">
-              {renderStatCard(<FileText size={20} className="text-green-600" />, "Total", totalHomework, "bg-green-50")}
+          <View className="bg-primary text-white rounded-2xl p-6 m-4 mb-6">
+            <View className="flex-row items-center  mb-3">
+              <View className="bg-white/20 rounded-lg p-3 mr-3">
+                <GraduationCap size={24} className="text-primary-foreground" />
+              </View>
+              <View className="flex-1">
+                <Typography className="text-2xl font-bold text-white">Homework Management</Typography>
+                <Typography className="text-sm text-white/80 mt-1">
+                  Streamline assignments and track student progress
+                </Typography>
+              </View>
             </View>
-            <View className="flex-1">
-              {renderStatCard(
-                <TrendingUp size={20} className="text-yellow-600" />,
-                "Due Soon",
-                upcomingHomework,
-                "bg-yellow-50",
+          </View>
+
+          {/* Class Selection */}
+          <View className="px-4 mb-6">
+            <View className="bg-white border border-border rounded-lg p-4 mb-4">
+              <View className="flex-row items-center mb-2">
+                <BookOpen size={18} className="text-primary mr-2" />
+                <Typography className="text-lg font-semibold text-foreground">Select Class</Typography>
+              </View>
+              <Typography className="text-sm text-muted-foreground mb-3">Choose a class to manage homework assignments</Typography>
+
+              <TouchableOpacity
+                onPress={() => setShowClassPicker(!showClassPicker)}
+                className="border border-border rounded-lg p-3 flex-row items-center justify-between bg-input"
+              >
+                <Typography className={cn("text-base", currentClassName ? "text-foreground" : "text-muted-foreground")}>
+                  {currentClassName || "Choose a class to get started"}
+                </Typography>
+                <ChevronDown size={20} className="text-muted-foreground" />
+              </TouchableOpacity>
+
+              {showClassPicker && (
+                <View className="mt-2 border border-border rounded-lg bg-card">
+                  {allClass.map((item) => (
+                    <TouchableOpacity
+                      key={item._id}
+                      onPress={() => selectClass(item._id)}
+                      className="p-3 border-b border-border flex-row items-center justify-between"
+                    >
+                      <View className="flex-1">
+                        <Typography className="font-semibold text-foreground">{item.name}</Typography>
+                        <Typography className="text-xs text-muted-foreground">Code: {item.classCode}</Typography>
+                      </View>
+                      {currentClass === item._id && <View className="w-2 h-2 bg-primary rounded-full" />}
+                    </TouchableOpacity>
+                  ))}
+                </View>
               )}
             </View>
-          </View>
-        </View>
 
-        {/* Homework List */}
-        {currentClass ? (
-          <View className="px-4 pb-6">
-            <View className="flex-row items-center mb-4">
-              <View className="flex-1 bg-input border border-border rounded-lg flex-row items-center px-3">
-                <Search size={18} className="text-muted-foreground mr-2" />
-                <TextInput
-                  placeholder="Search homework..."
-                  value={searchTerm}
-                  onChangeText={setSearchTerm}
-                  className="flex-1 py-2 text-foreground"
-                  placeholderTextColor="#999"
-                />
+            {/* Stats */}
+            <View className="flex-row mb-4">
+              <View className="flex-1 mr-2">
+                {renderStatCard(<FileText size={20} className="text-green-600" />, "Total", totalHomework, "bg-green-50")}
               </View>
-              <PermitComponent module={"HOMEWORK"} action={"CREATE"}>
-                <TouchableOpacity
-                  onPress={() => router.push("/management/homework/create")}
-                  className="bg-primary rounded-lg p-3 ml-2"
-                >
-                  <Plus size={20} className="text-primary-foreground" />
-                </TouchableOpacity>
-              </PermitComponent>
+              <View className="flex-1">
+                {renderStatCard(
+                  <TrendingUp size={20} className="text-yellow-600" />,
+                  "Due Soon",
+                  upcomingHomework,
+                  "bg-yellow-50",
+                )}
+              </View>
             </View>
+          </View>
 
-            {loading ? (
-              <View className="items-center justify-center py-8">
-                <ActivityIndicator size="large" color="#000" />
+          {/* Homework List */}
+          {currentClass ? (
+            <View className="px-4 pb-6">
+              <View className="flex-row items-center mb-4">
+                <View className="flex-1 bg-white border border-border rounded-lg flex-row items-center px-3">
+                  <Search size={18} className="text-muted-foreground mr-2" />
+                  <TextInput
+                    placeholder="Search homework..."
+                    value={searchTerm}
+                    onChangeText={setSearchTerm}
+                    className="flex-1 py-2 text-foreground focus:outline-none"
+                    placeholderTextColor="#999"
+                  />
+                </View>
+                <PermitComponent module={"HOMEWORK"} action={"CREATE"}>
+                  <TouchableOpacity
+                    onPress={() => router.push("/management/homework/create")}
+                    className="bg-primary text-white rounded-lg p-3 ml-2"
+                  >
+                    <Plus size={20} className="text-white" />
+                  </TouchableOpacity>
+                </PermitComponent>
               </View>
-            ) : filteredHomework.length > 0 ? (
-              <PermitComponent module={"HOMEWORK"} action={"VIEW"}>
-                <FlatList
-                  data={filteredHomework}
-                  renderItem={renderHomeworkItem}
-                  keyExtractor={(item) => item._id}
-                  scrollEnabled={false}
-                  ListHeaderComponent={
-                    <View className="mb-2">
-                      <Text className="text-lg font-semibold text-foreground mb-2">{currentClassName} Homework</Text>
-                      <View className="flex-row items-center">
-                        <Text className="text-sm text-muted-foreground">{totalHomework} total assignments</Text>
-                        {overdueHomework > 0 && (
-                          <View className="bg-destructive/10 rounded px-2 py-1 ml-2">
-                            <Text className="text-xs text-destructive font-semibold">{overdueHomework} overdue</Text>
-                          </View>
-                        )}
+
+              {loading ? (
+                <View className="items-center justify-center py-8">
+                  <ActivityIndicator size="large" color="#000" />
+                </View>
+              ) : filteredHomework.length > 0 ? (
+                <PermitComponent module={"HOMEWORK"} action={"VIEW"}>
+                  <FlatList
+                    data={filteredHomework}
+                    renderItem={renderHomeworkItem}
+                    keyExtractor={(item) => item._id}
+                    scrollEnabled={false}
+                    ListHeaderComponent={
+                      <View className="mb-2">
+                        <Typography className="text-lg font-semibold text-foreground mb-2">{currentClassName} Homework</Typography>
+                        <View className="flex-row items-center">
+                          <Typography className="text-sm text-muted-foreground">{totalHomework} total assignments</Typography>
+                          {overdueHomework > 0 && (
+                            <View className="bg-destructive/10 rounded px-2 py-1 ml-2">
+                              <Typography className="text-xs text-destructive font-semibold">{overdueHomework} overdue</Typography>
+                            </View>
+                          )}
+                        </View>
                       </View>
-                    </View>
-                  }
-                />
-              </PermitComponent>
-            ) : (
-              <View className="bg-card border border-border rounded-lg p-6 items-center">
-                <FileText size={32} className="text-muted-foreground mb-3" />
-                <Text className="text-lg font-semibold text-foreground mb-1">No Homework Found</Text>
-                <Text className="text-sm text-muted-foreground text-center">
-                  No homework assignments match your search criteria.
-                </Text>
-              </View>
-            )}
-          </View>
-        ) : (
-          <View className="px-4 pb-6">
-            <View className="bg-white border border-border rounded-lg p-8 items-center">
-              <View className="bg-primary/10 rounded-full p-4 mb-4">
-                <GraduationCap size={32} className="text-primary" />
-              </View>
-              <Text className="text-lg font-semibold text-foreground mb-2">Select a Class to Begin</Text>
-              <Text className="text-sm text-muted-foreground text-center">
-                Choose a class from the dropdown above to view and manage homework assignments for your students.
-              </Text>
+                    }
+                  />
+                </PermitComponent>
+              ) : (
+                <View className="bg-card border border-border rounded-lg p-6 items-center">
+                  <FileText size={32} className="text-muted-foreground mb-3" />
+                  <Typography className="text-lg font-semibold text-foreground mb-1">No Homework Found</Typography>
+                  <Typography className="text-sm text-muted-foreground text-center">
+                    No homework assignments match your search criteria.
+                  </Typography>
+                </View>
+              )}
             </View>
-          </View>
-        )}
-      </ScrollView>
-    </View>
+          ) : (
+            <View className="px-4 pb-6">
+              <View className="bg-white border border-border rounded-lg p-8 items-center">
+                <View className="bg-primary/10 rounded-full p-4 mb-4">
+                  <GraduationCap size={32} className="text-primary" />
+                </View>
+                <Typography className="text-lg font-semibold text-foreground mb-2">Select a Class to Begin</Typography>
+                <Typography className="text-sm text-muted-foreground text-center">
+                  Choose a class from the dropdown above to view and manage homework assignments for your students.
+                </Typography>
+              </View>
+            </View>
+          )}
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   )
 }
