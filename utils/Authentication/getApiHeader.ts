@@ -1,7 +1,7 @@
 import { get_access_token } from "../accessToken";
 
-const get_headers = () => {
-    const access_token = get_access_token()
+const get_headers = async () => {
+    const access_token =await get_access_token()
     return {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${access_token}`,

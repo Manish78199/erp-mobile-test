@@ -6,7 +6,7 @@ const useSections = () => {
 
   const { data, error, isLoading } = useSWR(ApiRoute.section.get_all, managementFetcher, { revalidateIfStale: false, })
   return {
-    sections: data,
+    sections: data as any[],
     isLoading,
     isError: error,
   }

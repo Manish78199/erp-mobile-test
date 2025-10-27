@@ -26,6 +26,7 @@ import { createStudentHomework } from "@/service/management/studenthomework"
 import { uploadImage } from "@/service/management/uploader"
 import { Typography } from "@/components/Typography"
 import { useClasses } from "@/hooks/management/classes"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 const today = new Date()
 today.setMinutes(today.getMinutes() - today.getTimezoneOffset())
@@ -50,16 +51,22 @@ export default function CreateHomework() {
 
 
   // Select sections based on class
-  const selectSection = () => {
-    if (classes?.length && classes[0]?.section) {
-      const allclasssection = classes[0].section.map((item: any) => ({
-        label: item?.name,
-        value: item?._id,
-      }))
-      setSection(allclasssection)
-    }
-    setFieldValue("section", "")
+const selectSection = () => {
+  const selectedClass = classes?.find((cls: any) => cls._id === values?.class_id);
+
+  if (selectedClass?.section?.length) {
+    const allClassSections = selectedClass.section.map((item: any) => ({
+      label: item?.name,
+      value: item?._id,
+    }));
+    setSection(allClassSections);
+  } else {
+    setSection([]);
   }
+
+  setFieldValue("section", "");
+};
+
 
   // Create homework request
   const createHomeWorkRequest = async (values: any) => {
@@ -191,6 +198,7 @@ export default function CreateHomework() {
   }
 
   return (
+    <SafeAreaView className="flex-1">
     <ScrollView className="flex-1 bg-background">
       {/* Loading Overlay */}
       {loading && (
@@ -209,10 +217,10 @@ export default function CreateHomework() {
           onPress={() => router.back()}
           className="flex-row items-center bg-input border border-border rounded-lg px-3 py-2 mr-2"
         >
-          <Typography className="text-primary font-semibold">←</Typography>
+          <Typography className="text-primary ">← Back</Typography>
         </TouchableOpacity>
 
-        <Typography className=" font-bold text-foreground">New Homework</Typography>
+        <Typography className=" font-bold text-xl ">New Homework</Typography>
       </View>
 
       <View className="flex-1 px-4  pb-6">
@@ -508,5 +516,6 @@ export default function CreateHomework() {
         </View>
       </View>
     </ScrollView>
+    </SafeAreaView>
   )
 }
