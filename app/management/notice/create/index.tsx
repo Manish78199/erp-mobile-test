@@ -152,7 +152,7 @@ export default function CreateNoticeScreen() {
         {/* Header */}
         <View className="flex-row items-center p-4">
           <TouchableOpacity
-            onPress={() => router.back()}
+            onPress={() => router.push("/management/notice")}
             className="flex-row items-center bg-input border border-border rounded-lg px-3 py-2 mr-2"
           >
             <Typography className="text-primary font-semibold">← Back</Typography>
