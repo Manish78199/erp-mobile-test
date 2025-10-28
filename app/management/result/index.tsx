@@ -86,12 +86,12 @@ export default function ResultSummary() {
           params: { student_id: item?.student_id },
         })
       }
-      className="mb-3 p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+      className="mb-3 p-4 rounded-lg border border-gray-200  bg-white "
     >
       <View className="flex-row items-center justify-between mb-2">
         <View className="flex-1">
-          <Text className="font-semibold text-gray-900 dark:text-white">{item?.full_name}</Text>
-          <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">Admission: {item?.admission_no}</Text>
+          <Text className="font-semibold text-gray-900 ">{item?.full_name}</Text>
+          <Text className="text-xs mt-1 text-gray-600 ">Admission: {item?.admission_no}</Text>
         </View>
         <View
           className={`px-3 py-1 rounded-full ${
@@ -109,18 +109,18 @@ export default function ResultSummary() {
       </View>
       <View className="flex-row items-center justify-between">
         <View>
-          <Text className="text-xs text-gray-600 dark:text-gray-400">Percentage</Text>
-          <Text className="text-lg font-bold text-gray-900 dark:text-white">{item?.percentage}%</Text>
+          <Text className="text-xs text-gray-600 ">Percentage</Text>
+          <Text className="text-lg font-bold text-gray-900 ">{item?.percentage}%</Text>
         </View>
         <View>
-          <Text className="text-xs text-gray-600 dark:text-gray-400">Marks</Text>
-          <Text className="text-lg font-bold text-gray-900 dark:text-white">
+          <Text className="text-xs text-gray-600 ">Marks</Text>
+          <Text className="text-lg font-bold text-gray-900 ">
             {item?.total_obtained}/{item?.total_max}
           </Text>
         </View>
         <View>
-          <Text className="text-xs text-gray-600 dark:text-gray-400">Grade</Text>
-          <Text className="text-lg font-bold text-gray-900 dark:text-white">{item?.grade || "NA"}</Text>
+          <Text className="text-xs text-gray-600 ">Grade</Text>
+          <Text className="text-lg font-bold text-gray-900 ">{item?.grade || "NA"}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -133,13 +133,13 @@ export default function ResultSummary() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Result Summary</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">View result summary for students</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Result Summary</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">View result summary for students</Text>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
           <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Select Class</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Class</Text>
             <RNPickerSelect
               items={ClassListItem}
               onValueChange={handleClassChange}
@@ -169,7 +169,7 @@ export default function ResultSummary() {
           </View>
 
           <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Select Exam</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Exam</Text>
             <RNPickerSelect
               items={ExamListItem}
               onValueChange={handleExamChange}
@@ -200,8 +200,8 @@ export default function ResultSummary() {
         </View>
 
         {currentExam && (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <Text className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Results</Text>
+          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+            <Text className="text-lg font-semibold mb-4 text-gray-900 ">Results</Text>
 
             {loading ? (
               <View className="flex-row items-center justify-center py-8">
@@ -217,7 +217,7 @@ export default function ResultSummary() {
             ) : (
               <View className="items-center justify-center py-8">
                 <MaterialCommunityIcons name="folder-open" size={48} color="#d1d5db" />
-                <Text className="text-gray-500 dark:text-gray-400 mt-2">No results found</Text>
+                <Text className="text-gray-500  mt-2">No results found</Text>
               </View>
             )}
           </View>

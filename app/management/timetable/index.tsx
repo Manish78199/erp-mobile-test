@@ -69,20 +69,20 @@ export default function TimetableScreen() {
   const stats = getTotalStats()
 
   const renderStatCard = (icon: string, label: string, value: number) => (
-    <View className="flex-1 rounded-lg p-3 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 mr-2">
-      <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">{label}</Text>
+    <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white  mr-2">
+      <Text className="text-xs font-medium text-gray-600  mb-2">{label}</Text>
       <View className="flex-row items-center">
         <MaterialIcons name={icon as any} size={24} color="#6366f1" />
-        <Text className="text-xl font-bold ml-2 text-gray-900 dark:text-white">{value}</Text>
+        <Text className="text-xl font-bold ml-2 text-gray-900 ">{value}</Text>
       </View>
     </View>
   )
 
   const renderTimetableCard = ({ item }: { item: any }) => (
-    <View className="rounded-lg p-4 mb-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <View className="rounded-lg p-4 mb-4 border border-gray-200  bg-white ">
       <View className="flex-row justify-between items-start mb-3">
         <View className="flex-1">
-          <Text className="font-semibold text-base text-gray-900 dark:text-white">
+          <Text className="font-semibold text-base text-gray-900 ">
             {item.class_name} - Section {item.section_name}
           </Text>
         </View>
@@ -105,14 +105,14 @@ export default function TimetableScreen() {
 
       {/* Weekly Schedule Preview */}
       <View className="mb-4">
-        <Text className="text-xs font-medium text-gray-900 dark:text-white mb-2">Weekly Schedule</Text>
+        <Text className="text-xs font-medium text-gray-900  mb-2">Weekly Schedule</Text>
         <View className="flex-row flex-wrap gap-1">
           {Object.keys(item.timetable).map((day) => (
-            <View key={day} className="rounded px-2 py-1 flex-1 min-w-[45px] bg-gray-100 dark:bg-gray-700">
-              <Text className="text-xs text-center font-medium text-gray-900 dark:text-white">
+            <View key={day} className="rounded px-2 py-1 flex-1 min-w-[45px] bg-gray-100 ">
+              <Text className="text-xs text-center font-medium text-gray-900 ">
                 {day.substring(0, 3)}
               </Text>
-              <Text className="text-[10px] text-center mt-1 text-gray-600 dark:text-gray-400">
+              <Text className="text-[10px] text-center mt-1 text-gray-600 ">
                 {item.timetable[day]?.length || 0}
               </Text>
             </View>
@@ -123,7 +123,7 @@ export default function TimetableScreen() {
       {/* View Button */}
       <TouchableOpacity
         onPress={() => setPreviewTt(item)}
-        className="rounded-lg p-3 flex-row items-center justify-center bg-gray-100 dark:bg-gray-700"
+        className="rounded-lg p-3 flex-row items-center justify-center bg-gray-100 "
       >
         <MaterialIcons name="visibility" size={16} color="#6366f1" />
         <Text className="text-sm font-medium ml-2 text-indigo-600 dark:text-indigo-400">View Details</Text>
@@ -159,8 +159,8 @@ export default function TimetableScreen() {
           <View className="px-4 py-6 ">
             <View className="flex-row justify-between items-start">
               <View className="flex-1">
-                <Typography className="text-2xl font-bold text-gray-900 dark:text-white">Timetables</Typography>
-                <Typography className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+                <Typography className="text-2xl font-bold text-gray-900 ">Timetables</Typography>
+                <Typography className="text-sm mt-1 text-gray-600 ">
                   Manage class schedules
                 </Typography>
               </View>
@@ -188,14 +188,14 @@ export default function TimetableScreen() {
 
           {/* Search and Filter */}
           <View className="px-4 py-3">
-            <View className="rounded-lg border border-gray-200 dark:border-gray-700 px-3 py-2 flex-row items-center mb-3 bg-white dark:bg-gray-800">
+            <View className="rounded-lg border border-gray-200  px-3 py-2 flex-row items-center mb-3 bg-white ">
               <MaterialIcons name="search" size={18} color="#6b7280" />
               <TextInput
                 placeholder="Search by class or section..."
                 placeholderTextColor="#9ca3af"
                 value={searchTerm}
                 onChangeText={setSearchTerm}
-                className="flex-1 ml-2 text-sm text-gray-900 dark:text-white"
+                className="flex-1 ml-2 text-sm text-gray-900 "
               />
             </View>
 
@@ -214,12 +214,12 @@ export default function TimetableScreen() {
           <View className="px-4 pb-6">
             {isLoading ? (
               <View className="py-8 items-center">
-                <Text className="text-gray-600 dark:text-gray-400">Loading timetables...</Text>
+                <Text className="text-gray-600 ">Loading timetables...</Text>
               </View>
             ) : isError ? (
               <View className="py-8 items-center">
                 <MaterialIcons name="error-outline" size={48} color="#ef4444" />
-                <Text className="text-gray-600 dark:text-gray-400 mt-2">Error loading timetables</Text>
+                <Text className="text-gray-600  mt-2">Error loading timetables</Text>
               </View>
             ) : filteredTimetables.length > 0 ? (
               <FlatList
@@ -231,7 +231,7 @@ export default function TimetableScreen() {
             ) : (
               <View className="py-8 items-center">
                 <MaterialIcons name="schedule" size={48} color="#d1d5db" />
-                <Text className="text-gray-600 dark:text-gray-400 mt-2">No timetables found</Text>
+                <Text className="text-gray-600  mt-2">No timetables found</Text>
               </View>
             )}
           </View>
@@ -240,10 +240,10 @@ export default function TimetableScreen() {
         {/* Preview Modal */}
         <Modal visible={previewTt !== null} transparent animationType="fade" onRequestClose={() => setPreviewTt(null)}>
           <View className="flex-1 bg-black/70 justify-center items-center p-4">
-            <View className="rounded-lg w-full max-h-[80%] border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <View className="rounded-lg w-full max-h-[80%] border border-gray-200  bg-white ">
               {/* Modal Header */}
-              <View className="flex-row justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
-                <Text className="font-bold text-lg text-gray-900 dark:text-white">
+              <View className="flex-row justify-between items-center p-4 border-b border-gray-200 ">
+                <Text className="font-bold text-lg text-gray-900 ">
                   {previewTt?.class_name} - Section {previewTt?.section_name}
                 </Text>
                 <TouchableOpacity onPress={() => setPreviewTt(null)}>
@@ -263,15 +263,15 @@ export default function TimetableScreen() {
                       <View>
                         {/* Table Header */}
                         <View className="flex-row mb-2">
-                          <View className="w-16 rounded-t-lg p-2 border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-700">
-                            <Text className="text-xs font-bold text-center text-gray-900 dark:text-white">Slot</Text>
+                          <View className="w-16 rounded-t-lg p-2 border border-gray-200  bg-gray-100 ">
+                            <Text className="text-xs font-bold text-center text-gray-900 ">Slot</Text>
                           </View>
                           {shortDays.map((day, idx) => (
                             <View
                               key={idx}
-                              className="w-24 rounded-t-lg p-2 border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-700"
+                              className="w-24 rounded-t-lg p-2 border border-gray-200  bg-gray-100 "
                             >
-                              <Text className="text-xs font-bold text-center text-gray-900 dark:text-white">{day}</Text>
+                              <Text className="text-xs font-bold text-center text-gray-900 ">{day}</Text>
                             </View>
                           ))}
                         </View>
@@ -279,25 +279,25 @@ export default function TimetableScreen() {
                         {/* Table Rows */}
                         {Array.from({ length: maxSlots }).map((_, slotIdx) => (
                           <View key={slotIdx} className="flex-row mb-1">
-                            <View className="w-16 p-2 border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-700">
-                              <Text className="text-xs text-center text-gray-900 dark:text-white">{slotIdx + 1}</Text>
+                            <View className="w-16 p-2 border border-gray-200  bg-gray-100 ">
+                              <Text className="text-xs text-center text-gray-900 ">{slotIdx + 1}</Text>
                             </View>
                             {days.map((day) => {
                               const period = previewTt.timetable[day]?.[slotIdx]
                               return (
                                 <View
                                   key={day}
-                                  className="w-24 p-2 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+                                  className="w-24 p-2 border border-gray-200  bg-white "
                                 >
                                   {period ? (
                                     <View>
-                                      <Text className="text-xs font-semibold text-gray-900 dark:text-white">
+                                      <Text className="text-xs font-semibold text-gray-900 ">
                                         {period.subject_name}
                                       </Text>
-                                      <Text className="text-[10px] mt-1 text-gray-600 dark:text-gray-400">
+                                      <Text className="text-[10px] mt-1 text-gray-600 ">
                                         {period.start_time}
                                       </Text>
-                                      <Text className="text-[9px] text-gray-600 dark:text-gray-400">
+                                      <Text className="text-[9px] text-gray-600 ">
                                         {period.teacher_name}
                                       </Text>
                                     </View>

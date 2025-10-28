@@ -53,14 +53,14 @@ export default function VehicleAddForm() {
 
   const FormField = ({ label, placeholder, value, onChangeText, error, keyboardType = "default" }: any) => (
     <View className="mb-4">
-      <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">{label}</Text>
+      <Text className="text-sm font-medium mb-2 text-gray-700 ">{label}</Text>
       <TextInput
         placeholder={placeholder}
         placeholderTextColor="#9ca3af"
         value={value}
         onChangeText={onChangeText}
         keyboardType={keyboardType}
-        className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+        className="p-3 rounded-lg border border-gray-300  bg-white  text-gray-900 "
       />
       {error && <Text className="text-xs mt-1 text-red-600">{error}</Text>}
     </View>
@@ -77,13 +77,13 @@ export default function VehicleAddForm() {
             <MaterialCommunityIcons name="truck" size={24} color="#2563eb" />
           </View>
           <View>
-            <Text className="text-2xl font-bold text-gray-900 dark:text-white">Add New Vehicle</Text>
-            <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Register a new vehicle in the fleet</Text>
+            <Text className="text-2xl font-bold text-gray-900 ">Add New Vehicle</Text>
+            <Text className="text-sm mt-1 text-gray-600 ">Register a new vehicle in the fleet</Text>
           </View>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-          <Text className="text-lg font-semibold text-gray-900 dark:text-white">Vehicle Information</Text>
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+          <Text className="text-lg font-semibold text-gray-900 ">Vehicle Information</Text>
           <FormField
             label="Registration Number"
             placeholder="e.g., TN-01-AB-1234"
@@ -114,7 +114,7 @@ export default function VehicleAddForm() {
             error={errors.year}
           />
           <View className="mb-4">
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Type</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Type</Text>
             <RNPickerSelect
               items={[
                 { label: "Bus", value: "bus" },
@@ -147,8 +147,8 @@ export default function VehicleAddForm() {
           </View>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-          <Text className="text-lg font-semibold text-gray-900 dark:text-white">Specifications</Text>
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+          <Text className="text-lg font-semibold text-gray-900 ">Specifications</Text>
           <FormField
             label="Capacity (Passengers)"
             placeholder="e.g., 50"
@@ -157,7 +157,7 @@ export default function VehicleAddForm() {
             keyboardType="numeric"
           />
           <View className="mb-4">
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Fuel Type</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Fuel Type</Text>
             <RNPickerSelect
               items={[
                 { label: "Diesel", value: "diesel" },
@@ -198,8 +198,8 @@ export default function VehicleAddForm() {
           />
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-          <Text className="text-lg font-semibold text-gray-900 dark:text-white">Documentation</Text>
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+          <Text className="text-lg font-semibold text-gray-900 ">Documentation</Text>
           <FormField
             label="Insurance Expiry Date"
             placeholder="YYYY-MM-DD"
@@ -223,9 +223,9 @@ export default function VehicleAddForm() {
         <View className="flex-row gap-3 pt-4">
           <TouchableOpacity
             onPress={() => router.back()}
-            className="flex-1 p-3 rounded-lg border border-gray-300 dark:border-gray-600"
+            className="flex-1 p-3 rounded-lg border border-gray-300 "
           >
-            <Text className="text-center font-medium text-gray-700 dark:text-gray-300">Cancel</Text>
+            <Text className="text-center font-medium text-gray-700 ">Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => handleSubmit()}

@@ -89,42 +89,42 @@ export default function CreateSubject() {
         <View className="px-4 py-6 space-y-6">
 
           <View>
-            <Typography className="text-2xl font-bold text-gray-900 dark:text-white">Create Subject</Typography>
-            <Typography className="text-sm mt-1 text-gray-600 dark:text-gray-400">Create class's subject</Typography>
+            <Typography className="text-2xl font-bold text-gray-900 ">Create Subject</Typography>
+            <Typography className="text-sm mt-1 text-gray-600 ">Create class's subject</Typography>
           </View>
 
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-            <Typography className="text-lg font-semibold text-gray-900 dark:text-white">Subject Details</Typography>
+          <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+            <Typography className="text-lg font-semibold text-gray-900 ">Subject Details</Typography>
 
             {/* Subject Name */}
             <View>
-              <Typography className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Subject Name</Typography>
+              <Typography className="text-sm font-medium mb-2 text-gray-700 ">Subject Name</Typography>
               <TextInput
                 placeholder="Mathematics"
                 placeholderTextColor="#9ca3af"
                 value={values.name}
                 onChangeText={(text) => handleChange("name")(text)}
-                className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-3 py-2 rounded-lg border border-gray-300  bg-white  text-gray-900 "
               />
               {errors.name && touched.name && <Typography className="mt-1 text-sm text-red-500">{errors.name}</Typography>}
             </View>
 
             {/* Subject Code */}
             <View>
-              <Typography className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Subject Code</Typography>
+              <Typography className="text-sm font-medium mb-2 text-gray-700 ">Subject Code</Typography>
               <TextInput
                 placeholder="MATH102"
                 placeholderTextColor="#9ca3af"
                 value={values.code}
                 onChangeText={(text) => handleChange("code")(text)}
-                className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-3 py-2 rounded-lg border border-gray-300  bg-white  text-gray-900 "
               />
               {errors.code && touched.code && <Typography className="mt-1 text-sm text-red-500">{errors.code}</Typography>}
             </View>
 
             {/* Subject Type */}
             <View>
-              <Typography className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Subject Type</Typography>
+              <Typography className="text-sm font-medium mb-2 text-gray-700 ">Subject Type</Typography>
               <RNPickerSelect
                 items={[
                   { label: "Theoretical", value: "THEORETICAL" },
@@ -158,7 +158,7 @@ export default function CreateSubject() {
 
             {/* Result Type */}
             <View>
-              <Typography className="text-sm font-medium mb-3 text-gray-700 dark:text-gray-300">Result Type</Typography>
+              <Typography className="text-sm font-medium mb-3 text-gray-700 ">Result Type</Typography>
               <View className="space-y-2">
                 {[
                   { name: "Grade", value: "GRADE" },
@@ -169,17 +169,17 @@ export default function CreateSubject() {
                   <TouchableOpacity
                     key={option.value}
                     onPress={() => setFieldValue("result_type", option.value)}
-                    className="flex-row items-center p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+                    className="flex-row items-center p-3 rounded-lg border border-gray-200  bg-white "
                   >
                     <View
                       className={`w-5 h-5 rounded-full border-2 items-center justify-center ${values.result_type === option.value
                         ? "border-emerald-600 bg-emerald-600"
-                        : "border-gray-300 dark:border-gray-600"
+                        : "border-gray-300 "
                         }`}
                     >
                       {values.result_type === option.value && <View className="w-2 h-2 rounded-full bg-white" />}
                     </View>
-                    <Typography className="ml-3 text-gray-900 dark:text-white font-medium">{option.name}</Typography>
+                    <Typography className="ml-3 text-gray-900  font-medium">{option.name}</Typography>
                   </TouchableOpacity>
                 ))}
               </View>
@@ -187,7 +187,7 @@ export default function CreateSubject() {
 
             {/* Class Selection */}
             <View>
-              <Typography className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+              <Typography className="text-sm font-medium mb-2 text-gray-700 ">
                 Class <Typography className="text-red-500">*</Typography>
               </Typography>
               <RNPickerSelect
@@ -225,9 +225,9 @@ export default function CreateSubject() {
             <View className="flex-row items-center justify-end gap-3 mt-6">
               <TouchableOpacity
                 onPress={() => router.push("/management/subject")}
-                className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600"
+                className="px-4 py-2 rounded-lg border border-gray-300 "
               >
-                <Typography className="text-gray-700 dark:text-gray-300 font-medium">Cancel</Typography>
+                <Typography className="text-gray-700  font-medium">Cancel</Typography>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => handleSubmit()}

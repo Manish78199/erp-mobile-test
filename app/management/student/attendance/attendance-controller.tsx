@@ -93,7 +93,7 @@ const AttendanceController = ({
                 "flex-row items-center px-3 py-2 rounded-lg border-2",
                 myAttendance === option.value
                   ? `${option.color} border-transparent`
-                  : "bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600",
+                  : "bg-gray-100  border-gray-300 ",
               )}
             >
               <MaterialCommunityIcons
@@ -104,7 +104,7 @@ const AttendanceController = ({
               <Text
                 className={cn(
                   "text-xs font-medium ml-1",
-                  myAttendance === option.value ? "text-white" : "text-gray-700 dark:text-gray-300",
+                  myAttendance === option.value ? "text-white" : "text-gray-700 ",
                 )}
               >
                 {option.label}

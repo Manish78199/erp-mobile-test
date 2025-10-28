@@ -52,11 +52,11 @@ export default function FeeStructureList() {
   const averageFee = totalClasses > 0 ? totalRevenue / totalClasses : 0
 
   const StatCard = ({ icon, title, value, color }: any) => (
-    <View className={cn("flex-1 rounded-lg p-3 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800")}>
+    <View className={cn("flex-1 rounded-lg p-3 border border-gray-200  bg-white ")}>
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
-          <Text className="text-xs font-medium mb-1 text-gray-600 dark:text-gray-400">{title}</Text>
-          <Text className="text-lg font-bold text-gray-900 dark:text-white">{value}</Text>
+          <Text className="text-xs font-medium mb-1 text-gray-600 ">{title}</Text>
+          <Text className="text-lg font-bold text-gray-900 ">{value}</Text>
         </View>
         <View className={cn("p-2 rounded-lg", color)}>
           <MaterialCommunityIcons name={icon} size={16} color="white" />
@@ -72,8 +72,8 @@ export default function FeeStructureList() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Fee Structure</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Manage class fee structures</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Fee Structure</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">Manage class fee structures</Text>
         </View>
 
         <View className="space-y-2">
@@ -96,9 +96,9 @@ export default function FeeStructureList() {
           </View>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-3">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3">
           <View className="flex-row items-center justify-between mb-3">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white">Search</Text>
+            <Text className="text-lg font-semibold text-gray-900 ">Search</Text>
             <TouchableOpacity
               onPress={() => router.push("/fee-structure-create")}
               className="bg-emerald-600 rounded-lg p-2 flex-row items-center gap-1"
@@ -108,14 +108,14 @@ export default function FeeStructureList() {
             </TouchableOpacity>
           </View>
 
-          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 dark:border-gray-600">
+          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 ">
             <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
             <TextInput
               placeholder="Search by class name..."
               placeholderTextColor="#9ca3af"
               value={searchTerm}
               onChangeText={setSearchTerm}
-              className="flex-1 ml-2 py-2 text-sm text-gray-900 dark:text-white"
+              className="flex-1 ml-2 py-2 text-sm text-gray-900 "
             />
           </View>
         </View>
@@ -130,11 +130,11 @@ export default function FeeStructureList() {
             data={filteredData}
             keyExtractor={(item) => item._id}
             renderItem={({ item }) => (
-              <View className="mb-3 rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+              <View className="mb-3 rounded-lg p-4 border border-gray-200  bg-white ">
                 <View className="flex-row items-center justify-between mb-2">
                   <View className="flex-1">
-                    <Text className="font-semibold text-gray-900 dark:text-white">{item.class_name}</Text>
-                    <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+                    <Text className="font-semibold text-gray-900 ">{item.class_name}</Text>
+                    <Text className="text-xs mt-1 text-gray-600 ">
                       Updated: {new Date(item.created_at).toLocaleDateString()}
                     </Text>
                   </View>
@@ -165,7 +165,7 @@ export default function FeeStructureList() {
         ) : (
           <View className="items-center justify-center py-12">
             <MaterialIcons name="folder-open" size={48} color="#d1d5db" />
-            <Text className="text-gray-500 dark:text-gray-400 mt-2">No fee structures found</Text>
+            <Text className="text-gray-500  mt-2">No fee structures found</Text>
           </View>
         )}
       </View>

@@ -204,8 +204,8 @@ export default function StudentAdmissionScreen() {
     <View className="flex-1 bg-white dark:bg-gray-900" style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
         <View className="mt-6 mb-6">
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Student Admission</Text>
-          <Text className="text-gray-600 dark:text-gray-400 mt-1">Complete the admission process for new students</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Student Admission</Text>
+          <Text className="text-gray-600  mt-1">Complete the admission process for new students</Text>
         </View>
 
         <ScrollView

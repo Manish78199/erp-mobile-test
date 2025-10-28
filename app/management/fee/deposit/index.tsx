@@ -144,13 +144,13 @@ export default function FeePayment() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Fee Payment</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Deposit student fees</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Fee Payment</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">Deposit student fees</Text>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
           <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Select Class</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Class</Text>
             <RNPickerSelect
               items={classList}
               onValueChange={handleClassChange}
@@ -180,7 +180,7 @@ export default function FeePayment() {
 
           {selectedClass && (
             <View>
-              <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Select Student</Text>
+              <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Student</Text>
               <RNPickerSelect
                 items={studentList}
                 onValueChange={handleStudentChange}
@@ -213,21 +213,21 @@ export default function FeePayment() {
         {studentDetails && (
           <>
             <View className="space-y-3">
-              <Text className="text-lg font-semibold text-gray-900 dark:text-white">Student Information</Text>
-              <View className="rounded-lg p-3 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Admission No</Text>
-                <Text className="font-semibold text-gray-900 dark:text-white">{studentDetails.admission_no}</Text>
+              <Text className="text-lg font-semibold text-gray-900 ">Student Information</Text>
+              <View className="rounded-lg p-3 border border-gray-200  bg-gray-50 ">
+                <Text className="text-xs font-medium text-gray-600  mb-1">Admission No</Text>
+                <Text className="font-semibold text-gray-900 ">{studentDetails.admission_no}</Text>
               </View>
-              <View className="rounded-lg p-3 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Student Name</Text>
-                <Text className="font-semibold text-gray-900 dark:text-white">
+              <View className="rounded-lg p-3 border border-gray-200  bg-gray-50 ">
+                <Text className="text-xs font-medium text-gray-600  mb-1">Student Name</Text>
+                <Text className="font-semibold text-gray-900 ">
                   {studentDetails.first_name} {studentDetails.last_name}
                 </Text>
               </View>
             </View>
 
             <View className="space-y-3">
-              <Text className="text-lg font-semibold text-gray-900 dark:text-white">Fee Summary</Text>
+              <Text className="text-lg font-semibold text-gray-900 ">Fee Summary</Text>
               <View className="rounded-lg p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700">
                 <Text className="text-xs font-medium text-blue-800 dark:text-blue-200 mb-1">Total Fee</Text>
                 <View className="flex-row items-center gap-1">
@@ -259,23 +259,23 @@ export default function FeePayment() {
               </View>
             </View>
 
-            <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-              <Text className="text-lg font-semibold text-gray-900 dark:text-white">Payment Details</Text>
+            <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+              <Text className="text-lg font-semibold text-gray-900 ">Payment Details</Text>
 
               <View>
-                <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Deposit Amount (₹)</Text>
+                <Text className="text-sm font-medium mb-2 text-gray-700 ">Deposit Amount (₹)</Text>
                 <TextInput
                   placeholder="Enter amount"
                   placeholderTextColor="#9ca3af"
                   value={amount}
                   onChangeText={setAmount}
                   keyboardType="numeric"
-                  className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700"
+                  className="border border-gray-300  rounded-lg px-3 py-2 text-gray-900  bg-gray-50 "
                 />
               </View>
 
               <View>
-                <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Payment Type</Text>
+                <Text className="text-sm font-medium mb-2 text-gray-700 ">Payment Type</Text>
                 <RNPickerSelect
                   items={paymentModes}
                   onValueChange={setPaymentMode}
@@ -305,19 +305,19 @@ export default function FeePayment() {
 
               {paymentMode !== "CASH" && (
                 <View>
-                  <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Reference Number</Text>
+                  <Text className="text-sm font-medium mb-2 text-gray-700 ">Reference Number</Text>
                   <TextInput
                     placeholder="Enter transaction reference"
                     placeholderTextColor="#9ca3af"
                     value={referenceNo}
                     onChangeText={setReferenceNo}
-                    className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700"
+                    className="border border-gray-300  rounded-lg px-3 py-2 text-gray-900  bg-gray-50 "
                   />
                 </View>
               )}
 
               <View>
-                <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Remarks</Text>
+                <Text className="text-sm font-medium mb-2 text-gray-700 ">Remarks</Text>
                 <TextInput
                   placeholder="Add payment remarks..."
                   placeholderTextColor="#9ca3af"
@@ -325,7 +325,7 @@ export default function FeePayment() {
                   onChangeText={setRemarks}
                   multiline
                   numberOfLines={3}
-                  className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700"
+                  className="border border-gray-300  rounded-lg px-3 py-2 text-gray-900  bg-gray-50 "
                 />
               </View>
             </View>
@@ -333,9 +333,9 @@ export default function FeePayment() {
             <View className="flex-row gap-3">
               <TouchableOpacity
                 onPress={() => router.back()}
-                className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg p-3"
+                className="flex-1 border border-gray-300  rounded-lg p-3"
               >
-                <Text className="text-center font-medium text-gray-700 dark:text-gray-300">Cancel</Text>
+                <Text className="text-center font-medium text-gray-700 ">Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={handleSubmit}

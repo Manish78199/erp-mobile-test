@@ -143,10 +143,10 @@ export default function HomeworkPage() {
           <TouchableOpacity
             onPress={() => {
               Alert.alert("Actions", "Choose an action", [
-                {
-                  text: "View Details",
-                  onPress: () => router.push(`/management/homework/view/${item?._id}`),
-                },
+                // {
+                //   text: "View Details",
+                //   onPress: () => router.push(`/management/homework/view/${item?._id}`),
+                // },
                 {
                   text: "Delete",
                   onPress: () => deleteHomeWork(item?._id),

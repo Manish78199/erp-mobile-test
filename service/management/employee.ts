@@ -1,9 +1,10 @@
 import {ApiRoute} from "@/constants/apiRoute";
 import { employeeFormikType } from "@/schema/employee";
+import { get_access_token } from "@/utils/accessToken";
 import axios from "axios";
 
 const createEmployee = async (employeeDetails: employeeFormikType) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
     return await axios.post(ApiRoute.employeeRoutes.create,
         employeeDetails,
         {
@@ -21,7 +22,7 @@ const createEmployee = async (employeeDetails: employeeFormikType) => {
 
 
 const geAllEmployee = async (designation: string| null = null ) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
     let route = designation ? `${ApiRoute.employeeRoutes.getAll}?designation=${designation}` : `${ApiRoute.employeeRoutes.getAll}`
     try {
@@ -42,7 +43,7 @@ const geAllEmployee = async (designation: string| null = null ) => {
 }
 
 const getEmployeeDetails = async (staff_id: string) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token = await get_access_token()
 
     let route = `${ApiRoute.employeeRoutes.getStaffDetails}/${staff_id}`
     try {
@@ -65,7 +66,7 @@ const getEmployeeDetails = async (staff_id: string) => {
 
 
 const getAllTeacherForAttendance = async (date: string) => {
-    const access_token = localStorage.getItem("access_token")
+        const access_token = await get_access_token()
 
 
     try {
@@ -88,7 +89,7 @@ const getAllTeacherForAttendance = async (date: string) => {
 
 
 const markEmployeeAttendance = async (attendaneDetails: any) => {
-    const access_token = localStorage.getItem("access_token")
+        const access_token = await get_access_token()
     return await axios.post(ApiRoute.employeeRoutes.attendance.markAttendance,
         attendaneDetails,
         {
@@ -110,7 +111,7 @@ const changeStaffPassword = async (data: {
     password: string
 }) => {
 
-    const access_token = localStorage.getItem("access_token")
+        const access_token = await get_access_token()
 
     const response = await axios.post(`${ApiRoute.employeeRoutes.update_password}`,
         data,

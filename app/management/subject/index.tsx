@@ -75,11 +75,11 @@ export default function SubjectList() {
   }
 
   const SubjectCard = ({ subject }: any) => (
-    <View className="mb-3 rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <View className="mb-3 rounded-lg p-4 border border-gray-200  bg-white ">
       <View className="flex-row items-start justify-between mb-3">
         <View className="flex-1">
-          <Typography className="text-base font-semibold text-gray-900 dark:text-white">{subject.name}</Typography>
-          <Typography className="text-xs mt-1 text-gray-600 dark:text-gray-400">{subject.code}</Typography>
+          <Typography className="text-base font-semibold text-gray-900 ">{subject.name}</Typography>
+          <Typography className="text-xs mt-1 text-gray-600 ">{subject.code}</Typography>
         </View>
         <TouchableOpacity
           onPress={() => handleDeleteSubject(subject._id)}
@@ -96,17 +96,17 @@ export default function SubjectList() {
 
       <View className="space-y-2">
         <View className="flex-row items-center justify-between">
-          <Typography className="text-xs text-gray-600 dark:text-gray-400">Class</Typography>
-          <Typography className="text-sm font-medium text-gray-900 dark:text-white">{subject.class_name}</Typography>
+          <Typography className="text-xs text-gray-600 ">Class</Typography>
+          <Typography className="text-sm font-medium text-gray-900 ">{subject.class_name}</Typography>
         </View>
         <View className="flex-row items-center justify-between">
-          <Typography className="text-xs text-gray-600 dark:text-gray-400">Result Type</Typography>
+          <Typography className="text-xs text-gray-600 ">Result Type</Typography>
           <View className="px-2 py-1 rounded bg-blue-100 dark:bg-blue-900">
             <Typography className="text-xs font-medium text-blue-700 dark:text-blue-200">{subject.result_type}</Typography>
           </View>
         </View>
         <View className="flex-row items-center justify-between">
-          <Typography className="text-xs text-gray-600 dark:text-gray-400">Subject Type</Typography>
+          <Typography className="text-xs text-gray-600 ">Subject Type</Typography>
           <View className="px-2 py-1 rounded bg-emerald-100 dark:bg-emerald-900">
             <Typography className="text-xs font-medium text-emerald-700 dark:text-emerald-200">{subject.subject_type}</Typography>
           </View>
@@ -135,8 +135,8 @@ export default function SubjectList() {
         <View className="px-4 py-6 space-y-6">
           <View className="flex-row items-center justify-between">
             <View>
-              <Typography className="text-2xl font-bold text-gray-900 dark:text-white">Course's Subjects</Typography>
-              <Typography className="text-sm mt-1 text-gray-600 dark:text-gray-400">Manage Course's Subjects</Typography>
+              <Typography className="text-2xl font-bold text-gray-900 ">Course's Subjects</Typography>
+              <Typography className="text-sm mt-1 text-gray-600 ">Manage Course's Subjects</Typography>
             </View>
             <TouchableOpacity
               onPress={() => router.push("/management/subject/add")}
@@ -148,13 +148,13 @@ export default function SubjectList() {
           </View>
 
           <View className="flex-row gap-2">
-            <TouchableOpacity className="flex-1 flex-row items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <TouchableOpacity className="flex-1 flex-row items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-200  bg-white ">
               <MaterialCommunityIcons name="filter" size={18} color="#6b7280" />
-              <Typography className="text-sm font-medium text-gray-700 dark:text-gray-300">Filter</Typography>
+              <Typography className="text-sm font-medium text-gray-700 ">Filter</Typography>
             </TouchableOpacity>
-            <TouchableOpacity className="flex-1 flex-row items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <TouchableOpacity className="flex-1 flex-row items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-200  bg-white ">
               <MaterialCommunityIcons name="download" size={18} color="#6b7280" />
-              <Typography className="text-sm font-medium text-gray-700 dark:text-gray-300">Export</Typography>
+              <Typography className="text-sm font-medium text-gray-700 ">Export</Typography>
             </TouchableOpacity>
           </View>
 
@@ -172,7 +172,7 @@ export default function SubjectList() {
           ) : (
             <View className="items-center justify-center py-12">
               <MaterialIcons name="folder-open" size={48} color="#d1d5db" />
-              <Typography className="text-gray-500 dark:text-gray-400 mt-2">No subjects found</Typography>
+              <Typography className="text-gray-500  mt-2">No subjects found</Typography>
             </View>
           )}
         </View>

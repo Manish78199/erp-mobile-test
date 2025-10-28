@@ -65,8 +65,8 @@ export default function FeeHistory() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Fee History</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">View all fee payments</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Fee History</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">View all fee payments</Text>
         </View>
 
         <View className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700 rounded-lg p-4">
@@ -79,15 +79,15 @@ export default function FeeHistory() {
           </View>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 dark:border-gray-600">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 ">
             <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
             <TextInput
               placeholder="Search by name or admission no..."
               placeholderTextColor="#9ca3af"
               value={searchTerm}
               onChangeText={setSearchTerm}
-              className="flex-1 ml-2 py-2 text-sm text-gray-900 dark:text-white"
+              className="flex-1 ml-2 py-2 text-sm text-gray-900 "
             />
           </View>
         </View>
@@ -102,11 +102,11 @@ export default function FeeHistory() {
             data={filteredHistory}
             keyExtractor={(item) => item._id}
             renderItem={({ item }) => (
-              <View className="mb-3 rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+              <View className="mb-3 rounded-lg p-4 border border-gray-200  bg-white ">
                 <View className="flex-row items-center justify-between mb-2">
                   <View className="flex-1">
-                    <Text className="font-semibold text-gray-900 dark:text-white">{item.student_name}</Text>
-                    <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+                    <Text className="font-semibold text-gray-900 ">{item.student_name}</Text>
+                    <Text className="text-xs mt-1 text-gray-600 ">
                       Admission: {item.admission_no}
                     </Text>
                   </View>
@@ -114,14 +114,14 @@ export default function FeeHistory() {
                     <Text className="text-xs font-medium text-emerald-700 dark:text-emerald-300">{item.status}</Text>
                   </View>
                 </View>
-                <View className="flex-row items-center justify-between mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                <View className="flex-row items-center justify-between mt-3 pt-3 border-t border-gray-200 ">
                   <View className="flex-row items-center gap-1">
                     <MaterialCommunityIcons name="currency-inr" size={16} color="#10b981" />
                     <Text className="font-bold text-emerald-600 dark:text-emerald-400">
                       ₹{item.paid_amount?.toLocaleString()}
                     </Text>
                   </View>
-                  <Text className="text-xs text-gray-600 dark:text-gray-400">
+                  <Text className="text-xs text-gray-600 ">
                     {new Date(item.deposit_at).toLocaleDateString()}
                   </Text>
                 </View>
@@ -131,7 +131,7 @@ export default function FeeHistory() {
         ) : (
           <View className="items-center justify-center py-12">
             <MaterialIcons name="folder-open" size={48} color="#d1d5db" />
-            <Text className="text-gray-500 dark:text-gray-400 mt-2">No fee history found</Text>
+            <Text className="text-gray-500  mt-2">No fee history found</Text>
           </View>
         )}
       </View>

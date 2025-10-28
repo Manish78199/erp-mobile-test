@@ -63,13 +63,13 @@ export default function RouteAddForm() {
 
   const FormField = ({ label, placeholder, value, onChangeText, error }: any) => (
     <View className="mb-4">
-      <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">{label}</Text>
+      <Text className="text-sm font-medium mb-2 text-gray-700 ">{label}</Text>
       <TextInput
         placeholder={placeholder}
         placeholderTextColor="#9ca3af"
         value={value}
         onChangeText={onChangeText}
-        className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+        className="p-3 rounded-lg border border-gray-300  bg-white  text-gray-900 "
       />
       {error && <Text className="text-xs mt-1 text-red-600">{error}</Text>}
     </View>
@@ -86,15 +86,15 @@ export default function RouteAddForm() {
             <MaterialCommunityIcons name="map-marker" size={24} color="#2563eb" />
           </View>
           <View>
-            <Text className="text-2xl font-bold text-gray-900 dark:text-white">Create New Route</Text>
-            <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+            <Text className="text-2xl font-bold text-gray-900 ">Create New Route</Text>
+            <Text className="text-sm mt-1 text-gray-600 ">
               Set up a new transport route with stops
             </Text>
           </View>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-          <Text className="text-lg font-semibold text-gray-900 dark:text-white">Basic Information</Text>
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+          <Text className="text-lg font-semibold text-gray-900 ">Basic Information</Text>
           <FormField
             label="Route Name"
             placeholder="e.g., Anna Nagar - T.Nagar Route"
@@ -110,7 +110,7 @@ export default function RouteAddForm() {
             error={errors.code}
           />
           <View className="mb-4">
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Route Type</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Route Type</Text>
             <RNPickerSelect
               items={[
                 { label: "Pickup Only", value: "PICKUP" },
@@ -143,8 +143,8 @@ export default function RouteAddForm() {
           </View>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-          <Text className="text-lg font-semibold text-gray-900 dark:text-white">Route Details</Text>
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+          <Text className="text-lg font-semibold text-gray-900 ">Route Details</Text>
           <FormField
             label="Start Location"
             placeholder="Starting point"
@@ -173,9 +173,9 @@ export default function RouteAddForm() {
           />
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
           <View className="flex-row items-center justify-between mb-4">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white">Pickup Points</Text>
+            <Text className="text-lg font-semibold text-gray-900 ">Pickup Points</Text>
             <TouchableOpacity onPress={addPickupPoint} className="bg-emerald-600 px-3 py-2 rounded-lg">
               <Text className="text-white text-sm font-medium">Add Point</Text>
             </TouchableOpacity>
@@ -183,10 +183,10 @@ export default function RouteAddForm() {
           {pickupPoints.map((point, index) => (
             <View
               key={index}
-              className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700"
+              className="p-3 rounded-lg border border-gray-200  bg-gray-50 "
             >
               <View className="flex-row items-center justify-between mb-3">
-                <Text className="font-medium text-gray-900 dark:text-white">Pickup Point {index + 1}</Text>
+                <Text className="font-medium text-gray-900 ">Pickup Point {index + 1}</Text>
                 {pickupPoints.length > 1 && (
                   <TouchableOpacity onPress={() => removePickupPoint(index)}>
                     <MaterialCommunityIcons name="trash-can" size={20} color="#ef4444" />
@@ -202,7 +202,7 @@ export default function RouteAddForm() {
                   updated[index].name = text
                   setPickupPoints(updated)
                 }}
-                className="p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white mb-2"
+                className="p-2 rounded-lg border border-gray-300  bg-white  text-gray-900  mb-2"
               />
               <TextInput
                 placeholder="Address"
@@ -213,7 +213,7 @@ export default function RouteAddForm() {
                   updated[index].address = text
                   setPickupPoints(updated)
                 }}
-                className="p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                className="p-2 rounded-lg border border-gray-300  bg-white  text-gray-900 "
               />
             </View>
           ))}
@@ -222,9 +222,9 @@ export default function RouteAddForm() {
         <View className="flex-row gap-3 pt-4">
           <TouchableOpacity
             onPress={() => router.back()}
-            className="flex-1 p-3 rounded-lg border border-gray-300 dark:border-gray-600"
+            className="flex-1 p-3 rounded-lg border border-gray-300 "
           >
-            <Text className="text-center font-medium text-gray-700 dark:text-gray-300">Cancel</Text>
+            <Text className="text-center font-medium text-gray-700 ">Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => handleSubmit()}

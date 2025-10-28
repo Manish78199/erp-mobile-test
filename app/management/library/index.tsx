@@ -169,11 +169,11 @@ export default function LibraryDashboard() {
   }
 
   const StatCard = ({ icon, title, value, subtitle, color }: any) => (
-    <View className={cn("flex-1 rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800")}>
+    <View className={cn("flex-1 rounded-lg p-4 border border-gray-200  bg-white ")}>
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
-          <Text className="text-xs font-medium mb-1 text-gray-600 dark:text-gray-400">{title}</Text>
-          <Text className="text-xl font-bold text-gray-900 dark:text-white">{value}</Text>
+          <Text className="text-xs font-medium mb-1 text-gray-600 ">{title}</Text>
+          <Text className="text-xl font-bold text-gray-900 ">{value}</Text>
           {subtitle && <Text className="text-xs mt-1 text-gray-500 dark:text-gray-500">{subtitle}</Text>}
         </View>
         <View className={cn("p-3 rounded-lg", color)}>
@@ -220,8 +220,8 @@ export default function LibraryDashboard() {
           <MaterialCommunityIcons name={getActivityIcon() as any} size={16} color="#6b7280" />
         </View>
         <View className="flex-1">
-          <Text className="text-sm font-medium text-gray-900 dark:text-white">{activity.message}</Text>
-          <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+          <Text className="text-sm font-medium text-gray-900 ">{activity.message}</Text>
+          <Text className="text-xs mt-1 text-gray-600 ">
             {activity.student} • {activity.timestamp}
           </Text>
         </View>
@@ -239,18 +239,18 @@ export default function LibraryDashboard() {
         <Text className="text-sm font-semibold text-indigo-600 dark:text-indigo-400">#{index + 1}</Text>
       </View>
       <View className="flex-1">
-        <Text className="text-sm font-medium text-gray-900 dark:text-white">{book.title}</Text>
-        <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+        <Text className="text-sm font-medium text-gray-900 ">{book.title}</Text>
+        <Text className="text-xs mt-1 text-gray-600 ">
           by {book.author} • {book.category}
         </Text>
         <View className="flex-row gap-4 mt-2">
-          <Text className="text-xs text-gray-600 dark:text-gray-400">Issues: {book.issueCount}</Text>
-          <Text className="text-xs text-gray-600 dark:text-gray-400">
+          <Text className="text-xs text-gray-600 ">Issues: {book.issueCount}</Text>
+          <Text className="text-xs text-gray-600 ">
             Available: {book.available}/{book.total}
           </Text>
         </View>
       </View>
-      <View className="w-12 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+      <View className="w-12 h-2 bg-gray-200  rounded-full overflow-hidden">
         <View className="h-2 bg-indigo-500" style={{ width: `${(book.issueCount / 50) * 100}%` }} />
       </View>
     </View>
@@ -271,8 +271,8 @@ export default function LibraryDashboard() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Library Dashboard</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+          <Text className="text-2xl font-bold text-gray-900 ">Library Dashboard</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">
             Manage books, memberships, and library operations
           </Text>
         </View>
@@ -317,54 +317,54 @@ export default function LibraryDashboard() {
 
             <View className="space-y-2">
               <View className="flex-row gap-2">
-                <View className="flex-1 rounded-lg p-3 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
                   <View className="flex-row items-center gap-2">
                     <View className="p-2 bg-emerald-500 rounded-lg">
                       <MaterialCommunityIcons name="check-circle" size={16} color="white" />
                     </View>
                     <View className="flex-1">
-                      <Text className="text-xs text-gray-600 dark:text-gray-400">Today's Returns</Text>
-                      <Text className="text-lg font-semibold text-gray-900 dark:text-white">{stats.todayReturns}</Text>
+                      <Text className="text-xs text-gray-600 ">Today's Returns</Text>
+                      <Text className="text-lg font-semibold text-gray-900 ">{stats.todayReturns}</Text>
                     </View>
                   </View>
                 </View>
 
-                <View className="flex-1 rounded-lg p-3 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
                   <View className="flex-row items-center gap-2">
                     <View className="p-2 bg-orange-500 rounded-lg">
                       <MaterialCommunityIcons name="clock" size={16} color="white" />
                     </View>
                     <View className="flex-1">
-                      <Text className="text-xs text-gray-600 dark:text-gray-400">Today's Issues</Text>
-                      <Text className="text-lg font-semibold text-gray-900 dark:text-white">{stats.todayIssues}</Text>
+                      <Text className="text-xs text-gray-600 ">Today's Issues</Text>
+                      <Text className="text-lg font-semibold text-gray-900 ">{stats.todayIssues}</Text>
                     </View>
                   </View>
                 </View>
               </View>
 
               <View className="flex-row gap-2">
-                <View className="flex-1 rounded-lg p-3 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
                   <View className="flex-row items-center gap-2">
                     <View className="p-2 bg-red-500 rounded-lg">
                       <MaterialCommunityIcons name="cash-multiple" size={16} color="white" />
                     </View>
                     <View className="flex-1">
-                      <Text className="text-xs text-gray-600 dark:text-gray-400">Pending Fines</Text>
-                      <Text className="text-lg font-semibold text-gray-900 dark:text-white">
+                      <Text className="text-xs text-gray-600 ">Pending Fines</Text>
+                      <Text className="text-lg font-semibold text-gray-900 ">
                         {formatCurrency(stats.pendingFines)}
                       </Text>
                     </View>
                   </View>
                 </View>
 
-                <View className="flex-1 rounded-lg p-3 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
                   <View className="flex-row items-center gap-2">
                     <View className="p-2 bg-green-500 rounded-lg">
                       <MaterialCommunityIcons name="trending-up" size={16} color="white" />
                     </View>
                     <View className="flex-1">
-                      <Text className="text-xs text-gray-600 dark:text-gray-400">Fines Collected</Text>
-                      <Text className="text-lg font-semibold text-gray-900 dark:text-white">
+                      <Text className="text-xs text-gray-600 ">Fines Collected</Text>
+                      <Text className="text-lg font-semibold text-gray-900 ">
                         {formatCurrency(stats.totalFinesCollected)}
                       </Text>
                     </View>
@@ -373,55 +373,55 @@ export default function LibraryDashboard() {
               </View>
             </View>
 
-            <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-              <Text className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Quick Actions</Text>
+            <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+              <Text className="text-lg font-semibold mb-4 text-gray-900 ">Quick Actions</Text>
               <View className="space-y-2">
-                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 ">
                   <View className="p-2 bg-blue-500 rounded-lg">
                     <MaterialCommunityIcons name="plus" size={16} color="white" />
                   </View>
                   <View>
-                    <Text className="font-semibold text-gray-900 dark:text-white">Add New Book</Text>
-                    <Text className="text-xs text-gray-600 dark:text-gray-400">Register new books</Text>
+                    <Text className="font-semibold text-gray-900 ">Add New Book</Text>
+                    <Text className="text-xs text-gray-600 ">Register new books</Text>
                   </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 ">
                   <View className="p-2 bg-green-500 rounded-lg">
                     <MaterialCommunityIcons name="book-plus" size={16} color="white" />
                   </View>
                   <View>
-                    <Text className="font-semibold text-gray-900 dark:text-white">Issue Book</Text>
-                    <Text className="text-xs text-gray-600 dark:text-gray-400">Issue books to students</Text>
+                    <Text className="font-semibold text-gray-900 ">Issue Book</Text>
+                    <Text className="text-xs text-gray-600 ">Issue books to students</Text>
                   </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 ">
                   <View className="p-2 bg-purple-500 rounded-lg">
                     <MaterialCommunityIcons name="check-circle" size={16} color="white" />
                   </View>
                   <View>
-                    <Text className="font-semibold text-gray-900 dark:text-white">Return Book</Text>
-                    <Text className="text-xs text-gray-600 dark:text-gray-400">Process book returns</Text>
+                    <Text className="font-semibold text-gray-900 ">Return Book</Text>
+                    <Text className="text-xs text-gray-600 ">Process book returns</Text>
                   </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 ">
                   <View className="p-2 bg-red-500 rounded-lg">
                     <MaterialCommunityIcons name="alert-circle" size={16} color="white" />
                   </View>
                   <View>
-                    <Text className="font-semibold text-gray-900 dark:text-white">Due Books</Text>
-                    <Text className="text-xs text-gray-600 dark:text-gray-400">Manage overdue books</Text>
+                    <Text className="font-semibold text-gray-900 ">Due Books</Text>
+                    <Text className="text-xs text-gray-600 ">Manage overdue books</Text>
                   </View>
                 </TouchableOpacity>
               </View>
             </View>
 
             <View className="space-y-4">
-              <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+              <View className="rounded-lg p-4 border border-gray-200  bg-white ">
                 <View className="flex-row items-center justify-between mb-4">
-                  <Text className="text-lg font-semibold text-gray-900 dark:text-white">Recent Activities</Text>
+                  <Text className="text-lg font-semibold text-gray-900 ">Recent Activities</Text>
                   <TouchableOpacity>
                     <Text className="text-sm font-medium text-indigo-600 dark:text-indigo-400">View All</Text>
                   </TouchableOpacity>
@@ -434,9 +434,9 @@ export default function LibraryDashboard() {
                 />
               </View>
 
-              <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+              <View className="rounded-lg p-4 border border-gray-200  bg-white ">
                 <View className="flex-row items-center justify-between mb-4">
-                  <Text className="text-lg font-semibold text-gray-900 dark:text-white">Popular Books</Text>
+                  <Text className="text-lg font-semibold text-gray-900 ">Popular Books</Text>
                   <TouchableOpacity>
                     <Text className="text-sm font-medium text-indigo-600 dark:text-indigo-400">View All</Text>
                   </TouchableOpacity>

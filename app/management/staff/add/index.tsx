@@ -121,7 +121,7 @@ export default function AddStaff() {
 
   const InputField = ({ label, value, onChangeText, placeholder, error, required = false }: any) => (
     <View className="mb-4">
-      <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">
+      <Text className="text-xs font-medium text-gray-600  mb-2">
         {label} {required && <Text className="text-red-500">*</Text>}
       </Text>
       <TextInput
@@ -130,7 +130,7 @@ export default function AddStaff() {
         placeholder={placeholder}
         placeholderTextColor="#9ca3af"
         editable={!creating}
-        className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+        className="p-3 rounded-lg border border-gray-300  bg-white  text-gray-900 "
       />
       {error && <Text className="text-xs text-red-600 mt-1">{error}</Text>}
     </View>
@@ -143,8 +143,8 @@ export default function AddStaff() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Add Staff Member</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+          <Text className="text-2xl font-bold text-gray-900 ">Add Staff Member</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">
             Register new staff with complete details
           </Text>
         </View>
@@ -159,7 +159,7 @@ export default function AddStaff() {
                   "flex-row items-center gap-2 px-4 py-2 rounded-lg border",
                   activeSection === section.id
                     ? "bg-emerald-600 dark:bg-emerald-600 border-emerald-600"
-                    : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800",
+                    : "border-gray-200  bg-white ",
                 )}
               >
                 <MaterialCommunityIcons
@@ -170,7 +170,7 @@ export default function AddStaff() {
                 <Text
                   className={cn(
                     "text-sm font-medium",
-                    activeSection === section.id ? "text-white" : "text-gray-700 dark:text-gray-300",
+                    activeSection === section.id ? "text-white" : "text-gray-700 ",
                   )}
                 >
                   {section.label}
@@ -181,7 +181,7 @@ export default function AddStaff() {
         </ScrollView>
 
         {activeSection === "personal" && (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
             <InputField
               label="Full Name"
               value={values.name}
@@ -205,18 +205,18 @@ export default function AddStaff() {
               placeholder="Enter mother's name"
             />
             <View className="mb-4">
-              <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Date of Birth *</Text>
+              <Text className="text-xs font-medium text-gray-600  mb-2">Date of Birth *</Text>
               <TextInput
                 value={values.date_of_birth}
                 onChangeText={handleChange("date_of_birth")}
                 placeholder="YYYY-MM-DD"
                 placeholderTextColor="#9ca3af"
                 editable={!creating}
-                className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                className="p-3 rounded-lg border border-gray-300  bg-white  text-gray-900 "
               />
             </View>
             <View className="mb-4">
-              <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Gender *</Text>
+              <Text className="text-xs font-medium text-gray-600  mb-2">Gender *</Text>
               <RNPickerSelect
                 items={[
                   { label: "Male", value: "MALE" },
@@ -248,7 +248,7 @@ export default function AddStaff() {
               />
             </View>
             <View className="mb-4">
-              <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Designation *</Text>
+              <Text className="text-xs font-medium text-gray-600  mb-2">Designation *</Text>
               <RNPickerSelect
                 items={designationOptions}
                 onValueChange={(value) => setFieldValue("designation", value)}
@@ -276,7 +276,7 @@ export default function AddStaff() {
               />
             </View>
             <View className="mb-4">
-              <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Marital Status</Text>
+              <Text className="text-xs font-medium text-gray-600  mb-2">Marital Status</Text>
               <RNPickerSelect
                 items={[
                   { label: "Single", value: "SINGLE" },
@@ -343,20 +343,20 @@ export default function AddStaff() {
         )}
 
         {activeSection === "education" && (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
             <View className="flex-row items-center justify-between mb-4">
-              <Text className="text-lg font-semibold text-gray-900 dark:text-white">Education Details</Text>
+              <Text className="text-lg font-semibold text-gray-900 ">Education Details</Text>
               <TouchableOpacity onPress={addNewEducation} disabled={creating} className="bg-emerald-600 rounded-lg p-2">
                 <MaterialCommunityIcons name="plus" size={18} color="white" />
               </TouchableOpacity>
             </View>
             {values.education.length === 0 ? (
-              <Text className="text-center text-gray-600 dark:text-gray-400 py-8">No education records added</Text>
+              <Text className="text-center text-gray-600  py-8">No education records added</Text>
             ) : (
               values.education.map((edu: any, ind: number) => (
-                <View key={ind} className="mb-4 p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
+                <View key={ind} className="mb-4 p-3 rounded-lg bg-gray-50 ">
                   <View className="flex-row items-center justify-between mb-3">
-                    <Text className="font-medium text-gray-900 dark:text-white">Education {ind + 1}</Text>
+                    <Text className="font-medium text-gray-900 ">Education {ind + 1}</Text>
                     <TouchableOpacity onPress={() => removeEducation(ind)} disabled={creating}>
                       <MaterialCommunityIcons name="trash-can" size={18} color="#ef4444" />
                     </TouchableOpacity>
@@ -419,9 +419,9 @@ export default function AddStaff() {
         )}
 
         {activeSection === "experience" && (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
             <View className="flex-row items-center justify-between mb-4">
-              <Text className="text-lg font-semibold text-gray-900 dark:text-white">Experience Details</Text>
+              <Text className="text-lg font-semibold text-gray-900 ">Experience Details</Text>
               <TouchableOpacity
                 onPress={addNewExperience}
                 disabled={creating}
@@ -431,12 +431,12 @@ export default function AddStaff() {
               </TouchableOpacity>
             </View>
             {values.experience.length === 0 ? (
-              <Text className="text-center text-gray-600 dark:text-gray-400 py-8">No experience records added</Text>
+              <Text className="text-center text-gray-600  py-8">No experience records added</Text>
             ) : (
               values.experience.map((exp: any, ind: number) => (
-                <View key={ind} className="mb-4 p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
+                <View key={ind} className="mb-4 p-3 rounded-lg bg-gray-50 ">
                   <View className="flex-row items-center justify-between mb-3">
-                    <Text className="font-medium text-gray-900 dark:text-white">Experience {ind + 1}</Text>
+                    <Text className="font-medium text-gray-900 ">Experience {ind + 1}</Text>
                     <TouchableOpacity onPress={() => removeExperience(ind)} disabled={creating}>
                       <MaterialCommunityIcons name="trash-can" size={18} color="#ef4444" />
                     </TouchableOpacity>
@@ -499,8 +499,8 @@ export default function AddStaff() {
         )}
 
         {activeSection === "leaves" && (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Leave Policy</Text>
+          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+            <Text className="text-lg font-semibold text-gray-900  mb-4">Leave Policy</Text>
             <InputField
               label="Medical Leaves"
               value={values.leaves.mediacal_leaves.toString()}
@@ -529,8 +529,8 @@ export default function AddStaff() {
         )}
 
         {activeSection === "bank" && (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Bank Details</Text>
+          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+            <Text className="text-lg font-semibold text-gray-900  mb-4">Bank Details</Text>
             <InputField
               label="Account Type"
               value={values.bank_details.account_type}
@@ -566,8 +566,8 @@ export default function AddStaff() {
         )}
 
         {activeSection === "credentials" && (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Login Credentials</Text>
+          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+            <Text className="text-lg font-semibold text-gray-900  mb-4">Login Credentials</Text>
             <InputField
               label="User ID"
               value={values.userId}
@@ -594,9 +594,9 @@ export default function AddStaff() {
               }
             }}
             disabled={activeSection === "personal" || creating}
-            className="flex-1 p-3 rounded-lg border border-gray-300 dark:border-gray-600"
+            className="flex-1 p-3 rounded-lg border border-gray-300 "
           >
-            <Text className="text-center font-medium text-gray-700 dark:text-gray-300">Previous</Text>
+            <Text className="text-center font-medium text-gray-700 ">Previous</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {

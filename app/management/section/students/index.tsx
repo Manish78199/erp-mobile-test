@@ -134,7 +134,7 @@ export default function StudentAssignmentScreen() {
   return (
     <SafeAreaView className="flex-1">
 
-      <View className="flex-1 bg-white dark:bg-gray-900" style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+      <View className="flex-1 bg-background" >
 
         <View className="flex-row items-center p-4">
           <TouchableOpacity
@@ -144,24 +144,24 @@ export default function StudentAssignmentScreen() {
             <Typography className="text-primary font-semibold">← Back</Typography>
           </TouchableOpacity>
 
-          <Typography className=" font-bold text-foreground">Section Student</Typography>
+          <Typography className="text-lg font-bold text-foreground">Section Student</Typography>
         </View>
         <ScrollView className="flex-1 px-4">
           {/* Header */}
           <View className="mt-6 mb-6">
-            <Typography className="text-2xl font-bold text-gray-900 dark:text-white">Student Assignment</Typography>
-            <Typography className="text-gray-600 dark:text-gray-400 mt-1">Assign students to sections</Typography>
+            <Typography className="text-2xl font-bold text-gray-900 ">Student Assignment</Typography>
+            <Typography className="text-gray-600  mt-1">Assign students to sections</Typography>
           </View>
 
           {/* Class Selection Card */}
-          <View className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6">
+          <View className="bg-white  rounded-lg border border-gray-200  p-4 mb-6">
             <View className="flex-row items-center gap-2 mb-4">
               <MaterialIcons name="filter-list" size={20} color="#10b981" />
-              <Typography className="text-lg font-semibold text-gray-900 dark:text-white">Select Class</Typography>
+              <Typography className="text-lg font-semibold text-gray-900 ">Select Class</Typography>
             </View>
 
             <View className="mb-4">
-              <Typography className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Class</Typography>
+              <Typography className="text-sm font-medium text-gray-700  mb-2">Class</Typography>
               <RNPickerSelect
                 onValueChange={(value) => {
                   setSelectedClassId(value)
@@ -182,7 +182,7 @@ export default function StudentAssignmentScreen() {
                     fontSize: 16,
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 10,
                     borderRadius: 6,
                     backgroundColor: "#f3f4f6",
@@ -196,7 +196,7 @@ export default function StudentAssignmentScreen() {
             {selectedClassId && (
               <>
                 <View className="mb-4">
-                  <Typography className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Section</Typography>
+                  <Typography className="text-sm font-medium text-gray-700  mb-2">Section</Typography>
                   <RNPickerSelect
                     onValueChange={setSelectedSectionId}
                     items={sections.map((section) => ({
@@ -214,7 +214,7 @@ export default function StudentAssignmentScreen() {
                         fontSize: 16,
                       },
                       inputAndroid: {
-                        paddingVertical: 12,
+                        paddingVertical: 0,
                         paddingHorizontal: 10,
                         borderRadius: 6,
                         backgroundColor: "#f3f4f6",
@@ -227,34 +227,34 @@ export default function StudentAssignmentScreen() {
 
                 <TouchableOpacity
                   onPress={handleReset}
-                  className="flex-row items-center justify-center gap-2 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600"
+                  className="flex-row items-center justify-center gap-2 px-4 py-2 rounded-lg border border-gray-300 "
                 >
                   <MaterialIcons name="refresh" size={18} color="#6b7280" />
-                  <Typography className="text-gray-700 dark:text-gray-300 font-medium">Reset</Typography>
+                  <Typography className="text-gray-700  font-medium">Reset</Typography>
                 </TouchableOpacity>
 
                 {/* Stats */}
-                <View className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <View className="mt-4 p-4 bg-blue-50  rounded-lg border border-blue-200 ">
                   <View className="gap-2">
                     <View className="flex-row justify-between">
-                      <Typography className="text-blue-600 dark:text-blue-400 font-medium">Total Students:</Typography>
-                      <Typography className="text-blue-800 dark:text-blue-200">{students.length}</Typography>
+                      <Typography className="text-blue-600  font-medium">Total Students:</Typography>
+                      <Typography className="text-blue-800 ">{students.length}</Typography>
                     </View>
                     <View className="flex-row justify-between">
-                      <Typography className="text-green-600 dark:text-green-400 font-medium">Assigned:</Typography>
-                      <Typography className="text-green-800 dark:text-green-200">
+                      <Typography className="text-green-600  font-medium">Assigned:</Typography>
+                      <Typography className="text-green-800 ">
                         {students.filter((s) => s.section_id).length}
                       </Typography>
                     </View>
                     <View className="flex-row justify-between">
-                      <Typography className="text-orange-600 dark:text-orange-400 font-medium">Unassigned:</Typography>
-                      <Typography className="text-orange-800 dark:text-orange-200">
+                      <Typography className="text-orange-600  font-medium">Unassigned:</Typography>
+                      <Typography className="text-orange-800 ">
                         {students.filter((s) => !s.section_id).length}
                       </Typography>
                     </View>
                     <View className="flex-row justify-between">
-                      <Typography className="text-purple-600 dark:text-purple-400 font-medium">Sections:</Typography>
-                      <Typography className="text-purple-800 dark:text-purple-200">{sections.length}</Typography>
+                      <Typography className="text-purple-600  font-medium">Sections:</Typography>
+                      <Typography className="text-purple-800 ">{sections.length}</Typography>
                     </View>
                   </View>
                 </View>
@@ -265,21 +265,21 @@ export default function StudentAssignmentScreen() {
           {selectedClassId && (
             <>
               {/* Search and Filter */}
-              <View className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6">
+              <View className="bg-white  rounded-lg border border-gray-200  p-4 mb-6">
                 <View className="mb-4">
-                  <View className="flex-row items-center border border-gray-300 dark:border-gray-600 rounded-lg px-3 bg-gray-50 dark:bg-gray-700">
+                  <View className="flex-row items-center border border-gray-300  rounded-lg px-3 bg-gray-50 ">
                     <MaterialIcons name="search" size={20} color="#9ca3af" />
                     <TextInput
                       placeholder="Search by name, roll, admission..."
                       value={searchTerm}
                       onChangeText={setSearchTerm}
                       placeholderTextColor="#9ca3af"
-                      className="flex-1 py-3 px-2 text-gray-900 dark:text-white"
+                      className="flex-1 py-3 px-2 text-gray-900 "
                     />
                   </View>
                 </View>
 
-                <View className="flex-row gap-2 mb-4">
+                <View >
                   <RNPickerSelect
                     onValueChange={setFilterStatus}
                     items={[
@@ -299,7 +299,7 @@ export default function StudentAssignmentScreen() {
                         flex: 1,
                       },
                       inputAndroid: {
-                        paddingVertical: 10,
+                        paddingVertical: 0,
                         paddingHorizontal: 10,
                         borderRadius: 6,
                         backgroundColor: "#f3f4f6",
@@ -318,7 +318,7 @@ export default function StudentAssignmentScreen() {
                       <TouchableOpacity
                         onPress={handleAssignStudents}
                         disabled={isProcessing}
-                        className="flex-1 flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg bg-emerald-400 dark:bg-emerald-600"
+                        className="flex-1 flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg bg-emerald-400 "
                       >
                         {isProcessing ? (
                           <ActivityIndicator size="small" color="#fff" />
@@ -334,39 +334,39 @@ export default function StudentAssignmentScreen() {
 
               {/* Section Overview */}
               {selectedSectionId && selectedSection && (
-                <View className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6">
+                <View className="bg-white  rounded-lg border border-gray-200  p-4 mb-6">
                   <View className="flex-row items-center gap-2 mb-4">
                     <MaterialIcons name="people" size={20} color="#10b981" />
-                    <Typography className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <Typography className="text-lg font-semibold text-gray-900 ">
                       Section {selectedSection.name} Overview
                     </Typography>
                   </View>
 
                   <View className="gap-3">
-                    <View className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                      <Typography className="text-sm text-gray-600 dark:text-gray-400">Room Number</Typography>
-                      <Typography className="text-lg font-semibold text-gray-900 dark:text-white mt-1">
+                    <View className="p-3 bg-gray-50  rounded-lg border border-gray-200 ">
+                      <Typography className="text-sm text-gray-600 ">Room Number</Typography>
+                      <Typography className="text-lg font-semibold text-gray-900  mt-1">
                         {selectedSection.room_no}
                       </Typography>
                     </View>
 
-                    <View className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                      <Typography className="text-sm text-gray-600 dark:text-gray-400">Class Teacher</Typography>
-                      <Typography className="text-lg font-semibold text-gray-900 dark:text-white mt-1">
+                    <View className="p-3 bg-gray-50  rounded-lg border border-gray-200 ">
+                      <Typography className="text-sm text-gray-600 ">Class Teacher</Typography>
+                      <Typography className="text-lg font-semibold text-gray-900  mt-1">
                         {selectedSection.teacher_name}
                       </Typography>
                     </View>
 
-                    <View className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                      <Typography className="text-sm text-gray-600 dark:text-gray-400">Current Strength</Typography>
-                      <Typography className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mt-1">
+                    <View className="p-3 bg-gray-50  rounded-lg border border-gray-200 ">
+                      <Typography className="text-sm text-gray-600 ">Current Strength</Typography>
+                      <Typography className="text-lg font-semibold text-emerald-600  mt-1">
                         {selectedSection.total_students}/{selectedSection.capacity}
                       </Typography>
                     </View>
 
-                    <View className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                      <Typography className="text-sm text-gray-600 dark:text-gray-400">Available Seats</Typography>
-                      <Typography className="text-lg font-semibold text-gray-900 dark:text-white mt-1">
+                    <View className="p-3 bg-gray-50  rounded-lg border border-gray-200 ">
+                      <Typography className="text-sm text-gray-600 ">Available Seats</Typography>
+                      <Typography className="text-lg font-semibold text-gray-900  mt-1">
                         {selectedSection.capacity - selectedSection.total_students}
                       </Typography>
                     </View>
@@ -375,14 +375,14 @@ export default function StudentAssignmentScreen() {
                   {/* Capacity Bar */}
                   <View className="mt-4">
                     <View className="flex-row justify-between items-center mb-2">
-                      <Typography className="text-sm text-gray-600 dark:text-gray-400">Capacity Utilization</Typography>
-                      <Typography className="text-sm font-medium text-gray-900 dark:text-white">
+                      <Typography className="text-sm text-gray-600 ">Capacity Utilization</Typography>
+                      <Typography className="text-sm font-medium text-gray-900 ">
                         {Math.round((selectedSection.total_students / selectedSection.capacity) * 100)}%
                       </Typography>
                     </View>
-                    <View className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <View className="h-3 bg-gray-200  rounded-full overflow-hidden">
                       <View
-                        className="h-full bg-emerald-400 dark:bg-emerald-600"
+                        className="h-full bg-emerald-400 "
                         style={{
                           width: `${(selectedSection.total_students / selectedSection.capacity) * 100}%`,
                         }}
@@ -393,9 +393,9 @@ export default function StudentAssignmentScreen() {
               )}
 
               {/* Students List */}
-              <View className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6">
+              <View className="bg-white  rounded-lg border border-gray-200  p-4 mb-6">
                 <View className="flex-row justify-between items-center mb-4">
-                  <Typography className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <Typography className="text-lg font-semibold text-gray-900 ">
                     Students ({filteredStudents.length})
                   </Typography>
                   {filteredStudents.length > 0 && (
@@ -407,15 +407,15 @@ export default function StudentAssignmentScreen() {
                     >
                       <View
                         className={`w-5 h-5 rounded border-2 ${filteredStudents.every((s) => selectedStudents.includes(s._id))
-                          ? "bg-emerald-400 dark:bg-emerald-600 border-emerald-400 dark:border-emerald-600"
-                          : "border-gray-300 dark:border-gray-600"
+                          ? "bg-emerald-400  border-emerald-400 "
+                          : "border-gray-300 "
                           }`}
                       >
                         {filteredStudents.every((s) => selectedStudents.includes(s._id)) && (
                           <MaterialIcons name="check" size={16} color="#fff" />
                         )}
                       </View>
-                      <Typography className="text-sm text-gray-600 dark:text-gray-400">Select All</Typography>
+                      <Typography className="text-sm text-gray-600 ">Select All</Typography>
                     </Pressable>
                   )}
                 </View>
@@ -423,7 +423,7 @@ export default function StudentAssignmentScreen() {
                 {filteredStudents.length === 0 ? (
                   <View className="items-center justify-center py-8">
                     <MaterialIcons name="people-outline" size={48} color="#d1d5db" />
-                    <Typography className="text-gray-500 dark:text-gray-400 mt-2">No students found</Typography>
+                    <Typography className="text-gray-500  mt-2">No students found</Typography>
                   </View>
                 ) : (
                   <FlatList
@@ -434,14 +434,14 @@ export default function StudentAssignmentScreen() {
                         <Pressable
                           onPress={() => handleStudentSelect(item._id)}
                           className={`flex-row items-center gap-3 p-3 mb-2 rounded-lg border ${isSelected
-                            ? "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-400 dark:border-emerald-600"
-                            : "bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600"
+                            ? "bg-emerald-50 border-emerald-400 "
+                            : "bg-gray-50  border-gray-200 "
                             }`}
                         >
                           <View
                             className={`w-5 h-5 rounded border-2 ${isSelected
-                              ? "bg-emerald-400 dark:bg-emerald-600 border-emerald-400 dark:border-emerald-600"
-                              : "border-gray-300 dark:border-gray-600"
+                              ? "bg-emerald-400  border-emerald-400 "
+                              : "border-gray-300 "
                               }`}
                           >
                             {isSelected && <MaterialIcons name="check" size={16} color="#fff" />}
@@ -449,18 +449,18 @@ export default function StudentAssignmentScreen() {
 
                           <View className="flex-1">
                             <View className="flex-row items-center gap-2 mb-1">
-                              <Typography className="font-semibold text-gray-900 dark:text-white">{item.first_name}</Typography>
+                              <Typography className="font-semibold text-gray-900 ">{item.first_name}</Typography>
                               <View
-                                className={`px-2 py-1 rounded ${item.gender === "male" ? "bg-blue-100 dark:bg-blue-900" : "bg-pink-100 dark:bg-pink-900"}`}
+                                className={`px-2 py-1 rounded ${item.gender === "male" ? "bg-blue-100 " : "bg-pink-100 "}`}
                               >
                                 <Typography
-                                  className={`text-xs font-medium ${item.gender === "male" ? "text-blue-800 dark:text-blue-200" : "text-pink-800 dark:text-pink-200"}`}
+                                  className={`text-xs font-medium ${item.gender === "male" ? "text-blue-800 " : "text-pink-800 "}`}
                                 >
                                   {item.gender}
                                 </Typography>
                               </View>
                             </View>
-                            <Typography className="text-xs text-gray-600 dark:text-gray-400">
+                            <Typography className="text-xs text-gray-600 ">
                               Roll: {item.roll_no} • Admission: {item.admission_no}
                             </Typography>
                           </View>
@@ -468,23 +468,23 @@ export default function StudentAssignmentScreen() {
                           <View className="items-end">
                             {item.section_id ? (
                               <View>
-                                <View className="bg-green-100 dark:bg-green-900 px-2 py-1 rounded mb-1">
-                                  <Typography className="text-xs font-semibold text-green-800 dark:text-green-200">
+                                <View className="bg-green-100  px-2 py-1 rounded mb-1">
+                                  <Typography className="text-xs font-semibold text-green-800 ">
                                     Assigned
                                   </Typography>
                                 </View>
-                                <Typography className="text-xs text-gray-600 dark:text-gray-400">
+                                <Typography className="text-xs text-gray-600 ">
                                   Section {item.section_name}
                                 </Typography>
                               </View>
                             ) : (
                               <View>
-                                <View className="bg-orange-100 dark:bg-orange-900 px-2 py-1 rounded mb-1">
-                                  <Typography className="text-xs font-semibold text-orange-800 dark:text-orange-200">
+                                <View className="bg-orange-100  px-2 py-1 rounded mb-1">
+                                  <Typography className="text-xs font-semibold text-orange-800 ">
                                     Unassigned
                                   </Typography>
                                 </View>
-                                <Typography className="text-xs text-gray-600 dark:text-gray-400">No section</Typography>
+                                <Typography className="text-xs text-gray-600 ">No section</Typography>
                               </View>
                             )}
                           </View>

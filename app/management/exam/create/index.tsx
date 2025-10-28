@@ -121,25 +121,25 @@ export default function CreateExam() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Create Exam</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Add a new exam with subjects and marks</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Create Exam</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">Add a new exam with subjects and marks</Text>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
           <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Exam Name *</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Exam Name *</Text>
             <TextInput
               placeholder="Enter exam name"
               placeholderTextColor="#9ca3af"
               value={values.name}
               onChangeText={(text) => setFieldValue("name", text)}
-              className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="p-3 rounded-lg border border-gray-300  bg-white  text-gray-900 "
             />
             {errors.name && touched.name && <Text className="text-red-600 text-xs mt-1">{errors.name}</Text>}
           </View>
 
           <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Class *</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Class *</Text>
             <RNPickerSelect
               items={classList}
               onValueChange={(value) => setFieldValue("class_id", value)}
@@ -172,14 +172,14 @@ export default function CreateExam() {
           </View>
 
           <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Duration (Minutes) *</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Duration (Minutes) *</Text>
             <TextInput
               placeholder="90"
               placeholderTextColor="#9ca3af"
               value={values.duration}
               onChangeText={(text) => setFieldValue("duration", text)}
               keyboardType="numeric"
-              className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="p-3 rounded-lg border border-gray-300  bg-white  text-gray-900 "
             />
             {errors.duration && touched.duration && (
               <Text className="text-red-600 text-xs mt-1">{errors.duration}</Text>
@@ -187,9 +187,9 @@ export default function CreateExam() {
           </View>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
           <View className="flex-row items-center justify-between">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white">Subjects</Text>
+            <Text className="text-lg font-semibold text-gray-900 ">Subjects</Text>
             <View className="bg-blue-600 px-2 py-1 rounded-full">
               <Text className="text-white text-xs font-semibold">{values.subjects.length}</Text>
             </View>
@@ -198,17 +198,17 @@ export default function CreateExam() {
           {values.subjects.map((subject, index) => (
             <View
               key={index}
-              className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700"
+              className="p-3 rounded-lg border border-gray-300  bg-gray-50 "
             >
               <View className="flex-row items-center justify-between mb-3">
-                <Text className="font-medium text-gray-900 dark:text-white">Subject {index + 1}</Text>
+                <Text className="font-medium text-gray-900 ">Subject {index + 1}</Text>
                 <TouchableOpacity onPress={() => handleRemoveSubject(index)}>
                   <MaterialCommunityIcons name="close-circle" size={20} color="#dc2626" />
                 </TouchableOpacity>
               </View>
 
               <View>
-                <Text className="text-xs font-medium mb-2 text-gray-700 dark:text-gray-300">Select Subject</Text>
+                <Text className="text-xs font-medium mb-2 text-gray-700 ">Select Subject</Text>
                 <RNPickerSelect
                   items={subjectList}
                   onValueChange={(value) => {

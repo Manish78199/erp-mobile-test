@@ -61,26 +61,26 @@ export default function EventPhotoGallery() {
 
   return (
     <ScrollView
-      className="flex-1 bg-white dark:bg-gray-900"
-      contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+      className="flex-1 bg-white "
+    
     >
       <View className="px-4 py-6 space-y-6">
         {/* Header Section */}
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Photo Gallery</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Your event's photos collection</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Photo Gallery</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">Your event's photos collection</Text>
         </View>
 
         {/* Header Card */}
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white ">
           <View className="flex-row items-center justify-between">
             <View className="flex-row items-center flex-1">
               <View className="p-3 rounded-full bg-indigo-100 dark:bg-indigo-900">
                 <MaterialCommunityIcons name="camera" size={24} color="#4f46e5" />
               </View>
               <View className="ml-3 flex-1">
-                <Text className="font-semibold text-gray-900 dark:text-white">Event Photos</Text>
-                <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+                <Text className="font-semibold text-gray-900 ">Event Photos</Text>
+                <Text className="text-xs mt-1 text-gray-600 ">
                   {activities.length} {activities.length === 1 ? "photo" : "photos"}
                 </Text>
               </View>
@@ -111,7 +111,7 @@ export default function EventPhotoGallery() {
               renderItem={({ item: photo }) => (
                 <TouchableOpacity
                   onPress={() => setActivePhoto(photo)}
-                  className="flex-1 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+                  className="flex-1 rounded-lg overflow-hidden border border-gray-200  bg-white "
                 >
                   <Image source={{ uri: photo.image_path }} className="w-full h-40" resizeMode="cover" />
                   <View className="absolute inset-0 bg-black/0 hover:bg-black/20 flex items-center justify-center">
@@ -124,12 +124,12 @@ export default function EventPhotoGallery() {
             />
           </View>
         ) : (
-          <View className="rounded-lg p-8 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 items-center justify-center">
-            <View className="p-4 rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
+          <View className="rounded-lg p-8 border border-gray-200  bg-white  items-center justify-center">
+            <View className="p-4 rounded-full bg-gray-100  mb-4">
               <MaterialCommunityIcons name="image-off" size={32} color="#9ca3af" />
             </View>
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No Photos Yet</Text>
-            <Text className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4">
+            <Text className="text-lg font-semibold text-gray-900  mb-2">No Photos Yet</Text>
+            <Text className="text-sm text-gray-600  text-center mb-4">
               Start building your photo gallery by adding some event photos.
             </Text>
             <TouchableOpacity

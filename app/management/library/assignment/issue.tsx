@@ -106,13 +106,13 @@ export default function BookIssueForm() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Issue Book</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Issue a book to a student</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Issue Book</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">Issue a book to a student</Text>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Student</Text>
+            <Text className="text-sm font-medium text-gray-700  mb-2">Select Student</Text>
             <RNPickerSelect
               items={students.map((s) => ({ label: `${s.name} (${s.admissionNo})`, value: s.id }))}
               onValueChange={setSelectedStudent}
@@ -142,7 +142,7 @@ export default function BookIssueForm() {
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Book</Text>
+            <Text className="text-sm font-medium text-gray-700  mb-2">Select Book</Text>
             <RNPickerSelect
               items={books.map((b) => ({ label: `${b.title} (${b.availableCopies} available)`, value: b.id }))}
               onValueChange={setSelectedBook}
@@ -172,13 +172,13 @@ export default function BookIssueForm() {
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Issue Date</Text>
+            <Text className="text-sm font-medium text-gray-700  mb-2">Issue Date</Text>
             <TouchableOpacity
               onPress={() => setShowIssueDatePicker(true)}
-              className="flex-row items-center p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700"
+              className="flex-row items-center p-3 rounded-lg border border-gray-300  bg-gray-50 "
             >
               <MaterialCommunityIcons name="calendar" size={20} color="#6b7280" />
-              <Text className="ml-2 font-medium text-gray-700 dark:text-gray-300">
+              <Text className="ml-2 font-medium text-gray-700 ">
                 {issueDate.toLocaleDateString()}
               </Text>
             </TouchableOpacity>
@@ -196,13 +196,13 @@ export default function BookIssueForm() {
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Due Date</Text>
+            <Text className="text-sm font-medium text-gray-700  mb-2">Due Date</Text>
             <TouchableOpacity
               onPress={() => setShowDueDatePicker(true)}
-              className="flex-row items-center p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700"
+              className="flex-row items-center p-3 rounded-lg border border-gray-300  bg-gray-50 "
             >
               <MaterialCommunityIcons name="calendar" size={20} color="#6b7280" />
-              <Text className="ml-2 font-medium text-gray-700 dark:text-gray-300">{dueDate.toLocaleDateString()}</Text>
+              <Text className="ml-2 font-medium text-gray-700 ">{dueDate.toLocaleDateString()}</Text>
             </TouchableOpacity>
             {showDueDatePicker && (
               <DateTimePicker
@@ -219,8 +219,8 @@ export default function BookIssueForm() {
         </View>
 
         <View className="flex-row gap-3">
-          <TouchableOpacity className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg p-3">
-            <Text className="text-center font-medium text-gray-700 dark:text-gray-300">Cancel</Text>
+          <TouchableOpacity className="flex-1 border border-gray-300  rounded-lg p-3">
+            <Text className="text-center font-medium text-gray-700 ">Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={handleIssueBook}

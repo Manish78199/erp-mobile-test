@@ -110,15 +110,15 @@ export default function StaffView() {
       <View className="px-4 py-6 space-y-6">
         <View className="flex-row items-center justify-between">
           <View>
-            <Text className="text-2xl font-bold text-gray-900 dark:text-white">Staff Details</Text>
-            <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">View and manage staff information</Text>
+            <Text className="text-2xl font-bold text-gray-900 ">Staff Details</Text>
+            <Text className="text-sm mt-1 text-gray-600 ">View and manage staff information</Text>
           </View>
           <TouchableOpacity className="bg-emerald-600 rounded-lg p-3">
             <MaterialCommunityIcons name="pencil" size={20} color="white" />
           </TouchableOpacity>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white ">
           <View className="flex-row items-start">
             <View className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900 items-center justify-center">
               <Text className="font-bold text-lg text-emerald-600 dark:text-emerald-400">
@@ -130,7 +130,7 @@ export default function StaffView() {
             </View>
             <View className="ml-4 flex-1">
               <View className="flex-row items-center gap-2 mb-2">
-                <Text className="text-lg font-semibold text-gray-900 dark:text-white">{staffData?.employee?.name}</Text>
+                <Text className="text-lg font-semibold text-gray-900 ">{staffData?.employee?.name}</Text>
                 <View className={cn("px-2 py-1 rounded", getStatusBadgeColor(staffData?.employee?.status))}>
                   <Text className={cn("text-xs font-medium", getStatusTextColor(staffData?.employee?.status))}>
                     {staffData?.employee?.status}
@@ -138,11 +138,11 @@ export default function StaffView() {
                 </View>
               </View>
               <View className="space-y-1">
-                <Text className="text-xs text-gray-600 dark:text-gray-400">
+                <Text className="text-xs text-gray-600 ">
                   ID: {staffData?.employee?.employee_code}
                 </Text>
-                <Text className="text-xs text-gray-600 dark:text-gray-400">{staffData?.employee?.designation}</Text>
-                <Text className="text-xs text-gray-600 dark:text-gray-400">
+                <Text className="text-xs text-gray-600 ">{staffData?.employee?.designation}</Text>
+                <Text className="text-xs text-gray-600 ">
                   Joined: {formatDate(staffData?.employee?.joining_date)}
                 </Text>
               </View>
@@ -160,7 +160,7 @@ export default function StaffView() {
                   "flex-row items-center gap-2 px-4 py-2 rounded-lg border",
                   activeSection === section.id
                     ? "bg-emerald-600 dark:bg-emerald-600 border-emerald-600"
-                    : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800",
+                    : "border-gray-200  bg-white ",
                 )}
               >
                 <MaterialCommunityIcons
@@ -171,7 +171,7 @@ export default function StaffView() {
                 <Text
                   className={cn(
                     "text-sm font-medium",
-                    activeSection === section.id ? "text-white" : "text-gray-700 dark:text-gray-300",
+                    activeSection === section.id ? "text-white" : "text-gray-700 ",
                   )}
                 >
                   {section.label}
@@ -182,46 +182,46 @@ export default function StaffView() {
         </ScrollView>
 
         {activeSection === "personal" && (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white">Personal Details</Text>
+          <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+            <Text className="text-lg font-semibold text-gray-900 ">Personal Details</Text>
             <View className="space-y-3">
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Full Name</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.employee?.name}</Text>
+                <Text className="text-xs font-medium text-gray-600  mb-1">Full Name</Text>
+                <Text className="text-sm text-gray-900 ">{staffData?.employee?.name}</Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Father's Name</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.employee?.father_name}</Text>
+                <Text className="text-xs font-medium text-gray-600  mb-1">Father's Name</Text>
+                <Text className="text-sm text-gray-900 ">{staffData?.employee?.father_name}</Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Mother's Name</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.employee?.mother_name}</Text>
+                <Text className="text-xs font-medium text-gray-600  mb-1">Mother's Name</Text>
+                <Text className="text-sm text-gray-900 ">{staffData?.employee?.mother_name}</Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Date of Birth</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">
+                <Text className="text-xs font-medium text-gray-600  mb-1">Date of Birth</Text>
+                <Text className="text-sm text-gray-900 ">
                   {formatDate(staffData?.employee?.date_of_birth)}
                 </Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Gender</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.employee?.gender}</Text>
+                <Text className="text-xs font-medium text-gray-600  mb-1">Gender</Text>
+                <Text className="text-sm text-gray-900 ">{staffData?.employee?.gender}</Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Marital Status</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.employee?.marital_status}</Text>
+                <Text className="text-xs font-medium text-gray-600  mb-1">Marital Status</Text>
+                <Text className="text-sm text-gray-900 ">{staffData?.employee?.marital_status}</Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Mobile Number</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.employee?.phone}</Text>
+                <Text className="text-xs font-medium text-gray-600  mb-1">Mobile Number</Text>
+                <Text className="text-sm text-gray-900 ">{staffData?.employee?.phone}</Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Email</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.employee?.email}</Text>
+                <Text className="text-xs font-medium text-gray-600  mb-1">Email</Text>
+                <Text className="text-sm text-gray-900 ">{staffData?.employee?.email}</Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Address</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.employee?.address}</Text>
+                <Text className="text-xs font-medium text-gray-600  mb-1">Address</Text>
+                <Text className="text-sm text-gray-900 ">{staffData?.employee?.address}</Text>
               </View>
             </View>
           </View>
@@ -232,25 +232,25 @@ export default function StaffView() {
             {staffData?.education?.map((edu: any, index: number) => (
               <View
                 key={index}
-                className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+                className="rounded-lg p-4 border border-gray-200  bg-white "
               >
-                <Text className="font-semibold text-gray-900 dark:text-white mb-3">Education {index + 1}</Text>
+                <Text className="font-semibold text-gray-900  mb-3">Education {index + 1}</Text>
                 <View className="space-y-2">
                   <View>
-                    <Text className="text-xs font-medium text-gray-600 dark:text-gray-400">Degree</Text>
-                    <Text className="text-sm text-gray-900 dark:text-white">{edu.degree}</Text>
+                    <Text className="text-xs font-medium text-gray-600 ">Degree</Text>
+                    <Text className="text-sm text-gray-900 ">{edu.degree}</Text>
                   </View>
                   <View>
-                    <Text className="text-xs font-medium text-gray-600 dark:text-gray-400">Institution</Text>
-                    <Text className="text-sm text-gray-900 dark:text-white">{edu.institution}</Text>
+                    <Text className="text-xs font-medium text-gray-600 ">Institution</Text>
+                    <Text className="text-sm text-gray-900 ">{edu.institution}</Text>
                   </View>
                   <View>
-                    <Text className="text-xs font-medium text-gray-600 dark:text-gray-400">Roll Number</Text>
-                    <Text className="text-sm text-gray-900 dark:text-white">{edu.roll_no || "N/A"}</Text>
+                    <Text className="text-xs font-medium text-gray-600 ">Roll Number</Text>
+                    <Text className="text-sm text-gray-900 ">{edu.roll_no || "N/A"}</Text>
                   </View>
                   <View>
-                    <Text className="text-xs font-medium text-gray-600 dark:text-gray-400">Duration</Text>
-                    <Text className="text-sm text-gray-900 dark:text-white">
+                    <Text className="text-xs font-medium text-gray-600 ">Duration</Text>
+                    <Text className="text-sm text-gray-900 ">
                       {formatDate(edu.start_date)} - {edu.end_date ? formatDate(edu.end_date) : "Present"}
                     </Text>
                   </View>
@@ -265,21 +265,21 @@ export default function StaffView() {
             {staffData?.experience?.map((exp: any, index: number) => (
               <View
                 key={index}
-                className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+                className="rounded-lg p-4 border border-gray-200  bg-white "
               >
-                <Text className="font-semibold text-gray-900 dark:text-white mb-3">Experience {index + 1}</Text>
+                <Text className="font-semibold text-gray-900  mb-3">Experience {index + 1}</Text>
                 <View className="space-y-2">
                   <View>
-                    <Text className="text-xs font-medium text-gray-600 dark:text-gray-400">Designation</Text>
-                    <Text className="text-sm text-gray-900 dark:text-white">{exp.designation}</Text>
+                    <Text className="text-xs font-medium text-gray-600 ">Designation</Text>
+                    <Text className="text-sm text-gray-900 ">{exp.designation}</Text>
                   </View>
                   <View>
-                    <Text className="text-xs font-medium text-gray-600 dark:text-gray-400">Organization</Text>
-                    <Text className="text-sm text-gray-900 dark:text-white">{exp.organization}</Text>
+                    <Text className="text-xs font-medium text-gray-600 ">Organization</Text>
+                    <Text className="text-sm text-gray-900 ">{exp.organization}</Text>
                   </View>
                   <View>
-                    <Text className="text-xs font-medium text-gray-600 dark:text-gray-400">Duration</Text>
-                    <Text className="text-sm text-gray-900 dark:text-white">
+                    <Text className="text-xs font-medium text-gray-600 ">Duration</Text>
+                    <Text className="text-sm text-gray-900 ">
                       {formatDate(exp.start_date)} - {exp.end_date ? formatDate(exp.end_date) : "Present"}
                     </Text>
                   </View>
@@ -290,30 +290,30 @@ export default function StaffView() {
         )}
 
         {activeSection === "leaves" && (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white">Leave Policy</Text>
+          <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+            <Text className="text-lg font-semibold text-gray-900 ">Leave Policy</Text>
             <View className="space-y-3">
-              <View className="flex-row justify-between items-center p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                <Text className="text-sm text-gray-600 dark:text-gray-400">Medical Leaves</Text>
-                <Text className="font-semibold text-gray-900 dark:text-white">
+              <View className="flex-row justify-between items-center p-3 rounded-lg bg-gray-50 ">
+                <Text className="text-sm text-gray-600 ">Medical Leaves</Text>
+                <Text className="font-semibold text-gray-900 ">
                   {staffData?.leave?.mediacal_leaves || 0}
                 </Text>
               </View>
-              <View className="flex-row justify-between items-center p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                <Text className="text-sm text-gray-600 dark:text-gray-400">Casual Leaves</Text>
-                <Text className="font-semibold text-gray-900 dark:text-white">
+              <View className="flex-row justify-between items-center p-3 rounded-lg bg-gray-50 ">
+                <Text className="text-sm text-gray-600 ">Casual Leaves</Text>
+                <Text className="font-semibold text-gray-900 ">
                   {staffData?.leave?.casual_leaves || 0}
                 </Text>
               </View>
-              <View className="flex-row justify-between items-center p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                <Text className="text-sm text-gray-600 dark:text-gray-400">Maternity Leaves</Text>
-                <Text className="font-semibold text-gray-900 dark:text-white">
+              <View className="flex-row justify-between items-center p-3 rounded-lg bg-gray-50 ">
+                <Text className="text-sm text-gray-600 ">Maternity Leaves</Text>
+                <Text className="font-semibold text-gray-900 ">
                   {staffData?.leave?.maternity_leaves || 0}
                 </Text>
               </View>
-              <View className="flex-row justify-between items-center p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                <Text className="text-sm text-gray-600 dark:text-gray-400">Sick Leaves</Text>
-                <Text className="font-semibold text-gray-900 dark:text-white">
+              <View className="flex-row justify-between items-center p-3 rounded-lg bg-gray-50 ">
+                <Text className="text-sm text-gray-600 ">Sick Leaves</Text>
+                <Text className="font-semibold text-gray-900 ">
                   {staffData?.leave?.sick_leaves || 0}
                 </Text>
               </View>
@@ -322,58 +322,58 @@ export default function StaffView() {
         )}
 
         {activeSection === "bank" && (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white">Bank Details</Text>
+          <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+            <Text className="text-lg font-semibold text-gray-900 ">Bank Details</Text>
             <View className="space-y-3">
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Account Type</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.bank?.account_type || "N/A"}</Text>
+                <Text className="text-xs font-medium text-gray-600  mb-1">Account Type</Text>
+                <Text className="text-sm text-gray-900 ">{staffData?.bank?.account_type || "N/A"}</Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Account Number</Text>
-                <Text className="text-sm text-gray-900 dark:text-white font-mono">
+                <Text className="text-xs font-medium text-gray-600  mb-1">Account Number</Text>
+                <Text className="text-sm text-gray-900  font-mono">
                   ****{staffData?.bank?.account_no?.slice(-4)}
                 </Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Bank Name</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.bank?.bank_name || "N/A"}</Text>
+                <Text className="text-xs font-medium text-gray-600  mb-1">Bank Name</Text>
+                <Text className="text-sm text-gray-900 ">{staffData?.bank?.bank_name || "N/A"}</Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">IFSC Code</Text>
-                <Text className="text-sm text-gray-900 dark:text-white font-mono">
+                <Text className="text-xs font-medium text-gray-600  mb-1">IFSC Code</Text>
+                <Text className="text-sm text-gray-900  font-mono">
                   {staffData?.bank?.ifsc_code || "N/A"}
                 </Text>
               </View>
               <View>
-                <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Branch Name</Text>
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.bank?.branch_name || "N/A"}</Text>
+                <Text className="text-xs font-medium text-gray-600  mb-1">Branch Name</Text>
+                <Text className="text-sm text-gray-900 ">{staffData?.bank?.branch_name || "N/A"}</Text>
               </View>
             </View>
           </View>
         )}
 
         {activeSection === "password" && (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white">Change Password</Text>
+          <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+            <Text className="text-lg font-semibold text-gray-900 ">Change Password</Text>
 
             <View>
-              <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">User ID</Text>
-              <View className="p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                <Text className="text-sm text-gray-900 dark:text-white">{staffData?.employee?.userId || "*****"}</Text>
+              <Text className="text-xs font-medium text-gray-600  mb-2">User ID</Text>
+              <View className="p-3 rounded-lg bg-gray-50 ">
+                <Text className="text-sm text-gray-900 ">{staffData?.employee?.userId || "*****"}</Text>
               </View>
             </View>
 
             <View>
-              <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">New Password</Text>
-              <View className="flex-row items-center border border-gray-300 dark:border-gray-600 rounded-lg px-3">
+              <Text className="text-xs font-medium text-gray-600  mb-2">New Password</Text>
+              <View className="flex-row items-center border border-gray-300  rounded-lg px-3">
                 <TextInput
                   secureTextEntry={!showNewPassword}
                   placeholder="Enter new password"
                   placeholderTextColor="#9ca3af"
                   value={passwordFormik.values.newPassword}
                   onChangeText={passwordFormik.handleChange("newPassword")}
-                  className="flex-1 py-3 text-sm text-gray-900 dark:text-white"
+                  className="flex-1 py-3 text-sm text-gray-900 "
                   editable={!isChangingPassword}
                 />
                 <TouchableOpacity onPress={() => setShowNewPassword(!showNewPassword)}>
@@ -383,15 +383,15 @@ export default function StaffView() {
             </View>
 
             <View>
-              <Text className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Confirm Password</Text>
-              <View className="flex-row items-center border border-gray-300 dark:border-gray-600 rounded-lg px-3">
+              <Text className="text-xs font-medium text-gray-600  mb-2">Confirm Password</Text>
+              <View className="flex-row items-center border border-gray-300  rounded-lg px-3">
                 <TextInput
                   secureTextEntry={!showConfirmPassword}
                   placeholder="Confirm new password"
                   placeholderTextColor="#9ca3af"
                   value={passwordFormik.values.confirmPassword}
                   onChangeText={passwordFormik.handleChange("confirmPassword")}
-                  className="flex-1 py-3 text-sm text-gray-900 dark:text-white"
+                  className="flex-1 py-3 text-sm text-gray-900 "
                   editable={!isChangingPassword}
                 />
                 <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>

@@ -86,7 +86,7 @@ export default function StaffList() {
   const StaffCard = ({ staff }: any) => (
     <TouchableOpacity
       onPress={() => router.push(`/management/staff/view/${staff._id}`)}
-      className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 mb-3"
+      className="rounded-lg p-4 border border-gray-200  bg-white  mb-3"
     >
       <View className="flex-row items-start justify-between mb-3">
         <View className="flex-row items-center flex-1">
@@ -94,8 +94,8 @@ export default function StaffList() {
             <Text className="font-bold text-emerald-600 dark:text-emerald-400">{getInitials(staff.name)}</Text>
           </View>
           <View className="ml-3 flex-1">
-            <Text className="font-semibold text-gray-900 dark:text-white">{staff.name}</Text>
-            <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400 capitalize">
+            <Text className="font-semibold text-gray-900 ">{staff.name}</Text>
+            <Text className="text-xs mt-1 text-gray-600  capitalize">
               {staff.designation.toLowerCase().replace("_", " ")}
             </Text>
           </View>
@@ -108,23 +108,23 @@ export default function StaffList() {
       <View className="space-y-2 mb-3">
         <View className="flex-row items-center">
           <MaterialCommunityIcons name="badge-account" size={14} color="#6b7280" />
-          <Text className="text-xs ml-2 text-gray-600 dark:text-gray-400">{staff.employee_code}</Text>
+          <Text className="text-xs ml-2 text-gray-600 ">{staff.employee_code}</Text>
         </View>
         <View className="flex-row items-center">
           <MaterialCommunityIcons name="phone" size={14} color="#6b7280" />
-          <Text className="text-xs ml-2 text-gray-600 dark:text-gray-400">{staff.phone}</Text>
+          <Text className="text-xs ml-2 text-gray-600 ">{staff.phone}</Text>
         </View>
         <View className="flex-row items-center">
           <MaterialCommunityIcons name="calendar" size={14} color="#6b7280" />
-          <Text className="text-xs ml-2 text-gray-600 dark:text-gray-400">Joined {formatDate(staff.joining_date)}</Text>
+          <Text className="text-xs ml-2 text-gray-600 ">Joined {formatDate(staff.joining_date)}</Text>
         </View>
       </View>
 
-      <View className="flex-row items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
+      <View className="flex-row items-center justify-between pt-3 border-t border-gray-200 ">
         <View className={cn("px-2 py-1 rounded", getStatusColor(staff.status))}>
           <Text className={cn("text-xs font-medium", getStatusTextColor(staff.status))}>{staff.status}</Text>
         </View>
-        <Text className="text-xs text-gray-600 dark:text-gray-400 capitalize">{staff.gender.toLowerCase()}</Text>
+        <Text className="text-xs text-gray-600  capitalize">{staff.gender.toLowerCase()}</Text>
       </View>
     </TouchableOpacity>
   )
@@ -137,8 +137,8 @@ export default function StaffList() {
       <View className="px-4 py-6 space-y-6">
         <View className="flex-row items-center justify-between">
           <View>
-            <Text className="text-2xl font-bold text-gray-900 dark:text-white">Staff Management</Text>
-            <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+            <Text className="text-2xl font-bold text-gray-900 ">Staff Management</Text>
+            <Text className="text-sm mt-1 text-gray-600 ">
               {filteredStaff.length} of {allStaff.length} staff members
             </Text>
           </View>
@@ -150,20 +150,20 @@ export default function StaffList() {
           </TouchableOpacity>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-3">
-          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 dark:border-gray-600">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3">
+          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 ">
             <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
             <TextInput
               placeholder="Search by name, code, email..."
               placeholderTextColor="#9ca3af"
               value={searchTerm}
               onChangeText={setSearchTerm}
-              className="flex-1 ml-2 py-2 text-sm text-gray-900 dark:text-white"
+              className="flex-1 ml-2 py-2 text-sm text-gray-900 "
             />
           </View>
 
           <View>
-            <Text className="text-xs font-medium mb-2 text-gray-600 dark:text-gray-400">Filter by Status</Text>
+            <Text className="text-xs font-medium mb-2 text-gray-600 ">Filter by Status</Text>
             <RNPickerSelect
               items={[
                 { label: "All Status", value: "all" },
@@ -196,7 +196,7 @@ export default function StaffList() {
           </View>
 
           <View>
-            <Text className="text-xs font-medium mb-2 text-gray-600 dark:text-gray-400">Filter by Designation</Text>
+            <Text className="text-xs font-medium mb-2 text-gray-600 ">Filter by Designation</Text>
             <RNPickerSelect
               items={[
                 { label: "All Roles", value: "all" },
@@ -231,7 +231,7 @@ export default function StaffList() {
           </View>
 
           <View>
-            <Text className="text-xs font-medium mb-2 text-gray-600 dark:text-gray-400">Filter by Gender</Text>
+            <Text className="text-xs font-medium mb-2 text-gray-600 ">Filter by Gender</Text>
             <RNPickerSelect
               items={[
                 { label: "All Gender", value: "all" },
@@ -267,10 +267,10 @@ export default function StaffList() {
           {(searchTerm || statusFilter !== "all" || designationFilter !== "all" || genderFilter !== "all") && (
             <TouchableOpacity
               onPress={clearFilters}
-              className="flex-row items-center justify-center p-2 rounded-lg border border-gray-300 dark:border-gray-600"
+              className="flex-row items-center justify-center p-2 rounded-lg border border-gray-300 "
             >
               <MaterialCommunityIcons name="close" size={16} color="#6b7280" />
-              <Text className="ml-2 text-sm font-medium text-gray-600 dark:text-gray-400">Clear Filters</Text>
+              <Text className="ml-2 text-sm font-medium text-gray-600 ">Clear Filters</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -278,13 +278,13 @@ export default function StaffList() {
         {loading ? (
           <View className="flex-row items-center justify-center py-12">
             <ActivityIndicator size="large" color="#10b981" />
-            <Text className="ml-2 text-gray-600 dark:text-gray-400">Loading staff members...</Text>
+            <Text className="ml-2 text-gray-600 ">Loading staff members...</Text>
           </View>
         ) : filteredStaff.length === 0 ? (
-          <View className="items-center justify-center py-12 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <View className="items-center justify-center py-12 rounded-lg border border-gray-200  bg-white ">
             <MaterialCommunityIcons name="account-multiple" size={48} color="#d1d5db" />
-            <Text className="text-gray-900 dark:text-white font-medium mt-2">No Staff Members Found</Text>
-            <Text className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+            <Text className="text-gray-900  font-medium mt-2">No Staff Members Found</Text>
+            <Text className="text-gray-600  text-sm mt-1">
               {searchTerm || statusFilter !== "all" || designationFilter !== "all" || genderFilter !== "all"
                 ? "Try adjusting your search or filters"
                 : "Get started by adding your first staff member"}

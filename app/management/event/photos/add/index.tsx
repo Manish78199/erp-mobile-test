@@ -128,17 +128,17 @@ export default function AddEventPhotos() {
       <View className="px-4 py-6 space-y-6">
         {/* Header */}
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Event Gallery</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Add Event's Photos</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Event Gallery</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">Add Event's Photos</Text>
         </View>
 
         {/* Form Card */}
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-          <Text className="text-lg font-semibold text-gray-900 dark:text-white">Photos Details</Text>
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+          <Text className="text-lg font-semibold text-gray-900 ">Photos Details</Text>
 
           {/* Title Input */}
           <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">
               Title <Text className="text-red-500">*</Text>
             </Text>
             <TextInput
@@ -146,14 +146,14 @@ export default function AddEventPhotos() {
               placeholderTextColor="#9ca3af"
               value={values.title}
               onChangeText={(text) => setFieldValue("title", text)}
-              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="w-full px-3 py-2 rounded-lg border border-gray-300  bg-white  text-gray-900 "
             />
             {touched.title && errors.title && <Text className="text-red-500 text-xs mt-1">{errors.title}</Text>}
           </View>
 
           {/* Recipient Selection */}
           <View>
-            <Text className="text-sm font-medium mb-3 text-gray-700 dark:text-gray-300">Send To:</Text>
+            <Text className="text-sm font-medium mb-3 text-gray-700 ">Send To:</Text>
             <View className="space-y-2">
               {[
                 { title: "SCHOOL", value: "SCHOOL", description: "Send to all students" },
@@ -166,7 +166,7 @@ export default function AddEventPhotos() {
                   className={`p-4 rounded-lg border-2 ${
                     values.reciever === option.value
                       ? "border-indigo-600 bg-indigo-50 dark:bg-indigo-900"
-                      : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+                      : "border-gray-200  bg-white "
                   }`}
                 >
                   <View className="flex-row items-center justify-between">
@@ -175,7 +175,7 @@ export default function AddEventPhotos() {
                         className={`font-semibold ${
                           values.reciever === option.value
                             ? "text-indigo-900 dark:text-indigo-100"
-                            : "text-gray-900 dark:text-white"
+                            : "text-gray-900 "
                         }`}
                       >
                         {option.title}
@@ -184,7 +184,7 @@ export default function AddEventPhotos() {
                         className={`text-xs mt-1 ${
                           values.reciever === option.value
                             ? "text-indigo-700 dark:text-indigo-200"
-                            : "text-gray-600 dark:text-gray-400"
+                            : "text-gray-600 "
                         }`}
                       >
                         {option.description}
@@ -204,7 +204,7 @@ export default function AddEventPhotos() {
           {/* Class Selection */}
           {(values.reciever === "CLASS" || values.reciever === "STUDENT") && (
             <View>
-              <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+              <Text className="text-sm font-medium mb-2 text-gray-700 ">
                 Class <Text className="text-red-500">*</Text>
               </Text>
               <RNPickerSelect
@@ -239,7 +239,7 @@ export default function AddEventPhotos() {
           {/* Student Selection */}
           {values.reciever === "STUDENT" && (
             <View>
-              <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Select Student</Text>
+              <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Student</Text>
               <RNPickerSelect
                 items={StudentListItem}
                 onValueChange={(value) => setFieldValue("student_id", value)}
@@ -271,12 +271,12 @@ export default function AddEventPhotos() {
 
           {/* Image Upload Placeholder */}
           <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">
               Select Images <Text className="text-red-500">*</Text>
             </Text>
-            <TouchableOpacity className="p-6 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 items-center justify-center">
+            <TouchableOpacity className="p-6 rounded-lg border-2 border-dashed border-gray-300  bg-gray-50  items-center justify-center">
               <MaterialCommunityIcons name="cloud-upload" size={32} color="#9ca3af" />
-              <Text className="text-sm font-medium mt-2 text-gray-600 dark:text-gray-400">Tap to upload images</Text>
+              <Text className="text-sm font-medium mt-2 text-gray-600 ">Tap to upload images</Text>
               <Text className="text-xs text-gray-500 dark:text-gray-500 mt-1">
                 {imageUploadingProgress > 0 ? `${imageUploadingProgress}%` : "PNG, JPG up to 10MB"}
               </Text>

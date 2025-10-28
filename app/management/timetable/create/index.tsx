@@ -199,18 +199,18 @@ export default function NewTimetablePage() {
         <View className="p-4">
 
           <View className="flex-1">
-            <Typography className="text-2xl font-bold text-gray-900 dark:text-white">Create New Timetable</Typography>
-            <Typography className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+            <Typography className="text-2xl font-bold text-gray-900 ">Create New Timetable</Typography>
+            <Typography className="text-sm mt-1 text-gray-600 ">
               Manage class Timetable
             </Typography>
           </View>
           {/* Basic Information Card */}
-          <View className="mt-3 border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-6 bg-white dark:bg-gray-800">
-            <Typography className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Basic Information</Typography>
+          <View className="mt-3 border border-gray-200  rounded-lg p-4 mb-6 bg-white ">
+            <Typography className="text-lg font-semibold mb-4 text-gray-900 ">Basic Information</Typography>
 
             {/* Class Select */}
             <View className="mb-4">
-              <Typography className="text-sm font-medium mb-2 text-gray-900 dark:text-white">Class *</Typography>
+              <Typography className="text-sm font-medium mb-2 text-gray-900 ">Class *</Typography>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row gap-2 ">
                 {classes.map((item) => (
                   <TouchableOpacity
@@ -220,13 +220,13 @@ export default function NewTimetablePage() {
                       "px-4 py-2 rounded-lg border mx-2",
                       formData.class_id === item._id
                         ? "bg-indigo-600 border-indigo-600"
-                        : "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600",
+                        : "bg-white  border-gray-200 ",
                     )}
                   >
                     <Typography
                       className={cn(
                         "text-sm font-medium",
-                        formData.class_id === item._id ? "text-white" : "text-gray-900 dark:text-white",
+                        formData.class_id === item._id ? "text-white" : "text-gray-900 ",
                       )}
                     >
                       {item?.name} ({item?.classCode})
@@ -238,7 +238,7 @@ export default function NewTimetablePage() {
 
             {/* Section Select */}
             <View>
-              <Typography className="text-sm font-medium mb-2 text-gray-900 dark:text-white">Section *</Typography>
+              <Typography className="text-sm font-medium mb-2 text-gray-900 ">Section *</Typography>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row gap-2">
                 {sections?.map((item: any) => (
                   <TouchableOpacity
@@ -248,13 +248,13 @@ export default function NewTimetablePage() {
                       "px-4 py-2 rounded-lg border mx-1",
                       formData.section_id === item._id
                         ? "bg-indigo-600 border-indigo-600"
-                        : "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600",
+                        : "bg-white  border-gray-200 ",
                     )}
                   >
                     <Typography
                       className={cn(
                         "text-sm font-medium",
-                        formData.section_id === item._id ? "text-white" : "text-gray-900 dark:text-white",
+                        formData.section_id === item._id ? "text-white" : "text-gray-900 ",
                       )}
                     >
                       {item?.name}
@@ -266,9 +266,9 @@ export default function NewTimetablePage() {
           </View>
 
           {/* Time Slots Card */}
-          <View className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-6 bg-white dark:bg-gray-800">
+          <View className="border border-gray-200  rounded-lg p-4 mb-6 bg-white ">
             <View className="flex-row justify-between items-center mb-4">
-              <Typography className="text-lg font-semibold text-gray-900 dark:text-white">Time Slots</Typography>
+              <Typography className="text-lg font-semibold text-gray-900 ">Time Slots</Typography>
               <TouchableOpacity
                 onPress={addTimeSlot}
                 className="px-3 py-2 rounded-lg flex-row items-center gap-1 bg-indigo-600"
@@ -283,9 +283,9 @@ export default function NewTimetablePage() {
               keyExtractor={(item) => item.id}
               scrollEnabled={false}
               renderItem={({ item: slot, index }) => (
-                <View className="p-3 border border-gray-200 dark:border-gray-700 rounded-lg mb-3 bg-gray-50 dark:bg-gray-700">
+                <View className="p-3 border border-gray-200  rounded-lg mb-3 bg-gray-50 ">
                   <View className="flex-row justify-between items-center mb-3">
-                    <Typography className="text-sm font-medium text-gray-900 dark:text-white">Period {index + 1}</Typography>
+                    <Typography className="text-sm font-medium text-gray-900 ">Period {index + 1}</Typography>
                     <TouchableOpacity onPress={() => removeTimeSlot(slot.id)} className="p-2 rounded-lg bg-red-600">
                       <Trash2 size={14} color="white" />
                     </TouchableOpacity>
@@ -299,7 +299,7 @@ export default function NewTimetablePage() {
                           value={slot.start_time}
                           onChangeText={(value) => handleTimeSlotEdit(slot.id, "start_time", value)}
                           placeholder="HH:MM"
-                          className="flex-1 border border-gray-200 dark:border-gray-600 rounded px-2 py-1 text-gray-900 dark:text-white"
+                          className="flex-1 border border-gray-200  rounded px-2 py-1 text-gray-900 "
                         />
                         <TouchableOpacity onPress={() => setEditingTimeSlot(null)} className="p-2 rounded bg-indigo-600">
                           <Check size={14} color="white" />
@@ -310,13 +310,13 @@ export default function NewTimetablePage() {
                         onPress={() => setEditingTimeSlot(`${slot.id}-start`)}
                         className="flex-row items-center gap-2 p-2"
                       >
-                        <Typography className="text-sm font-mono text-gray-900 dark:text-white">{slot.start_time}</Typography>
+                        <Typography className="text-sm font-mono text-gray-900 ">{slot.start_time}</Typography>
                         <Edit2 size={12} color="#9ca3af" />
                       </TouchableOpacity>
                     )}
                   </View>
 
-                  <Typography className="text-xs text-center mb-2 text-gray-600 dark:text-gray-400">to</Typography>
+                  <Typography className="text-xs text-center mb-2 text-gray-600 ">to</Typography>
 
                   {/* End Time */}
                   <View>
@@ -326,7 +326,7 @@ export default function NewTimetablePage() {
                           value={slot.end_time}
                           onChangeText={(value) => handleTimeSlotEdit(slot.id, "end_time", value)}
                           placeholder="HH:MM"
-                          className="flex-1 border border-gray-200 dark:border-gray-600 rounded px-2 py-1 text-gray-900 dark:text-white"
+                          className="flex-1 border border-gray-200  rounded px-2 py-1 text-gray-900 "
                         />
                         <TouchableOpacity onPress={() => setEditingTimeSlot(null)} className="p-2 rounded bg-indigo-600">
                           <Check size={14} color="white" />
@@ -337,7 +337,7 @@ export default function NewTimetablePage() {
                         onPress={() => setEditingTimeSlot(`${slot.id}-end`)}
                         className="flex-row items-center gap-2 p-2"
                       >
-                        <Typography className="text-sm font-mono text-gray-900 dark:text-white">{slot.end_time}</Typography>
+                        <Typography className="text-sm font-mono text-gray-900 ">{slot.end_time}</Typography>
                         <Edit2 size={12} color="#9ca3af" />
                       </TouchableOpacity>
                     )}
@@ -358,13 +358,13 @@ export default function NewTimetablePage() {
                       "px-4 py-2 rounded-lg border min-w-20 items-center mx-2 ",
                       selectedDay === day.id
                         ? "bg-indigo-600 border-indigo-600"
-                        : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700",
+                        : "bg-white  border-gray-200 ",
                     )}
                   >
                     <Typography
                       className={cn(
                         "text-xs font-medium",
-                        selectedDay === day.id ? "text-white" : "text-gray-900 dark:text-white",
+                        selectedDay === day.id ? "text-white" : "text-gray-900 ",
                       )}
                     >
                       {day.name.slice(0, 3)}
@@ -401,23 +401,23 @@ export default function NewTimetablePage() {
             {selectedDay > 1 && (
               <TouchableOpacity
                 onPress={copyPreviousDay}
-                className="px-3 py-2 rounded-lg flex-row items-center gap-1 bg-gray-100 dark:bg-gray-700"
+                className="px-3 py-2 rounded-lg flex-row items-center gap-1 bg-gray-100 "
               >
                 <Copy size={14} color="#6b7280" />
-                <Typography className="text-xs font-medium text-gray-900 dark:text-white">Copy Prev</Typography>
+                <Typography className="text-xs font-medium text-gray-900 ">Copy Prev</Typography>
               </TouchableOpacity>
             )}
             <TouchableOpacity
               onPress={fillAllDaysLikeCurrent}
-              className="px-3 py-2 rounded-lg flex-row items-center gap-1 bg-gray-100 dark:bg-gray-700"
+              className="px-3 py-2 rounded-lg flex-row items-center gap-1 bg-gray-100 "
             >
-              <Typography className="text-xs font-medium text-gray-900 dark:text-white">Apply All</Typography>
+              <Typography className="text-xs font-medium text-gray-900 ">Apply All</Typography>
             </TouchableOpacity>
           </View>
 
          
-          <View className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-6 bg-white dark:bg-gray-800">
-            <Typography className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Periods</Typography>
+          <View className="border border-gray-200  rounded-lg p-4 mb-6 bg-white ">
+            <Typography className="text-lg font-semibold mb-4 text-gray-900 ">Periods</Typography>
 
             <FlatList
               data={timeSlots}
@@ -428,8 +428,8 @@ export default function NewTimetablePage() {
                 const entry = timetableEntries[key]
 
                 return (
-                  <View className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 mb-3 bg-gray-50 dark:bg-gray-700">
-                    <Typography className="text-xs font-medium mb-3 text-gray-900 dark:text-white">
+                  <View className="border border-gray-200  rounded-lg p-3 mb-3 bg-gray-50 ">
+                    <Typography className="text-xs font-medium mb-3 text-gray-900 ">
                       Period {index + 1}: {slot.start_time} - {slot.end_time}
                     </Typography>
 
@@ -444,14 +444,14 @@ export default function NewTimetablePage() {
                               "px-3 py-2 rounded-lg border flex-row items-center gap-1 mx-1 ",
                               entry?.subject_id === (s.id ?? s._id)
                                 ? "bg-indigo-600 border-indigo-600"
-                                : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600",
+                                : "bg-white  border-gray-200 ",
                             )}
                           >
                             <View className="w-2 h-2 rounded-full" style={{ backgroundColor: s.color ?? "#666" }} />
                             <Typography
                               className={cn(
                                 "text-xs capitalize font-medium",
-                                entry?.subject_id === (s.id ?? s._id) ? "text-white" : "text-gray-900  dark:text-white",
+                                entry?.subject_id === (s.id ?? s._id) ? "text-white" : "text-gray-900  ",
                               )}
                             >
                               {s.name}
@@ -471,13 +471,13 @@ export default function NewTimetablePage() {
                             "px-3 mx-1 py-2 rounded-lg border",
                             entry?.teacher_id === t._id
                               ? "bg-indigo-600 border-indigo-600"
-                              : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600",
+                              : "bg-white  border-gray-200 ",
                           )}
                         >
                           <Typography
                             className={cn(
                               "text-xs capitalize font-medium",
-                              entry?.teacher_id === t._id ? "text-white" : "text-gray-900 dark:text-white",
+                              entry?.teacher_id === t._id ? "text-white" : "text-gray-900 ",
                             )}
                           >
                             {t.name}
@@ -492,20 +492,20 @@ export default function NewTimetablePage() {
           </View>
 
           {/* Preview Table */}
-          <View className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-6 bg-white dark:bg-gray-800">
-            <Typography className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Preview Timetable</Typography>
+          <View className="border border-gray-200  rounded-lg p-4 mb-6 bg-white ">
+            <Typography className="text-lg font-semibold mb-4 text-gray-900 ">Preview Timetable</Typography>
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View>
               
-                <View className="flex-row border-b border-gray-200 dark:border-gray-700">
-                  <View className="w-20 p-2 border-r border-gray-200 dark:border-gray-700">
-                    <Typography className="text-xs font-bold text-gray-900 dark:text-white">Day</Typography>
+                <View className="flex-row border-b border-gray-200 ">
+                  <View className="w-20 p-2 border-r border-gray-200 ">
+                    <Typography className="text-xs font-bold text-gray-900 ">Day</Typography>
                   </View>
                   {timeSlots.map((slot, i) => (
-                    <View key={slot.id} className="w-24 p-2 items-center border-r border-gray-200 dark:border-gray-700">
-                      <Typography className="text-xs font-bold text-gray-900 dark:text-white">Period {i + 1}</Typography>
-                      <Typography className="text-sm text-gray-600 dark:text-gray-400">
+                    <View key={slot.id} className="w-24 p-2 items-center border-r border-gray-200 ">
+                      <Typography className="text-xs font-bold text-gray-900 ">Period {i + 1}</Typography>
+                      <Typography className="text-sm text-gray-600 ">
                         {slot.start_time} - {slot.end_time}
                       </Typography>
                     </View>
@@ -514,9 +514,9 @@ export default function NewTimetablePage() {
 
                 {/* Table Body */}
                 {daysOfWeek.map((day) => (
-                  <View key={day.id} className="flex-row border-b border-gray-200 dark:border-gray-700">
-                    <View className="w-20 p-2 justify-center border-r border-gray-200 dark:border-gray-700">
-                      <Typography className="text-xs font-medium text-gray-900 dark:text-white">{day.name.slice(0, 3)}</Typography>
+                  <View key={day.id} className="flex-row border-b border-gray-200 ">
+                    <View className="w-20 p-2 justify-center border-r border-gray-200 ">
+                      <Typography className="text-xs font-medium text-gray-900 ">{day.name.slice(0, 3)}</Typography>
                     </View>
                     {timeSlots.map((slot) => {
                       const key = `${day.id}-${slot.id}`
@@ -527,14 +527,14 @@ export default function NewTimetablePage() {
                       return (
                         <View
                           key={key}
-                          className="w-24 p-2 items-center justify-center border-r border-gray-200 dark:border-gray-700"
+                          className="w-24 p-2 items-center justify-center border-r border-gray-200 "
                         >
                           {entry ? (
                             <View className="items-center gap-1">
-                              <Typography className="text-[10px] font-medium text-gray-900 dark:text-white">
+                              <Typography className="text-[10px] font-medium text-gray-900 ">
                                 {subject?.name ?? "—"}
                               </Typography>
-                              <Typography className="text-[8px] text-gray-600 dark:text-gray-400">{teacher?.name ?? "—"}</Typography>
+                              <Typography className="text-[8px] text-gray-600 ">{teacher?.name ?? "—"}</Typography>
                             </View>
                           ) : (
                             <Typography className="text-xs text-gray-400 dark:text-gray-500">—</Typography>
@@ -552,9 +552,9 @@ export default function NewTimetablePage() {
           <View className="flex-row gap-3 mb-6">
             <TouchableOpacity
               onPress={() => router.back()}
-              className="flex-1 border border-gray-200 dark:border-gray-700 rounded-lg py-3 items-center bg-white dark:bg-gray-800"
+              className="flex-1 border border-gray-200  rounded-lg py-3 items-center bg-white "
             >
-              <Typography className="font-medium text-gray-900 dark:text-white">Cancel</Typography>
+              <Typography className="font-medium text-gray-900 ">Cancel</Typography>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={handleSubmit}
@@ -562,7 +562,7 @@ export default function NewTimetablePage() {
               className={cn(
                 "flex-1 rounded-lg py-3 items-center flex-row justify-center gap-2",
                 isSubmitting || !formData.class_id || !formData.section_id
-                  ? "bg-gray-200 dark:bg-gray-700"
+                  ? "bg-gray-200 "
                   : "bg-indigo-600",
               )}
             >
@@ -571,7 +571,7 @@ export default function NewTimetablePage() {
                 className={cn(
                   "font-medium",
                   isSubmitting || !formData.class_id || !formData.section_id
-                    ? "text-gray-600 dark:text-gray-400"
+                    ? "text-gray-600 "
                     : "text-white",
                 )}
               >

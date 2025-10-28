@@ -130,20 +130,20 @@ export default function BookAddForm() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Add New Book</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Add a new book to the library inventory</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Add New Book</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">Add a new book to the library inventory</Text>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
           <View className="flex-row items-center gap-2 mb-4">
             <View className="p-2 bg-blue-500 rounded-lg">
               <MaterialCommunityIcons name="book-open" size={18} color="white" />
             </View>
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white">Book Information</Text>
+            <Text className="text-lg font-semibold text-gray-900 ">Book Information</Text>
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <Text className="text-sm font-medium text-gray-700  mb-2">
               ISBN <Text className="text-red-500">*</Text>
             </Text>
             <TextInput
@@ -152,15 +152,15 @@ export default function BookAddForm() {
               placeholder="e.g., 978-0262033848"
               placeholderTextColor="#9ca3af"
               className={cn(
-                "px-3 py-2 rounded-lg border text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700",
-                errors.isbn ? "border-red-500" : "border-gray-300 dark:border-gray-600",
+                "px-3 py-2 rounded-lg border text-gray-900  bg-gray-50 ",
+                errors.isbn ? "border-red-500" : "border-gray-300 ",
               )}
             />
             {errors.isbn && <Text className="text-red-500 text-xs mt-1">{errors.isbn}</Text>}
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <Text className="text-sm font-medium text-gray-700  mb-2">
               Title <Text className="text-red-500">*</Text>
             </Text>
             <TextInput
@@ -169,15 +169,15 @@ export default function BookAddForm() {
               placeholder="Enter book title"
               placeholderTextColor="#9ca3af"
               className={cn(
-                "px-3 py-2 rounded-lg border text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700",
-                errors.title ? "border-red-500" : "border-gray-300 dark:border-gray-600",
+                "px-3 py-2 rounded-lg border text-gray-900  bg-gray-50 ",
+                errors.title ? "border-red-500" : "border-gray-300 ",
               )}
             />
             {errors.title && <Text className="text-red-500 text-xs mt-1">{errors.title}</Text>}
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <Text className="text-sm font-medium text-gray-700  mb-2">
               Author <Text className="text-red-500">*</Text>
             </Text>
             <TextInput
@@ -186,15 +186,15 @@ export default function BookAddForm() {
               placeholder="Enter author name"
               placeholderTextColor="#9ca3af"
               className={cn(
-                "px-3 py-2 rounded-lg border text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700",
-                errors.author ? "border-red-500" : "border-gray-300 dark:border-gray-600",
+                "px-3 py-2 rounded-lg border text-gray-900  bg-gray-50 ",
+                errors.author ? "border-red-500" : "border-gray-300 ",
               )}
             />
             {errors.author && <Text className="text-red-500 text-xs mt-1">{errors.author}</Text>}
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</Text>
+            <Text className="text-sm font-medium text-gray-700  mb-2">Category</Text>
             <RNPickerSelect
               items={categories.map((cat) => ({ label: cat, value: cat }))}
               onValueChange={(value) => handleInputChange("category", value)}
@@ -223,7 +223,7 @@ export default function BookAddForm() {
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <Text className="text-sm font-medium text-gray-700  mb-2">
               Publisher <Text className="text-red-500">*</Text>
             </Text>
             <TextInput
@@ -232,15 +232,15 @@ export default function BookAddForm() {
               placeholder="Enter publisher name"
               placeholderTextColor="#9ca3af"
               className={cn(
-                "px-3 py-2 rounded-lg border text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700",
-                errors.publisher ? "border-red-500" : "border-gray-300 dark:border-gray-600",
+                "px-3 py-2 rounded-lg border text-gray-900  bg-gray-50 ",
+                errors.publisher ? "border-red-500" : "border-gray-300 ",
               )}
             />
             {errors.publisher && <Text className="text-red-500 text-xs mt-1">{errors.publisher}</Text>}
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Publish Year</Text>
+            <Text className="text-sm font-medium text-gray-700  mb-2">Publish Year</Text>
             <TextInput
               value={formData.publishYear.toString()}
               onChangeText={(value) =>
@@ -250,23 +250,23 @@ export default function BookAddForm() {
               placeholderTextColor="#9ca3af"
               keyboardType="numeric"
               className={cn(
-                "px-3 py-2 rounded-lg border text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700",
-                errors.publishYear ? "border-red-500" : "border-gray-300 dark:border-gray-600",
+                "px-3 py-2 rounded-lg border text-gray-900  bg-gray-50 ",
+                errors.publishYear ? "border-red-500" : "border-gray-300 ",
               )}
             />
             {errors.publishYear && <Text className="text-red-500 text-xs mt-1">{errors.publishYear}</Text>}
           </View>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
-          <Text className="text-lg font-semibold text-gray-900 dark:text-white">Inventory Details</Text>
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+          <Text className="text-lg font-semibold text-gray-900 ">Inventory Details</Text>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Total Copies</Text>
+            <Text className="text-sm font-medium text-gray-700  mb-2">Total Copies</Text>
             <View className="flex-row items-center gap-2">
               <TouchableOpacity
                 onPress={() => handleInputChange("totalCopies", Math.max(1, formData.totalCopies - 1))}
-                className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                className="p-2 border border-gray-300  rounded-lg"
               >
                 <MaterialCommunityIcons name="minus" size={18} color="#6b7280" />
               </TouchableOpacity>
@@ -274,11 +274,11 @@ export default function BookAddForm() {
                 value={formData.totalCopies.toString()}
                 onChangeText={(value) => handleInputChange("totalCopies", Number.parseInt(value) || 1)}
                 keyboardType="numeric"
-                className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-center text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700"
+                className="flex-1 px-3 py-2 rounded-lg border border-gray-300  text-center text-gray-900  bg-gray-50 "
               />
               <TouchableOpacity
                 onPress={() => handleInputChange("totalCopies", formData.totalCopies + 1)}
-                className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                className="p-2 border border-gray-300  rounded-lg"
               >
                 <MaterialCommunityIcons name="plus" size={18} color="#6b7280" />
               </TouchableOpacity>
@@ -286,7 +286,7 @@ export default function BookAddForm() {
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Price (₹)</Text>
+            <Text className="text-sm font-medium text-gray-700  mb-2">Price (₹)</Text>
             <TextInput
               value={formData.price.toString()}
               onChangeText={(value) => handleInputChange("price", Number.parseInt(value) || 0)}
@@ -294,12 +294,12 @@ export default function BookAddForm() {
               placeholderTextColor="#9ca3af"
               keyboardType="numeric"
               className={cn(
-                "px-3 py-2 rounded-lg border text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700",
-                errors.price ? "border-red-500" : "border-gray-300 dark:border-gray-600",
+                "px-3 py-2 rounded-lg border text-gray-900  bg-gray-50 ",
+                errors.price ? "border-red-500" : "border-gray-300 ",
               )}
             />
             {formData.price > 0 && (
-              <Text className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+              <Text className="text-xs text-gray-600  mt-1">
                 {formatCurrency(formData.price)} per copy
               </Text>
             )}
@@ -307,22 +307,22 @@ export default function BookAddForm() {
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Location</Text>
+            <Text className="text-sm font-medium text-gray-700  mb-2">Location</Text>
             <TextInput
               value={formData.location}
               onChangeText={(value) => handleInputChange("location", value)}
               placeholder="e.g., CS-A-001"
               placeholderTextColor="#9ca3af"
               className={cn(
-                "px-3 py-2 rounded-lg border text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700",
-                errors.location ? "border-red-500" : "border-gray-300 dark:border-gray-600",
+                "px-3 py-2 rounded-lg border text-gray-900  bg-gray-50 ",
+                errors.location ? "border-red-500" : "border-gray-300 ",
               )}
             />
             {errors.location && <Text className="text-red-500 text-xs mt-1">{errors.location}</Text>}
           </View>
 
           <View>
-            <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</Text>
+            <Text className="text-sm font-medium text-gray-700  mb-2">Status</Text>
             <RNPickerSelect
               items={[
                 { label: "Available", value: "available" },
@@ -355,8 +355,8 @@ export default function BookAddForm() {
           </View>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-3">
-          <Text className="text-lg font-semibold text-gray-900 dark:text-white">Description</Text>
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3">
+          <Text className="text-lg font-semibold text-gray-900 ">Description</Text>
           <TextInput
             value={formData.description}
             onChangeText={(value) => handleInputChange("description", value)}
@@ -364,13 +364,13 @@ export default function BookAddForm() {
             placeholderTextColor="#9ca3af"
             multiline
             numberOfLines={4}
-            className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700"
+            className="px-3 py-2 rounded-lg border border-gray-300  text-gray-900  bg-gray-50 "
           />
         </View>
 
         <View className="flex-row gap-3">
-          <TouchableOpacity className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg p-3">
-            <Text className="text-center font-medium text-gray-700 dark:text-gray-300">Cancel</Text>
+          <TouchableOpacity className="flex-1 border border-gray-300  rounded-lg p-3">
+            <Text className="text-center font-medium text-gray-700 ">Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={handleSubmit}

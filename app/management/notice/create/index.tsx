@@ -115,7 +115,7 @@ export default function CreateNoticeScreen() {
         "rounded-lg p-4 border-2 mb-3",
         values.audience_type === value
           ? "border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20"
-          : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800",
+          : "border-gray-200  bg-white ",
       )}
     >
       <View className="flex-row items-center justify-between">
@@ -123,17 +123,17 @@ export default function CreateNoticeScreen() {
           <Typography
             className={cn(
               "font-semibold",
-              values.audience_type === value ? "text-indigo-600" : "text-gray-900 dark:text-white",
+              values.audience_type === value ? "text-indigo-600" : "text-gray-900 ",
             )}
           >
             {title}
           </Typography>
-          <Typography className="text-xs mt-1 text-gray-600 dark:text-gray-400">{description}</Typography>
+          <Typography className="text-xs mt-1 text-gray-600 ">{description}</Typography>
         </View>
         <View
           className={cn(
             "w-5 h-5 rounded-full border-2",
-            values.audience_type === value ? "border-indigo-600 bg-indigo-600" : "border-gray-300 dark:border-gray-600",
+            values.audience_type === value ? "border-indigo-600 bg-indigo-600" : "border-gray-300 ",
           )}
         >
           {values.audience_type === value && (
@@ -148,7 +148,7 @@ export default function CreateNoticeScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-background">
-      <ScrollView className="flex-1" contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+      <ScrollView className="flex-1">
         {/* Header */}
         <View className="flex-row items-center p-4">
           <TouchableOpacity
@@ -158,24 +158,24 @@ export default function CreateNoticeScreen() {
             <Typography className="text-primary font-semibold">← Back</Typography>
           </TouchableOpacity>
 
-          <Typography className=" font-bold text-foreground">New Section</Typography>
+          <Typography className="text-lg font-bold text-foreground">New Section</Typography>
         </View>
         <View className="px-4 py-4 ">
         
           <View>
-            <Typography className="text-2xl font-bold text-gray-900 dark:text-white">Create Notice</Typography>
-            <Typography className="text-sm mt-1 text-gray-600 dark:text-gray-400">Send notice to students</Typography>
+            <Typography className="text-2xl font-bold text-gray-900 ">Create Notice</Typography>
+            <Typography className="text-sm mt-1 text-gray-600 ">Send notice to students</Typography>
           </View>
         </View>
 
         <View className="px-4 pb-6 space-y-6">
           {/* Notice Details Card */}
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <Typography className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Notice Details</Typography>
+          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+            <Typography className="text-lg font-semibold mb-4 text-gray-900 ">Notice Details</Typography>
 
             {/* Title Field */}
             <View className="mb-4">
-              <Typography className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <Typography className="text-sm font-medium text-gray-700  mb-2">
                 Title <Text className="text-red-500">*</Text>
               </Typography>
               <TextInput
@@ -183,7 +183,7 @@ export default function CreateNoticeScreen() {
                 placeholderTextColor="#9ca3af"
                 value={values.title}
                 onChangeText={handleChange("title")}
-                className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-3 py-2 rounded-lg border border-gray-300  bg-gray-50  text-gray-900 "
               />
               {touched.title && errors.title && (
                 <Typography className="text-xs text-red-600 mt-1">{errors.title}</Typography>
@@ -192,7 +192,7 @@ export default function CreateNoticeScreen() {
 
             {/* Message Field */}
             <View className="mb-4">
-              <Typography className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <Typography className="text-sm font-medium text-gray-700  mb-2">
                 Message <Text className="text-red-500">*</Text>
               </Typography>
               <TextInput
@@ -202,7 +202,7 @@ export default function CreateNoticeScreen() {
                 onChangeText={handleChange("message")}
                 multiline
                 numberOfLines={4}
-                className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-3 py-2 rounded-lg border border-gray-300  bg-gray-50  text-gray-900 "
               />
               {touched.message && errors.message && (
                 <Typography className="text-xs text-red-600 mt-1">{errors.message}</Typography>
@@ -211,8 +211,8 @@ export default function CreateNoticeScreen() {
           </View>
 
           {/* Audience Selection Card */}
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <Typography className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Send To</Typography>
+          <View className="rounded-lg mt-3 p-4 border border-gray-200  bg-white ">
+            <Typography className="text-lg font-semibold mb-4 text-gray-900 ">Send To</Typography>
 
             <AudienceOption title="School" value="ALL" description="Send to all students in the school" />
             <AudienceOption title="Class" value="CLASS" description="Send to all students in a specific class" />
@@ -221,8 +221,8 @@ export default function CreateNoticeScreen() {
 
           {/* Class Selection */}
           {(values.audience_type === "CLASS" || values.audience_type === "STUDENT") && (
-            <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-              <Typography className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+            <View className="rounded-lg p-4 mt-3 border border-gray-200  bg-white ">
+              <Typography className="text-lg font-semibold mb-4 text-gray-900 ">
                 Select Class <Text className="text-red-500">*</Text>
               </Typography>
               <RNPickerSelect
@@ -259,24 +259,24 @@ export default function CreateNoticeScreen() {
 
           {/* Student Selection */}
           {values.audience_type === "STUDENT" && (
-            <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-              <Typography className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+            <View className="rounded-lg mt-3 p-4 border border-gray-200  bg-white ">
+              <Typography className="text-lg font-semibold mb-4 text-gray-900 ">
                 Select Students <Text className="text-red-500">*</Text>
               </Typography>
 
               {allStudent.length > 0 ? (
                 <View>
-                  <View className="flex-row mb-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                    <Typography className="flex-1 text-xs font-semibold text-gray-600 dark:text-gray-400">
+                  <View className="flex-row mb-3 pb-3 border-b border-gray-200 ">
+                    <Typography className="flex-1 text-xs font-semibold text-gray-600 ">
                       Roll
                     </Typography>
-                    <Typography className="flex-1 text-xs font-semibold text-gray-600 dark:text-gray-400">
+                    <Typography className="flex-1 text-xs font-semibold text-gray-600 ">
                       Name
                     </Typography>
-                    <Typography className="flex-1 text-xs font-semibold text-gray-600 dark:text-gray-400">
+                    <Typography className="flex-1 text-xs font-semibold text-gray-600 ">
                       Father
                     </Typography>
-                    <Typography className="w-12 text-xs font-semibold text-gray-600 dark:text-gray-400">
+                    <Typography className="w-12 text-xs font-semibold text-gray-600 ">
                       Select
                     </Typography>
                   </View>
@@ -286,14 +286,14 @@ export default function CreateNoticeScreen() {
                     data={allStudent}
                     keyExtractor={(item) => item._id}
                     renderItem={({ item }) => (
-                      <View className="flex-row items-center py-2 border-b border-gray-100 dark:border-gray-700">
-                        <Typography className="flex-1 text-xs text-gray-900 dark:text-white">
+                      <View className="flex-row items-center py-2 border-b border-gray-100 ">
+                        <Typography className="flex-1 text-xs text-gray-900 ">
                           {item.roll_number || "--"}
                         </Typography>
-                        <Typography className="flex-1 text-xs text-gray-900 dark:text-white">
+                        <Typography className="flex-1 text-xs text-gray-900 ">
                           {item.first_name}
                         </Typography>
-                        <Typography className="flex-1 text-xs text-gray-900 dark:text-white">
+                        <Typography className="flex-1 text-xs text-gray-900 ">
                           {item.father_name}
                         </Typography>
                         <TouchableOpacity
@@ -311,13 +311,13 @@ export default function CreateNoticeScreen() {
                   />
                 </View>
               ) : (
-                <Typography className="text-sm text-gray-600 dark:text-gray-400">
+                <Typography className="text-sm text-gray-600 ">
                   Please select a class first
                 </Typography>
               )}
 
               {touched.student_ids && errors.student_ids && (
-                <Typography className="text-xs text-red-600 mt-2">{errors?.student_ids}</Typography>
+                <Typography className="text-xs text-red-600 mt-2">{errors?.student_ids?.toString()}</Typography>
               )}
             </View>
           )}
@@ -326,7 +326,7 @@ export default function CreateNoticeScreen() {
           <TouchableOpacity
             onPress={() => handleSubmit()}
             disabled={creating}
-            className={cn("rounded-lg p-4 items-center justify-center", creating ? "bg-gray-400" : "bg-indigo-600")}
+            className={cn("rounded-lg mt-5 p-4 items-center justify-center", creating ? "bg-gray-400" : "bg-indigo-600")}
           >
             {creating ? (
               <ActivityIndicator size="small" color="white" />

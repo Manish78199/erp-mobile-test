@@ -45,7 +45,7 @@ export default function VehicleManagement() {
       case "inspection_due":
         return "bg-yellow-100 dark:bg-yellow-900"
       default:
-        return "bg-gray-100 dark:bg-gray-800"
+        return "bg-gray-100 "
     }
   }
 
@@ -58,7 +58,7 @@ export default function VehicleManagement() {
       case "car":
         return "bg-emerald-100 dark:bg-emerald-900"
       default:
-        return "bg-gray-100 dark:bg-gray-800"
+        return "bg-gray-100 "
     }
   }
 
@@ -100,21 +100,21 @@ export default function VehicleManagement() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Vehicle Management</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+          <Text className="text-2xl font-bold text-gray-900 ">Vehicle Management</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">
             Manage fleet vehicles, maintenance, and documentation
           </Text>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-3">
-          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 dark:border-gray-600">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3">
+          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 ">
             <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
             <TextInput
               placeholder="Search by registration, make, model..."
               placeholderTextColor="#9ca3af"
               value={searchTerm}
               onChangeText={setSearchTerm}
-              className="flex-1 ml-2 py-2 text-sm text-gray-900 dark:text-white"
+              className="flex-1 ml-2 py-2 text-sm text-gray-900 "
             />
           </View>
 
@@ -201,17 +201,17 @@ export default function VehicleManagement() {
             data={filteredVehicles}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item: vehicle }) => (
-              <View className="mb-4 rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+              <View className="mb-4 rounded-lg p-4 border border-gray-200  bg-white ">
                 <View className="flex-row items-start justify-between mb-4">
                   <View className="flex-row items-start flex-1">
                     <View className="p-3 bg-blue-500 rounded-lg mr-3">
                       <MaterialCommunityIcons name="truck" size={24} color="white" />
                     </View>
                     <View className="flex-1">
-                      <Text className="text-lg font-semibold text-gray-900 dark:text-white">
+                      <Text className="text-lg font-semibold text-gray-900 ">
                         {vehicle.registrationNumber}
                       </Text>
-                      <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+                      <Text className="text-sm mt-1 text-gray-600 ">
                         {vehicle.make} {vehicle.model} ({vehicle.year})
                       </Text>
                       <View className="flex-row gap-2 mt-2">
@@ -237,29 +237,29 @@ export default function VehicleManagement() {
 
                 <View className="space-y-2 mb-4">
                   <View className="flex-row justify-between">
-                    <Text className="text-sm text-gray-600 dark:text-gray-400">Capacity:</Text>
-                    <Text className="text-sm font-medium text-gray-900 dark:text-white">
+                    <Text className="text-sm text-gray-600 ">Capacity:</Text>
+                    <Text className="text-sm font-medium text-gray-900 ">
                       {vehicle.capacity} passengers
                     </Text>
                   </View>
                   <View className="flex-row justify-between">
-                    <Text className="text-sm text-gray-600 dark:text-gray-400">Fuel Efficiency:</Text>
-                    <Text className="text-sm font-medium text-gray-900 dark:text-white">
+                    <Text className="text-sm text-gray-600 ">Fuel Efficiency:</Text>
+                    <Text className="text-sm font-medium text-gray-900 ">
                       {vehicle.fuelEfficiency} km/l
                     </Text>
                   </View>
                   <View className="flex-row justify-between">
-                    <Text className="text-sm text-gray-600 dark:text-gray-400">Last Maintenance:</Text>
-                    <Text className="text-sm font-medium text-gray-900 dark:text-white">
+                    <Text className="text-sm text-gray-600 ">Last Maintenance:</Text>
+                    <Text className="text-sm font-medium text-gray-900 ">
                       {formatDate(vehicle.lastMaintenance)}
                     </Text>
                   </View>
                 </View>
 
                 <View className="mb-4">
-                  <Text className="text-sm font-medium mb-2 text-gray-900 dark:text-white">Document Status</Text>
+                  <Text className="text-sm font-medium mb-2 text-gray-900 ">Document Status</Text>
                   <View className="flex-row gap-2">
-                    <View className="flex-1 p-2 rounded-lg bg-gray-100 dark:bg-gray-700">
+                    <View className="flex-1 p-2 rounded-lg bg-gray-100 ">
                       <View className="flex-row items-center gap-1">
                         {isExpired(vehicle.insuranceExpiry) ? (
                           <MaterialCommunityIcons name="alert-circle" size={14} color="#ef4444" />
@@ -268,13 +268,13 @@ export default function VehicleManagement() {
                         ) : (
                           <MaterialCommunityIcons name="check-circle" size={14} color="#22c55e" />
                         )}
-                        <Text className="text-xs text-gray-700 dark:text-gray-300">Insurance</Text>
+                        <Text className="text-xs text-gray-700 ">Insurance</Text>
                       </View>
-                      <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+                      <Text className="text-xs mt-1 text-gray-600 ">
                         {formatDate(vehicle.insuranceExpiry)}
                       </Text>
                     </View>
-                    <View className="flex-1 p-2 rounded-lg bg-gray-100 dark:bg-gray-700">
+                    <View className="flex-1 p-2 rounded-lg bg-gray-100 ">
                       <View className="flex-row items-center gap-1">
                         {isExpired(vehicle.fitnessExpiry) ? (
                           <MaterialCommunityIcons name="alert-circle" size={14} color="#ef4444" />
@@ -283,21 +283,21 @@ export default function VehicleManagement() {
                         ) : (
                           <MaterialCommunityIcons name="check-circle" size={14} color="#22c55e" />
                         )}
-                        <Text className="text-xs text-gray-700 dark:text-gray-300">Fitness</Text>
+                        <Text className="text-xs text-gray-700 ">Fitness</Text>
                       </View>
-                      <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+                      <Text className="text-xs mt-1 text-gray-600 ">
                         {formatDate(vehicle.fitnessExpiry)}
                       </Text>
                     </View>
                   </View>
                 </View>
 
-                <View className="flex-row gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 dark:border-gray-600">
-                    <Text className="text-center text-sm font-medium text-gray-700 dark:text-gray-300">View</Text>
+                <View className="flex-row gap-2 pt-4 border-t border-gray-200 ">
+                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 ">
+                    <Text className="text-center text-sm font-medium text-gray-700 ">View</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 dark:border-gray-600">
-                    <Text className="text-center text-sm font-medium text-gray-700 dark:text-gray-300">Edit</Text>
+                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 ">
+                    <Text className="text-center text-sm font-medium text-gray-700 ">Edit</Text>
                   </TouchableOpacity>
                   <TouchableOpacity className="flex-1 p-2 rounded-lg border border-red-300 dark:border-red-600">
                     <Text className="text-center text-sm font-medium text-red-600 dark:text-red-400">Delete</Text>
@@ -309,28 +309,28 @@ export default function VehicleManagement() {
         ) : (
           <View className="items-center justify-center py-12">
             <MaterialIcons name="folder-open" size={48} color="#d1d5db" />
-            <Text className="text-gray-500 dark:text-gray-400 mt-2">No vehicles found</Text>
+            <Text className="text-gray-500  mt-2">No vehicles found</Text>
           </View>
         )}
 
         <View className="flex-row gap-2 mt-4">
-          <View className="flex-1 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <View className="flex-1 p-3 rounded-lg border border-gray-200  bg-white ">
             <Text className="text-2xl font-bold text-emerald-600">
               {filteredVehicles.filter((v) => v.status === "active").length}
             </Text>
-            <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">Active Vehicles</Text>
+            <Text className="text-xs mt-1 text-gray-600 ">Active Vehicles</Text>
           </View>
-          <View className="flex-1 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <View className="flex-1 p-3 rounded-lg border border-gray-200  bg-white ">
             <Text className="text-2xl font-bold text-orange-600">
               {filteredVehicles.filter((v) => v.status === "maintenance").length}
             </Text>
-            <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">In Maintenance</Text>
+            <Text className="text-xs mt-1 text-gray-600 ">In Maintenance</Text>
           </View>
-          <View className="flex-1 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <View className="flex-1 p-3 rounded-lg border border-gray-200  bg-white ">
             <Text className="text-2xl font-bold text-blue-600">
               {filteredVehicles.reduce((sum, v) => sum + v.capacity, 0)}
             </Text>
-            <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">Total Capacity</Text>
+            <Text className="text-xs mt-1 text-gray-600 ">Total Capacity</Text>
           </View>
         </View>
       </View>

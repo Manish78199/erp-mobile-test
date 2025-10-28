@@ -46,8 +46,8 @@ export default function Marksheet() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">View Marksheet</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+          <Text className="text-2xl font-bold text-gray-900 ">View Marksheet</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">
             Student marksheet and performance details
           </Text>
         </View>
@@ -55,13 +55,13 @@ export default function Marksheet() {
         {loading ? (
           <View className="flex-row items-center justify-center py-12">
             <ActivityIndicator size="large" color="#10b981" />
-            <Text className="ml-3 font-medium text-gray-600 dark:text-gray-400">Loading marksheet...</Text>
+            <Text className="ml-3 font-medium text-gray-600 ">Loading marksheet...</Text>
           </View>
         ) : pdfUrl ? (
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 items-center justify-center py-12">
+          <View className="rounded-lg p-4 border border-gray-200  bg-white  items-center justify-center py-12">
             <MaterialCommunityIcons name="file-pdf-box" size={64} color="#dc2626" />
-            <Text className="mt-4 font-semibold text-gray-900 dark:text-white">PDF Marksheet</Text>
-            <Text className="text-sm mt-2 text-gray-600 dark:text-gray-400 text-center">
+            <Text className="mt-4 font-semibold text-gray-900 ">PDF Marksheet</Text>
+            <Text className="text-sm mt-2 text-gray-600  text-center">
               Marksheet loaded successfully. Open in PDF viewer to view details.
             </Text>
           </View>

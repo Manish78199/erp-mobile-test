@@ -38,11 +38,11 @@ export default function RouteManagement() {
       case "active":
         return "bg-emerald-100 dark:bg-emerald-900"
       case "inactive":
-        return "bg-gray-100 dark:bg-gray-800"
+        return "bg-gray-100 "
       case "maintenance":
         return "bg-orange-100 dark:bg-orange-900"
       default:
-        return "bg-gray-100 dark:bg-gray-800"
+        return "bg-gray-100 "
     }
   }
 
@@ -55,7 +55,7 @@ export default function RouteManagement() {
       case "both":
         return "bg-emerald-100 dark:bg-emerald-900"
       default:
-        return "bg-gray-100 dark:bg-gray-800"
+        return "bg-gray-100 "
     }
   }
 
@@ -87,21 +87,21 @@ export default function RouteManagement() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Route Management</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+          <Text className="text-2xl font-bold text-gray-900 ">Route Management</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">
             Manage transport routes, stops, and schedules
           </Text>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-3">
-          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 dark:border-gray-600">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3">
+          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 ">
             <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
             <TextInput
               placeholder="Search by route name, code..."
               placeholderTextColor="#9ca3af"
               value={searchTerm}
               onChangeText={setSearchTerm}
-              className="flex-1 ml-2 py-2 text-sm text-gray-900 dark:text-white"
+              className="flex-1 ml-2 py-2 text-sm text-gray-900 "
             />
           </View>
 
@@ -187,15 +187,15 @@ export default function RouteManagement() {
             data={filteredRoutes}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item: route }) => (
-              <View className="mb-4 rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+              <View className="mb-4 rounded-lg p-4 border border-gray-200  bg-white ">
                 <View className="flex-row items-start justify-between mb-4">
                   <View className="flex-row items-start flex-1">
                     <View className="p-3 bg-purple-500 rounded-lg mr-3">
                       <MaterialCommunityIcons name="map-marker" size={24} color="white" />
                     </View>
                     <View className="flex-1">
-                      <Text className="text-lg font-semibold text-gray-900 dark:text-white">{route.name}</Text>
-                      <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Code: {route.code}</Text>
+                      <Text className="text-lg font-semibold text-gray-900 ">{route.name}</Text>
+                      <Text className="text-sm mt-1 text-gray-600 ">Code: {route.code}</Text>
                       <View className="flex-row gap-2 mt-2">
                         <View className={cn("px-2 py-1 rounded", getStatusColor(route.status))}>
                           <Text className="text-xs font-medium text-gray-800 dark:text-gray-200">
@@ -211,16 +211,16 @@ export default function RouteManagement() {
                     </View>
                   </View>
                   <View className="items-end">
-                    <Text className="text-sm font-medium text-gray-900 dark:text-white">
+                    <Text className="text-sm font-medium text-gray-900 ">
                       {route.occupancy}/{route.total_capacity}
                     </Text>
-                    <View className="w-16 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mt-1 overflow-hidden">
+                    <View className="w-16 h-2 bg-gray-200  rounded-full mt-1 overflow-hidden">
                       <View
                         className="h-full bg-blue-500"
                         style={{ width: `${getOccupancyPercentage(route.occupancy, route.total_capacity)}%` }}
                       />
                     </View>
-                    <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+                    <Text className="text-xs mt-1 text-gray-600 ">
                       {route.occupancy_percentage}% occupied
                     </Text>
                   </View>
@@ -228,27 +228,27 @@ export default function RouteManagement() {
 
                 <View className="space-y-2 mb-4">
                   <View className="flex-row justify-between">
-                    <Text className="text-sm text-gray-600 dark:text-gray-400">Distance:</Text>
-                    <Text className="text-sm font-medium text-gray-900 dark:text-white">{route.distance} km</Text>
+                    <Text className="text-sm text-gray-600 ">Distance:</Text>
+                    <Text className="text-sm font-medium text-gray-900 ">{route.distance} km</Text>
                   </View>
                   <View className="flex-row justify-between">
-                    <Text className="text-sm text-gray-600 dark:text-gray-400">Duration:</Text>
-                    <Text className="text-sm font-medium text-gray-900 dark:text-white">{route.duration} min</Text>
+                    <Text className="text-sm text-gray-600 ">Duration:</Text>
+                    <Text className="text-sm font-medium text-gray-900 ">{route.duration} min</Text>
                   </View>
                   <View className="flex-row justify-between">
-                    <Text className="text-sm text-gray-600 dark:text-gray-400">Stops:</Text>
-                    <Text className="text-sm font-medium text-gray-900 dark:text-white">
+                    <Text className="text-sm text-gray-600 ">Stops:</Text>
+                    <Text className="text-sm font-medium text-gray-900 ">
                       {route.route_stops?.length || 0}
                     </Text>
                   </View>
                 </View>
 
-                <View className="flex-row gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 dark:border-gray-600">
-                    <Text className="text-center text-sm font-medium text-gray-700 dark:text-gray-300">View</Text>
+                <View className="flex-row gap-2 pt-4 border-t border-gray-200 ">
+                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 ">
+                    <Text className="text-center text-sm font-medium text-gray-700 ">View</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 dark:border-gray-600">
-                    <Text className="text-center text-sm font-medium text-gray-700 dark:text-gray-300">Edit</Text>
+                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 ">
+                    <Text className="text-center text-sm font-medium text-gray-700 ">Edit</Text>
                   </TouchableOpacity>
                   <TouchableOpacity className="flex-1 p-2 rounded-lg border border-blue-300 dark:border-blue-600">
                     <Text className="text-center text-sm font-medium text-blue-600 dark:text-blue-400">Track</Text>
@@ -260,28 +260,28 @@ export default function RouteManagement() {
         ) : (
           <View className="items-center justify-center py-12">
             <MaterialIcons name="folder-open" size={48} color="#d1d5db" />
-            <Text className="text-gray-500 dark:text-gray-400 mt-2">No routes found</Text>
+            <Text className="text-gray-500  mt-2">No routes found</Text>
           </View>
         )}
 
         <View className="flex-row gap-2 mt-4">
-          <View className="flex-1 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <View className="flex-1 p-3 rounded-lg border border-gray-200  bg-white ">
             <Text className="text-2xl font-bold text-emerald-600">
               {filteredRoutes.filter((r) => r.status === "active").length}
             </Text>
-            <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">Active Routes</Text>
+            <Text className="text-xs mt-1 text-gray-600 ">Active Routes</Text>
           </View>
-          <View className="flex-1 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <View className="flex-1 p-3 rounded-lg border border-gray-200  bg-white ">
             <Text className="text-2xl font-bold text-blue-600">
               {filteredRoutes.reduce((sum, r) => sum + r.occupancy, 0)}
             </Text>
-            <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">Students Assigned</Text>
+            <Text className="text-xs mt-1 text-gray-600 ">Students Assigned</Text>
           </View>
-          <View className="flex-1 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <View className="flex-1 p-3 rounded-lg border border-gray-200  bg-white ">
             <Text className="text-2xl font-bold text-orange-600">
               {Math.round(filteredRoutes.reduce((sum, r) => sum + r.distance, 0))} km
             </Text>
-            <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">Total Distance</Text>
+            <Text className="text-xs mt-1 text-gray-600 ">Total Distance</Text>
           </View>
         </View>
       </View>

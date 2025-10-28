@@ -47,11 +47,11 @@ export default function ExamList() {
   }
 
   const ExamCard = ({ item }: any) => (
-    <View className="mb-3 p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <View className="mb-3 p-4 rounded-lg border border-gray-200  bg-white ">
       <View className="flex-row items-center justify-between mb-3">
         <View className="flex-1">
-          <Text className="font-semibold text-gray-900 dark:text-white">{item?.name}</Text>
-          <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+          <Text className="font-semibold text-gray-900 ">{item?.name}</Text>
+          <Text className="text-xs mt-1 text-gray-600 ">
             {item?.class_name} • {item?.session}
           </Text>
         </View>
@@ -97,8 +97,8 @@ export default function ExamList() {
       <View className="px-4 py-6 space-y-6">
         <View className="flex-row items-center justify-between">
           <View>
-            <Text className="text-2xl font-bold text-gray-900 dark:text-white">Exams</Text>
-            <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Manage exams</Text>
+            <Text className="text-2xl font-bold text-gray-900 ">Exams</Text>
+            <Text className="text-sm mt-1 text-gray-600 ">Manage exams</Text>
           </View>
           <TouchableOpacity
             onPress={() => router.push("/management/exam/create")}
@@ -122,7 +122,7 @@ export default function ExamList() {
         ) : (
           <View className="items-center justify-center py-12">
             <MaterialCommunityIcons name="folder-open" size={48} color="#d1d5db" />
-            <Text className="text-gray-500 dark:text-gray-400 mt-2">No exams found</Text>
+            <Text className="text-gray-500  mt-2">No exams found</Text>
           </View>
         )}
       </View>

@@ -133,26 +133,26 @@ export default function CreateSectionScreen() {
           <Typography className="text-primary font-semibold">← Back</Typography>
         </TouchableOpacity>
 
-        <Typography className=" font-bold text-foreground">New Section</Typography>
+        <Typography className="text-lg font-bold text-foreground">New Section</Typography>
       </View>
       
         <ScrollView className="flex-1 px-4">
           {/* Header */}
           <View className="mt-3 mb-6">
-            <Text className="text-2xl font-bold text-gray-900 dark:text-white">Create New Section</Text>
-            <Text className="text-gray-600 dark:text-gray-400 mt-1">Add a new section to organize students</Text>
+            <Text className="text-2xl font-bold text-gray-900 ">Create New Section</Text>
+            <Text className="text-gray-600  mt-1">Add a new section to organize students</Text>
           </View>
 
           {/* Basic Information Card */}
-          <View className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6">
+          <View className="bg-white  rounded-lg border border-gray-200  p-4 mb-6">
             <View className="flex-row items-center gap-2 mb-4">
               <MaterialIcons name="book" size={20} color="#10b981" />
-              <Text className="text-lg font-semibold text-gray-900 dark:text-white">Basic Information</Text>
+              <Text className="text-lg font-semibold text-gray-900 ">Basic Information</Text>
             </View>
 
-            {/* Section Name */}
+           
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <Text className="text-sm font-medium text-gray-700  mb-2">
                 Section Name <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
@@ -160,22 +160,22 @@ export default function CreateSectionScreen() {
                 onChangeText={(value) => handleInputChange("name", value)}
                 placeholder="Enter section name"
                 placeholderTextColor="#9ca3af"
-                className={`border rounded-lg px-3 py-3 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 ${errors.name ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+                className={`border rounded-lg px-3 py-3 text-gray-900  bg-gray-50  ${errors.name ? "border-red-500" : "border-gray-300 "
                   }`}
               />
               {errors.name && <Text className="text-red-500 text-xs mt-1">{errors.name}</Text>}
 
-              {/* Quick Suggestions */}
+              
               <View className="mt-3">
-                <Text className="text-xs text-gray-600 dark:text-gray-400 mb-2">Quick suggestions:</Text>
+                <Text className="text-xs text-gray-600  mb-2">Quick suggestions:</Text>
                 <View className="flex-row flex-wrap gap-2">
                   {suggestedSectionNames.map((name) => (
                     <TouchableOpacity
                       key={name}
                       onPress={() => handleInputChange("name", name)}
-                      className="px-3 py-2 rounded bg-indigo-100 dark:bg-indigo-900"
+                      className="px-3 py-2 rounded bg-indigo-100 "
                     >
-                      <Text className="text-xs font-medium text-indigo-800 dark:text-indigo-200">{name}</Text>
+                      <Text className="text-xs font-medium text-indigo-800 ">{name}</Text>
                     </TouchableOpacity>
                   ))}
                 </View>
@@ -184,7 +184,7 @@ export default function CreateSectionScreen() {
 
             {/* Class Selection */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <Text className="text-sm font-medium text-gray-700  mb-2">
                 Class <Text className="text-red-500">*</Text>
               </Text>
               <RNPickerSelect
@@ -206,7 +206,7 @@ export default function CreateSectionScreen() {
                     borderColor: errors.class_id ? "#ef4444" : "#d1d5db",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 10,
                     borderRadius: 6,
                     backgroundColor: "#f3f4f6",
@@ -222,7 +222,7 @@ export default function CreateSectionScreen() {
 
             {/* Class Teacher Selection */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <Text className="text-sm font-medium text-gray-700  mb-2">
                 Class Teacher <Text className="text-red-500">*</Text>
               </Text>
               <RNPickerSelect
@@ -244,7 +244,7 @@ export default function CreateSectionScreen() {
                     borderColor: errors.teacher_id ? "#ef4444" : "#d1d5db",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 10,
                     borderRadius: 6,
                     backgroundColor: "#f3f4f6",
@@ -260,7 +260,7 @@ export default function CreateSectionScreen() {
 
             {/* Room Number */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <Text className="text-sm font-medium text-gray-700  mb-2">
                 Room No <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
@@ -268,7 +268,7 @@ export default function CreateSectionScreen() {
                 onChangeText={(value) => handleInputChange("room_no", value)}
                 placeholder="101, 103"
                 placeholderTextColor="#9ca3af"
-                className={`border rounded-lg px-3 py-3 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 ${errors.room_no ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+                className={`border rounded-lg px-3 py-3 text-gray-900  bg-gray-50  ${errors.room_no ? "border-red-500" : "border-gray-300 "
                   }`}
               />
               {errors.room_no && <Text className="text-red-500 text-xs mt-1">{errors.room_no}</Text>}
@@ -276,7 +276,7 @@ export default function CreateSectionScreen() {
 
             {/* Capacity */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <Text className="text-sm font-medium text-gray-700  mb-2">
                 Capacity <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
@@ -285,7 +285,7 @@ export default function CreateSectionScreen() {
                 placeholder="Maximum students (1-50)"
                 placeholderTextColor="#9ca3af"
                 keyboardType="number-pad"
-                className={`border rounded-lg px-3 py-3 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 ${errors.capacity ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+                className={`border rounded-lg px-3 py-3 text-gray-900  bg-gray-50  ${errors.capacity ? "border-red-500" : "border-gray-300 "
                   }`}
               />
               {errors.capacity && <Text className="text-red-500 text-xs mt-1">{errors.capacity}</Text>}
@@ -293,7 +293,7 @@ export default function CreateSectionScreen() {
 
             {/* Description */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Description</Text>
+              <Text className="text-sm font-medium text-gray-700  mb-2">Description</Text>
               <TextInput
                 value={formData.description}
                 onChangeText={(value) => handleInputChange("description", value)}
@@ -301,23 +301,23 @@ export default function CreateSectionScreen() {
                 placeholderTextColor="#9ca3af"
                 multiline
                 numberOfLines={4}
-                className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-3 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700"
+                className="border border-gray-300  rounded-lg px-3 py-3 text-gray-900  bg-gray-50 "
               />
             </View>
 
             {/* Active Status */}
-            <View className="flex-row items-center justify-between p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700">
+            <View className="flex-row items-center justify-between p-3 border border-gray-300  rounded-lg bg-gray-50 ">
               <View>
-                <Text className="text-sm font-medium text-gray-700 dark:text-gray-300">Active Status</Text>
-                <Text className="text-xs text-gray-600 dark:text-gray-400 mt-1">Set this section as active</Text>
+                <Text className="text-sm font-medium text-gray-700 ">Active Status</Text>
+                <Text className="text-xs text-gray-600  mt-1">Set this section as active</Text>
               </View>
               <TouchableOpacity
                 onPress={() => handleInputChange("is_active", !formData.is_active)}
-                className={`px-4 py-2 rounded-lg ${formData.is_active ? "bg-green-100 dark:bg-green-900" : "bg-gray-300 dark:bg-gray-600"
+                className={`px-4 py-2 rounded-lg ${formData.is_active ? "bg-green-100 " : "bg-gray-300 "
                   }`}
               >
                 <Text
-                  className={`font-semibold ${formData.is_active ? "text-green-800 dark:text-green-200" : "text-gray-700 dark:text-gray-300"
+                  className={`font-semibold ${formData.is_active ? "text-green-800 " : "text-gray-700 "
                     }`}
                 >
                   {formData.is_active ? "Active" : "Inactive"}
@@ -327,41 +327,41 @@ export default function CreateSectionScreen() {
           </View>
 
           {/* Preview Card */}
-          <View className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Section Preview</Text>
+          <View className="bg-white  rounded-lg border border-gray-200  p-4 mb-6">
+            <Text className="text-lg font-semibold text-gray-900  mb-4">Section Preview</Text>
 
-            <View className="p-4 border border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700">
+            <View className="p-4 border border-gray-200  rounded-lg bg-gray-50 ">
               <View className="items-center mb-4">
-                <Text className="text-lg font-bold text-gray-900 dark:text-white">Section {formData.name || "___"}</Text>
-                <Text className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                <Text className="text-lg font-bold text-gray-900 ">Section {formData.name || "___"}</Text>
+                <Text className="text-sm text-gray-600  mt-1">
                   {selectedClass?.name || "Select Class"}
                 </Text>
               </View>
 
               <View className="gap-3 text-sm">
                 <View className="flex-row justify-between">
-                  <Text className="text-gray-600 dark:text-gray-400">Room:</Text>
-                  <Text className="font-medium text-gray-900 dark:text-white">{formData.room_no || "Not set"}</Text>
+                  <Text className="text-gray-600 ">Room:</Text>
+                  <Text className="font-medium text-gray-900 ">{formData.room_no || "Not set"}</Text>
                 </View>
 
                 <View className="flex-row justify-between">
-                  <Text className="text-gray-600 dark:text-gray-400">Capacity:</Text>
-                  <Text className="font-medium text-gray-900 dark:text-white">
+                  <Text className="text-gray-600 ">Capacity:</Text>
+                  <Text className="font-medium text-gray-900 ">
                     {formData.capacity ? `${formData.capacity} students` : "Not set"}
                   </Text>
                 </View>
 
                 <View className="flex-row justify-between">
-                  <Text className="text-gray-600 dark:text-gray-400">Teacher:</Text>
-                  <Text className="font-medium text-gray-900 dark:text-white">
+                  <Text className="text-gray-600 ">Teacher:</Text>
+                  <Text className="font-medium text-gray-900 ">
                     {selectedTeacher?.name || "Not assigned"}
                   </Text>
                 </View>
 
                 <View className="flex-row justify-between">
-                  <Text className="text-gray-600 dark:text-gray-400">Status:</Text>
+                  <Text className="text-gray-600 ">Status:</Text>
                   <Text
-                    className={`font-medium ${formData.is_active ? "text-green-600 dark:text-green-400" : "text-gray-600 dark:text-gray-400"}`}
+                    className={`font-medium ${formData.is_active ? "text-green-600 " : "text-gray-600 "}`}
                   >
                     {formData.is_active ? "Active" : "Inactive"}
                   </Text>
@@ -369,19 +369,19 @@ export default function CreateSectionScreen() {
               </View>
 
               {formData.description && (
-                <View className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-600">
-                  <Text className="text-xs text-gray-600 dark:text-gray-400 mb-1">Description:</Text>
-                  <Text className="text-sm text-gray-900 dark:text-white">{formData.description}</Text>
+                <View className="mt-4 pt-3 border-t border-gray-200 ">
+                  <Text className="text-xs text-gray-600  mb-1">Description:</Text>
+                  <Text className="text-sm text-gray-900 ">{formData.description}</Text>
                 </View>
               )}
             </View>
 
             {selectedTeacher && (
-              <View className="mt-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-                <Text className="text-sm font-semibold text-green-800 dark:text-green-200">
+              <View className="mt-4 p-3 bg-green-50  border border-green-200 rounded-lg">
+                <Text className="text-sm font-semibold text-green-800 ">
                   Teacher: {selectedTeacher.name}
                 </Text>
-                <Text className="text-xs text-green-700 dark:text-green-300 mt-1">
+                <Text className="text-xs text-green-700  mt-1">
                   {selectedTeacher.employee_code} • {selectedTeacher.phone}
                 </Text>
               </View>
@@ -392,15 +392,15 @@ export default function CreateSectionScreen() {
           <View className="flex-row gap-3 mb-6">
             <TouchableOpacity
               disabled={isSubmitting}
-              className="flex-1 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+              className="flex-1 py-3 rounded-lg border border-gray-300  bg-white "
             >
-              <Text className="text-center font-semibold text-gray-700 dark:text-gray-300">Cancel</Text>
+              <Text className="text-center font-semibold text-gray-700 ">Cancel</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress={handleSubmit}
               disabled={isSubmitting}
-              className="flex-1 py-3 rounded-lg bg-indigo-500 dark:bg-indigo-600 flex-row items-center justify-center gap-2"
+              className="flex-1 py-3 rounded-lg bg-indigo-500  flex-row items-center justify-center gap-2"
             >
               {isSubmitting ? (
                 <ActivityIndicator size="small" color="#fff" />

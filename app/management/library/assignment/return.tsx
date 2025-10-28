@@ -129,7 +129,7 @@ export default function ReturnBooks() {
   }
 
   const BookCard = ({ book }: { book: IssuedBook }) => (
-    <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 mb-3">
+    <View className="rounded-lg p-4 border border-gray-200  bg-white  mb-3">
       <View className="flex-row items-start gap-3 mb-3">
         <TouchableOpacity onPress={() => handleSelectBook(book.id)}>
           <MaterialCommunityIcons
@@ -142,8 +142,8 @@ export default function ReturnBooks() {
         <View className="flex-1">
           <View className="flex-row items-start justify-between mb-2">
             <View className="flex-1">
-              <Text className="text-lg font-semibold text-gray-900 dark:text-white">{book.bookTitle}</Text>
-              <Text className="text-sm text-gray-600 dark:text-gray-400 mt-1">by {book.bookAuthor}</Text>
+              <Text className="text-lg font-semibold text-gray-900 ">{book.bookTitle}</Text>
+              <Text className="text-sm text-gray-600  mt-1">by {book.bookAuthor}</Text>
             </View>
             <View className={cn("px-2 py-1 rounded-full", getStatusColor(book.status))}>
               <Text className="text-xs font-medium capitalize">{book.status}</Text>
@@ -152,22 +152,22 @@ export default function ReturnBooks() {
 
           <View className="space-y-2 mb-3">
             <View className="flex-row justify-between">
-              <Text className="text-xs text-gray-600 dark:text-gray-400">Student:</Text>
-              <Text className="text-xs font-medium text-gray-900 dark:text-white">
+              <Text className="text-xs text-gray-600 ">Student:</Text>
+              <Text className="text-xs font-medium text-gray-900 ">
                 {book.studentName} - Room {book.studentRoom}
               </Text>
             </View>
             <View className="flex-row justify-between">
-              <Text className="text-xs text-gray-600 dark:text-gray-400">Issue Date:</Text>
-              <Text className="text-xs font-medium text-gray-900 dark:text-white">{book.issueDate}</Text>
+              <Text className="text-xs text-gray-600 ">Issue Date:</Text>
+              <Text className="text-xs font-medium text-gray-900 ">{book.issueDate}</Text>
             </View>
             <View className="flex-row justify-between">
-              <Text className="text-xs text-gray-600 dark:text-gray-400">Due Date:</Text>
-              <Text className="text-xs font-medium text-gray-900 dark:text-white">{book.dueDate}</Text>
+              <Text className="text-xs text-gray-600 ">Due Date:</Text>
+              <Text className="text-xs font-medium text-gray-900 ">{book.dueDate}</Text>
             </View>
             {book.fineAmount && (
               <View className="flex-row justify-between">
-                <Text className="text-xs text-gray-600 dark:text-gray-400">Fine:</Text>
+                <Text className="text-xs text-gray-600 ">Fine:</Text>
                 <Text className="text-xs font-medium text-red-600">{formatCurrency(book.fineAmount)}</Text>
               </View>
             )}
@@ -196,19 +196,19 @@ export default function ReturnBooks() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Return Books</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Process book returns from students</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Return Books</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">Process book returns from students</Text>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-3">
-          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 dark:border-gray-600">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3">
+          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 ">
             <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
             <TextInput
               placeholder="Search books or students..."
               placeholderTextColor="#9ca3af"
               value={searchTerm}
               onChangeText={setSearchTerm}
-              className="flex-1 ml-2 py-2 text-sm text-gray-900 dark:text-white"
+              className="flex-1 ml-2 py-2 text-sm text-gray-900 "
             />
           </View>
 
@@ -221,13 +221,13 @@ export default function ReturnBooks() {
                   "py-2 px-3 rounded-lg border",
                   filterStatus === status
                     ? "bg-indigo-600 border-indigo-600"
-                    : "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600",
+                    : "bg-white  border-gray-200 ",
                 )}
               >
                 <Text
                   className={cn(
                     "text-xs font-medium capitalize",
-                    filterStatus === status ? "text-white" : "text-gray-700 dark:text-gray-300",
+                    filterStatus === status ? "text-white" : "text-gray-700 ",
                   )}
                 >
                   {status}
@@ -254,7 +254,7 @@ export default function ReturnBooks() {
         ) : (
           <View className="items-center justify-center py-12">
             <MaterialCommunityIcons name="book-check" size={48} color="#10b981" />
-            <Text className="text-gray-500 dark:text-gray-400 mt-2">No books found</Text>
+            <Text className="text-gray-500  mt-2">No books found</Text>
           </View>
         )}
       </View>

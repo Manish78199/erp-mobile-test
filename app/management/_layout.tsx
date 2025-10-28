@@ -88,8 +88,8 @@ function ManagementLayout() {
           ),
         }}
       />
-      {/* <Tabs.Screen
-        name="attendance/index"
+      <Tabs.Screen
+        name="student/attendance/index"
         options={{
           title: "Attendance",
           tabBarIcon: ({ color, focused }) => (
@@ -103,6 +103,18 @@ function ManagementLayout() {
           ),
         }}
       />
+      <Tabs.Screen name="notice/index" options={{
+        title: "Circulars",
+        tabBarIcon: ({ color, focused }) => (
+          <TabIcon
+            name="megaphone"
+            color={color}
+            focused={focused}
+            activeColor={"orange"}
+            inactiveColor="#9CA3AF"
+          />
+        ),
+      }} />
       <Tabs.Screen
         name="homework/index"
         options={{
@@ -118,35 +130,54 @@ function ManagementLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="wellness/index"
-        options={{
-          title: "Health",
-          tabBarIcon: ({ color, focused }) => (
-            <TabIcon
-              name="medical-outline"
-              color={color}
-              focused={focused}
-              activeColor={"red"}
-              inactiveColor="#9CA3AF"
-            />
-          ),
-        }}
-      /> */}
 
-      {/* <Tabs.Screen name="calendar/index" options={{ href: null }} />
-      <Tabs.Screen name="communication/index" options={{ href: null }} />
-      <Tabs.Screen name="events/gallery/index" options={{ href: null }} />
+
+      <Tabs.Screen name="calendar/index" options={{ href: null }} />
+      <Tabs.Screen name="classes/index" options={{ href: null }} />
+      <Tabs.Screen name="event/photos/index" options={{ href: null }} />
+      <Tabs.Screen name="event/photos/add/index" options={{ href: null }} />
       <Tabs.Screen name="exam/index" options={{ href: null }} />
-      <Tabs.Screen name="fee/index" options={{ href: null }} />
-      <Tabs.Screen name="hostel/index" options={{ href: null }} />
+      <Tabs.Screen name="exam/create/index" options={{ href: null }} />
+      <Tabs.Screen name="fee/deposit/index" options={{ href: null }} />
+      <Tabs.Screen name="fee/history/index" options={{ href: null }} />
+      <Tabs.Screen name="fee/structure/index" options={{ href: null }} />
+      <Tabs.Screen name="fee/structure/create/index" options={{ href: null }} />
+      <Tabs.Screen name="fee/structure/update/[class_id]/index" options={{ href: null }} />
+      <Tabs.Screen name="fee/structure/view/[class_id]/index" options={{ href: null }} />
+      <Tabs.Screen name="fee/view/[deposit_id]/index" options={{ href: null }} />
+
+      <Tabs.Screen name="homework/create/index" options={{ href: null }} />
       <Tabs.Screen name="library/index" options={{ href: null }} />
-      <Tabs.Screen name="notice/index" options={{ href: null }} />
-      <Tabs.Screen name="profile/index" options={{ href: null }} />
+      <Tabs.Screen name="library/assignment/index" options={{ href: null }} />
+      <Tabs.Screen name="library/assignment/issue" options={{ href: null }} />
+      <Tabs.Screen name="library/assignment/return" options={{ href: null }} />
+      <Tabs.Screen name="library/book/index" options={{ href: null }} />
+      <Tabs.Screen name="library/book/add/index" options={{ href: null }} />
+      <Tabs.Screen name="library/due/index" options={{ href: null }} />
+
+      <Tabs.Screen name="notice/create/index" options={{ href: null }} />
       <Tabs.Screen name="result/index" options={{ href: null }} />
+      <Tabs.Screen name="result/[student_id]/index" options={{ href: null }} />
+      <Tabs.Screen name="section/index" options={{ href: null }} />
+      <Tabs.Screen name="section/create/index" options={{ href: null }} />
+      <Tabs.Screen name="section/students/index" options={{ href: null }} />
+      <Tabs.Screen name="staff/index" options={{ href: null }} />
+      <Tabs.Screen name="staff/add/index" options={{ href: null }} />
+      <Tabs.Screen name="staff/view/[staff_id]/index" options={{ href: null }} />
+      <Tabs.Screen name="student/index" options={{ href: null }} />
+      <Tabs.Screen name="student/admission/index" options={{ href: null }} />
+      <Tabs.Screen name="student/attendance/attendance-controller" options={{ href: null }} />
+
+      <Tabs.Screen name="subject/index" options={{ href: null }} />
+      <Tabs.Screen name="subject/add/index" options={{ href: null }} />
       <Tabs.Screen name="syllabus/index" options={{ href: null }} />
       <Tabs.Screen name="timetable/index" options={{ href: null }} />
-      <Tabs.Screen name="transport/index" options={{ href: null }} /> */}
+      <Tabs.Screen name="timetable/create/index" options={{ href: null }} />
+      <Tabs.Screen name="transport/index" options={{ href: null }} />
+      <Tabs.Screen name="transport/route/index" options={{ href: null }} />
+      <Tabs.Screen name="transport/route/add/index" options={{ href: null }} />
+      <Tabs.Screen name="transport/vehicle/index" options={{ href: null }} />
+      <Tabs.Screen name="transport/vehicle/add/index" options={{ href: null }} />
     </Tabs>
   )
 }

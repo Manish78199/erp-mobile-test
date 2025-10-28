@@ -16,13 +16,13 @@ export default function BookIssueReturn() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Book Issue & Return</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+          <Text className="text-2xl font-bold text-gray-900 ">Book Issue & Return</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">
             Issue books to students and process returns
           </Text>
         </View>
 
-        <View className="flex-row gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
+        <View className="flex-row gap-2 bg-gray-100  p-1 rounded-lg">
           <TouchableOpacity
             onPress={() => setActiveTab("issue")}
             className={cn("flex-1 py-3 px-4 rounded-md", activeTab === "issue" ? "bg-indigo-600" : "bg-transparent")}
@@ -32,7 +32,7 @@ export default function BookIssueReturn() {
               <Text
                 className={cn(
                   "font-medium text-sm",
-                  activeTab === "issue" ? "text-white" : "text-gray-600 dark:text-gray-400",
+                  activeTab === "issue" ? "text-white" : "text-gray-600 ",
                 )}
               >
                 Issue Book
@@ -53,7 +53,7 @@ export default function BookIssueReturn() {
               <Text
                 className={cn(
                   "font-medium text-sm",
-                  activeTab === "return" ? "text-white" : "text-gray-600 dark:text-gray-400",
+                  activeTab === "return" ? "text-white" : "text-gray-600 ",
                 )}
               >
                 Return Book
@@ -62,12 +62,12 @@ export default function BookIssueReturn() {
           </TouchableOpacity>
         </View>
 
-        <View className="rounded-lg p-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 items-center justify-center py-12">
+        <View className="rounded-lg p-6 border border-gray-200  bg-white  items-center justify-center py-12">
           <MaterialCommunityIcons name={activeTab === "issue" ? "book-plus" : "book-check"} size={48} color="#10b981" />
-          <Text className="text-lg font-semibold text-gray-900 dark:text-white mt-4">
+          <Text className="text-lg font-semibold text-gray-900  mt-4">
             {activeTab === "issue" ? "Issue Book" : "Return Book"}
           </Text>
-          <Text className="text-sm text-gray-600 dark:text-gray-400 mt-2 text-center">
+          <Text className="text-sm text-gray-600  mt-2 text-center">
             {activeTab === "issue" ? "Select a student and book to issue" : "Select a student to process book return"}
           </Text>
         </View>

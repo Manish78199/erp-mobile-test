@@ -107,13 +107,13 @@ export default function CreateFeeStructure() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Create Fee Structure</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">Set up fee components for a class</Text>
+          <Text className="text-2xl font-bold text-gray-900 ">Create Fee Structure</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">Set up fee components for a class</Text>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
           <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Select Class</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Class</Text>
             <RNPickerSelect
               items={classList}
               onValueChange={handleSelectClass}
@@ -154,7 +154,7 @@ export default function CreateFeeStructure() {
 
         <View className="space-y-3">
           <View className="flex-row items-center justify-between">
-            <Text className="text-lg font-semibold text-gray-900 dark:text-white">Fee Components</Text>
+            <Text className="text-lg font-semibold text-gray-900 ">Fee Components</Text>
             <TouchableOpacity onPress={addComponent} className="bg-blue-600 rounded-lg p-2 flex-row items-center gap-1">
               <MaterialCommunityIcons name="plus" size={18} color="white" />
               <Text className="text-white text-sm font-medium">Add</Text>
@@ -164,29 +164,29 @@ export default function CreateFeeStructure() {
           {components.map((component, index) => (
             <View
               key={index}
-              className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-3"
+              className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3"
             >
               <View>
-                <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Fee Particular</Text>
+                <Text className="text-sm font-medium mb-2 text-gray-700 ">Fee Particular</Text>
                 <TextInput
                   placeholder="e.g., Tuition Fee"
                   placeholderTextColor="#9ca3af"
                   value={component.head_name}
                   onChangeText={(text) => updateComponent(index, "head_name", text)}
-                  className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700"
+                  className="border border-gray-300  rounded-lg px-3 py-2 text-gray-900  bg-gray-50 "
                 />
               </View>
 
               <View className="flex-row items-center gap-2">
                 <View className="flex-1">
-                  <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Amount (₹)</Text>
+                  <Text className="text-sm font-medium mb-2 text-gray-700 ">Amount (₹)</Text>
                   <TextInput
                     placeholder="0"
                     placeholderTextColor="#9ca3af"
                     value={component.amount.toString()}
                     onChangeText={(text) => updateComponent(index, "amount", Number(text) || 0)}
                     keyboardType="numeric"
-                    className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700"
+                    className="border border-gray-300  rounded-lg px-3 py-2 text-gray-900  bg-gray-50 "
                   />
                 </View>
                 {index > 0 && (
@@ -205,9 +205,9 @@ export default function CreateFeeStructure() {
         <View className="flex-row gap-3">
           <TouchableOpacity
             onPress={() => router.back()}
-            className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg p-3"
+            className="flex-1 border border-gray-300  rounded-lg p-3"
           >
-            <Text className="text-center font-medium text-gray-700 dark:text-gray-300">Cancel</Text>
+            <Text className="text-center font-medium text-gray-700 ">Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={handleSubmit}

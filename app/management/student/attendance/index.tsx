@@ -213,11 +213,11 @@ export default function StudentAttendance() {
   }
 
   const StatCard = ({ icon, title, value, color }: any) => (
-    <View className={cn("flex-1 rounded-lg p-3 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800")}>
+    <View className={cn("flex-1 rounded-lg p-3 border border-gray-200  bg-white ")}>
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
-          <Text className="text-xs font-medium mb-1 text-gray-600 dark:text-gray-400">{title}</Text>
-          <Text className="text-lg font-bold text-gray-900 dark:text-white">{value}</Text>
+          <Text className="text-xs font-medium mb-1 text-gray-600 ">{title}</Text>
+          <Text className="text-lg font-bold text-gray-900 ">{value}</Text>
         </View>
         <View className={cn("p-2 rounded-lg", color)}>
           <MaterialCommunityIcons name={icon} size={16} color="white" />
@@ -233,15 +233,15 @@ export default function StudentAttendance() {
     >
       <View className="px-4 py-6 space-y-6">
         <View>
-          <Text className="text-2xl font-bold text-gray-900 dark:text-white">Student Attendance</Text>
-          <Text className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+          <Text className="text-2xl font-bold text-gray-900 ">Student Attendance</Text>
+          <Text className="text-sm mt-1 text-gray-600 ">
             Manage and track student attendance efficiently
           </Text>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-4">
+        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
           <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Select Class</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Class</Text>
             <RNPickerSelect
               items={classList}
               onValueChange={setCurrentClass}
@@ -271,13 +271,13 @@ export default function StudentAttendance() {
           </View>
 
           <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Select Date</Text>
+            <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Date</Text>
             <TouchableOpacity
               onPress={() => setShowDatePicker(true)}
-              className="flex-row items-center p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700"
+              className="flex-row items-center p-3 rounded-lg border border-gray-300  bg-gray-50 "
             >
               <MaterialCommunityIcons name="calendar" size={20} color="#6b7280" />
-              <Text className="ml-2 font-medium text-gray-700 dark:text-gray-300">
+              <Text className="ml-2 font-medium text-gray-700 ">
                 {selectedDate.toLocaleDateString()}
               </Text>
             </TouchableOpacity>
@@ -322,7 +322,7 @@ export default function StudentAttendance() {
         {currentClass && (
           <>
             <View>
-              <Text className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Attendance Overview</Text>
+              <Text className="text-lg font-semibold mb-3 text-gray-900 ">Attendance Overview</Text>
               <View className="space-y-2">
                 <View className="flex-row gap-2">
                   <StatCard icon="account-multiple" title="Total" value={attendanceStats.total} color="bg-blue-500" />
@@ -347,22 +347,22 @@ export default function StudentAttendance() {
               </View>
             </View>
 
-            <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-3">
-              <Text className="text-sm font-medium text-gray-700 dark:text-gray-300">Search & Filter</Text>
+            <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3">
+              <Text className="text-sm font-medium text-gray-700 ">Search & Filter</Text>
 
-              <View className="flex-row items-center px-3 rounded-lg border border-gray-300 dark:border-gray-600">
+              <View className="flex-row items-center px-3 rounded-lg border border-gray-300 ">
                 <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
                 <TextInput
                   placeholder="Search students..."
                   placeholderTextColor="#9ca3af"
                   value={searchTerm}
                   onChangeText={setSearchTerm}
-                  className="flex-1 ml-2 py-2 text-sm text-gray-900 dark:text-white"
+                  className="flex-1 ml-2 py-2 text-sm text-gray-900 "
                 />
               </View>
 
               <View>
-                <Text className="text-xs font-medium mb-2 text-gray-600 dark:text-gray-400">Filter by Status</Text>
+                <Text className="text-xs font-medium mb-2 text-gray-600 ">Filter by Status</Text>
                 <RNPickerSelect
                   items={[
                     { label: "All Status", value: "all" },
@@ -402,7 +402,7 @@ export default function StudentAttendance() {
               <View className="space-y-3">
                 <TouchableOpacity
                   onPress={handleSelectAll}
-                  className="flex-row items-center p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+                  className="flex-row items-center p-3 rounded-lg border border-gray-200  bg-white "
                 >
                   <MaterialCommunityIcons
                     name={
@@ -413,7 +413,7 @@ export default function StudentAttendance() {
                     size={24}
                     color="#10b981"
                   />
-                  <Text className="ml-3 font-medium text-gray-700 dark:text-gray-300">
+                  <Text className="ml-3 font-medium text-gray-700 ">
                     Select All ({filteredStudents.length})
                   </Text>
                 </TouchableOpacity>
@@ -455,8 +455,8 @@ export default function StudentAttendance() {
               </View>
             )}
 
-            <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-              <Text className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Mark Attendance</Text>
+            <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+              <Text className="text-lg font-semibold mb-4 text-gray-900 ">Mark Attendance</Text>
 
               {loading ? (
                 <View className="flex-row items-center justify-center py-12">
@@ -470,14 +470,14 @@ export default function StudentAttendance() {
                   renderItem={({ item: student }) => (
                     <View
                       key={student._id}
-                      className="mb-4 pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0"
+                      className="mb-4 pb-4 border-b border-gray-200  last:border-b-0"
                     >
                       <View className="flex-row items-center justify-between mb-3">
                         <View className="flex-1">
-                          <Text className="font-semibold text-gray-900 dark:text-white">
+                          <Text className="font-semibold text-gray-900 ">
                             {student.first_name} {student.last_name}
                           </Text>
-                          <Text className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+                          <Text className="text-xs mt-1 text-gray-600 ">
                             Roll: {student.rollNo} • Admission: {student.admission_no}
                           </Text>
                         </View>
@@ -506,7 +506,7 @@ export default function StudentAttendance() {
               ) : (
                 <View className="items-center justify-center py-8">
                   <MaterialIcons name="folder-open" size={48} color="#d1d5db" />
-                  <Text className="text-gray-500 dark:text-gray-400 mt-2">No students found</Text>
+                  <Text className="text-gray-500  mt-2">No students found</Text>
                 </View>
               )}
             </View>

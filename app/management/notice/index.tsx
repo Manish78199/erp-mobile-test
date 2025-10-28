@@ -21,7 +21,7 @@ export default function NoticesScreen() {
   const [selectedNotice, setSelectedNotice] = useState<any>(null)
   const [showModal, setShowModal] = useState(false)
 
- const {data:notices,isError,isLoading}=useNotices()
+  const { data: notices, isError, isLoading } = useNotices()
 
   const filteredNotices = React.useMemo(() => {
     let filtered = notices
@@ -52,20 +52,20 @@ export default function NoticesScreen() {
 
   const getAudienceColor = (type: string) => {
     const colors: { [key: string]: string } = {
-      ALL: "bg-blue-100 dark:bg-blue-900",
-      CLASS: "bg-purple-100 dark:bg-purple-900",
-      STUDENT: "bg-emerald-100 dark:bg-emerald-900",
+      ALL: "bg-blue-100",
+      CLASS: "bg-purple-100",
+      STUDENT: "bg-emerald-100",
     }
-    return colors[type] || "bg-gray-100 dark:bg-gray-900"
+    return colors[type] || "bg-gray-100"
   }
 
   const getAudienceTextColor = (type: string) => {
     const colors: { [key: string]: string } = {
-      ALL: "text-blue-700 dark:text-blue-200",
-      CLASS: "text-purple-700 dark:text-purple-200",
-      STUDENT: "text-emerald-700 dark:text-emerald-200",
+      ALL: "text-blue-700",
+      CLASS: "text-purple-700",
+      STUDENT: "text-emerald-700",
     }
-    return colors[type] || "text-gray-700 dark:text-gray-200"
+    return colors[type] || "text-gray-700"
   }
 
   const handleViewNotice = (notice: any) => {
@@ -76,10 +76,10 @@ export default function NoticesScreen() {
   const NoticeModal = () => (
     <Modal visible={showModal} transparent animationType="fade" onRequestClose={() => setShowModal(false)}>
       <View className="flex-1 bg-black/50 justify-end">
-        <View className="bg-white dark:bg-gray-800 rounded-t-2xl max-h-[90%]">
+        <View className="bg-white  rounded-t-2xl max-h-[90%]">
           {/* Modal Header */}
-          <View className="flex-row items-center justify-between px-4 py-4 border-b border-gray-200 dark:border-gray-700">
-            <Typography className="text-lg font-semibold text-gray-900 dark:text-white">Notice Details</Typography>
+          <View className="flex-row items-center justify-between px-4 py-4 border-b border-gray-200 ">
+            <Typography className="text-lg font-semibold text-gray-900 ">Notice Details</Typography>
             <TouchableOpacity onPress={() => setShowModal(false)}>
               <X size={24} color="#6b7280" />
             </TouchableOpacity>
@@ -91,15 +91,15 @@ export default function NoticesScreen() {
               <View className="space-y-4">
                 {/* Title */}
                 <View>
-                  <Typography className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Title</Typography>
-                  <Typography className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <Typography className="text-xs font-medium text-gray-600  mb-1">Title</Typography>
+                  <Typography className="text-lg font-semibold text-gray-900 ">
                     {selectedNotice.title}
                   </Typography>
                 </View>
 
                 {/* Audience Type */}
                 <View>
-                  <Typography className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">
+                  <Typography className="text-xs font-medium text-gray-600  mb-2">
                     Audience
                   </Typography>
                   <View className={cn("px-3 py-2 rounded-lg w-fit", getAudienceColor(selectedNotice.audience_type))}>
@@ -113,17 +113,17 @@ export default function NoticesScreen() {
 
                 {/* Date */}
                 <View>
-                  <Typography className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Created</Typography>
-                  <Typography className="text-sm text-gray-700 dark:text-gray-300">
+                  <Typography className="text-xs font-medium text-gray-600  mb-1">Created</Typography>
+                  <Typography className="text-sm text-gray-700 ">
                     {new Date(selectedNotice.created_at).toLocaleString()}
                   </Typography>
                 </View>
 
                 {/* Message */}
                 <View>
-                  <Typography className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Message</Typography>
-                  <View className="p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                    <Typography className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <Typography className="text-xs font-medium text-gray-600  mb-2">Message</Typography>
+                  <View className="p-3 rounded-lg bg-gray-50 ">
+                    <Typography className="text-sm text-gray-700  leading-relaxed">
                       {selectedNotice.message}
                     </Typography>
                   </View>
@@ -132,8 +132,8 @@ export default function NoticesScreen() {
                 {/* Class Info (if applicable) */}
                 {selectedNotice.audience_type === "CLASS" && selectedNotice.class_id && (
                   <View>
-                    <Typography className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Class</Typography>
-                    <Typography className="text-sm text-gray-700 dark:text-gray-300">
+                    <Typography className="text-xs font-medium text-gray-600  mb-1">Class</Typography>
+                    <Typography className="text-sm text-gray-700 ">
                       {selectedNotice.class_id}
                     </Typography>
                   </View>
@@ -144,12 +144,12 @@ export default function NoticesScreen() {
                   selectedNotice.student_ids &&
                   selectedNotice?.student_ids?.length > 0 && (
                     <View>
-                      <Typography className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">
+                      <Typography className="text-xs font-medium text-gray-600  mb-2">
                         Recipients ({selectedNotice?.student_ids?.length})
                       </Typography>
                       <View className="space-y-1">
                         {selectedNotice.student_ids.map((studentId: string, index: number) => (
-                          <Typography key={index} className="text-sm text-gray-700 dark:text-gray-300">
+                          <Typography key={index} className="text-sm text-gray-700 ">
                             • {studentId}
                           </Typography>
                         ))}
@@ -161,7 +161,7 @@ export default function NoticesScreen() {
           </ScrollView>
 
           {/* Modal Footer */}
-          <View className="px-4 py-4 border-t border-gray-200 dark:border-gray-700">
+          <View className="px-4 py-4 border-t border-gray-200 ">
             <TouchableOpacity onPress={() => setShowModal(false)} className="bg-indigo-600 rounded-lg p-3">
               <Typography className="text-center text-white font-medium">Close</Typography>
             </TouchableOpacity>
@@ -172,11 +172,11 @@ export default function NoticesScreen() {
   )
 
   const NoticeCard = ({ notice }: any) => (
-    <View className="mb-4 rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <View className="mb-4 rounded-lg p-4 border border-gray-200  bg-white ">
       <View className="flex-row items-start justify-between mb-3">
         <View className="flex-1">
-          <Typography className="text-lg font-semibold text-gray-900 dark:text-white">{notice.title}</Typography>
-          <Typography className="text-xs mt-1 text-gray-500 dark:text-gray-400">
+          <Typography className="text-lg font-semibold text-gray-900 ">{notice.title}</Typography>
+          <Typography className="text-xs mt-1 text-gray-500 ">
             {new Date(notice.created_at).toLocaleString()}
           </Typography>
         </View>
@@ -187,12 +187,12 @@ export default function NoticesScreen() {
         </View>
       </View>
 
-      <Typography className="text-sm text-gray-700 dark:text-gray-300 mb-3 line-clamp-2">{notice.message}</Typography>
+      <Typography className="text-sm text-gray-700  mb-3 line-clamp-2">{notice.message}</Typography>
 
       <View className="flex-row gap-2 pt-2">
         <TouchableOpacity
           onPress={() => handleViewNotice(notice)}
-          className="flex-1 rounded-lg p-2 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700"
+          className="flex-1 rounded-lg p-2 border border-gray-200  bg-gray-50 "
         >
           <View className="flex-row items-center justify-center gap-2">
             <MaterialCommunityIcons name="eye" size={16} color="#6366f1" />
@@ -205,9 +205,9 @@ export default function NoticesScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-background">
-      <ScrollView className="flex-1" contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
-        
-                <View className="flex-row items-center p-4">
+      <ScrollView className="flex-1" >
+
+        <View className="flex-row items-center p-4">
           <TouchableOpacity
             onPress={() => router.push("/management")}
             className="flex-row items-center bg-input border border-border rounded-lg px-3 py-2 mr-2"
@@ -215,13 +215,13 @@ export default function NoticesScreen() {
             <Typography className="text-primary font-semibold">← Back</Typography>
           </TouchableOpacity>
 
-          <Typography className=" font-bold text-foreground">Notices</Typography>
+          <Typography className="text-lg font-bold text-foreground">Notices</Typography>
         </View>{/* Header */}
 
         <View className="px-4 py-4 flex-row items-center justify-between">
           <View>
-            <Typography className="text-2xl font-bold text-gray-900 dark:text-white">Notices</Typography>
-            <Typography className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+            <Typography className="text-2xl font-bold text-gray-900 ">Notices</Typography>
+            <Typography className="text-sm mt-1 text-gray-600 ">
               Manage notices and announcements
             </Typography>
           </View>
@@ -236,15 +236,15 @@ export default function NoticesScreen() {
         <View className="px-4 pb-6 space-y-4">
           {/* Stats */}
           <View className="flex-row gap-2">
-            <View className="flex-1 rounded-lg p-3 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-              <Typography className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+            <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
+              <Typography className="text-xs font-medium text-gray-600  mb-1">
                 Total Notices
               </Typography>
-              <Typography className="text-lg font-bold text-gray-900 dark:text-white">{notices?.length}</Typography>
+              <Typography className="text-lg font-bold text-gray-900 ">{notices?.length}</Typography>
             </View>
-            <View className="flex-1 rounded-lg p-3 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-              <Typography className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">This Month</Typography>
-              <Typography className="text-lg font-bold text-gray-900 dark:text-white">
+            <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
+              <Typography className="text-xs font-medium text-gray-600  mb-1">This Month</Typography>
+              <Typography className="text-lg font-bold text-gray-900 ">
                 {
                   notices?.filter((n: any) => {
                     const noticeDate = new Date(n.created_at)
@@ -257,34 +257,34 @@ export default function NoticesScreen() {
           </View>
 
           {/* Search and Filter */}
-          <View className="rounded-lg p-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 space-y-3">
-            <Typography className="text-sm font-medium text-gray-700 dark:text-gray-300">Search & Filter</Typography>
+          <View className="rounded-lg p-4 border border-gray-200 mt-3  bg-white  space-y-3">
+            <Typography className="text-sm font-medium text-gray-700 ">Search & Filter</Typography>
 
-            <View className="flex-row items-center px-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700">
+            <View className="flex-row items-center px-3 rounded-lg border border-gray-300  bg-gray-50 ">
               <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
               <TextInput
                 placeholder="Search notices..."
                 placeholderTextColor="#9ca3af"
                 value={searchTerm}
                 onChangeText={setSearchTerm}
-                className="flex-1 ml-2 py-2 text-sm text-gray-900 dark:text-white"
+                className="flex-1 ml-2 py-2 text-sm text-gray-900 "
               />
             </View>
 
-            <View className="flex-row gap-2">
+            <View className="flex-row gap-2 mt-2">
               {["all", "ALL", "CLASS", "STUDENT"].map((type) => (
                 <TouchableOpacity
                   key={type}
                   onPress={() => setFilterType(type)}
                   className={cn(
                     "px-3 py-2 rounded-lg",
-                    filterType === type ? "bg-indigo-600" : "bg-gray-200 dark:bg-gray-700",
+                    filterType === type ? "bg-indigo-600" : "bg-gray-200 ",
                   )}
                 >
                   <Typography
                     className={cn(
                       "text-xs font-medium",
-                      filterType === type ? "text-white" : "text-gray-700 dark:text-gray-300",
+                      filterType === type ? "text-white" : "text-gray-700 ",
                     )}
                   >
                     {type === "all" ? "All" : getAudienceLabel(type)}
@@ -296,12 +296,12 @@ export default function NoticesScreen() {
 
           {/* Notices List */}
           {isLoading ? (
-            <View className="flex-row items-center justify-center py-12">
+            <View className="flex-row mt-2 items-center justify-center py-12">
               <ActivityIndicator size="large" color="#4f46e5" />
             </View>
           ) : filteredNotices?.length > 0 ? (
             <View>
-              <Typography className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+              <Typography className="text-lg mt-2 font-semibold mb-4 text-gray-900 ">
                 {filteredNotices?.length} Notice{filteredNotices?.length !== 1 ? "s" : ""}
               </Typography>
               <FlatList
@@ -314,7 +314,7 @@ export default function NoticesScreen() {
           ) : (
             <View className="items-center justify-center py-12">
               <MaterialIcons name="mail-outline" size={48} color="#d1d5db" />
-              <Typography className="text-gray-500 dark:text-gray-400 mt-2">No notices found</Typography>
+              <Typography className="text-gray-500  mt-2">No notices found</Typography>
             </View>
           )}
         </View>
