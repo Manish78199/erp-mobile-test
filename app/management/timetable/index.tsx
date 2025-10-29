@@ -70,10 +70,10 @@ export default function TimetableScreen() {
 
   const renderStatCard = (icon: string, label: string, value: number) => (
     <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white  mr-2">
-      <Text className="text-xs font-medium text-gray-600  mb-2">{label}</Text>
+      <Typography className="text-xs font-medium text-gray-600  mb-2">{label}</Typography>
       <View className="flex-row items-center">
         <MaterialIcons name={icon as any} size={24} color="#6366f1" />
-        <Text className="text-xl font-bold ml-2 text-gray-900 ">{value}</Text>
+        <Typography className="text-xl font-bold ml-2 text-gray-900 ">{value}</Typography>
       </View>
     </View>
   )
@@ -82,39 +82,39 @@ export default function TimetableScreen() {
     <View className="rounded-lg p-4 mb-4 border border-gray-200  bg-white ">
       <View className="flex-row justify-between items-start mb-3">
         <View className="flex-1">
-          <Text className="font-semibold text-base text-gray-900 ">
+          <Typography className="font-semibold text-base text-gray-900 ">
             {item.class_name} - Section {item.section_name}
-          </Text>
+          </Typography>
         </View>
         <View
           className={cn(
             "px-2 py-1 rounded",
-            isActiveTimetable(item) ? "bg-green-100 dark:bg-green-900" : "bg-red-100 dark:bg-red-900",
+            isActiveTimetable(item) ? "bg-green-100 " : "bg-red-100 ",
           )}
         >
-          <Text
+          <Typography
             className={cn(
               "text-xs font-medium",
-              isActiveTimetable(item) ? "text-green-700 dark:text-green-200" : "text-red-700 dark:text-red-200",
+              isActiveTimetable(item) ? "text-green-700 " : "text-red-700 ",
             )}
           >
             {isActiveTimetable(item) ? "Active" : "Inactive"}
-          </Text>
+          </Typography>
         </View>
       </View>
 
       {/* Weekly Schedule Preview */}
       <View className="mb-4">
-        <Text className="text-xs font-medium text-gray-900  mb-2">Weekly Schedule</Text>
+        <Typography className="text-xs font-medium text-gray-900  mb-2">Weekly Schedule</Typography>
         <View className="flex-row flex-wrap gap-1">
           {Object.keys(item.timetable).map((day) => (
             <View key={day} className="rounded px-2 py-1 flex-1 min-w-[45px] bg-gray-100 ">
-              <Text className="text-xs text-center font-medium text-gray-900 ">
+              <Typography className="text-xs text-center font-medium text-gray-900 ">
                 {day.substring(0, 3)}
-              </Text>
-              <Text className="text-[10px] text-center mt-1 text-gray-600 ">
+              </Typography>
+              <Typography className="text-[10px] text-center mt-1 text-gray-600 ">
                 {item.timetable[day]?.length || 0}
-              </Text>
+              </Typography>
             </View>
           ))}
         </View>
@@ -126,7 +126,7 @@ export default function TimetableScreen() {
         className="rounded-lg p-3 flex-row items-center justify-center bg-gray-100 "
       >
         <MaterialIcons name="visibility" size={16} color="#6366f1" />
-        <Text className="text-sm font-medium ml-2 text-indigo-600 dark:text-indigo-400">View Details</Text>
+        <Typography className="text-sm font-medium ml-2 text-indigo-600 ">View Details</Typography>
       </TouchableOpacity>
     </View>
   )
@@ -137,12 +137,12 @@ export default function TimetableScreen() {
         <View className="flex-row items-center p-4">
           <TouchableOpacity
             onPress={() => router.push("/management")}
-            className="flex-row items-center bg-input border border-border rounded-lg px-3 py-2 mr-2"
+            className="flex-row items-center bg-white border border-border rounded-lg px-3 py-2 mr-2"
           >
             <Typography className="text-primary font-semibold">← Back</Typography>
           </TouchableOpacity>
 
-          <Typography className=" font-bold text-foreground">Class Timetables</Typography>
+          <Typography className="text-lg font-bold text-foreground">Class Timetables</Typography>
         </View>
         <ScrollView
           className="flex-1"
@@ -161,7 +161,7 @@ export default function TimetableScreen() {
               <View className="flex-1">
                 <Typography className="text-2xl font-bold text-gray-900 ">Timetables</Typography>
                 <Typography className="text-sm mt-1 text-gray-600 ">
-                  Manage class schedules
+                  Manage class timetables
                 </Typography>
               </View>
               <TouchableOpacity
@@ -169,7 +169,7 @@ export default function TimetableScreen() {
                 className="px-3 py-2 rounded-lg flex-row items-center bg-indigo-600"
               >
                 <MaterialIcons name="add" size={20} color="white" />
-                <Text className="text-white text-sm font-medium ml-1">New</Text>
+                <Typography className="text-white text-sm font-medium ml-1">New</Typography>
               </TouchableOpacity>
             </View>
           </View>
@@ -204,7 +204,7 @@ export default function TimetableScreen() {
                 items={classPickerItems}
                 value={filterClass}
                 onValueChange={(value) => setFilterClass(value)}
-                placeholder={{ label: "Select a class...", value: null }}
+                placeholder={{ label: "-- Select class --", value: null }}
               />
             </View>
 
@@ -214,12 +214,12 @@ export default function TimetableScreen() {
           <View className="px-4 pb-6">
             {isLoading ? (
               <View className="py-8 items-center">
-                <Text className="text-gray-600 ">Loading timetables...</Text>
+                <Typography className="text-gray-600 ">Loading timetables...</Typography>
               </View>
             ) : isError ? (
               <View className="py-8 items-center">
                 <MaterialIcons name="error-outline" size={48} color="#ef4444" />
-                <Text className="text-gray-600  mt-2">Error loading timetables</Text>
+                <Typography className="text-gray-600  mt-2">Error loading timetables</Typography>
               </View>
             ) : filteredTimetables.length > 0 ? (
               <FlatList
@@ -231,7 +231,7 @@ export default function TimetableScreen() {
             ) : (
               <View className="py-8 items-center">
                 <MaterialIcons name="schedule" size={48} color="#d1d5db" />
-                <Text className="text-gray-600  mt-2">No timetables found</Text>
+                <Typography className="text-gray-600  mt-2">No timetables found</Typography>
               </View>
             )}
           </View>
@@ -243,9 +243,9 @@ export default function TimetableScreen() {
             <View className="rounded-lg w-full max-h-[80%] border border-gray-200  bg-white ">
               {/* Modal Header */}
               <View className="flex-row justify-between items-center p-4 border-b border-gray-200 ">
-                <Text className="font-bold text-lg text-gray-900 ">
+                <Typography className="font-bold text-lg text-gray-900 ">
                   {previewTt?.class_name} - Section {previewTt?.section_name}
-                </Text>
+                </Typography>
                 <TouchableOpacity onPress={() => setPreviewTt(null)}>
                   <MaterialIcons name="close" size={24} color="#6b7280" />
                 </TouchableOpacity>
@@ -264,14 +264,14 @@ export default function TimetableScreen() {
                         {/* Table Header */}
                         <View className="flex-row mb-2">
                           <View className="w-16 rounded-t-lg p-2 border border-gray-200  bg-gray-100 ">
-                            <Text className="text-xs font-bold text-center text-gray-900 ">Slot</Text>
+                            <Typography className="text-xs font-bold text-center text-gray-900 ">Slot</Typography>
                           </View>
                           {shortDays.map((day, idx) => (
                             <View
                               key={idx}
                               className="w-24 rounded-t-lg p-2 border border-gray-200  bg-gray-100 "
                             >
-                              <Text className="text-xs font-bold text-center text-gray-900 ">{day}</Text>
+                              <Typography className="text-xs font-bold text-center text-gray-900 ">{day}</Typography>
                             </View>
                           ))}
                         </View>
@@ -280,29 +280,29 @@ export default function TimetableScreen() {
                         {Array.from({ length: maxSlots }).map((_, slotIdx) => (
                           <View key={slotIdx} className="flex-row mb-1">
                             <View className="w-16 p-2 border border-gray-200  bg-gray-100 ">
-                              <Text className="text-xs text-center text-gray-900 ">{slotIdx + 1}</Text>
+                              <Typography className="text-xs text-center text-gray-900 ">{slotIdx + 1}</Typography>
                             </View>
-                            {days.map((day) => {
+                            {days.map((day,ind) => {
                               const period = previewTt.timetable[day]?.[slotIdx]
                               return (
                                 <View
-                                  key={day}
+                                  key={ind}
                                   className="w-24 p-2 border border-gray-200  bg-white "
                                 >
                                   {period ? (
                                     <View>
-                                      <Text className="text-xs font-semibold text-gray-900 ">
+                                      <Typography className="text-xs font-semibold text-gray-900 ">
                                         {period.subject_name}
-                                      </Text>
-                                      <Text className="text-[10px] mt-1 text-gray-600 ">
+                                      </Typography>
+                                      <Typography className="text-[10px] mt-1 text-gray-600 ">
                                         {period.start_time}
-                                      </Text>
-                                      <Text className="text-[9px] text-gray-600 ">
+                                      </Typography>
+                                      <Typography className="text-[9px] text-gray-600 ">
                                         {period.teacher_name}
-                                      </Text>
+                                      </Typography>
                                     </View>
                                   ) : (
-                                    <Text className="text-xs text-gray-400 dark:text-gray-500">-</Text>
+                                    <Typography className="text-xs text-gray-400">-</Typography>
                                   )}
                                 </View>
                               )

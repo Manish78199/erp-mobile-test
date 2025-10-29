@@ -1,13 +1,8 @@
 import {ApiRoute} from "@/constants/apiRoute";
+import { get_headers } from "@/utils/Authentication/getApiHeader";
 import axios from "axios";
 
-const get_headers = () => {
-    const access_token = localStorage.getItem("access_token");
-    return {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${access_token}`,
-    };
-};
+
 
 const add_book =async (data: any) => {
     return axios.post(ApiRoute.LIBRARY.book_crud, data, {

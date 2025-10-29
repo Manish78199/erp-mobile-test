@@ -19,7 +19,7 @@ const useSubjects = () => {
 const useClassSubjects = (class_id: string | null = null) => {
     const route = class_id ? `${ApiRoute.subjectService.getClassSubject}/${class_id}` : null
 
-    const { data, error, isLoading } = useSWR(route, managementFetcher, { revalidateIfStale: false, })
+    const { data, error, isLoading } = useSWR(route, managementFetcher, { revalidateIfStale: false,revalidateOnFocus:true ,revalidateOnReconnect:true})
 
     return {
         sections: data ?? [],

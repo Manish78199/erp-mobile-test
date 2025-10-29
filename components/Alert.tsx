@@ -1,35 +1,3 @@
-// import React from "react";
-// import { View } from "react-native";
-// import { Typography } from "./Typography";
-
-// interface AlertProps {
-//   type: "ERROR" | "SUCCESS" | "WARNING" | string;
-//   message: string;
-// }
-
-// export default function Alert({ type, message }: AlertProps) {
-//   const baseClasses = "absolute text-sm bottom-20 z-50 w-full flex-row justify-center rounded-lg";
-//   const boxBase = "px-4 py-2 rounded-md border";
-
-//   const getStyle = () => {
-//     switch (type) {
-//       case "ERROR":
-//         return `${boxBase} border-red-700/30 bg-red-500 text-white `;
-//       case "SUCCESS":
-//         return `${boxBase} border-emerald-700/30 bg-emerald-600 text-white `;
-//       default:
-//         return `${boxBase} border-yellow-700/30 bg-zinc-900 text-yellow-500`;
-//     }
-//   };
-
-//   return (
-//     <View className={baseClasses}>
-//       <View className={`${getStyle()} rounded-full`}>
-//         <Typography className="text-sm text-white">{message}</Typography>
-//       </View>
-//     </View>
-//   );
-// }
 
 
 "use client"

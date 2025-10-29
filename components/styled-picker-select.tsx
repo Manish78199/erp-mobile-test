@@ -31,7 +31,7 @@ export function StyledPickerSelect({ items, onValueChange, value, placeholder, c
             fontSize: 14,
           },
           inputAndroid: {
-            paddingVertical: 12,
+            paddingVertical: 0,
             paddingHorizontal: 12,
             borderRadius: 8,
             borderWidth: 1,
