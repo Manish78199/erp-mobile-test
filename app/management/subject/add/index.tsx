@@ -72,8 +72,8 @@ export default function CreateSubject() {
   return (
     <SafeAreaView className="flex-1">
       <ScrollView
-        className="flex-1 bg-white dark:bg-gray-900"
-        contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+        className="flex-1 bg-background"
+      
       >
         <View className="flex-row items-center p-4">
           <TouchableOpacity
@@ -83,7 +83,7 @@ export default function CreateSubject() {
             <Typography className="text-primary font-semibold">← Back</Typography>
           </TouchableOpacity>
 
-          <Typography className=" font-bold text-foreground">New Subject</Typography>
+          <Typography className="text-lg font-bold text-foreground">New Subject</Typography>
         </View>
 
         <View className="px-4 py-6 space-y-6">
@@ -93,10 +93,10 @@ export default function CreateSubject() {
             <Typography className="text-sm mt-1 text-gray-600 ">Create class's subject</Typography>
           </View>
 
-          <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
+          <View className="rounded-lg p-4 mt-4 border border-gray-200  bg-white  space-y-4">
             <Typography className="text-lg font-semibold text-gray-900 ">Subject Details</Typography>
 
-            {/* Subject Name */}
+          
             <View>
               <Typography className="text-sm font-medium mb-2 text-gray-700 ">Subject Name</Typography>
               <TextInput
@@ -109,7 +109,7 @@ export default function CreateSubject() {
               {errors.name && touched.name && <Typography className="mt-1 text-sm text-red-500">{errors.name}</Typography>}
             </View>
 
-            {/* Subject Code */}
+         
             <View>
               <Typography className="text-sm font-medium mb-2 text-gray-700 ">Subject Code</Typography>
               <TextInput
@@ -122,8 +122,8 @@ export default function CreateSubject() {
               {errors.code && touched.code && <Typography className="mt-1 text-sm text-red-500">{errors.code}</Typography>}
             </View>
 
-            {/* Subject Type */}
-            <View>
+            
+            <View className="mt-2">
               <Typography className="text-sm font-medium mb-2 text-gray-700 ">Subject Type</Typography>
               <RNPickerSelect
                 items={[
@@ -144,7 +144,7 @@ export default function CreateSubject() {
                     color: "#000",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 10,
                     borderRadius: 8,
                     borderWidth: 1,
@@ -157,9 +157,9 @@ export default function CreateSubject() {
             </View>
 
             {/* Result Type */}
-            <View>
+            <View className="mt-2">
               <Typography className="text-sm font-medium mb-3 text-gray-700 ">Result Type</Typography>
-              <View className="space-y-2">
+              <View className="space-y-2 gap-2">
                 {[
                   { name: "Grade", value: "GRADE" },
                   { name: "Percentage", value: "PERCENTAGE" },
@@ -186,7 +186,7 @@ export default function CreateSubject() {
             </View>
 
             {/* Class Selection */}
-            <View>
+            <View className="mt-2">
               <Typography className="text-sm font-medium mb-2 text-gray-700 ">
                 Class <Typography className="text-red-500">*</Typography>
               </Typography>
@@ -206,7 +206,7 @@ export default function CreateSubject() {
                     color: "#000",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 10,
                     borderRadius: 8,
                     borderWidth: 1,

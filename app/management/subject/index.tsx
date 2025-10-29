@@ -99,16 +99,16 @@ export default function SubjectList() {
           <Typography className="text-xs text-gray-600 ">Class</Typography>
           <Typography className="text-sm font-medium text-gray-900 ">{subject.class_name}</Typography>
         </View>
-        <View className="flex-row items-center justify-between">
+        <View className="flex-row items-center justify-between mt-1">
           <Typography className="text-xs text-gray-600 ">Result Type</Typography>
-          <View className="px-2 py-1 rounded bg-blue-100 dark:bg-blue-900">
-            <Typography className="text-xs font-medium text-blue-700 dark:text-blue-200">{subject.result_type}</Typography>
+          <View className="px-2 py-1 rounded bg-blue-100 ">
+            <Typography className="text-xs font-medium text-blue-700 ">{subject.result_type}</Typography>
           </View>
         </View>
-        <View className="flex-row items-center justify-between">
+        <View className="flex-row items-center justify-between mt-1">
           <Typography className="text-xs text-gray-600 ">Subject Type</Typography>
-          <View className="px-2 py-1 rounded bg-emerald-100 dark:bg-emerald-900">
-            <Typography className="text-xs font-medium text-emerald-700 dark:text-emerald-200">{subject.subject_type}</Typography>
+          <View className="px-2 py-1 rounded bg-emerald-100">
+            <Typography className="text-xs font-medium text-emerald-700 ">{subject.subject_type}</Typography>
           </View>
         </View>
       </View>
@@ -118,8 +118,8 @@ export default function SubjectList() {
   return (
     <SafeAreaView className="flex-1">
       <ScrollView
-        className="flex-1 bg-background dark:bg-gray-900"
-        contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+        className="flex-1 bg-background "
+        
       >
 
         <View className="flex-row items-center p-4">
@@ -130,7 +130,7 @@ export default function SubjectList() {
             <Typography className="text-primary font-semibold">← Back</Typography>
           </TouchableOpacity>
 
-          <Typography className=" font-bold text-foreground">Subjects</Typography>
+          <Typography className="text-lg font-bold text-foreground">Subjects</Typography>
         </View>
         <View className="px-4 py-6 space-y-6">
           <View className="flex-row items-center justify-between">
@@ -147,7 +147,7 @@ export default function SubjectList() {
             </TouchableOpacity>
           </View>
 
-          <View className="flex-row gap-2">
+          <View className="flex-row gap-2 mb-3 mt-2">
             <TouchableOpacity className="flex-1 flex-row items-center justify-center gap-2 px-3 py-2 rounded-lg border border-gray-200  bg-white ">
               <MaterialCommunityIcons name="filter" size={18} color="#6b7280" />
               <Typography className="text-sm font-medium text-gray-700 ">Filter</Typography>
@@ -166,7 +166,7 @@ export default function SubjectList() {
             <FlatList
               scrollEnabled={false}
               data={allSubject}
-              keyExtractor={(item) => item._id}
+              keyExtractor={(item) => item?._id}
               renderItem={({ item }) => <SubjectCard subject={item} />}
             />
           ) : (

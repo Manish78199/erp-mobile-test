@@ -2,13 +2,14 @@
 
 import { useEffect, useMemo, useState } from "react"
 import { View, Text, ScrollView, FlatList, ActivityIndicator, Alert, TouchableOpacity } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 import { useRouter } from "expo-router"
 import RNPickerSelect from "react-native-picker-select"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { getAllClass } from "@/service/management/class/classBasic"
 import { get_clas_exam_for_attendance } from "@/service/management/exam"
 import { get_result_summary } from "@/service/management/result"
+import { Typography } from "@/components/Typography"
 
 export default function ResultSummary() {
   const insets = useSafeAreaInsets()
@@ -23,7 +24,7 @@ export default function ResultSummary() {
 
   const ClassListItem = useMemo(
     () => [
-      { label: "-- Select Class --", value: null },
+     
       ...allClass.map((item: any) => ({ label: item.name, value: item._id })),
     ],
     [allClass],
@@ -31,7 +32,7 @@ export default function ResultSummary() {
 
   const ExamListItem = useMemo(
     () => [
-      { label: "-- Select Exam --", value: null },
+     
       ...allExam.map((item: any) => ({ label: `${item?.name} (${item?.session})`, value: item._id })),
     ],
     [allExam],
@@ -82,7 +83,7 @@ export default function ResultSummary() {
     <TouchableOpacity
       onPress={() =>
         router.push({
-          pathname: "/management/result/[student_id]/index",
+          pathname: "/management/result/[student_id]",
           params: { student_id: item?.student_id },
         })
       }
@@ -90,139 +91,151 @@ export default function ResultSummary() {
     >
       <View className="flex-row items-center justify-between mb-2">
         <View className="flex-1">
-          <Text className="font-semibold text-gray-900 ">{item?.full_name}</Text>
-          <Text className="text-xs mt-1 text-gray-600 ">Admission: {item?.admission_no}</Text>
+          <Typography className="font-semibold text-gray-900 ">{item?.full_name}</Typography>
+          <Typography className="text-xs mt-1 text-gray-600 ">Admission: {item?.admission_no}</Typography>
         </View>
         <View
-          className={`px-3 py-1 rounded-full ${
-            item?.status === "PASS" ? "bg-emerald-100 dark:bg-emerald-900" : "bg-red-100 dark:bg-red-900"
-          }`}
-        >
-          <Text
-            className={`text-xs font-semibold ${
-              item?.status === "PASS" ? "text-emerald-700 dark:text-emerald-200" : "text-red-700 dark:text-red-200"
+          className={`px-3 py-1 rounded-full ${item?.status === "PASS" ? "bg-emerald-100 " : "bg-red-100 "
             }`}
+        >
+          <Typography
+            className={`text-xs font-semibold ${item?.status === "PASS" ? "text-emerald-700" : "text-red-700 0"
+              }`}
           >
             {item?.status}
-          </Text>
+          </Typography>
         </View>
       </View>
       <View className="flex-row items-center justify-between">
         <View>
-          <Text className="text-xs text-gray-600 ">Percentage</Text>
-          <Text className="text-lg font-bold text-gray-900 ">{item?.percentage}%</Text>
+          <Typography className="text-xs text-gray-600 ">Percentage</Typography>
+          <Typography className="text-lg font-bold text-gray-900 ">{item?.percentage}%</Typography>
         </View>
         <View>
-          <Text className="text-xs text-gray-600 ">Marks</Text>
-          <Text className="text-lg font-bold text-gray-900 ">
+          <Typography className="text-xs text-gray-600 ">Marks</Typography>
+          <Typography className="text-lg font-bold text-gray-900 ">
             {item?.total_obtained}/{item?.total_max}
-          </Text>
+          </Typography>
         </View>
         <View>
-          <Text className="text-xs text-gray-600 ">Grade</Text>
-          <Text className="text-lg font-bold text-gray-900 ">{item?.grade || "NA"}</Text>
+          <Typography className="text-xs text-gray-600 ">Grade</Typography>
+          <Typography className="text-lg font-bold text-gray-900 ">{item?.grade || "NA"}</Typography>
         </View>
       </View>
     </TouchableOpacity>
   )
 
   return (
-    <ScrollView
-      className="flex-1 bg-white dark:bg-gray-900"
-      contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
-    >
-      <View className="px-4 py-6 space-y-6">
-        <View>
-          <Text className="text-2xl font-bold text-gray-900 ">Result Summary</Text>
-          <Text className="text-sm mt-1 text-gray-600 ">View result summary for students</Text>
-        </View>
+    <SafeAreaView className="flex-1 bg-background">
+      <View className="flex-row items-center p-4">
+        <TouchableOpacity
+          onPress={() => router.push("/management")}
+          className="flex-row items-center bg-input border border-border rounded-lg px-3 py-2 mr-2"
+        >
+          <Typography className=" text-primary font-semibold">← Back</Typography>
+        </TouchableOpacity>
 
-        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
-          <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Class</Text>
-            <RNPickerSelect
-              items={ClassListItem}
-              onValueChange={handleClassChange}
-              value={currentClass}
-              placeholder={{ label: "Select Class", value: null }}
-              style={{
-                inputIOS: {
-                  paddingVertical: 12,
-                  paddingHorizontal: 10,
-                  borderRadius: 8,
-                  borderWidth: 1,
-                  borderColor: "#e5e7eb",
-                  backgroundColor: "#f9fafb",
-                  color: "#000",
-                },
-                inputAndroid: {
-                  paddingVertical: 12,
-                  paddingHorizontal: 10,
-                  borderRadius: 8,
-                  borderWidth: 1,
-                  borderColor: "#e5e7eb",
-                  backgroundColor: "#f9fafb",
-                  color: "#000",
-                },
-              }}
-            />
-          </View>
-
-          <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Exam</Text>
-            <RNPickerSelect
-              items={ExamListItem}
-              onValueChange={handleExamChange}
-              value={currentExam}
-              placeholder={{ label: "Select Exam", value: null }}
-              style={{
-                inputIOS: {
-                  paddingVertical: 12,
-                  paddingHorizontal: 10,
-                  borderRadius: 8,
-                  borderWidth: 1,
-                  borderColor: "#e5e7eb",
-                  backgroundColor: "#f9fafb",
-                  color: "#000",
-                },
-                inputAndroid: {
-                  paddingVertical: 12,
-                  paddingHorizontal: 10,
-                  borderRadius: 8,
-                  borderWidth: 1,
-                  borderColor: "#e5e7eb",
-                  backgroundColor: "#f9fafb",
-                  color: "#000",
-                },
-              }}
-            />
-          </View>
-        </View>
-
-        {currentExam && (
-          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
-            <Text className="text-lg font-semibold mb-4 text-gray-900 ">Results</Text>
-
-            {loading ? (
-              <View className="flex-row items-center justify-center py-8">
-                <ActivityIndicator size="large" color="#10b981" />
-              </View>
-            ) : allStudent.length > 0 ? (
-              <FlatList
-                scrollEnabled={false}
-                data={allStudent}
-                keyExtractor={(item) => item.student_id}
-                renderItem={({ item }) => <ResultCard item={item} />}
-              />
-            ) : (
-              <View className="items-center justify-center py-8">
-                <MaterialCommunityIcons name="folder-open" size={48} color="#d1d5db" />
-                <Text className="text-gray-500  mt-2">No results found</Text>
-              </View>
-            )}
-          </View>
-        )}
+        <Typography className="text-lg font-bold text-foreground">Result </Typography>
       </View>
-    </ScrollView>
+      <ScrollView
+        className="flex-1 bg-background"
+
+      >
+        <View className="px-4 pb-6 space-y-6">
+
+          <View>
+            <Typography className="text-2xl font-bold text-gray-900 ">Result Summary</Typography>
+            <Typography className="text-sm mt-1 text-gray-600 ">View result summary for students</Typography>
+          </View>
+
+          <View className="rounded-lg mt-3 p-4 border border-gray-200  bg-white  space-y-4">
+            <View>
+              <Typography className="text-sm font-medium mb-2 text-gray-700 ">Select Class</Typography>
+              <RNPickerSelect
+                items={ClassListItem}
+                onValueChange={handleClassChange}
+               
+                value={currentClass}
+                placeholder={{ label: "-- Select Class -- ", value: null }}
+                style={{
+                  inputIOS: {
+                    paddingVertical: 12,
+                    paddingHorizontal: 10,
+                    borderRadius: 8,
+                    borderWidth: 1,
+                    borderColor: "#e5e7eb",
+                    backgroundColor: "#f9fafb",
+                    color: "#000",
+                  },
+                  inputAndroid: {
+                    paddingVertical: 0,
+                    paddingHorizontal: 10,
+                    borderRadius: 8,
+                    borderWidth: 1,
+                    borderColor: "#e5e7eb",
+                    backgroundColor: "#f9fafb",
+                    color: "#000",
+                  },
+                }}
+              />
+            </View>
+
+            <View>
+              <Typography className="text-sm font-medium mb-2 text-gray-700 ">Select Exam</Typography>
+              <RNPickerSelect
+                items={ExamListItem}
+                onValueChange={handleExamChange}
+                value={currentExam}
+                placeholder={{ label: "-- Select Exam --", value: null }}
+                style={{
+                  inputIOS: {
+                    paddingVertical: 12,
+                    paddingHorizontal: 10,
+                    borderRadius: 8,
+                    borderWidth: 1,
+                    borderColor: "#e5e7eb",
+                    backgroundColor: "#f9fafb",
+                    color: "#000",
+                  },
+                  inputAndroid: {
+                    paddingVertical: 0,
+                    paddingHorizontal: 10,
+                    borderRadius: 8,
+                    borderWidth: 1,
+                    borderColor: "#e5e7eb",
+                    backgroundColor: "#f9fafb",
+                    color: "#000",
+                  },
+                }}
+              />
+            </View>
+          </View>
+
+          {currentExam && (
+            <View className="rounded-lg p-4 mt-3 border border-gray-200  bg-white ">
+              <Typography className="text-lg font-semibold mb-4 text-gray-900 ">Results</Typography>
+
+              {loading ? (
+                <View className="flex-row items-center justify-center py-8">
+                  <ActivityIndicator size="large" color="#10b981" />
+                </View>
+              ) : allStudent.length > 0 ? (
+                <FlatList
+                  scrollEnabled={false}
+                  data={allStudent}
+                  keyExtractor={(item) => item.student_id}
+                  renderItem={({ item }) => <ResultCard item={item} />}
+                />
+              ) : (
+                <View className="items-center justify-center py-8">
+                  <MaterialCommunityIcons name="folder-open" size={48} color="#d1d5db" />
+                  <Typography className="text-gray-500  mt-2">No results found</Typography>
+                </View>
+              )}
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }

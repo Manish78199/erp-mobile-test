@@ -1,9 +1,13 @@
 
 import { useState, useEffect } from "react"
 import { View, Text, ScrollView, FlatList, TouchableOpacity, ActivityIndicator, Alert } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { cn } from "@/utils/cn"
+import { Typography } from "@/components/Typography"
+import { useRouter } from "expo-router"
+
+import { Link } from "expo-router"
 
 interface LibraryStats {
   totalBooks: number
@@ -140,6 +144,8 @@ export default function LibraryDashboard() {
   const [loading, setLoading] = useState(true)
   const [selectedPeriod, setSelectedPeriod] = useState("current")
 
+  const router=useRouter()
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -172,9 +178,9 @@ export default function LibraryDashboard() {
     <View className={cn("flex-1 rounded-lg p-4 border border-gray-200  bg-white ")}>
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
-          <Text className="text-xs font-medium mb-1 text-gray-600 ">{title}</Text>
-          <Text className="text-xl font-bold text-gray-900 ">{value}</Text>
-          {subtitle && <Text className="text-xs mt-1 text-gray-500 dark:text-gray-500">{subtitle}</Text>}
+          <Typography className="text-xs font-medium mb-1 text-gray-600 ">{title}</Typography>
+          <Typography className="text-xl font-bold text-gray-900 ">{value}</Typography>
+          {subtitle && <Typography className="text-xs mt-1 text-gray-500 dark:text-gray-500">{subtitle}</Typography>}
         </View>
         <View className={cn("p-3 rounded-lg", color)}>
           <MaterialCommunityIcons name={icon} size={20} color="white" />
@@ -220,14 +226,14 @@ export default function LibraryDashboard() {
           <MaterialCommunityIcons name={getActivityIcon() as any} size={16} color="#6b7280" />
         </View>
         <View className="flex-1">
-          <Text className="text-sm font-medium text-gray-900 ">{activity.message}</Text>
-          <Text className="text-xs mt-1 text-gray-600 ">
+          <Typography className="text-sm font-medium text-gray-900 ">{activity.message}</Typography>
+          <Typography className="text-xs mt-1 text-gray-600 ">
             {activity.student} • {activity.timestamp}
-          </Text>
+          </Typography>
         </View>
-        {activity.fine && <Text className="text-sm font-semibold text-red-600">{formatCurrency(activity.fine)}</Text>}
+        {activity.fine && <Typography className="text-sm font-semibold text-red-600">{formatCurrency(activity.fine)}</Typography>}
         {activity.amount && (
-          <Text className="text-sm font-semibold text-green-600">{formatCurrency(activity.amount)}</Text>
+          <Typography className="text-sm font-semibold text-green-600">{formatCurrency(activity.amount)}</Typography>
         )}
       </View>
     )
@@ -236,18 +242,18 @@ export default function LibraryDashboard() {
   const PopularBookItem = ({ book, index }: { book: PopularBook; index: number }) => (
     <View className="flex-row items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">
       <View className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900 rounded-full items-center justify-center">
-        <Text className="text-sm font-semibold text-indigo-600 dark:text-indigo-400">#{index + 1}</Text>
+        <Typography className="text-sm font-semibold text-indigo-600 dark:text-indigo-400">#{index + 1}</Typography>
       </View>
       <View className="flex-1">
-        <Text className="text-sm font-medium text-gray-900 ">{book.title}</Text>
-        <Text className="text-xs mt-1 text-gray-600 ">
+        <Typography className="text-sm font-medium text-gray-900 ">{book.title}</Typography>
+        <Typography className="text-xs mt-1 text-gray-600 ">
           by {book.author} • {book.category}
-        </Text>
+        </Typography>
         <View className="flex-row gap-4 mt-2">
-          <Text className="text-xs text-gray-600 ">Issues: {book.issueCount}</Text>
-          <Text className="text-xs text-gray-600 ">
+          <Typography className="text-xs text-gray-600 ">Issues: {book.issueCount}</Typography>
+          <Typography className="text-xs text-gray-600 ">
             Available: {book.available}/{book.total}
-          </Text>
+          </Typography>
         </View>
       </View>
       <View className="w-12 h-2 bg-gray-200  rounded-full overflow-hidden">
@@ -265,193 +271,206 @@ export default function LibraryDashboard() {
   }
 
   return (
-    <ScrollView
-      className="flex-1 bg-white dark:bg-gray-900"
-      contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
-    >
-      <View className="px-4 py-6 space-y-6">
-        <View>
-          <Text className="text-2xl font-bold text-gray-900 ">Library Dashboard</Text>
-          <Text className="text-sm mt-1 text-gray-600 ">
-            Manage books, memberships, and library operations
-          </Text>
-        </View>
+    <SafeAreaView className="flex-1 bg-background">
 
-        {stats && (
-          <>
-            <View className="space-y-3">
-              <View className="flex-row gap-3">
-                <StatCard
-                  icon="book-multiple"
-                  title="Total Books"
-                  value={stats.totalBooks.toLocaleString()}
-                  subtitle={`${stats.availableBooks} available`}
-                  color="bg-blue-500"
-                />
-                <StatCard
-                  icon="book-open"
-                  title="Issued Books"
-                  value={stats.issuedBooks}
-                  subtitle={`+${stats.todayIssues} today`}
-                  color="bg-green-500"
-                />
+      <View className="flex-row items-center p-4">
+        <TouchableOpacity
+          onPress={() => router.push("/management")}
+          className="flex-row items-center bg-input border border-border rounded-lg px-3 py-2 mr-2"
+        >
+          <Typography className="text-primary font-semibold">← Back</Typography>
+        </TouchableOpacity>
+
+        <Typography className="text-lg font-bold text-foreground">Library</Typography>
+      </View>
+      <ScrollView
+        className="flex-1 bg-white dark:bg-gray-900"
+        
+      >
+        <View className="px-4 py-6 space-y-6">
+          <View>
+            <Typography className="text-2xl font-bold text-gray-900 ">Library Dashboard</Typography>
+            <Typography className="text-sm mt-1 text-gray-600 ">
+              Manage books, memberships, and library operations
+            </Typography>
+          </View>
+
+          {stats && (
+            <>
+              <View className="space-y-3">
+                <View className="flex-row gap-3">
+                  <StatCard
+                    icon="book-multiple"
+                    title="Total Books"
+                    value={stats.totalBooks.toLocaleString()}
+                    subtitle={`${stats.availableBooks} available`}
+                    color="bg-blue-500"
+                  />
+                  <StatCard
+                    icon="book-open"
+                    title="Issued Books"
+                    value={stats.issuedBooks}
+                    subtitle={`+${stats.todayIssues} today`}
+                    color="bg-green-500"
+                  />
+                </View>
+
+                <View className="flex-row gap-3">
+                  <StatCard
+                    icon="account-multiple"
+                    title="Active Members"
+                    value={stats.activeMembers}
+                    subtitle={`of ${stats.totalStudents} students`}
+                    color="bg-purple-500"
+                  />
+                  <StatCard
+                    icon="alert-triangle"
+                    title="Overdue Books"
+                    value={stats.overdueBooks}
+                    subtitle="Requires attention"
+                    color="bg-red-500"
+                  />
+                </View>
               </View>
 
-              <View className="flex-row gap-3">
-                <StatCard
-                  icon="account-multiple"
-                  title="Active Members"
-                  value={stats.activeMembers}
-                  subtitle={`of ${stats.totalStudents} students`}
-                  color="bg-purple-500"
-                />
-                <StatCard
-                  icon="alert-triangle"
-                  title="Overdue Books"
-                  value={stats.overdueBooks}
-                  subtitle="Requires attention"
-                  color="bg-red-500"
-                />
-              </View>
-            </View>
+              <View className="space-y-2">
+                <View className="flex-row gap-2">
+                  <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
+                    <View className="flex-row items-center gap-2">
+                      <View className="p-2 bg-emerald-500 rounded-lg">
+                        <MaterialCommunityIcons name="check-circle" size={16} color="white" />
+                      </View>
+                      <View className="flex-1">
+                        <Typography className="text-xs text-gray-600 ">Today's Returns</Typography>
+                        <Typography className="text-lg font-semibold text-gray-900 ">{stats.todayReturns}</Typography>
+                      </View>
+                    </View>
+                  </View>
 
-            <View className="space-y-2">
-              <View className="flex-row gap-2">
-                <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
-                  <View className="flex-row items-center gap-2">
-                    <View className="p-2 bg-emerald-500 rounded-lg">
+                  <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
+                    <View className="flex-row items-center gap-2">
+                      <View className="p-2 bg-orange-500 rounded-lg">
+                        <MaterialCommunityIcons name="clock" size={16} color="white" />
+                      </View>
+                      <View className="flex-1">
+                        <Typography className="text-xs text-gray-600 ">Today's Issues</Typography>
+                        <Typography className="text-lg font-semibold text-gray-900 ">{stats.todayIssues}</Typography>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+
+                <View className="flex-row gap-2">
+                  <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
+                    <View className="flex-row items-center gap-2">
+                      <View className="p-2 bg-red-500 rounded-lg">
+                        <MaterialCommunityIcons name="cash-multiple" size={16} color="white" />
+                      </View>
+                      <View className="flex-1">
+                        <Typography className="text-xs text-gray-600 ">Pending Fines</Typography>
+                        <Typography className="text-lg font-semibold text-gray-900 ">
+                          {formatCurrency(stats.pendingFines)}
+                        </Typography>
+                      </View>
+                    </View>
+                  </View>
+
+                  <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
+                    <View className="flex-row items-center gap-2">
+                      <View className="p-2 bg-green-500 rounded-lg">
+                        <MaterialCommunityIcons name="trending-up" size={16} color="white" />
+                      </View>
+                      <View className="flex-1">
+                        <Typography className="text-xs text-gray-600 ">Fines Collected</Typography>
+                        <Typography className="text-lg font-semibold text-gray-900 ">
+                          {formatCurrency(stats.totalFinesCollected)}
+                        </Typography>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+
+              <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+                <Typography className="text-lg font-semibold mb-4 text-gray-900 ">Quick Actions</Typography>
+                <View className="space-y-2">
+                  <Link className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " href={"/management/library/book/add"}>
+                    <View className="p-2 bg-blue-500 rounded-lg">
+                      <MaterialCommunityIcons name="plus" size={16} color="white" />
+                    </View>
+                    <View>
+                      <Typography className="font-semibold text-gray-900 ">Add New Book</Typography>
+                      <Typography className="text-xs text-gray-600 ">Register new books</Typography>
+                    </View>
+                  </Link>
+
+                  <Link className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " href={"/management/library/assignment/issue"}>
+                    <View className="p-2 bg-green-500 rounded-lg">
+                      <MaterialCommunityIcons name="book-plus" size={16} color="white" />
+                    </View>
+                    <View>
+                      <Typography className="font-semibold text-gray-900 ">Issue Book</Typography>
+                      <Typography className="text-xs text-gray-600 ">Issue books to students</Typography>
+                    </View>
+                  </Link>
+
+                  <Link className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " href={"/management/library/assignment/return"}>
+                    <View className="p-2 bg-purple-500 rounded-lg">
                       <MaterialCommunityIcons name="check-circle" size={16} color="white" />
                     </View>
-                    <View className="flex-1">
-                      <Text className="text-xs text-gray-600 ">Today's Returns</Text>
-                      <Text className="text-lg font-semibold text-gray-900 ">{stats.todayReturns}</Text>
+                    <View>
+                      <Typography className="font-semibold text-gray-900 ">Return Book</Typography>
+                      <Typography className="text-xs text-gray-600 ">Process book returns</Typography>
                     </View>
-                  </View>
-                </View>
+                  </Link>
 
-                <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
-                  <View className="flex-row items-center gap-2">
-                    <View className="p-2 bg-orange-500 rounded-lg">
-                      <MaterialCommunityIcons name="clock" size={16} color="white" />
-                    </View>
-                    <View className="flex-1">
-                      <Text className="text-xs text-gray-600 ">Today's Issues</Text>
-                      <Text className="text-lg font-semibold text-gray-900 ">{stats.todayIssues}</Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-
-              <View className="flex-row gap-2">
-                <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
-                  <View className="flex-row items-center gap-2">
+                  <Link className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " href={"/management/library/due"}>
                     <View className="p-2 bg-red-500 rounded-lg">
-                      <MaterialCommunityIcons name="cash-multiple" size={16} color="white" />
+                      <MaterialCommunityIcons name="alert-circle" size={16} color="white" />
                     </View>
-                    <View className="flex-1">
-                      <Text className="text-xs text-gray-600 ">Pending Fines</Text>
-                      <Text className="text-lg font-semibold text-gray-900 ">
-                        {formatCurrency(stats.pendingFines)}
-                      </Text>
+                    <View>
+                      <Typography className="font-semibold text-gray-900 ">Due Books</Typography>
+                      <Typography className="text-xs text-gray-600 ">Manage overdue books</Typography>
                     </View>
-                  </View>
-                </View>
-
-                <View className="flex-1 rounded-lg p-3 border border-gray-200  bg-white ">
-                  <View className="flex-row items-center gap-2">
-                    <View className="p-2 bg-green-500 rounded-lg">
-                      <MaterialCommunityIcons name="trending-up" size={16} color="white" />
-                    </View>
-                    <View className="flex-1">
-                      <Text className="text-xs text-gray-600 ">Fines Collected</Text>
-                      <Text className="text-lg font-semibold text-gray-900 ">
-                        {formatCurrency(stats.totalFinesCollected)}
-                      </Text>
-                    </View>
-                  </View>
+                  </Link>
                 </View>
               </View>
-            </View>
 
-            <View className="rounded-lg p-4 border border-gray-200  bg-white ">
-              <Text className="text-lg font-semibold mb-4 text-gray-900 ">Quick Actions</Text>
-              <View className="space-y-2">
-                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 ">
-                  <View className="p-2 bg-blue-500 rounded-lg">
-                    <MaterialCommunityIcons name="plus" size={16} color="white" />
+              <View className="space-y-4">
+                <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+                  <View className="flex-row items-center justify-between mb-4">
+                    <Typography className="text-lg font-semibold text-gray-900 ">Recent Activities</Typography>
+                    <TouchableOpacity>
+                      <Typography className="text-sm font-medium text-indigo-600 dark:text-indigo-400">View All</Typography>
+                    </TouchableOpacity>
                   </View>
-                  <View>
-                    <Text className="font-semibold text-gray-900 ">Add New Book</Text>
-                    <Text className="text-xs text-gray-600 ">Register new books</Text>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 ">
-                  <View className="p-2 bg-green-500 rounded-lg">
-                    <MaterialCommunityIcons name="book-plus" size={16} color="white" />
-                  </View>
-                  <View>
-                    <Text className="font-semibold text-gray-900 ">Issue Book</Text>
-                    <Text className="text-xs text-gray-600 ">Issue books to students</Text>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 ">
-                  <View className="p-2 bg-purple-500 rounded-lg">
-                    <MaterialCommunityIcons name="check-circle" size={16} color="white" />
-                  </View>
-                  <View>
-                    <Text className="font-semibold text-gray-900 ">Return Book</Text>
-                    <Text className="text-xs text-gray-600 ">Process book returns</Text>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity className="flex-row items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 ">
-                  <View className="p-2 bg-red-500 rounded-lg">
-                    <MaterialCommunityIcons name="alert-circle" size={16} color="white" />
-                  </View>
-                  <View>
-                    <Text className="font-semibold text-gray-900 ">Due Books</Text>
-                    <Text className="text-xs text-gray-600 ">Manage overdue books</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View className="space-y-4">
-              <View className="rounded-lg p-4 border border-gray-200  bg-white ">
-                <View className="flex-row items-center justify-between mb-4">
-                  <Text className="text-lg font-semibold text-gray-900 ">Recent Activities</Text>
-                  <TouchableOpacity>
-                    <Text className="text-sm font-medium text-indigo-600 dark:text-indigo-400">View All</Text>
-                  </TouchableOpacity>
+                  <FlatList
+                    scrollEnabled={false}
+                    data={activities}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item }) => <ActivityItem activity={item} />}
+                  />
                 </View>
-                <FlatList
-                  scrollEnabled={false}
-                  data={activities}
-                  keyExtractor={(item) => item.id.toString()}
-                  renderItem={({ item }) => <ActivityItem activity={item} />}
-                />
-              </View>
 
-              <View className="rounded-lg p-4 border border-gray-200  bg-white ">
-                <View className="flex-row items-center justify-between mb-4">
-                  <Text className="text-lg font-semibold text-gray-900 ">Popular Books</Text>
-                  <TouchableOpacity>
-                    <Text className="text-sm font-medium text-indigo-600 dark:text-indigo-400">View All</Text>
-                  </TouchableOpacity>
+                <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+                  <View className="flex-row items-center justify-between mb-4">
+                    <Typography className="text-lg font-semibold text-gray-900 ">Popular Books</Typography>
+                    <TouchableOpacity>
+                      <Typography className="text-sm font-medium text-indigo-600 dark:text-indigo-400">View All</Typography>
+                    </TouchableOpacity>
+                  </View>
+                  <FlatList
+                    scrollEnabled={false}
+                    data={popularBooks}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item, index }) => <PopularBookItem book={item} index={index} />}
+                  />
                 </View>
-                <FlatList
-                  scrollEnabled={false}
-                  data={popularBooks}
-                  keyExtractor={(item) => item.id.toString()}
-                  renderItem={({ item, index }) => <PopularBookItem book={item} index={index} />}
-                />
               </View>
-            </View>
-          </>
-        )}
-      </View>
-    </ScrollView>
+            </>
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }

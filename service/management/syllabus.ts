@@ -23,26 +23,29 @@ const getAllSylllabus = async () => {
 
 
 
-const addSyllabus = async (data: { description: string, class_id: string, file: File }) => {
-    const formData = new FormData()
-    formData.append('description', data?.description)
-    formData.append('class_id', data?.class_id)
-    formData.append('file', data?.file)
+const addSyllabus = async (data: { description: string; class_id: string; file: any }) => {
+  const formData = new FormData();
 
-    const access_token = await get_access_token()
+  formData.append("description", data.description);
+  formData.append("class_id", data.class_id);
+  formData.append("file", {
+    uri: data.file.uri,
+    name: data.file.name || "syllabus.pdf",
+    type: data.file.type || "application/pdf",
+  } as any);
 
-    const response = await axios.post(ApiRoute.syllabus.create,
-        formData,
-        {
-            headers: {
-                "Authorization": `Bearer ${access_token}`,
-            },
+  const access_token = await get_access_token();
 
-        }
-    );
-    return response
+  const response = await axios.post(ApiRoute.syllabus.create, formData, {
+    headers: {
+      "Authorization": `Bearer ${access_token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
 
-}
+  return response;
+};
+
 
 
 

@@ -201,11 +201,13 @@ export default function StudentAdmissionScreen() {
   const labelColor = isDark ? "text-gray-300" : "text-gray-700"
 
   return (
-    <View className="flex-1 bg-white dark:bg-gray-900" style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+    <View className={`flex-1 ${bgColor}`} style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
         <View className="mt-6 mb-6">
-          <Text className="text-2xl font-bold text-gray-900 ">Student Admission</Text>
-          <Text className="text-gray-600  mt-1">Complete the admission process for new students</Text>
+          <Text className={`text-2xl font-bold ${textColor}`}>Student Admission</Text>
+          <Text className={`${isDark ? "text-gray-400" : "text-gray-600"} mt-1`}>
+            Complete the admission process for new students
+          </Text>
         </View>
 
         <ScrollView
@@ -784,7 +786,7 @@ export default function StudentAdmissionScreen() {
                       <Text className={`text-xs font-medium mb-1 ${labelColor}`}>Institute Name</Text>
                       <TextInput
                         placeholder="Enter institute name"
-                        value={item.institute_name }
+                        value={item.institute_name}
                         onChangeText={(text) => {
                           const updated = [...values.education_qualifications]
                           updated[index].institute_name = text

@@ -1,9 +1,11 @@
 
 import { useState, useEffect } from "react"
 import { View, Text, ScrollView, FlatList, TouchableOpacity, TextInput, ActivityIndicator, Alert } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { cn } from "@/utils/cn"
+import { Typography } from "@/components/Typography"
+import { useRouter } from "expo-router"
 
 interface OverdueBook {
   id: string
@@ -73,6 +75,8 @@ export default function DueBooks() {
   const [searchTerm, setSearchTerm] = useState("")
   const [filterDays, setFilterDays] = useState("all")
   const [selectedBooks, setSelectedBooks] = useState<Set<string>>(new Set())
+
+  const router = useRouter()
 
   const fineRates = {
     perDay: 10,
@@ -169,38 +173,38 @@ export default function DueBooks() {
         <View className="flex-1">
           <View className="flex-row items-start justify-between mb-2">
             <View className="flex-1">
-              <Text className="text-lg font-semibold text-gray-900 ">{book.bookTitle}</Text>
-              <Text className="text-sm text-gray-600  mt-1">by {book.bookAuthor}</Text>
+              <Typography className="text-lg font-semibold text-gray-900 ">{book.bookTitle}</Typography>
+              <Typography className="text-sm text-gray-600  mt-1">by {book.bookAuthor}</Typography>
             </View>
             <View className="flex-row items-center gap-2">
               <View className={cn("w-3 h-3 rounded-full", getPriorityColor(book.daysOverdue))} />
-              <Text className="text-lg font-bold text-red-600">{formatCurrency(book.fineAmount)}</Text>
+              <Typography className="text-lg font-bold text-red-600">{formatCurrency(book.fineAmount)}</Typography>
             </View>
           </View>
 
           <View className="space-y-2 mb-3">
             <View className="flex-row justify-between">
-              <Text className="text-xs text-gray-600 ">Student:</Text>
-              <Text className="text-xs font-medium text-gray-900 ">
+              <Typography className="text-xs text-gray-600 ">Student:</Typography>
+              <Typography className="text-xs font-medium text-gray-900 ">
                 {book.studentName} - Room {book.studentRoom}
-              </Text>
+              </Typography>
             </View>
             <View className="flex-row justify-between">
-              <Text className="text-xs text-gray-600 ">Days Overdue:</Text>
-              <Text className="text-xs font-medium text-red-600">{book.daysOverdue} days</Text>
+              <Typography className="text-xs text-gray-600 ">Days Overdue:</Typography>
+              <Typography className="text-xs font-medium text-red-600">{book.daysOverdue} days</Typography>
             </View>
             <View className="flex-row justify-between">
-              <Text className="text-xs text-gray-600 ">Email:</Text>
-              <Text className="text-xs font-medium text-gray-900 ">{book.studentEmail}</Text>
+              <Typography className="text-xs text-gray-600 ">Email:</Typography>
+              <Typography className="text-xs font-medium text-gray-900 ">{book.studentEmail}</Typography>
             </View>
           </View>
 
           <View className="flex-row gap-2">
             <TouchableOpacity className="flex-1 bg-orange-600 rounded-lg p-2">
-              <Text className="text-white text-center text-xs font-medium">Send Reminder</Text>
+              <Typography className="text-white text-center text-xs font-medium">Send Reminder</Typography>
             </TouchableOpacity>
             <TouchableOpacity className="flex-1 bg-green-600 rounded-lg p-2">
-              <Text className="text-white text-center text-xs font-medium">Collect Fine</Text>
+              <Typography className="text-white text-center text-xs font-medium">Collect Fine</Typography>
             </TouchableOpacity>
           </View>
         </View>
@@ -217,120 +221,133 @@ export default function DueBooks() {
   }
 
   return (
-    <ScrollView
-      className="flex-1 bg-white dark:bg-gray-900"
-      contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
-    >
-      <View className="px-4 py-6 space-y-6">
-        <View>
-          <Text className="text-2xl font-bold text-gray-900 ">Due Books Management</Text>
-          <Text className="text-sm mt-1 text-gray-600 ">Track overdue books and manage fines</Text>
-        </View>
+    <SafeAreaView className="flex-1 bg-background">
 
-        <View className="space-y-3">
-          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
-            <View className="flex-row items-center justify-between mb-2">
-              <Text className="text-sm font-medium text-gray-700 ">Overdue Books</Text>
-              <Text className="text-2xl font-bold text-red-600">{overdueBooks.length}</Text>
+      <View className="flex-row items-center p-4">
+        <TouchableOpacity
+          onPress={() => router.push("/management")}
+          className="flex-row items-center bg-white border border-border rounded-lg px-3 py-2 mr-2"
+        >
+          <Typography className="text-primary font-semibold">← Back</Typography>
+        </TouchableOpacity>
+
+        <Typography className="text-lg font-bold text-foreground">Due Books</Typography>
+      </View>
+      <ScrollView
+        className="flex-1 bg-white dark:bg-gray-900"
+        contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+      >
+        <View className="px-4 py-6 space-y-6">
+          <View>
+            <Typography className="text-2xl font-bold text-gray-900 ">Due Books Management</Typography>
+            <Typography className="text-sm mt-1 text-gray-600 ">Track overdue books and manage fines</Typography>
+          </View>
+
+          <View className="space-y-3">
+            <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+              <View className="flex-row items-center justify-between mb-2">
+                <Typography className="text-sm font-medium text-gray-700 ">Overdue Books</Typography>
+                <Typography className="text-2xl font-bold text-red-600">{overdueBooks.length}</Typography>
+              </View>
+              <Typography className="text-xs text-gray-600 ">Requires attention</Typography>
             </View>
-            <Text className="text-xs text-gray-600 ">Requires attention</Text>
-          </View>
 
-          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
-            <View className="flex-row items-center justify-between mb-2">
-              <Text className="text-sm font-medium text-gray-700 ">Total Fines</Text>
-              <Text className="text-2xl font-bold text-orange-600">{formatCurrency(totalFineAmount)}</Text>
+            <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+              <View className="flex-row items-center justify-between mb-2">
+                <Typography className="text-sm font-medium text-gray-700 ">Total Fines</Typography>
+                <Typography className="text-2xl font-bold text-orange-600">{formatCurrency(totalFineAmount)}</Typography>
+              </View>
+              <Typography className="text-xs text-gray-600 ">Pending collection</Typography>
             </View>
-            <Text className="text-xs text-gray-600 ">Pending collection</Text>
-          </View>
 
-          <View className="rounded-lg p-4 border border-gray-200  bg-white ">
-            <View className="flex-row items-center justify-between mb-2">
-              <Text className="text-sm font-medium text-gray-700 ">Critical (30+ days)</Text>
-              <Text className="text-2xl font-bold text-red-600">
-                {overdueBooks.filter((b) => b.daysOverdue >= 30).length}
-              </Text>
+            <View className="rounded-lg p-4 border border-gray-200  bg-white ">
+              <View className="flex-row items-center justify-between mb-2">
+                <Typography className="text-sm font-medium text-gray-700 ">Critical (30+ days)</Typography>
+                <Typography className="text-2xl font-bold text-red-600">
+                  {overdueBooks.filter((b) => b.daysOverdue >= 30).length}
+                </Typography>
+              </View>
+              <Typography className="text-xs text-gray-600 ">Immediate action</Typography>
             </View>
-            <Text className="text-xs text-gray-600 ">Immediate action</Text>
-          </View>
-        </View>
-
-        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3">
-          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 ">
-            <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
-            <TextInput
-              placeholder="Search books or students..."
-              placeholderTextColor="#9ca3af"
-              value={searchTerm}
-              onChangeText={setSearchTerm}
-              className="flex-1 ml-2 py-2 text-sm text-gray-900 "
-            />
           </View>
 
-          <View className="flex-row gap-2">
-            {["all", "1-7", "8-14", "15-30", "30+"].map((period) => (
-              <TouchableOpacity
-                key={period}
-                onPress={() => setFilterDays(period)}
-                className={cn(
-                  "py-2 px-3 rounded-lg border",
-                  filterDays === period
-                    ? "bg-indigo-600 border-indigo-600"
-                    : "bg-white  border-gray-200 ",
-                )}
-              >
-                <Text
+          <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3">
+            <View className="flex-row items-center px-3 rounded-lg border border-gray-300 ">
+              <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
+              <TextInput
+                placeholder="Search books or students..."
+                placeholderTextColor="#9ca3af"
+                value={searchTerm}
+                onChangeText={setSearchTerm}
+                className="flex-1 ml-2 py-2 text-sm text-gray-900 "
+              />
+            </View>
+
+            <View className="flex-row gap-2">
+              {["all", "1-7", "8-14", "15-30", "30+"].map((period) => (
+                <TouchableOpacity
+                  key={period}
+                  onPress={() => setFilterDays(period)}
                   className={cn(
-                    "text-xs font-medium",
-                    filterDays === period ? "text-white" : "text-gray-700 ",
+                    "py-2 px-3 rounded-lg border",
+                    filterDays === period
+                      ? "bg-indigo-600 border-indigo-600"
+                      : "bg-white  border-gray-200 ",
                   )}
                 >
-                  {period === "all" ? "All" : `${period} days`}
-                </Text>
-              </TouchableOpacity>
-            ))}
+                  <Typography
+                    className={cn(
+                      "text-xs font-medium",
+                      filterDays === period ? "text-white" : "text-gray-700 ",
+                    )}
+                  >
+                    {period === "all" ? "All" : `${period} days`}
+                  </Typography>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            <TouchableOpacity
+              onPress={handleSelectAll}
+              className="flex-row items-center p-2 rounded-lg border border-gray-200  bg-gray-50 "
+            >
+              <MaterialCommunityIcons
+                name={
+                  selectedBooks.size === filteredBooks.length && filteredBooks.length > 0
+                    ? "checkbox-marked"
+                    : "checkbox-blank-outline"
+                }
+                size={20}
+                color="#10b981"
+              />
+              <Typography className="ml-2 text-sm font-medium text-gray-700 ">
+                Select All ({filteredBooks.length})
+              </Typography>
+            </TouchableOpacity>
           </View>
 
-          <TouchableOpacity
-            onPress={handleSelectAll}
-            className="flex-row items-center p-2 rounded-lg border border-gray-200  bg-gray-50 "
-          >
-            <MaterialCommunityIcons
-              name={
-                selectedBooks.size === filteredBooks.length && filteredBooks.length > 0
-                  ? "checkbox-marked"
-                  : "checkbox-blank-outline"
-              }
-              size={20}
-              color="#10b981"
+          {selectedBooks.size > 0 && (
+            <TouchableOpacity className="bg-orange-600 rounded-lg p-3 flex-row items-center justify-center gap-2">
+              <MaterialCommunityIcons name="send" size={18} color="white" />
+              <Typography className="text-white font-semibold">Send Reminder ({selectedBooks.size})</Typography>
+            </TouchableOpacity>
+          )}
+
+          {filteredBooks.length > 0 ? (
+            <FlatList
+              scrollEnabled={false}
+              data={filteredBooks}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => <OverdueBookCard book={item} />}
             />
-            <Text className="ml-2 text-sm font-medium text-gray-700 ">
-              Select All ({filteredBooks.length})
-            </Text>
-          </TouchableOpacity>
+          ) : (
+            <View className="items-center justify-center py-12">
+              <MaterialCommunityIcons name="check-circle" size={48} color="#10b981" />
+              <Typography className="text-gray-500  mt-2">No overdue books</Typography>
+            </View>
+          )}
         </View>
-
-        {selectedBooks.size > 0 && (
-          <TouchableOpacity className="bg-orange-600 rounded-lg p-3 flex-row items-center justify-center gap-2">
-            <MaterialCommunityIcons name="send" size={18} color="white" />
-            <Text className="text-white font-semibold">Send Reminder ({selectedBooks.size})</Text>
-          </TouchableOpacity>
-        )}
-
-        {filteredBooks.length > 0 ? (
-          <FlatList
-            scrollEnabled={false}
-            data={filteredBooks}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => <OverdueBookCard book={item} />}
-          />
-        ) : (
-          <View className="items-center justify-center py-12">
-            <MaterialCommunityIcons name="check-circle" size={48} color="#10b981" />
-            <Text className="text-gray-500  mt-2">No overdue books</Text>
-          </View>
-        )}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   )
 }

@@ -1,12 +1,13 @@
 
 import { useContext, useEffect, useState } from "react"
 import { View, Text, ScrollView, FlatList, TouchableOpacity, ActivityIndicator, Alert } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 import { useRouter } from "expo-router"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { get_all_exam } from "@/service/management/exam"
-import {result_declare} from "@/service/management/result"
+import { result_declare } from "@/service/management/result"
 import { AlertContext } from "@/context/Alert/context"
+import { Typography } from "@/components/Typography"
 
 export default function ExamList() {
   const insets = useSafeAreaInsets()
@@ -47,26 +48,24 @@ export default function ExamList() {
   }
 
   const ExamCard = ({ item }: any) => (
-    <View className="mb-3 p-4 rounded-lg border border-gray-200  bg-white ">
+    <View className="mb-3 p-4 mt-3 rounded-lg border border-gray-200  bg-white ">
       <View className="flex-row items-center justify-between mb-3">
         <View className="flex-1">
-          <Text className="font-semibold text-gray-900 ">{item?.name}</Text>
-          <Text className="text-xs mt-1 text-gray-600 ">
+          <Typography className="font-semibold text-gray-900 ">{item?.name}</Typography>
+          <Typography className="text-xs mt-1 text-gray-600 ">
             {item?.class_name} • {item?.session}
-          </Text>
+          </Typography>
         </View>
         <View
-          className={`px-3 py-1 rounded-full ${
-            item?.result_declare ? "bg-emerald-100 dark:bg-emerald-900" : "bg-yellow-100 dark:bg-yellow-900"
-          }`}
-        >
-          <Text
-            className={`text-xs font-semibold ${
-              item?.result_declare ? "text-emerald-700 dark:text-emerald-200" : "text-yellow-700 dark:text-yellow-200"
+          className={`px-3 py-1 rounded-full ${item?.result_declare ? "bg-emerald-100 " : "bg-yellow-100 "
             }`}
+        >
+          <Typography
+            className={`text-xs font-semibold ${item?.result_declare ? "text-emerald-700 " : "text-yellow-700 "
+              }`}
           >
             {item?.result_declare ? "Declared" : "Pending"}
-          </Text>
+          </Typography>
         </View>
       </View>
 
@@ -74,14 +73,14 @@ export default function ExamList() {
         <TouchableOpacity
           onPress={() => handleDeclareResult(item?._id)}
           disabled={declaring === item?._id}
-          className="flex-row items-center justify-center p-2 rounded-lg bg-emerald-600 dark:bg-emerald-700"
+          className="flex-row items-center justify-center p-2 rounded-lg bg-emerald-600 "
         >
           {declaring === item?._id ? (
             <ActivityIndicator size="small" color="white" />
           ) : (
             <>
               <MaterialCommunityIcons name="check-circle" size={16} color="white" />
-              <Text className="ml-2 font-medium text-white text-sm">Declare Result</Text>
+              <Typography className="ml-2 font-medium text-white text-sm">Declare Result</Typography>
             </>
           )}
         </TouchableOpacity>
@@ -90,42 +89,54 @@ export default function ExamList() {
   )
 
   return (
-    <ScrollView
-      className="flex-1 bg-white dark:bg-gray-900"
-      contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
-    >
-      <View className="px-4 py-6 space-y-6">
-        <View className="flex-row items-center justify-between">
-          <View>
-            <Text className="text-2xl font-bold text-gray-900 ">Exams</Text>
-            <Text className="text-sm mt-1 text-gray-600 ">Manage exams</Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => router.push("/management/exam/create")}
-            className="p-2 rounded-lg bg-emerald-600 dark:bg-emerald-700"
-          >
-            <MaterialCommunityIcons name="plus" size={24} color="white" />
-          </TouchableOpacity>
-        </View>
+    <SafeAreaView className="flex-1  bg-background">
+      <View className="flex-row items-center p-4">
+        <TouchableOpacity
+          onPress={() => router.push("/management")}
+          className="flex-row items-center bg-white border border-border rounded-lg px-3 py-2 mr-2"
+        >
+          <Typography className=" text-primary font-semibold">← Back</Typography>
+        </TouchableOpacity>
 
-        {loading ? (
-          <View className="flex-row items-center justify-center py-12">
-            <ActivityIndicator size="large" color="#10b981" />
-          </View>
-        ) : examList.length > 0 ? (
-          <FlatList
-            scrollEnabled={false}
-            data={examList}
-            keyExtractor={(item) => item._id}
-            renderItem={({ item }) => <ExamCard item={item} />}
-          />
-        ) : (
-          <View className="items-center justify-center py-12">
-            <MaterialCommunityIcons name="folder-open" size={48} color="#d1d5db" />
-            <Text className="text-gray-500  mt-2">No exams found</Text>
-          </View>
-        )}
+        <Typography className="text-lg font-bold text-foreground">Exams </Typography>
       </View>
-    </ScrollView>
+      <ScrollView
+        className="flex-1 bg-background"
+
+      >
+        <View className="px-4 py-6 space-y-6">
+          <View className="flex-row items-center justify-between">
+            <View>
+              <Typography className="text-2xl font-bold text-gray-900 ">Exams</Typography>
+              <Typography className="text-sm mt-1 text-gray-600 ">Manage exams</Typography>
+            </View>
+            <TouchableOpacity
+              onPress={() => router.push("/management/exam/create")}
+              className="p-2 rounded-lg bg-emerald-600 "
+            >
+              <MaterialCommunityIcons name="plus" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
+
+          {loading ? (
+            <View className="flex-row items-center justify-center py-12">
+              <ActivityIndicator size="large" color="#10b981" />
+            </View>
+          ) : examList.length > 0 ? (
+            <FlatList
+              scrollEnabled={false}
+              data={examList}
+              keyExtractor={(item) => item._id}
+              renderItem={({ item }) => <ExamCard item={item} />}
+            />
+          ) : (
+            <View className="items-center justify-center py-12">
+              <MaterialCommunityIcons name="folder-open" size={48} color="#d1d5db" />
+              <Typography className="text-gray-500  mt-2">No exams found</Typography>
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }

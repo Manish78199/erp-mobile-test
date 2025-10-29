@@ -399,8 +399,8 @@ const selectSection = () => {
               {showAssignedDatePicker && (
                 <DateTimePicker
                   value={values.assigned_date ? new Date(values.assigned_date) : new Date()}
-                  mode="datetime"
-                  display="spinner"
+                 mode="date"
+                  display="default"
                   onChange={handleAssignedDateChange}
                   minimumDate={today}
                 />
@@ -428,8 +428,8 @@ const selectSection = () => {
               {showDueDatePicker && (
                 <DateTimePicker
                   value={values.due_date ? new Date(values.due_date) : new Date()}
-                  mode="datetime"
-                  display="spinner"
+                 mode="date"
+                  display="default"
                   onChange={handleDueDateChange}
                   minimumDate={today}
                 />

@@ -1,4 +1,3 @@
-"use client"
 
 import { useEffect, useState } from "react"
 import {
@@ -28,7 +27,7 @@ export default function ClassManagementScreen() {
   const [className, setClassName] = useState("")
   const [selectedSection, setSelectedSection] = useState<string[]>([])
   const [allClass, setClass] = useState<
-    Array<{ name: string; classCode: string; studentCount?: number; subjectCount?: number }>
+    Array<{_id:string, name: string; classCode: string; studentCount?: number; subjectCount?: number }>
   >([])
   const [loading, setLoading] = useState(false)
   const insets = useSafeAreaInsets()
@@ -90,21 +89,21 @@ export default function ClassManagementScreen() {
   }
 
   const renderClassItem = ({ item }: { item: any }) => (
-    <View className="flex-row items-center justify-between px-4 py-3 border-b border-border dark:border-zinc-800">
+    <View className="flex-row items-center justify-between px-4 py-3 border-b border-border ">
       <View className="flex-1">
-        <Typography className="text-sm font-semibold text-textPrimary dark:text-foreground">{item.name}</Typography>
+        <Typography className="text-sm font-semibold text-textPrimary ">{item.name} </Typography>
         <Typography className="text-xs text-textSecondary mt-1">{item.classCode}</Typography>
       </View>
-      <View className="flex-row items-center space-x-4">
+      <View className="flex-row items-center space-x-4 ">
         <View className="items-center">
           <Typography className="text-xs text-textSecondary">Students</Typography>
-          <Typography className="text-sm font-semibold text-textPrimary dark:text-foreground">
+          <Typography className="text-sm font-semibold text-textPrimary ">
             {item.studentCount || 0}
           </Typography>
         </View>
-        <View className="items-center">
+        <View className="items-center mx-2">
           <Typography className="text-xs text-textSecondary">Subjects</Typography>
-          <Typography className="text-sm font-semibold text-textPrimary dark:text-foreground">
+          <Typography className="text-sm font-semibold text-textPrimary ">
             {item.subjectCount || 0}
           </Typography>
         </View>
@@ -118,14 +117,14 @@ export default function ClassManagementScreen() {
 
   return (
     <SafeAreaView className="flex-1">
-      <View className="flex-1 bg-background dark:bg-[var(--background-color)]" style={{ paddingTop: insets.top }}>
-        {/* Modal */}
+      <View className="flex-1 bg-background " >
+      
         <Modal visible={isOpen} transparent animationType="fade" onRequestClose={() => setIsOpen(false)}>
           <View className="flex-1 bg-black/50 justify-center items-center px-4">
-            <View className="w-full max-w-sm rounded-xl p-6 bg-surface dark:bg-[var(--card-background-color)] border border-border dark:border-[var(--card-border-color)]">
-              <Typography className="text-lg font-semibold text-textPrimary dark:text-foreground">Add New Class</Typography>
+            <View className="w-full max-w-sm rounded-xl p-6 bg-surface  border border-border ">
+              <Typography className="text-lg font-semibold text-textPrimary ">Add New Class</Typography>
 
-              <View className="border-t border-border dark:border-[var(--card-border-color)] mt-3 pt-4">
+              <View className="border-t border-border  mt-3 pt-4">
                 {/* Class Name Input */}
                 <View className="mb-4">
                   <Typography className="text-sm font-medium text-textSecondary mb-2">Class Name</Typography>
@@ -134,7 +133,7 @@ export default function ClassManagementScreen() {
                     placeholderTextColor="#9ca3af"
                     value={className}
                     onChangeText={setClassName}
-                    className="rounded-lg border border-border dark:border-[var(--card-border-color)] px-3 py-2 text-sm bg-surfaceVariant dark:bg-[var(--field-background-color)] text-textPrimary dark:text-foreground"
+                    className="rounded-lg border border-border  px-3 py-2 text-sm bg-surfaceVariant  text-textPrimar"
                   />
                 </View>
 
@@ -165,19 +164,19 @@ export default function ClassManagementScreen() {
               </View>
 
               {/* Action Buttons */}
-              <View className="flex-row justify-end space-x-3 mt-6">
+              <View className="flex-row justify-end gap-3 mt-6">
                 <TouchableOpacity onPress={discardClassModal} className="px-4 py-2 rounded-md bg-error/10">
                   <Typography className="text-sm font-semibold text-error">Cancel</Typography>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={createClassRequest}
                   disabled={creatingClass}
-                  className="px-4 py-2 rounded-md bg-success"
+                  className="px-4  py-2 rounded-md bg-success"
                 >
                   {creatingClass ? (
                     <ActivityIndicator size="small" color="#fff" />
                   ) : (
-                    <Typography className="text-sm font-semibold text-white">Add Class</Typography>
+                    <Typography className=" text-sm font-semibold text-white">Add Class</Typography>
                   )}
                 </TouchableOpacity>
               </View>
@@ -193,23 +192,23 @@ export default function ClassManagementScreen() {
             <Typography className="text-primary font-semibold">← Back</Typography>
           </TouchableOpacity>
 
-          <Typography className=" font-bold text-foreground">Classes</Typography>
+          <Typography className="text-lg font-bold text-foreground">Classes</Typography>
         </View>
-        {/* Body */}
+       
         <ScrollView className="flex-1 px-4">
 
           <View className="mt-6 mb-6">
-            {/* Add Button */}
+       
 
             <View className=" flex-row item-center justify-between">
               <View>
-                <Typography className="text-2xl font-bold text-textPrimary dark:text-foreground">Class Management</Typography>
+                <Typography className="text-2xl font-bold text-textPrimary ">Class Management</Typography>
                 <Typography className="text-textSecondary mt-1">Manage Your School's classes.</Typography>
               </View>
               <PermitComponent module="CLASS" action="CREATE">
                 <TouchableOpacity onPress={() => setIsOpen(true)} className="bg-primary text-white p-3 rounded-lg">
 
-                  <Plus size={20} className="text-white" />
+                  <Plus size={20} color="white" />
                 </TouchableOpacity>
               </PermitComponent>
             </View>
@@ -218,16 +217,16 @@ export default function ClassManagementScreen() {
 
 
 
-            {/* Filter & Export Buttons */}
-            <View className="flex-row space-x-2 mt-3">
-              <TouchableOpacity className="flex-row items-center space-x-2 px-3 py-2 rounded-md bg-surfaceVariant dark:bg-[var(--hover-backgroud-color)]">
+           
+            <View className="flex-row space-x-2 mt-3 gap-2">
+              <TouchableOpacity className="flex-row items-center space-x-2 px-3 py-2 rounded-md bg-surfaceVariant ">
                 <MaterialIcons name="filter-list" size={18} color="#6A5ACD" />
-                <Typography className="text-textPrimary dark:text-foreground">Filter By</Typography>
+                <Typography className="text-textPrimary ">Filter By</Typography>
               </TouchableOpacity>
 
-              <TouchableOpacity className="flex-row items-center space-x-2 px-3 py-2 rounded-md bg-surfaceVariant dark:bg-[var(--hover-backgroud-color)]">
+              <TouchableOpacity className="flex-row items-center space-x-2 px-3 py-2 rounded-md bg-surfaceVariant ">
                 <MaterialCommunityIcons name="note" size={18} color="#6A5ACD" />
-                <Typography className="text-textPrimary dark:text-foreground">Exports</Typography>
+                <Typography className="text-textPrimary ">Exports</Typography>
                 <MaterialIcons name="expand-more" size={16} color="#6A5ACD" />
               </TouchableOpacity>
             </View>
@@ -243,9 +242,9 @@ export default function ClassManagementScreen() {
               <FlatList
                 data={allClass}
                 renderItem={renderClassItem}
-                keyExtractor={(item) => item.classCode}
+                keyExtractor={(item) => item._id}
                 scrollEnabled={false}
-                className="rounded-lg border border-border dark:border-[var(--card-border-color)] bg-surface dark:bg-[var(--card-background-color)]"
+                className="rounded-lg border border-border  bg-surface "
               />
             ) : (
               <View className="py-8 items-center">

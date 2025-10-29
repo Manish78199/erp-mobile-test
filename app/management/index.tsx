@@ -1,17 +1,21 @@
-"use client"
-
 import { useRouter } from "expo-router"
-import type React from "react"
-import { View, ScrollView, TouchableOpacity, Dimensions, RefreshControl } from "react-native"
-import { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import {
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Dimensions,
+  RefreshControl,
+} from "react-native"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import LogoutButton from "@/components/LogoutButton"
 import { Typography } from "@/components/Typography"
 import { StudentAppDataContext } from "@/context/Student/context"
 import Premium3DIcon from "@/components/Premium3DIcon"
 import { LinearGradient } from "expo-linear-gradient"
+import { Ionicons, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons"
 
-const { width, height } = Dimensions.get("window")
+const { width } = Dimensions.get("window")
 
 interface RecentModule {
   title: string
@@ -36,45 +40,50 @@ const ManagementDashboard: React.FC = () => {
   const router = useRouter()
   const [refreshing, setRefreshing] = useState(false)
   const [recentModules, setRecentModules] = useState<RecentModule[]>([])
+  const { profile: Profile } = useContext(StudentAppDataContext)
 
-  const { profile: Profile, refresh: refreshProfile } = useContext(StudentAppDataContext)
+  const onRefresh = () => setRefreshing(true)
 
-  const onRefresh = () => {
-    setRefreshing(true)
+  /** 🧠 Map of icon names to proper library */
+  const renderIcon = (name: string, size: number, color: string) => {
+    // MaterialCommunityIcons list
+    const materialCommunity = ["clipboard", "bus", "library"]
+    const ionicons = [
+      "calendar",
+      "chatbubble-ellipses",
+      "book-outline",
+      "document-text",
+      "trophy",
+      "time",
+      "megaphone",
+      "people",
+      "mail",
+      "bookmarks",
+    ]
+    const material = ["school", "layers", "checkmark-done"]
 
+    if (materialCommunity.includes(name))
+      return <MaterialCommunityIcons name={name as any} size={size} color={color} />
+    if (ionicons.includes(name))
+      return <Ionicons name={name as any} size={size} color={color} />
+    if (material.includes(name))
+      return <MaterialIcons name={name as any} size={size} color={color} />
+
+    // fallback
+    return <Ionicons name="alert-circle-outline" size={size} color={color} />
   }
 
+  /** ===== Sections ===== */
   const managementSections: ModuleSection[] = [
     {
       title: "Communication",
       modules: [
         {
-          title: "Birthday",
-          icon: "cake",
-          colors: ["#ff6b6b", "#ee5a6f"],
-          screen: "/management/communication/birthday",
-          description: "Student birthdays",
-        },
-        {
-          title: "Calendar",
-          icon: "event",
-          colors: ["#fdbb2d", "#22c1c3"],
-          screen: "/management/calendar",
-          description: "Academic calendar",
-        },
-        {
           title: "Circulars",
-          icon: "notifications",
+          icon: "megaphone",
           colors: ["#4facfe", "#00f2fe"],
           screen: "/management/notice",
-          description: "School notices",
-        },
-        {
-          title: "Image Gallery",
-          icon: "photo-library",
-          colors: ["#89f7fe", "#66a6ff"],
-          screen: "/management/event/photos",
-          description: "Event photos",
+          description: "School announcements",
         },
         {
           title: "Mailbox",
@@ -84,22 +93,8 @@ const ManagementDashboard: React.FC = () => {
           description: "Messages",
         },
         {
-          title: "Quiz",
-          icon: "quiz",
-          colors: ["#a8edea", "#fed6e3"],
-          screen: "/management/communication/quiz",
-          description: "Create quizzes",
-        },
-        {
-          title: "School News",
-          icon: "newspaper",
-          colors: ["#667eea", "#764ba2"],
-          screen: "/management/communication/news",
-          description: "News updates",
-        },
-        {
           title: "SMS History",
-          icon: "sms",
+          icon: "chatbubble-ellipses",
           colors: ["#f093fb", "#f5576c"],
           screen: "/management/communication/sms",
           description: "SMS logs",
@@ -111,99 +106,90 @@ const ManagementDashboard: React.FC = () => {
       modules: [
         {
           title: "Attendance",
-          icon: "check-circle",
-          colors: ["#ffecd2", "#fcb69f"],
+          icon: "calendar",
+          colors: ["#34d399", "#10b981"],
           screen: "/management/student/attendance",
           description: "Class-wise attendance",
         },
         {
           title: "Homework",
-          icon: "assignment",
-          colors: ["#f093fb", "#f5576c"],
+          icon: "book-outline",
+          colors: ["#f97316", "#fb923c"],
           screen: "/management/homework",
           description: "Manage assignments",
         },
         {
-          title: "Hostel Attendance",
-          icon: "domain",
-          colors: ["#a1c4fd", "#c2e9fb"],
-          screen: "/management/workspace/hostel",
-          description: "Hostel records",
-        },
-        {
-          title: "Lesson Planning",
-          icon: "book",
-          colors: ["#d299c2", "#fef9d7"],
-          screen: "/management/workspace/lesson",
-          description: "Plan lessons",
-        },
-        {
           title: "Mark Entry",
-          icon: "grade",
-          colors: ["#11998e", "#38ef7d"],
-          screen: "/management/workspace/marks",
-          description: "Enter student marks",
-        },
-        {
-          title: "My Attendance",
-          icon: "event-available",
-          colors: ["#ff9a9e", "#fecfef"],
-          screen: "/management/workspace/my-attendance",
-          description: "Staff attendance",
-        },
-        {
-          title: "Remarks",
-          icon: "comment",
-          colors: ["#ffecd2", "#fcb69f"],
-          screen: "/management/workspace/remarks",
-          description: "Student remarks",
-        },
-        {
-          title: "Service Requests",
-          icon: "support-agent",
-          colors: ["#4facfe", "#00f2fe"],
-          screen: "/management/workspace/requests",
-          description: "Complaints & grievances",
+          icon: "clipboard",
+          colors: ["#22c55e", "#16a34a"],
+          screen: "/management/exam",
+          description: "Enter marks & results",
         },
         {
           title: "Syllabus",
-          icon: "library-books",
-          colors: ["#667eea", "#764ba2"],
+          icon: "library",
+          colors: ["#6366f1", "#818cf8"],
           screen: "/management/syllabus",
           description: "Course curriculum",
-        },
-        {
-          title: "Task Management",
-          icon: "task-alt",
-          colors: ["#fdbb2d", "#22c1c3"],
-          screen: "/management/workspace/tasks",
-          description: "Manage tasks",
-        },
-        {
-          title: "Teacher Diary",
-          icon: "diary",
-          colors: ["#a8edea", "#fed6e3"],
-          screen: "/management/workspace/diary",
-          description: "Load management",
         },
       ],
     },
     {
-      title: "Approvals & Alerts",
+      title: "Management & Setup",
       modules: [
         {
-          title: "Student Leave",
-          icon: "assignment-late",
-          colors: ["#fa709a", "#fee140"],
-          screen: "/management/approvals/leave",
-          description: "Approve leave requests",
+          title: "Classes",
+          icon: "school",
+          colors: ["#60a5fa", "#3b82f6"],
+          screen: "/management/classes",
+          description: "Class list & setup",
         },
         {
-          title: "Time Table",
-          icon: "schedule",
-          colors: ["#89f7fe", "#66a6ff"],
-          screen: "/management/timetable",
-          description: "Class schedules",
+          title: "Sections",
+          icon: "layers",
+          colors: ["#f87171", "#ef4444"],
+          screen: "/management/section",
+          description: "Manage sections",
+        },
+        {
+          title: "Subjects",
+          icon: "book-outline",
+          colors: ["#a78bfa", "#8b5cf6"],
+          screen: "/management/subject",
+          description: "Subjects setup",
+        },
+        {
+          title: "Exam",
+          icon: "trophy",
+          colors: ["#facc15", "#eab308"],
+          screen: "/management/exam",
+          description: "Exam management",
+        },
+        {
+          title: "Result",
+          icon: "document-text",
+          colors: ["#10b981", "#059669"],
+          screen: "/management/result",
+          description: "View student results",
+        },
+      ],
+    },
+    {
+      title: "Library & Transport",
+      modules: [
+        {
+          title: "Library",
+          icon: "bookmarks",
+          colors: ["#6366f1", "#4338ca"],
+          screen: "/management/library",
+          description: "Library management",
+        },
+        {
+          title: "Transport",
+          icon: "bus",
+          colors: ["#f43f5e", "#e11d48"],
+          screen: "/management/transport",
+          description: "Bus routes & vehicle info",
         },
       ],
     },
@@ -211,92 +197,39 @@ const ManagementDashboard: React.FC = () => {
       title: "Others",
       modules: [
         {
-          title: "Downloads",
-          icon: "download",
-          colors: ["#11998e", "#38ef7d"],
-          screen: "/management/others/downloads",
-          description: "Download resources",
-        },
-        {
-          title: "Library",
-          icon: "local-library",
-          colors: ["#667eea", "#764ba2"],
-          screen: "/management/library",
-          description: "Issued books",
-        },
-        {
           title: "Student Details",
-          icon: "person",
-          colors: ["#f093fb", "#f5576c"],
+          icon: "people",
+          colors: ["#06b6d4", "#0891b2"],
           screen: "/management/student",
           description: "Student information",
         },
         {
-          title: "Student Location",
-          icon: "location-on",
-          colors: ["#ff9a9e", "#fecfef"],
-          screen: "/management/others/location",
-          description: "Track students",
-        },
-        {
-          title: "Transport",
-          icon: "directions-bus",
-          colors: ["#ffecd2", "#fcb69f"],
-          screen: "/management/transport",
-          description: "Bus routes",
-        },
-           {
-          title: "Section",
-          icon: "directions-bus",
-          colors: ["#ffecd2", "#fcb69f"],
-          screen: "/management/section",
-          description: "Bus routes",
+          title: "Time Table",
+          icon: "time",
+          colors: ["#f59e0b", "#d97706"],
+          screen: "/management/timetable",
+          description: "Class schedules",
         },
       ],
     },
   ]
 
   const quickStats = [
-    {
-      title: "Total Students",
-      value: "--",
-      icon: "people",
-      colors: ["#11998e", "#38ef7d"],
-    },
-    {
-      title: "Pending Tasks",
-      value: "0",
-      icon: "task-alt",
-      colors: ["#f093fb", "#f5576c"],
-    },
-    {
-      title: "Approvals",
-      value: "--",
-      icon: "approval",
-      colors: ["#a8edea", "#fed6e3"],
-    },
-    {
-      title: "Messages",
-      value: "0",
-      icon: "mail",
-      colors: ["#667eea", "#764ba2"],
-    },
+    { title: "Total Students", value: "--", icon: "people", colors: ["#22c55e", "#16a34a"] },
+    { title: "Pending Tasks", value: "0", icon: "clipboard", colors: ["#f97316", "#fb923c"] },
+    { title: "Approvals", value: "--", icon: "checkmark-done", colors: ["#3b82f6", "#2563eb"] },
+    { title: "Messages", value: "0", icon: "mail", colors: ["#a855f7", "#7e22ce"] },
   ]
 
-  // Load recent modules from AsyncStorage
   const loadRecentModules = async () => {
     try {
       const stored = await AsyncStorage.getItem("recentModulesManagement")
-      if (stored) {
-        const parsed = JSON.parse(stored)
-        setRecentModules(parsed.slice(0, 4))
-      }
+      if (stored) setRecentModules(JSON.parse(stored).slice(0, 4))
     } catch (error) {
       console.error("Error loading recent modules:", error)
     }
   }
 
-  // Save recent modules to AsyncStorage
   const saveRecentModules = async (modules: RecentModule[]) => {
     try {
       await AsyncStorage.setItem("recentModulesManagement", JSON.stringify(modules))
@@ -305,33 +238,19 @@ const ManagementDashboard: React.FC = () => {
     }
   }
 
-  // Handle module press and update recent modules
   const handleModulePress = (module: any) => {
-    const recentModule: RecentModule = {
-      title: module.title,
-      icon: module.icon,
-      colors: module.colors,
-      screen: module.screen,
-      lastUsed: Date.now(),
-    }
-
-    const updatedRecent = [recentModule, ...recentModules.filter((item) => item.screen !== module.screen)].slice(0, 4)
-
-    setRecentModules(updatedRecent)
-    saveRecentModules(updatedRecent)
-
+    const recentModule: RecentModule = { ...module, lastUsed: Date.now() }
+    const updated = [recentModule, ...recentModules.filter((m) => m.screen !== module.screen)].slice(0, 4)
+    setRecentModules(updated)
+    saveRecentModules(updated)
     router.push(module.screen as any)
   }
 
-  const getGreeting = (): { period: "morning" | "afternoon" | "evening"; message: string } => {
+  const getGreeting = () => {
     const hour = new Date().getHours()
-    if (hour < 12) {
-      return { period: "morning", message: "Good Morning" }
-    } else if (hour < 17) {
-      return { period: "afternoon", message: "Good Afternoon" }
-    } else {
-      return { period: "evening", message: "Good Evening" }
-    }
+    if (hour < 12) return "Good Morning"
+    if (hour < 17) return "Good Afternoon"
+    return "Good Evening"
   }
 
   useEffect(() => {
@@ -344,7 +263,7 @@ const ManagementDashboard: React.FC = () => {
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
     >
-      {/* Header with Gradient */}
+      {/* ===== Header ===== */}
       <LinearGradient
         colors={["#667eea", "#764ba2"]}
         start={{ x: 0, y: 0 }}
@@ -359,17 +278,17 @@ const ManagementDashboard: React.FC = () => {
       >
         <View className="flex flex-row items-center justify-between">
           <Typography className="font-extrabold text-white mb-2 text-center">
-            {getGreeting().message} , {Profile?.full_name}
+            {getGreeting()}, {Profile?.full_name}
           </Typography>
           <LogoutButton />
         </View>
       </LinearGradient>
 
-      {/* Quick Stats */}
+      {/* ===== Quick Stats ===== */}
       <View className="flex-row flex-wrap justify-between px-4 -mt-8 mb-6">
-        {quickStats.map((stat, index) => (
+        {quickStats.map((stat, i) => (
           <TouchableOpacity
-            key={index}
+            key={i}
             className="bg-white rounded-2xl px-2 py-4 items-center mb-3"
             style={{
               width: (width - 48) / 2,
@@ -380,21 +299,21 @@ const ManagementDashboard: React.FC = () => {
               elevation: 8,
             }}
           >
-            <Premium3DIcon name={stat.icon} size={40} colors={stat.colors} />
+            {renderIcon(stat.icon, 40, stat.colors[0])}
             <Typography className="text-2xl font-extrabold text-[#2C3E50] mt-3">{stat.value}</Typography>
             <Typography className="text-xs text-[#7F8C8D] mt-1">{stat.title}</Typography>
           </TouchableOpacity>
         ))}
       </View>
 
-      {/* Recent Module Uses Section */}
+      {/* ===== Recently Used ===== */}
       {recentModules.length > 0 && (
         <View className="px-4 mb-6">
           <Typography className="text-[22px] font-bold text-[#2C3E50] mb-4">Recently Used</Typography>
           <View className="flex-row justify-between">
-            {recentModules.map((module, index) => (
+            {recentModules.map((module, i) => (
               <TouchableOpacity
-                key={index}
+                key={i}
                 className="bg-white rounded-2xl p-3 items-center"
                 style={{
                   width: (width - 80) / 4,
@@ -406,7 +325,7 @@ const ManagementDashboard: React.FC = () => {
                 }}
                 onPress={() => router.push(module.screen as any)}
               >
-                <Premium3DIcon name={module.icon} size={32} colors={module.colors} />
+                {renderIcon(module.icon, 32, module.colors[0])}
                 <Typography className="text-xs font-semibold text-[#2C3E50] text-center mt-2">
                   {module.title}
                 </Typography>
@@ -416,14 +335,14 @@ const ManagementDashboard: React.FC = () => {
         </View>
       )}
 
-      {/* Module Sections */}
-      {managementSections.map((section, sectionIndex) => (
-        <View key={sectionIndex} className="px-4 mb-8">
+      {/* ===== All Sections ===== */}
+      {managementSections.map((section, i) => (
+        <View key={i} className="px-4 mb-8">
           <Typography className="text-[22px] font-bold text-[#2C3E50] mb-4">{section.title}</Typography>
           <View className="flex-row flex-wrap justify-between">
-            {section.modules.map((module, moduleIndex) => (
+            {section.modules.map((module, j) => (
               <TouchableOpacity
-                key={moduleIndex}
+                key={j}
                 className="bg-white rounded-[20px] p-4 items-center mb-4"
                 style={{
                   width: (width - 64) / 3,
@@ -435,12 +354,7 @@ const ManagementDashboard: React.FC = () => {
                 }}
                 onPress={() => handleModulePress(module)}
               >
-                <Premium3DIcon
-                  name={module.icon}
-                  size={48}
-                  colors={module.colors}
-                  containerStyle={{ marginBottom: 8 }}
-                />
+                {renderIcon(module.icon, 48, module.colors[0])}
                 <Typography className="text-xs font-bold text-[#2C3E50] text-center mb-1">{module.title}</Typography>
                 <Typography className="text-xs text-[#7F8C8D] text-center">{module.description}</Typography>
               </TouchableOpacity>
@@ -449,7 +363,6 @@ const ManagementDashboard: React.FC = () => {
         </View>
       ))}
 
-      {/* Bottom Padding */}
       <View className="h-8" />
     </ScrollView>
   )
