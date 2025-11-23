@@ -15,7 +15,7 @@ export default function RouteManagement() {
   const [searchTerm, setSearchTerm] = useState("")
   const [filterStatus, setFilterStatus] = useState("all")
   const [filterType, setFilterType] = useState("all")
-  const [transportRoutes, setTransportRoutes] = useState([])
+  const [transportRoutes, setTransportRoutes] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -36,11 +36,11 @@ export default function RouteManagement() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "active":
-        return "bg-emerald-100 dark:bg-emerald-900"
+        return "bg-emerald-100 "
       case "inactive":
         return "bg-gray-100 "
       case "maintenance":
-        return "bg-orange-100 dark:bg-orange-900"
+        return "bg-orange-100 "
       default:
         return "bg-gray-100 "
     }
@@ -49,11 +49,11 @@ export default function RouteManagement() {
   const getTypeColor = (type: string) => {
     switch (type) {
       case "pickup":
-        return "bg-blue-100 dark:bg-blue-900"
+        return "bg-blue-100 "
       case "drop":
-        return "bg-purple-100 dark:bg-purple-900"
+        return "bg-purple-100 "
       case "both":
-        return "bg-emerald-100 dark:bg-emerald-900"
+        return "bg-emerald-100 "
       default:
         return "bg-gray-100 "
     }
@@ -82,10 +82,10 @@ export default function RouteManagement() {
 
   return (
     <ScrollView
-      className="flex-1 bg-white dark:bg-gray-900"
-      contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+      className="flex-1 bg-background "
+    
     >
-      <View className="px-4 py-6 space-y-6">
+      <View className="px-4 mt-3 py-6 space-y-6">
         <View>
           <Text className="text-2xl font-bold text-gray-900 ">Route Management</Text>
           <Text className="text-sm mt-1 text-gray-600 ">
@@ -93,7 +93,7 @@ export default function RouteManagement() {
           </Text>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3">
+        <View className="mt-3 rounded-lg mb-3 p-4 border border-gray-200  bg-white  space-y-3">
           <View className="flex-row items-center px-3 rounded-lg border border-gray-300 ">
             <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
             <TextInput
@@ -105,7 +105,7 @@ export default function RouteManagement() {
             />
           </View>
 
-          <View className="flex-row gap-2">
+          <View className="flex-row gap-2 mt-3">
             <View className="flex-1">
               <RNPickerSelect
                 items={[
@@ -128,7 +128,7 @@ export default function RouteManagement() {
                     fontSize: 14,
                   },
                   inputAndroid: {
-                    paddingVertical: 10,
+                    paddingVertical: 0,
                     paddingHorizontal: 10,
                     borderRadius: 8,
                     borderWidth: 1,
@@ -162,7 +162,7 @@ export default function RouteManagement() {
                     fontSize: 14,
                   },
                   inputAndroid: {
-                    paddingVertical: 10,
+                    paddingVertical: 0,
                     paddingHorizontal: 10,
                     borderRadius: 8,
                     borderWidth: 1,
@@ -198,12 +198,12 @@ export default function RouteManagement() {
                       <Text className="text-sm mt-1 text-gray-600 ">Code: {route.code}</Text>
                       <View className="flex-row gap-2 mt-2">
                         <View className={cn("px-2 py-1 rounded", getStatusColor(route.status))}>
-                          <Text className="text-xs font-medium text-gray-800 dark:text-gray-200">
+                          <Text className="text-xs font-medium text-gray-800 ">
                             {route?.status?.charAt(0).toUpperCase() + route?.status?.slice(1)}
                           </Text>
                         </View>
                         <View className={cn("px-2 py-1 rounded", getTypeColor(route.type))}>
-                          <Text className="text-xs font-medium text-gray-800 dark:text-gray-200">
+                          <Text className="text-xs font-medium text-gray-800 ">
                             {route?.type?.charAt(0).toUpperCase() + route?.type?.slice(1)}
                           </Text>
                         </View>
@@ -250,8 +250,8 @@ export default function RouteManagement() {
                   <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 ">
                     <Text className="text-center text-sm font-medium text-gray-700 ">Edit</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-blue-300 dark:border-blue-600">
-                    <Text className="text-center text-sm font-medium text-blue-600 dark:text-blue-400">Track</Text>
+                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-blue-300 ">
+                    <Text className="text-center text-sm font-medium text-blue-600 ">Track</Text>
                   </TouchableOpacity>
                 </View>
               </View>

@@ -1,6 +1,6 @@
-"use client"
 
-import { useState } from "react"
+
+import { useContext, useState } from "react"
 import {
   View,
   Text,
@@ -17,40 +17,23 @@ import * as ImagePicker from "expo-image-picker"
 import RNPickerSelect from "react-native-picker-select"
 import DateTimePicker from "@react-native-community/datetimepicker"
 import { MaterialIcons } from "@expo/vector-icons"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { useColorScheme } from "nativewind"
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
+import { useClasses } from "@/hooks/management/classes"
+import { getFeeStructureByClass } from "@/service/management/feeStructure"
+import StudentRegistrationSchema from "@/schema/admission"
+import { createAdmission } from "@/service/management/student"
+import { Typography } from "@/components/Typography"
+import { useRouter } from "expo-router"
+import { AlertContext } from "@/context/Alert/context"
 
-// Mock schema - replace with your actual StudentRegistrationSchema
-const StudentRegistrationSchema = {}
 
-// Mock API functions - replace with your actual API calls
-const createAdmission = async (data: any) => {
-  return Promise.resolve()
-}
 
-const getFeeStructureByClass = async (classId: string) => {
-  return {
-    components: [
-      { head_name: "Tuition Fee", amount: 5000 },
-      { head_name: "Transport Fee", amount: 1000 },
-    ],
-    total_amount: 6000,
-  }
-}
 
-const useClasses = () => {
-  return {
-    classes: [
-      { _id: "1", name: "Class 10", classCode: "X" },
-      { _id: "2", name: "Class 11", classCode: "XI" },
-    ],
-  }
-}
+
+
+
 
 export default function StudentAdmissionScreen() {
-  const insets = useSafeAreaInsets()
-  const { colorScheme } = useColorScheme()
-  const isDark = colorScheme === "dark"
 
   const [feeStructure, setFeeStructure] = useState<any>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -58,6 +41,9 @@ export default function StudentAdmissionScreen() {
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [datePickerField, setDatePickerField] = useState("")
   const { classes } = useClasses()
+
+  const {showAlert}=useContext(AlertContext)
+  const router=useRouter()
 
   const { values, errors, handleChange, handleReset, handleSubmit, setFieldValue, touched, handleBlur } = useFormik({
     initialValues: {
@@ -120,13 +106,15 @@ export default function StudentAdmissionScreen() {
     },
     validationSchema: StudentRegistrationSchema,
     onSubmit: async (formValues) => {
+      
       setIsSubmitting(true)
       try {
         await createAdmission(formValues)
-        Alert.alert("Success", "Admission successful!")
+        showAlert("SUCCESS","Admission completed")
         handleReset(formValues)
       } catch (error: any) {
-        Alert.alert("Error", error?.response?.data?.message || "Error in admission process.")
+        console.log(error,"error",error?.response?.data?.messag)
+        showAlert("ERROR", error?.response?.data?.message || "Error in admission process.")
       } finally {
         setIsSubmitting(false)
       }
@@ -194,20 +182,27 @@ export default function StudentAdmissionScreen() {
     { id: "documents", label: "Documents", icon: "description" },
   ]
 
-  const bgColor = isDark ? "bg-gray-900" : "bg-white"
-  const textColor = isDark ? "text-white" : "text-gray-900"
-  const borderColor = isDark ? "border-gray-700" : "border-gray-200"
-  const inputBg = isDark ? "bg-gray-800" : "bg-gray-50"
-  const labelColor = isDark ? "text-gray-300" : "text-gray-700"
+  const bgColor = "bg-white"
+  const textColor = "text-gray-900"
+  const borderColor = "border-gray-200"
+  const inputBg = "bg-gray-50"
+  const labelColor = "text-gray-700"
 
   return (
-    <View className={`flex-1 ${bgColor}`} style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+    <SafeAreaView className="flex-1 bg-background">
+      <View className="flex-row items-center p-4">
+        <TouchableOpacity
+          onPress={() => router.push("/management/student")}
+          className="flex-row items-center bg-white border border-border rounded-lg px-3 py-2 mr-2"
+        >
+          <Typography className="text-primary font-semibold">← Back</Typography>
+        </TouchableOpacity>
+        <Typography className="text-xl font-bold text-foreground">Addmission</Typography>
+      </View>
       <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
         <View className="mt-6 mb-6">
           <Text className={`text-2xl font-bold ${textColor}`}>Student Admission</Text>
-          <Text className={`${isDark ? "text-gray-400" : "text-gray-600"} mt-1`}>
-            Complete the admission process for new students
-          </Text>
+          <Text className="text-gray-600 mt-1">Complete the admission process for new students</Text>
         </View>
 
         <ScrollView
@@ -220,27 +215,22 @@ export default function StudentAdmissionScreen() {
             <TouchableOpacity
               key={section.id}
               onPress={() => setActiveSection(section.id)}
-              className={`px-4 py-2 rounded-lg flex-row items-center gap-2 ${
-                activeSection === section.id ? "bg-emerald-600" : isDark ? "bg-gray-800" : "bg-gray-100"
-              }`}
+              className={`px-4 py-2 rounded-lg flex-row items-center gap-2 ${activeSection === section.id ? "bg-emerald-600" : "bg-gray-300"
+                }`}
             >
               <MaterialIcons
                 name={section.icon as any}
                 size={16}
-                color={activeSection === section.id ? "white" : isDark ? "#d1d5db" : "#6b7280"}
+                color={activeSection === section.id ? "white" : "#6b7280"}
               />
-              <Text
-                className={`text-xs font-medium ${
-                  activeSection === section.id ? "text-white" : isDark ? "text-gray-300" : "text-gray-600"
-                }`}
-              >
+              <Text className={`text-xs font-medium ${activeSection === section.id ? "text-white" : "text-gray-600"}`}>
                 {section.label}
               </Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
 
-        {/* Personal Details Section */}
+
         {activeSection === "personal" && (
           <View className={`mb-6 p-4 rounded-lg border ${borderColor} ${bgColor}`}>
             <Text className={`text-lg font-semibold mb-4 ${textColor}`}>Personal Details</Text>
@@ -254,10 +244,8 @@ export default function StudentAdmissionScreen() {
                 <Image source={{ uri: values.personal_details.profileImage }} className="w-24 h-32 rounded-lg" />
               ) : (
                 <View className="items-center">
-                  <MaterialIcons name="photo-camera" size={32} color={isDark ? "#d1d5db" : "#6b7280"} />
-                  <Text className={`text-xs mt-2 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                    Tap to upload photo
-                  </Text>
+                  <MaterialIcons name="photo-camera" size={32} color="#6b7280" />
+                  <Text className="text-xs mt-2 text-gray-600">Tap to upload photo</Text>
                 </View>
               )}
             </TouchableOpacity>
@@ -272,7 +260,7 @@ export default function StudentAdmissionScreen() {
                 value={values.personal_details.first_name}
                 onChangeText={(text) => setFieldValue("personal_details.first_name", text)}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -284,7 +272,7 @@ export default function StudentAdmissionScreen() {
                 value={values.personal_details.middle_name}
                 onChangeText={(text) => setFieldValue("personal_details.middle_name", text)}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -296,7 +284,7 @@ export default function StudentAdmissionScreen() {
                 value={values.personal_details.last_name}
                 onChangeText={(text) => setFieldValue("personal_details.last_name", text)}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -343,21 +331,21 @@ export default function StudentAdmissionScreen() {
                     paddingVertical: 12,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                 }}
               />
@@ -385,21 +373,21 @@ export default function StudentAdmissionScreen() {
                     paddingVertical: 12,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                 }}
               />
@@ -415,7 +403,7 @@ export default function StudentAdmissionScreen() {
                 value={values.personal_details.nationality}
                 onChangeText={(text) => setFieldValue("personal_details.nationality", text)}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -440,21 +428,21 @@ export default function StudentAdmissionScreen() {
                     paddingVertical: 12,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                 }}
               />
@@ -478,21 +466,21 @@ export default function StudentAdmissionScreen() {
                     paddingVertical: 12,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                 }}
               />
@@ -506,7 +494,7 @@ export default function StudentAdmissionScreen() {
                 value={values.personal_details.aadhar_number}
                 onChangeText={(text) => setFieldValue("personal_details.aadhar_number", text)}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
           </View>
@@ -527,7 +515,7 @@ export default function StudentAdmissionScreen() {
                 onChangeText={(text) => setFieldValue("contact_details.phone_number", text)}
                 keyboardType="phone-pad"
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -539,7 +527,7 @@ export default function StudentAdmissionScreen() {
                 onChangeText={(text) => setFieldValue("contact_details.alternate_phone_number", text)}
                 keyboardType="phone-pad"
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -553,7 +541,7 @@ export default function StudentAdmissionScreen() {
                 onChangeText={(text) => setFieldValue("contact_details.email_address", text)}
                 keyboardType="email-address"
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -577,21 +565,21 @@ export default function StudentAdmissionScreen() {
                     paddingVertical: 12,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                 }}
               />
@@ -606,7 +594,7 @@ export default function StudentAdmissionScreen() {
                 value={values.contact_details.city}
                 onChangeText={(text) => setFieldValue("contact_details.city", text)}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -621,7 +609,7 @@ export default function StudentAdmissionScreen() {
                 multiline
                 numberOfLines={3}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -636,7 +624,7 @@ export default function StudentAdmissionScreen() {
                 multiline
                 numberOfLines={3}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
           </View>
@@ -656,7 +644,7 @@ export default function StudentAdmissionScreen() {
                 value={values.parent_guardian_details.father_name}
                 onChangeText={(text) => setFieldValue("parent_guardian_details.father_name", text)}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -667,7 +655,7 @@ export default function StudentAdmissionScreen() {
                 value={values.parent_guardian_details.mother_name}
                 onChangeText={(text) => setFieldValue("parent_guardian_details.mother_name", text)}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -678,7 +666,7 @@ export default function StudentAdmissionScreen() {
                 value={values.parent_guardian_details.guardian_name}
                 onChangeText={(text) => setFieldValue("parent_guardian_details.guardian_name", text)}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -689,7 +677,7 @@ export default function StudentAdmissionScreen() {
                 value={values.parent_guardian_details.father_occupation}
                 onChangeText={(text) => setFieldValue("parent_guardian_details.father_occupation", text)}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -700,7 +688,7 @@ export default function StudentAdmissionScreen() {
                 value={values.parent_guardian_details.mother_occupation}
                 onChangeText={(text) => setFieldValue("parent_guardian_details.mother_occupation", text)}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -714,7 +702,7 @@ export default function StudentAdmissionScreen() {
                 onChangeText={(text) => setFieldValue("parent_guardian_details.father_phone_number", text)}
                 keyboardType="phone-pad"
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
 
@@ -726,7 +714,7 @@ export default function StudentAdmissionScreen() {
                 onChangeText={(text) => setFieldValue("parent_guardian_details.mother_phone_number", text)}
                 keyboardType="phone-pad"
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
           </View>
@@ -748,10 +736,8 @@ export default function StudentAdmissionScreen() {
 
             {values.education_qualifications.length === 0 ? (
               <View className="items-center py-8">
-                <MaterialIcons name="school" size={32} color={isDark ? "#6b7280" : "#d1d5db"} />
-                <Text className={`text-sm mt-2 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                  No qualifications added
-                </Text>
+                <MaterialIcons name="school" size={32} color="#d1d5db" />
+                <Text className="text-sm mt-2 text-gray-600">No qualifications added</Text>
               </View>
             ) : (
               <FlatList
@@ -768,7 +754,7 @@ export default function StudentAdmissionScreen() {
                     </View>
 
                     <View className="mb-3">
-                      <Text className={`text-xs font-medium mb-1 ${labelColor}`}>Class/Course Name</Text>
+                      <Text className="text-xs font-medium mb-1 text-gray-700">Class/Course Name</Text>
                       <TextInput
                         placeholder="e.g., Class 10, B.Tech"
                         value={item.name}
@@ -778,12 +764,12 @@ export default function StudentAdmissionScreen() {
                           setFieldValue("education_qualifications", updated)
                         }}
                         className={`px-3 py-2 rounded border text-xs ${borderColor} ${bgColor} ${textColor}`}
-                        placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                        placeholderTextColor="#d1d5db"
                       />
                     </View>
 
                     <View className="mb-3">
-                      <Text className={`text-xs font-medium mb-1 ${labelColor}`}>Institute Name</Text>
+                      <Text className="text-xs font-medium mb-1 text-gray-700">Institute Name</Text>
                       <TextInput
                         placeholder="Enter institute name"
                         value={item.institute_name}
@@ -793,12 +779,12 @@ export default function StudentAdmissionScreen() {
                           setFieldValue("education_qualifications", updated)
                         }}
                         className={`px-3 py-2 rounded border text-xs ${borderColor} ${bgColor} ${textColor}`}
-                        placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                        placeholderTextColor="#d1d5db"
                       />
                     </View>
 
                     <View className="mb-3">
-                      <Text className={`text-xs font-medium mb-1 ${labelColor}`}>Percentage</Text>
+                      <Text className="text-xs font-medium mb-1 text-gray-700">Percentage</Text>
                       <TextInput
                         placeholder="Enter percentage"
                         value={item.percentage?.toString()}
@@ -809,12 +795,12 @@ export default function StudentAdmissionScreen() {
                         }}
                         keyboardType="decimal-pad"
                         className={`px-3 py-2 rounded border text-xs ${borderColor} ${bgColor} ${textColor}`}
-                        placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                        placeholderTextColor="#d1d5db"
                       />
                     </View>
 
                     <View className="mb-3">
-                      <Text className={`text-xs font-medium mb-1 ${labelColor}`}>Passing Year</Text>
+                      <Text className="text-xs font-medium mb-1 text-gray-700">Passing Year</Text>
                       <TextInput
                         placeholder="e.g., 2023"
                         value={item.year}
@@ -824,7 +810,7 @@ export default function StudentAdmissionScreen() {
                           setFieldValue("education_qualifications", updated)
                         }}
                         className={`px-3 py-2 rounded border text-xs ${borderColor} ${bgColor} ${textColor}`}
-                        placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                        placeholderTextColor="#d1d5db"
                       />
                     </View>
                   </View>
@@ -856,21 +842,21 @@ export default function StudentAdmissionScreen() {
                     paddingVertical: 12,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                 }}
               />
@@ -892,21 +878,21 @@ export default function StudentAdmissionScreen() {
                     paddingVertical: 12,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                 }}
               />
@@ -929,21 +915,21 @@ export default function StudentAdmissionScreen() {
                     paddingVertical: 12,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 16,
                     borderRadius: 8,
-                    backgroundColor: isDark ? "#1f2937" : "#f3f4f6",
-                    color: isDark ? "#fff" : "#000",
+                    backgroundColor: "#f3f4f6",
+                    color: "#000",
                     fontSize: 16,
                     borderWidth: 1,
-                    borderColor: isDark ? "#374151" : "#e5e7eb",
+                    borderColor: "#e5e7eb",
                   },
                 }}
               />
@@ -958,7 +944,7 @@ export default function StudentAdmissionScreen() {
                 multiline
                 numberOfLines={2}
                 className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                placeholderTextColor="#d1d5db"
               />
             </View>
           </View>
@@ -972,19 +958,15 @@ export default function StudentAdmissionScreen() {
             {values.course_details.student_class && feeStructure ? (
               <>
                 {(feeStructure as any)?.components?.map((item: any, index: number) => (
-                  <View key={index} className={`mb-4 p-3 rounded-lg ${isDark ? "bg-gray-800" : "bg-gray-100"}`}>
-                    <Text className={`text-xs font-medium mb-1 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-                      {item.head_name}
-                    </Text>
+                  <View key={index} className="mb-4 p-3 rounded-lg bg-gray-100">
+                    <Text className="text-xs font-medium mb-1 text-gray-700">{item.head_name}</Text>
                     <Text className={`text-lg font-semibold ${textColor}`}>₹ {item.amount.toLocaleString()}</Text>
                   </View>
                 ))}
 
-                <View className={`mb-4 p-3 rounded-lg ${isDark ? "bg-emerald-900" : "bg-emerald-100"}`}>
-                  <Text className={`text-xs font-medium mb-1 ${isDark ? "text-emerald-300" : "text-emerald-700"}`}>
-                    Total Fee
-                  </Text>
-                  <Text className={`text-lg font-semibold ${isDark ? "text-emerald-100" : "text-emerald-900"}`}>
+                <View className="mb-4 p-3 rounded-lg bg-emerald-100">
+                  <Text className="text-xs font-medium mb-1 text-emerald-700">Total Fee</Text>
+                  <Text className="text-lg font-semibold text-emerald-900">
                     ₹ {(feeStructure as any)?.total_amount}
                   </Text>
                 </View>
@@ -997,24 +979,20 @@ export default function StudentAdmissionScreen() {
                     onChangeText={(text) => setFieldValue("fee_details.fee_paid", Number.parseFloat(text) || 0)}
                     keyboardType="decimal-pad"
                     className={`px-4 py-3 rounded-lg border ${borderColor} ${inputBg} ${textColor}`}
-                    placeholderTextColor={isDark ? "#9ca3af" : "#d1d5db"}
+                    placeholderTextColor="#d1d5db"
                   />
                 </View>
 
-                <View className={`p-3 rounded-lg ${isDark ? "bg-emerald-900" : "bg-emerald-100"}`}>
-                  <Text className={`text-xs font-medium mb-1 ${isDark ? "text-emerald-300" : "text-emerald-700"}`}>
-                    Remaining Fee
-                  </Text>
-                  <Text className={`text-lg font-semibold ${isDark ? "text-emerald-100" : "text-emerald-900"}`}>
+                <View className="p-3 rounded-lg bg-emerald-100">
+                  <Text className="text-xs font-medium mb-1 text-emerald-700">Remaining Fee</Text>
+                  <Text className="text-lg font-semibold text-emerald-900">
                     ₹ {((feeStructure as any)?.total_amount - values.fee_details.fee_paid).toLocaleString()}
                   </Text>
                 </View>
               </>
             ) : (
-              <View className={`p-4 rounded-lg ${isDark ? "bg-amber-900" : "bg-amber-100"}`}>
-                <Text className={`text-sm ${isDark ? "text-amber-200" : "text-amber-800"}`}>
-                  Please select a class to view the fee structure.
-                </Text>
+              <View className="p-4 rounded-lg bg-amber-100">
+                <Text className="text-sm text-amber-800">Please select a class to view the fee structure.</Text>
               </View>
             )}
           </View>
@@ -1044,10 +1022,8 @@ export default function StudentAdmissionScreen() {
                     <Image source={{ uri: (values.documents as any)[doc.key] }} className="w-20 h-24 rounded-lg" />
                   ) : (
                     <View className="items-center">
-                      <MaterialIcons name="cloud-upload" size={28} color={isDark ? "#d1d5db" : "#6b7280"} />
-                      <Text className={`text-xs mt-2 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                        Tap to upload
-                      </Text>
+                      <MaterialIcons name="cloud-upload" size={28} color="#6b7280" />
+                      <Text className="text-xs mt-2 text-gray-600">Tap to upload</Text>
                     </View>
                   )}
                 </TouchableOpacity>
@@ -1066,12 +1042,11 @@ export default function StudentAdmissionScreen() {
                 }
               }}
               disabled={activeSection === "personal"}
-              className={`flex-1 px-4 py-3 rounded-lg border flex-row items-center justify-center gap-2 ${
-                activeSection === "personal" ? "opacity-50" : ""
-              } ${borderColor}`}
+              className={`flex-1 px-4 py-3 rounded-lg border flex-row items-center justify-center gap-2 ${activeSection === "personal" ? "opacity-50" : ""
+                } ${borderColor}`}
             >
-              <MaterialIcons name="arrow-back" size={18} color={isDark ? "#d1d5db" : "#6b7280"} />
-              <Text className={`font-medium ${isDark ? "text-gray-300" : "text-gray-600"}`}>Previous</Text>
+              <MaterialIcons name="arrow-back" size={18} color="#6b7280" />
+              <Text className="text-gray-600 font-medium">Previous</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -1082,9 +1057,8 @@ export default function StudentAdmissionScreen() {
                 }
               }}
               disabled={activeSection === "documents"}
-              className={`flex-1 px-4 py-3 rounded-lg bg-emerald-600 flex-row items-center justify-center gap-2 ${
-                activeSection === "documents" ? "opacity-50" : ""
-              }`}
+              className={`flex-1 px-4 py-3 rounded-lg bg-emerald-600 flex-row items-center justify-center gap-2 ${activeSection === "documents" ? "opacity-50" : ""
+                }`}
             >
               <Text className="text-white font-medium">Next</Text>
               <MaterialIcons name="arrow-forward" size={18} color="white" />
@@ -1096,15 +1070,14 @@ export default function StudentAdmissionScreen() {
               onPress={() => handleReset(values)}
               className={`flex-1 px-4 py-3 rounded-lg border ${borderColor}`}
             >
-              <Text className={`text-center font-medium ${isDark ? "text-gray-300" : "text-gray-600"}`}>Reset</Text>
+              <Text className="text-gray-600 text-center font-medium">Reset</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress={() => handleSubmit()}
               disabled={isSubmitting}
-              className={`flex-1 px-4 py-3 rounded-lg bg-emerald-600 flex-row items-center justify-center gap-2 ${
-                isSubmitting ? "opacity-50" : ""
-              }`}
+              className={`flex-1 px-4 py-3 rounded-lg bg-emerald-600 flex-row items-center justify-center gap-2 ${isSubmitting ? "opacity-50" : ""
+                }`}
             >
               {isSubmitting ? (
                 <>
@@ -1121,6 +1094,6 @@ export default function StudentAdmissionScreen() {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   )
 }

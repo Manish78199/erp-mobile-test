@@ -1,190 +1,155 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { View, Text, ScrollView, TouchableOpacity, TextInput, ActivityIndicator, Alert } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { useContext, useMemo, useState } from "react"
+import { View, Text, ScrollView, TextInput, TouchableOpacity, ActivityIndicator } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 import { useRouter } from "expo-router"
-import RNPickerSelect from "react-native-picker-select"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+import RNPickerSelect from "react-native-picker-select"
+import { depositFee, getStudentDetails } from "@/service/management/fee"
+import { getClassStudents } from "@/service/management/student"
+import { AlertContext } from "@/context/Alert/context"
+import { Typography } from "@/components/Typography"
+import { useClasses } from "@/hooks/management/classes"
 
-// Mock API - replace with actual API calls
-const getAllClass = async () => {
-  return [
-    { _id: "1", name: "Class 10-A" },
-    { _id: "2", name: "Class 10-B" },
-  ]
-}
-
-const getClassStudents = async (classId: string) => {
-  return [
-    { _id: "1", first_name: "John", last_name: "Doe", admission_no: "ADM001" },
-    { _id: "2", first_name: "Jane", last_name: "Smith", admission_no: "ADM002" },
-  ]
-}
-
-const getStudentDetails = async (studentId: string) => {
-  return {
-    data: {
-      data: {
-        admission_no: "ADM001",
-        first_name: "John",
-        middle_name: "",
-        last_name: "Doe",
-        father_name: "Robert Doe",
-        total_fee: 50000,
-        paid_fee: 20000,
-        remaining_fee: 30000,
-      },
-    },
-  }
-}
-
-const depositFee = async (data: any) => {
-  return { data: { message: "Fee deposited successfully", data: "1" } }
+interface StudentFeeDetails {
+  admission_no: string
+  first_name: string
+  middle_name?: string
+  last_name: string
+  father_name: string
+  total_fee: number
+  paid_fee: number
+  remaining_fee: number
 }
 
 export default function FeePayment() {
-  const insets = useSafeAreaInsets()
+  const { showAlert } = useContext(AlertContext)
   const router = useRouter()
+  const { classes } = useClasses()
 
-  const [allClass, setAllClass] = useState([])
-  const [allStudents, setAllStudents] = useState([])
-  const [selectedClass, setSelectedClass] = useState(null)
-  const [selectedStudent, setSelectedStudent] = useState(null)
-  const [studentDetails, setStudentDetails] = useState<any>(null)
-  const [amount, setAmount] = useState("")
-  const [paymentMode, setPaymentMode] = useState("CASH")
-  const [remarks, setRemarks] = useState("")
-  const [referenceNo, setReferenceNo] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [depositing, setDepositing] = useState(false)
+  const [creating, setCreating] = useState(false)
+  const [allStudent, setAllStudent] = useState<any[]>([])
+  const [studentFeeDetails, setStudentFeeDetails] = useState<StudentFeeDetails | null>(null)
+  const [currentClass, setCurrentClass] = useState("")
+  const [currentStudent, setCurrentStudent] = useState("")
 
-  useEffect(() => {
-    const fetchClasses = async () => {
-      try {
-        const classes = await getAllClass()
-        setAllClass(classes)
-      } catch (error) {
-        Alert.alert("Error", "Failed to fetch classes")
-      }
-    }
-    fetchClasses()
-  }, [])
+  const [formData, setFormData] = useState({
+    student_id: "",
+    remarks: "",
+    payment_mode: "CASH",
+    reference_no: "",
+    paid_amount: 0,
+  })
 
-  const handleClassChange = async (value: string) => {
-    setSelectedClass(value)
-    setSelectedStudent(null)
-    setStudentDetails(null)
-    try {
-      setLoading(true)
-      const students = await getClassStudents(value)
-      setAllStudents(students)
-    } catch (error) {
-      Alert.alert("Error", "Failed to fetch students")
-    } finally {
-      setLoading(false)
-    }
+  const paymentModes = [
+    { label: "CASH", value: "CASH" },
+    { label: "UPI", value: "UPI" },
+    { label: "CARD", value: "CARD" },
+    { label: "BANK TRANSFER", value: "BANK_TRANSFER" },
+    { label: "OTHER", value: "OTHER" },
+  ]
+
+  const classList = useMemo(() => classes.map((c: any) => ({
+    label: `${c.name} (${c.classCode})`,
+    value: c._id,
+  })), [classes])
+
+  const studentOptions = allStudent.map((student: any) => ({
+    label: `(${student?.admission_no}) ${student?.first_name}`,
+    value: student["_id"],
+  }))
+
+  const handleClassChange = (value: string) => {
+    if (!value) return;
+    setCurrentClass(value)
+    setStudentFeeDetails(null)
+    setCurrentStudent("")
+    getClassStudents(value).then((data: any[]) => {
+
+      setAllStudent(data)
+    })
   }
 
-  const handleStudentChange = async (value: string) => {
-    setSelectedStudent(value)
-    try {
-      const details = await getStudentDetails(value)
-      setStudentDetails(details.data.data)
-    } catch (error) {
-      Alert.alert("Error", "Failed to fetch student details")
+  const handleStudentChange = (value: string) => {
+    if (!value) {
+      setStudentFeeDetails(null)
+      return;
     }
+    setCurrentStudent(value)
+    setFormData((prev) => ({ ...prev, student_id: value }))
+    getStudentDetails(value)
+      .then((res) => {
+        setStudentFeeDetails(res.data.data)
+      })
+      .catch((error) => {
+        showAlert("ERROR", error.response?.data?.message)
+      })
   }
 
   const handleSubmit = async () => {
-    if (!selectedStudent || !amount) {
-      Alert.alert("Error", "Please fill all required fields")
+    if (!formData.student_id) {
+      showAlert("ERROR", "Please select a student")
       return
     }
 
-    setDepositing(true)
+    if (formData.paid_amount <= 0) {
+      showAlert("ERROR", "Please enter a valid amount")
+      return
+    }
+
+    setCreating(true)
     try {
-      await depositFee({
-        student_id: selectedStudent,
-        paid_amount: Number(amount),
-        payment_mode: paymentMode,
-        remarks,
-        reference_no: referenceNo,
-      })
-      Alert.alert("Success", "Fee deposited successfully")
-      router.push(`/fee-slip/${selectedStudent}`)
-    } catch (error) {
-      Alert.alert("Error", "Failed to deposit fee")
+      const res = await depositFee(formData)
+      showAlert("SUCCESS", res?.data.message)
+      router.push(`/management/fee/view/${res?.data.data}`)
+    } catch (error: any) {
+      showAlert("ERROR", error.response?.data.message)
     } finally {
-      setDepositing(false)
+      setCreating(false)
     }
   }
 
-  const classList = allClass.map((item) => ({
-    label: item.name,
-    value: item._id,
-  }))
-
-  const studentList = allStudents.map((item: any) => ({
-    label: `(${item.admission_no}) ${item.first_name} ${item.last_name}`,
-    value: item._id,
-  }))
-
-  const paymentModes = [
-    { label: "Cash", value: "CASH" },
-    { label: "UPI", value: "UPI" },
-    { label: "Card", value: "CARD" },
-    { label: "Bank Transfer", value: "BANK_TRANSFER" },
-  ]
-
   return (
-    <ScrollView
-      className="flex-1 bg-white dark:bg-gray-900"
-      contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
-    >
-      <View className="px-4 py-6 space-y-6">
-        <View>
-          <Text className="text-2xl font-bold text-gray-900 ">Fee Payment</Text>
-          <Text className="text-sm mt-1 text-gray-600 ">Deposit student fees</Text>
+    <SafeAreaView className="flex-1 bg-background">
+      <View className="flex-row items-center p-4">
+        <TouchableOpacity
+          onPress={() => router.push("/management")}
+          className="flex-row items-center bg-white border border-border rounded-lg px-3 py-2 mr-2"
+        >
+          <Typography className="text-primary font-semibold">← Back</Typography>
+        </TouchableOpacity>
+
+        <Typography className="text-xl font-bold text-foreground">Deposit Fee</Typography>
+      </View>
+      <ScrollView className="flex-1 " showsVerticalScrollIndicator={false}>
+
+        <View className=" p-4">
+          <Typography className="text-2xl font-bold text-foreground">Fee Deposit</Typography>
+          <Typography className="mt-1 text-sm text-muted-foreground">
+            Deposit student's fees .
+          </Typography>
         </View>
 
-        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
-          <View>
-            <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Class</Text>
-            <RNPickerSelect
-              items={classList}
-              onValueChange={handleClassChange}
-              value={selectedClass}
-              style={{
-                inputIOS: {
-                  paddingVertical: 12,
-                  paddingHorizontal: 10,
-                  borderRadius: 8,
-                  borderWidth: 1,
-                  borderColor: "#e5e7eb",
-                  backgroundColor: "#f9fafb",
-                  color: "#000",
-                },
-                inputAndroid: {
-                  paddingVertical: 12,
-                  paddingHorizontal: 10,
-                  borderRadius: 8,
-                  borderWidth: 1,
-                  borderColor: "#e5e7eb",
-                  backgroundColor: "#f9fafb",
-                  color: "#000",
-                },
-              }}
-            />
-          </View>
+        <View className="p-4">
 
-          {selectedClass && (
-            <View>
-              <Text className="text-sm font-medium mb-2 text-gray-700 ">Select Student</Text>
+          <View className="mb-6 rounded-lg bg-white  border border-border  p-4">
+            <View className="mb-4 flex-row items-center gap-2">
+              <View className="rounded-lg bg-emerald-600 p-2">
+                <MaterialCommunityIcons name="receipt" size={20} color="white" />
+              </View>
+              <Typography className="text-lg font-semibold text-foreground">Fee Payment</Typography>
+            </View>
+
+            <View className="mb-4">
+              <Typography className="mb-2 text-sm font-medium text-foreground">
+                Class <Text className="text-red-500">*</Text>
+              </Typography>
               <RNPickerSelect
-                items={studentList}
-                onValueChange={handleStudentChange}
-                value={selectedStudent}
+                items={classList}
+                onValueChange={handleClassChange}
+                value={currentClass}
+                placeholder={{ label: "-- Select Class --", value: null }}
                 style={{
                   inputIOS: {
                     paddingVertical: 12,
@@ -196,7 +161,7 @@ export default function FeePayment() {
                     color: "#000",
                   },
                   inputAndroid: {
-                    paddingVertical: 12,
+                    paddingVertical: 0,
                     paddingHorizontal: 10,
                     borderRadius: 8,
                     borderWidth: 1,
@@ -207,152 +172,212 @@ export default function FeePayment() {
                 }}
               />
             </View>
-          )}
-        </View>
 
-        {studentDetails && (
-          <>
-            <View className="space-y-3">
-              <Text className="text-lg font-semibold text-gray-900 ">Student Information</Text>
-              <View className="rounded-lg p-3 border border-gray-200  bg-gray-50 ">
-                <Text className="text-xs font-medium text-gray-600  mb-1">Admission No</Text>
-                <Text className="font-semibold text-gray-900 ">{studentDetails.admission_no}</Text>
-              </View>
-              <View className="rounded-lg p-3 border border-gray-200  bg-gray-50 ">
-                <Text className="text-xs font-medium text-gray-600  mb-1">Student Name</Text>
-                <Text className="font-semibold text-gray-900 ">
-                  {studentDetails.first_name} {studentDetails.last_name}
-                </Text>
-              </View>
+            <View className="mb-4">
+              <Typography className="mb-2 text-sm font-medium text-foreground">
+                Student <Text className="text-red-500">*</Text>
+              </Typography>
+              <RNPickerSelect
+                items={studentOptions}
+                onValueChange={handleStudentChange}
+                value={currentStudent}
+                placeholder={{ label: "-- Select Student --", value: null }}
+                style={{
+                  inputIOS: {
+                    paddingVertical: 12,
+                    paddingHorizontal: 10,
+                    borderRadius: 8,
+                    borderWidth: 1,
+                    borderColor: "#e5e7eb",
+                    backgroundColor: "#f9fafb",
+                    color: "#000",
+                  },
+                  inputAndroid: {
+                    paddingVertical: 0,
+                    paddingHorizontal: 10,
+                    borderRadius: 8,
+                    borderWidth: 1,
+                    borderColor: "#e5e7eb",
+                    backgroundColor: "#f9fafb",
+                    color: "#000",
+                  },
+                }}
+              />
             </View>
+          </View>
 
-            <View className="space-y-3">
-              <Text className="text-lg font-semibold text-gray-900 ">Fee Summary</Text>
-              <View className="rounded-lg p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700">
-                <Text className="text-xs font-medium text-blue-800 dark:text-blue-200 mb-1">Total Fee</Text>
-                <View className="flex-row items-center gap-1">
-                  <MaterialCommunityIcons name="currency-inr" size={20} color="#3b82f6" />
-                  <Text className="text-2xl font-bold text-blue-700 dark:text-blue-400">
-                    ₹{studentDetails.total_fee?.toLocaleString()}
-                  </Text>
+          {/* Student Details Section */}
+          {studentFeeDetails && (
+            <>
+              <View className="mb-6 rounded-lg border border-border bg-white p-4">
+                <View className="mb-4 flex-row items-center gap-2">
+                  <View className="rounded-lg bg-blue-600 p-2">
+                    <MaterialCommunityIcons name="account-check" size={20} color="white" />
+                  </View>
+                  <Typography className="text-lg font-semibold text-foreground">Student Information</Typography>
+                </View>
+
+                <View className="mb-3 rounded-lg border border-border bg-background p-3">
+                  <Typography className="text-xs text-muted-foreground">Admission No</Typography>
+                  <Typography className="mt-1 font-semibold text-foreground">
+                    {studentFeeDetails?.admission_no || "--"}
+                  </Typography>
+                </View>
+
+                <View className="mb-3 rounded-lg border border-border bg-background p-3">
+                  <Typography className="text-xs text-muted-foreground">Student Name</Typography>
+                  <Typography className="mt-1 font-semibold text-foreground">
+                    {`${studentFeeDetails?.first_name} ${studentFeeDetails?.middle_name || ""} ${studentFeeDetails?.last_name}`.trim()}
+                  </Typography>
+                </View>
+
+                <View className="rounded-lg border border-border bg-background p-3">
+                  <Typography className="text-xs text-muted-foreground">Father's Name</Typography>
+                  <Typography className="mt-1 font-semibold text-foreground">
+                    {studentFeeDetails?.father_name || "--"}
+                  </Typography>
                 </View>
               </View>
 
-              <View className="rounded-lg p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700">
-                <Text className="text-xs font-medium text-emerald-800 dark:text-emerald-200 mb-1">Paid Fee</Text>
-                <View className="flex-row items-center gap-1">
-                  <MaterialCommunityIcons name="currency-inr" size={20} color="#10b981" />
-                  <Text className="text-2xl font-bold text-emerald-700 dark:text-emerald-400">
-                    ₹{studentDetails.paid_fee?.toLocaleString()}
-                  </Text>
+              {/* Fee Summary */}
+              <View className="mb-6 gap-3">
+                <View className="rounded-lg border border-blue-200 bg-blue-50 p-4">
+                  <Typography className="text-xs text-muted-foreground">Total Fee</Typography>
+                  <View className="mt-2 flex-row items-center gap-1">
+                    <MaterialCommunityIcons name="currency-inr" size={16} color="#3b82f6" />
+                    <Typography className="text-lg font-bold text-blue-600">
+                      {studentFeeDetails["total_fee"]?.toLocaleString("en-IN")}
+                    </Typography>
+                  </View>
+                </View>
+
+                <View className="rounded-lg border border-emerald-200 bg-emerald-50 p-4">
+                  <Typography className="text-xs text-muted-foreground">Paid Fee</Typography>
+                  <View className="mt-2 flex-row items-center gap-1">
+                    <MaterialCommunityIcons name="currency-inr" size={16} color="#10b981" />
+                    <Typography className="text-lg font-bold text-emerald-600">
+                      {studentFeeDetails["paid_fee"]?.toLocaleString("en-IN")}
+                    </Typography>
+                  </View>
+                </View>
+
+                <View className="rounded-lg border border-orange-200 bg-orange-50 p-4">
+                  <Typography className="text-xs text-muted-foreground">Remaining Fee</Typography>
+                  <View className="mt-2 flex-row items-center gap-1">
+                    <MaterialCommunityIcons name="currency-inr" size={16} color="#f97316" />
+                    <Typography className="text-lg font-bold text-orange-600">
+                      {studentFeeDetails["remaining_fee"]?.toLocaleString("en-IN")}
+                    </Typography>
+                  </View>
                 </View>
               </View>
 
-              <View className="rounded-lg p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-700">
-                <Text className="text-xs font-medium text-orange-800 dark:text-orange-200 mb-1">Remaining Fee</Text>
-                <View className="flex-row items-center gap-1">
-                  <MaterialCommunityIcons name="currency-inr" size={20} color="#f59e0b" />
-                  <Text className="text-2xl font-bold text-orange-700 dark:text-orange-400">
-                    ₹{studentDetails.remaining_fee?.toLocaleString()}
-                  </Text>
+              {/* Payment Details */}
+              <View className="mb-6 rounded-lg border border-border bg-white p-4">
+                <View className="mb-4 flex-row items-center gap-2">
+                  <View className="rounded-lg bg-purple-600 p-2">
+                    <MaterialCommunityIcons name="credit-card" size={20} color="white" />
+                  </View>
+                  <Typography className="text-lg font-semibold text-foreground">Payment Details</Typography>
                 </View>
-              </View>
-            </View>
 
-            <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-4">
-              <Text className="text-lg font-semibold text-gray-900 ">Payment Details</Text>
+                <View className="mb-4">
+                  <Typography className="mb-2 text-sm font-medium text-foreground">
+                    Deposit Amount <Text className="text-red-500">*</Text>
+                  </Typography>
+                  <View className="flex-row items-center rounded-lg border border-border bg-background px-3">
+                    <MaterialCommunityIcons name="currency-inr" size={16} color="#999" />
+                    <TextInput
+                      placeholder="Enter amount"
+                      value={formData.paid_amount.toString()}
+                      onChangeText={(text) =>
+                        setFormData((prev) => ({ ...prev, paid_amount: Number.parseFloat(text) || 0 }))
+                      }
+                      keyboardType="decimal-pad"
+                      className="flex-1 px-2 py-3 text-foreground"
+                      placeholderTextColor="#999"
+                    />
+                  </View>
+                </View>
 
-              <View>
-                <Text className="text-sm font-medium mb-2 text-gray-700 ">Deposit Amount (₹)</Text>
-                <TextInput
-                  placeholder="Enter amount"
-                  placeholderTextColor="#9ca3af"
-                  value={amount}
-                  onChangeText={setAmount}
-                  keyboardType="numeric"
-                  className="border border-gray-300  rounded-lg px-3 py-2 text-gray-900  bg-gray-50 "
-                />
-              </View>
-
-              <View>
-                <Text className="text-sm font-medium mb-2 text-gray-700 ">Payment Type</Text>
-                <RNPickerSelect
-                  items={paymentModes}
-                  onValueChange={setPaymentMode}
-                  value={paymentMode}
-                  style={{
-                    inputIOS: {
-                      paddingVertical: 12,
-                      paddingHorizontal: 10,
-                      borderRadius: 8,
-                      borderWidth: 1,
-                      borderColor: "#e5e7eb",
-                      backgroundColor: "#f9fafb",
-                      color: "#000",
-                    },
-                    inputAndroid: {
-                      paddingVertical: 12,
-                      paddingHorizontal: 10,
-                      borderRadius: 8,
-                      borderWidth: 1,
-                      borderColor: "#e5e7eb",
-                      backgroundColor: "#f9fafb",
-                      color: "#000",
-                    },
-                  }}
-                />
-              </View>
-
-              {paymentMode !== "CASH" && (
-                <View>
-                  <Text className="text-sm font-medium mb-2 text-gray-700 ">Reference Number</Text>
-                  <TextInput
-                    placeholder="Enter transaction reference"
-                    placeholderTextColor="#9ca3af"
-                    value={referenceNo}
-                    onChangeText={setReferenceNo}
-                    className="border border-gray-300  rounded-lg px-3 py-2 text-gray-900  bg-gray-50 "
+                <View className="mb-4">
+                  <Typography className="mb-2 text-sm font-medium text-foreground">
+                    Payment Type <Text className="text-red-500">*</Text>
+                  </Typography>
+                  <RNPickerSelect
+                    items={paymentModes}
+                    onValueChange={(value) => setFormData((prev) => ({ ...prev, payment_mode: value }))}
+                    value={formData.payment_mode}
+                    style={{
+                      inputIOS: {
+                        paddingVertical: 12,
+                        paddingHorizontal: 10,
+                        borderRadius: 8,
+                        borderWidth: 1,
+                        borderColor: "#e5e7eb",
+                        backgroundColor: "#f9fafb",
+                        color: "#000",
+                      },
+                      inputAndroid: {
+                        paddingVertical: 0,
+                        paddingHorizontal: 10,
+                        borderRadius: 8,
+                        borderWidth: 1,
+                        borderColor: "#e5e7eb",
+                        backgroundColor: "#f9fafb",
+                        color: "#000",
+                      },
+                    }}
                   />
                 </View>
-              )}
 
-              <View>
-                <Text className="text-sm font-medium mb-2 text-gray-700 ">Remarks</Text>
-                <TextInput
-                  placeholder="Add payment remarks..."
-                  placeholderTextColor="#9ca3af"
-                  value={remarks}
-                  onChangeText={setRemarks}
-                  multiline
-                  numberOfLines={3}
-                  className="border border-gray-300  rounded-lg px-3 py-2 text-gray-900  bg-gray-50 "
-                />
+                <View className="mb-4">
+                  <Typography className="mb-2 text-sm font-medium text-foreground">Remarks</Typography>
+                  <TextInput
+                    placeholder="Add payment remarks..."
+                    value={formData.remarks}
+                    onChangeText={(text) => setFormData((prev) => ({ ...prev, remarks: text }))}
+                    multiline
+                    numberOfLines={3}
+                    className="rounded-lg border border-border bg-background px-3 py-2 text-foreground"
+                    placeholderTextColor="#999"
+                  />
+                </View>
+
+                {formData.payment_mode !== "CASH" && (
+                  <View>
+                    <Typography className="mb-2 text-sm font-medium text-foreground">Reference Number</Typography>
+                    <TextInput
+                      placeholder="Enter transaction reference number"
+                      value={formData.reference_no}
+                      onChangeText={(text) => setFormData((prev) => ({ ...prev, reference_no: text }))}
+                      className="rounded-lg border border-border bg-background px-3 py-2 text-foreground"
+                      placeholderTextColor="#999"
+                    />
+                  </View>
+                )}
               </View>
-            </View>
 
-            <View className="flex-row gap-3">
-              <TouchableOpacity
-                onPress={() => router.back()}
-                className="flex-1 border border-gray-300  rounded-lg p-3"
-              >
-                <Text className="text-center font-medium text-gray-700 ">Cancel</Text>
-              </TouchableOpacity>
+              {/* Submit Button */}
               <TouchableOpacity
                 onPress={handleSubmit}
-                disabled={depositing}
-                className="flex-1 bg-blue-600 rounded-lg p-3 flex-row items-center justify-center gap-2"
+                disabled={creating}
+                className={`mb-6 flex-row items-center justify-center rounded-lg py-3 ${creating ? "bg-gray-400" : "bg-indigo-600"
+                  }`}
               >
-                {depositing ? (
+                {creating ? (
                   <ActivityIndicator size="small" color="white" />
                 ) : (
-                  <MaterialCommunityIcons name="check" size={18} color="white" />
+                  <>
+                    <MaterialCommunityIcons name="check" size={20} color="white" />
+                    <Typography className="ml-2 font-semibold text-white">Submit Payment</Typography>
+                  </>
                 )}
-                <Text className="text-white font-medium">{depositing ? "Processing..." : "Submit Payment"}</Text>
               </TouchableOpacity>
-            </View>
-          </>
-        )}
-      </View>
-    </ScrollView>
+            </>
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }

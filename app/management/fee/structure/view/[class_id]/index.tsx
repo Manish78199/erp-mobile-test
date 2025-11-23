@@ -1,120 +1,124 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { useRouter, useLocalSearchParams } from "expo-router"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, RefreshControl } from "react-native"
+import { useLocalSearchParams, useRouter } from "expo-router"
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { Typography } from "@/components/Typography"
+import { getFeeStructureByClass } from "@/service/management/feeStructure"
 
-// Mock API - replace with actual API calls
-const getFeeStructureByClass = async (classId: string) => {
-  return {
-    _id: "1",
-    class_id: classId,
-    class_name: "Class 10-A",
-    total_amount: 50000,
-    components: [
-      { head_name: "Tuition Fee", amount: 30000 },
-      { head_name: "Lab Fee", amount: 10000 },
-      { head_name: "Library Fee", amount: 5000 },
-      { head_name: "Sports Fee", amount: 5000 },
-    ],
-    created_at: new Date(),
-  }
+interface FeeStructure {
+  _id: string
+  class_id: string
+  class_name: string
+  total_amount: number
+  components: Array<{ head_name: string; amount: number }>
+  created_at: string
 }
 
-export default function ViewFeeStructure() {
-  const insets = useSafeAreaInsets()
+export default function ViewFeeStructureScreen() {
   const router = useRouter()
-  const { classId } = useLocalSearchParams()
-
-  const [feeStructure, setFeeStructure] = useState<any>(null)
+  const { class_id } = useLocalSearchParams()
+  const [feeStructure, setFeeStructure] = useState<FeeStructure | null>(null)
   const [loading, setLoading] = useState(true)
 
+  const get_fee_structure_request = async () => {
+
+    setLoading(true)
+
+    const mockData = await getFeeStructureByClass(class_id)
+    setFeeStructure(mockData)
+
+    setLoading(false)
+  }
   useEffect(() => {
-    const fetchFeeStructure = async () => {
-      try {
-        setLoading(true)
-        const structure = await getFeeStructureByClass(classId as string)
-        setFeeStructure(structure)
-      } catch (error) {
-        Alert.alert("Error", "Failed to fetch fee structure")
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchFeeStructure()
-  }, [classId])
+
+
+    get_fee_structure_request()
+
+  }, [class_id])
 
   if (loading) {
     return (
-      <View className="flex-1 bg-white dark:bg-gray-900 items-center justify-center">
-        <ActivityIndicator size="large" color="#10b981" />
+      <View className="flex-1 bg-white items-center justify-center">
+        <ActivityIndicator size="large" color="#2563eb" />
       </View>
     )
   }
 
   return (
-    <ScrollView
-      className="flex-1 bg-white dark:bg-gray-900"
-      contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
-    >
-      <View className="px-4 py-6 space-y-6">
-        <View className="flex-row items-center justify-between">
-          <View>
-            <Text className="text-2xl font-bold text-gray-900 ">Fee Structure Details</Text>
-            <Text className="text-sm mt-1 text-gray-600 ">{feeStructure?.class_name}</Text>
+    <SafeAreaView className="flex-1 bg-background">
+      <View className="flex-row items-center p-4">
+        <TouchableOpacity
+          onPress={() => router.push("/management/fee/structure")}
+          className="flex-row items-center bg-white border border-border rounded-lg px-3 py-2 mr-2"
+        >
+          <Typography className="text-primary font-semibold">← Back</Typography>
+        </TouchableOpacity>
+
+        <Typography className="text-xl font-bold text-foreground"> Fee components</Typography>
+      </View>
+      <ScrollView refreshControl={<RefreshControl refreshing={loading} onRefresh={get_fee_structure_request} />} className="flex-1" showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View className=" px-4 pt-6 pb-4 ">
+
+          <Text className="text-2xl font-bold text-text-color">Fee Structure</Text>
+          <Text className="text-nav-text text-sm mt-1">View fee components</Text>
+        </View>
+
+
+        <View className="px-4 py-6">
+
+          <View className="bg-white border border-gray-200 rounded-2xl p-4 mb-6">
+            <Text className="text-nav-text text-sm font-medium mb-2">Class</Text>
+            <View className="flex-row items-center">
+              <View className="bg-blue-50 p-2 rounded-lg mr-3">
+                <MaterialIcons name="school" size={20} color="#2563eb" />
+              </View>
+              <Text className="text-text-color font-semibold text-lg">{feeStructure?.class_name}</Text>
+            </View>
           </View>
+
+          {/* Total Fee Card */}
+          <View className="bg-green-50 border border-green-200 rounded-2xl p-4 mb-6">
+            <Text className="text-nav-text text-sm font-medium mb-3">Total Fee Amount</Text>
+            <View className="flex-row items-center">
+              <View className="bg-green-100 p-2 rounded-lg mr-3">
+                <MaterialCommunityIcons name="currency-inr" size={24} color="#16a34a" />
+              </View>
+              <Text className="text-green-700 font-bold text-2xl">₹{feeStructure?.total_amount.toLocaleString()}</Text>
+            </View>
+          </View>
+
+          {/* Fee Components */}
+          {feeStructure?.components && feeStructure.components.length > 0 && (
+            <View>
+              <Text className="text-lg font-bold text-text-color mb-4">Fee Components Breakdown</Text>
+              {feeStructure.components.map((component, index) => (
+                <View key={index} className="bg-white border border-gray-200 rounded-xl p-4 mb-3">
+                  <Text className="text-nav-text text-sm font-medium mb-2">{component.head_name}</Text>
+                  <View className="flex-row items-center">
+                    <MaterialCommunityIcons name="currency-inr" size={18} color="#6b7280" />
+                    <Text className="text-text-color font-semibold text-lg ml-1">
+                      ₹{component.amount.toLocaleString()}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          )}
+
+          {/* Edit Button */}
           <TouchableOpacity
-            onPress={() => router.push(`/update-fee-structure/${classId}`)}
-            className="bg-amber-600 rounded-lg p-3"
+            onPress={() => router.push(`/management/fee/structure/update/${feeStructure?.class_id}`)}
+            className="bg-indigo-600 rounded-xl py-3 px-4 flex-row items-center justify-center mt-6 mb-6"
           >
-            <MaterialCommunityIcons name="pencil" size={20} color="white" />
+            <MaterialIcons name="edit" size={20} color="white" />
+            <Text className="text-white font-semibold ml-2">Edit Structure</Text>
           </TouchableOpacity>
         </View>
-
-        <View className="rounded-lg p-4 border border-gray-200  bg-white ">
-          <Text className="text-sm font-medium mb-2 text-gray-700 ">Class</Text>
-          <Text className="text-lg font-semibold text-gray-900 ">{feeStructure?.class_name}</Text>
-        </View>
-
-        <View className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700 rounded-lg p-4">
-          <Text className="text-sm font-medium text-emerald-800 dark:text-emerald-200 mb-2">Total Fee Amount</Text>
-          <View className="flex-row items-center gap-2">
-            <MaterialCommunityIcons name="currency-inr" size={28} color="#10b981" />
-            <Text className="text-3xl font-bold text-emerald-700 dark:text-emerald-400">
-              ₹{feeStructure?.total_amount?.toLocaleString()}
-            </Text>
-          </View>
-        </View>
-
-        <View className="space-y-3">
-          <Text className="text-lg font-semibold text-gray-900 ">Fee Components Breakdown</Text>
-          {feeStructure?.components?.map((component: any, index: number) => (
-            <View
-              key={index}
-              className="rounded-lg p-4 border border-gray-200  bg-white "
-            >
-              <View className="flex-row items-center justify-between">
-                <Text className="font-medium text-gray-900 ">{component.head_name}</Text>
-                <View className="flex-row items-center gap-1">
-                  <MaterialCommunityIcons name="currency-inr" size={16} color="#10b981" />
-                  <Text className="font-bold text-emerald-600 dark:text-emerald-400">
-                    ₹{component.amount?.toLocaleString()}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          ))}
-        </View>
-
-        <TouchableOpacity
-          onPress={() => router.back()}
-          className="border border-gray-300  rounded-lg p-3"
-        >
-          <Text className="text-center font-medium text-gray-700 ">Back</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   )
 }

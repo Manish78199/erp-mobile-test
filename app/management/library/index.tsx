@@ -432,7 +432,7 @@ export default function LibraryDashboard() {
                     </View>
                   </Link>
 
-                  <Link href={"/management/library/due"} className="mt-2">
+                  {/* <Link href={"/management/library/due"} className="mt-2">
                     <View className="flex-row w-full items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
                       <View className="p-2 bg-red-500 rounded-lg">
                         <MaterialCommunityIcons name="alert-circle" size={16} color="white" />
@@ -442,7 +442,7 @@ export default function LibraryDashboard() {
                         <Typography className="text-xs text-gray-600 ">Manage overdue books</Typography>
                       </View>
                     </View>
-                  </Link>
+                  </Link> */}
                 </View>
               </View>
 

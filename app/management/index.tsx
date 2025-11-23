@@ -59,8 +59,15 @@ const ManagementDashboard: React.FC = () => {
       "people",
       "mail",
       "bookmarks",
+      "document-text-outline",
+      "document-text",
+      "library",
+      "checkmark-done",
+      "reader",
+      "list"
+      // "stats-chart"
     ]
-    const material = ["school", "layers", "checkmark-done"]
+    const material = ["school", "layers", "checkmark-done", "account-balance","history","grade","task","description"]
 
     if (materialCommunity.includes(name))
       return <MaterialCommunityIcons name={name as any} size={size} color={color} />
@@ -113,7 +120,7 @@ const ManagementDashboard: React.FC = () => {
         },
         {
           title: "Homework",
-          icon: "book-outline",
+          icon: "task",
           colors: ["#f97316", "#fb923c"],
           screen: "/management/homework",
           description: "Manage assignments",
@@ -127,7 +134,7 @@ const ManagementDashboard: React.FC = () => {
         },
         {
           title: "Syllabus",
-          icon: "library",
+          icon: "description",
           colors: ["#6366f1", "#818cf8"],
           screen: "/management/syllabus",
           description: "Course curriculum",
@@ -153,7 +160,7 @@ const ManagementDashboard: React.FC = () => {
         },
         {
           title: "Subjects",
-          icon: "book-outline",
+          icon: "reader",
           colors: ["#a78bfa", "#8b5cf6"],
           screen: "/management/subject",
           description: "Subjects setup",
@@ -167,7 +174,7 @@ const ManagementDashboard: React.FC = () => {
         },
         {
           title: "Result",
-          icon: "document-text",
+          icon: "grade",
           colors: ["#10b981", "#059669"],
           screen: "/management/result",
           description: "View student results",
@@ -179,8 +186,8 @@ const ManagementDashboard: React.FC = () => {
       modules: [
         {
           title: "Library",
-          icon: "bookmarks",
-          colors: ["#6366f1", "#4338ca"],
+          icon: "library",
+          colors: ["#FF8B5D", "#FF5A37"],
           screen: "/management/library",
           description: "Library management",
         },
@@ -191,6 +198,34 @@ const ManagementDashboard: React.FC = () => {
           screen: "/management/transport",
           description: "Bus routes & vehicle info",
         },
+      ],
+    },
+        {
+      title: "Fee Management",
+      modules: [
+        {
+          title: "Deposit",
+          icon: "account-balance",
+          colors:["#00C9A7", "#008F7A"],
+          screen: "/management/fee/deposit",
+          description: "Student Fee",
+        },
+         {
+          title: "Fee History",
+          icon: "history",
+          colors: ["#FACC15", "#FB923C"],
+          screen: "/management/fee/history",
+          description: " Fee history",
+        },
+         {
+          title: "Fee",
+          icon: "list",
+          colors: ["#6366f1", "#4338ca"],
+          screen: "/management/fee/structure",
+          description: "Fee Structure",
+        },
+        
+       
       ],
     },
     {

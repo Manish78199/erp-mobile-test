@@ -37,13 +37,13 @@ export default function VehicleManagement() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "active":
-        return "bg-emerald-100 dark:bg-emerald-900"
+        return "bg-emerald-100 "
       case "maintenance":
-        return "bg-orange-100 dark:bg-orange-900"
+        return "bg-orange-100 "
       case "out_of_service":
-        return "bg-red-100 dark:bg-red-900"
+        return "bg-red-100 "
       case "inspection_due":
-        return "bg-yellow-100 dark:bg-yellow-900"
+        return "bg-yellow-100 "
       default:
         return "bg-gray-100 "
     }
@@ -52,11 +52,11 @@ export default function VehicleManagement() {
   const getTypeColor = (type: string) => {
     switch (type) {
       case "bus":
-        return "bg-blue-100 dark:bg-blue-900"
+        return "bg-blue-100 "
       case "van":
-        return "bg-purple-100 dark:bg-purple-900"
+        return "bg-purple-100 "
       case "car":
-        return "bg-emerald-100 dark:bg-emerald-900"
+        return "bg-emerald-100 "
       default:
         return "bg-gray-100 "
     }
@@ -95,7 +95,7 @@ export default function VehicleManagement() {
 
   return (
     <ScrollView
-      className="flex-1 bg-white dark:bg-gray-900"
+      className="flex-1 bg-white "
       contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
     >
       <View className="px-4 py-6 space-y-6">
@@ -216,12 +216,12 @@ export default function VehicleManagement() {
                       </Text>
                       <View className="flex-row gap-2 mt-2">
                         <View className={cn("px-2 py-1 rounded", getStatusColor(vehicle.status))}>
-                          <Text className="text-xs font-medium text-gray-800 dark:text-gray-200">
+                          <Text className="text-xs font-medium text-gray-800 ">
                             {vehicle?.status?.charAt(0).toUpperCase() + vehicle?.status?.slice(1)}
                           </Text>
                         </View>
                         <View className={cn("px-2 py-1 rounded", getTypeColor(vehicle.type))}>
-                          <Text className="text-xs font-medium text-gray-800 dark:text-gray-200">
+                          <Text className="text-xs font-medium text-gray-800 ">
                             {vehicle?.type?.charAt(0).toUpperCase() + vehicle?.type?.slice(1)}
                           </Text>
                         </View>
@@ -229,7 +229,7 @@ export default function VehicleManagement() {
                     </View>
                   </View>
                   {vehicle.gpsEnabled && (
-                    <View className="p-2 bg-emerald-100 dark:bg-emerald-900 rounded-lg">
+                    <View className="p-2 bg-emerald-100  rounded-lg">
                       <MaterialCommunityIcons name="map-marker" size={16} color="#059669" />
                     </View>
                   )}
@@ -299,8 +299,8 @@ export default function VehicleManagement() {
                   <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 ">
                     <Text className="text-center text-sm font-medium text-gray-700 ">Edit</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-red-300 dark:border-red-600">
-                    <Text className="text-center text-sm font-medium text-red-600 dark:text-red-400">Delete</Text>
+                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-red-300 ">
+                    <Text className="text-center text-sm font-medium text-red-600 ">Delete</Text>
                   </TouchableOpacity>
                 </View>
               </View>

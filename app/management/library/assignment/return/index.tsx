@@ -305,7 +305,7 @@ export default function ReturnBooksPage() {
           <Typography className="text-xs text-muted-foreground">Due: {formatDateDisplay(book.due_date)}</Typography>
         </View>
 
-        <View className={`rounded-full   px-2 py-1 mb-3 ${bookStatus.color}`}>
+        <View className={`rounded-full  w-auto self-start   px-2 py-1 mb-3 ${bookStatus.color}`}>
           <Typography className="text-xs  font-medium text-white">
             {bookStatus.status === "overdue"
               ? `${bookStatus.days} days overdue`
@@ -329,7 +329,7 @@ export default function ReturnBooksPage() {
         <TouchableOpacity
           onPress={() => handleReturnBook(book.assignment_id)}
           disabled={isReturning === book.assignment_id}
-          className={`flex-row items-center justify-center rounded-lg py-2 ${isReturning === book.assignment_id ? "bg-gray-800" : "bg-purple-600"
+          className={`flex-row items-center justify-center rounded-lg py-2 ${isReturning === book.assignment_id ? "bg-gray-800" : "bg-indigo-600"
             }`}
         >
           {isReturning === book.assignment_id ? (
@@ -345,83 +345,7 @@ export default function ReturnBooksPage() {
     )
   }
 
-  // Book List Item Component for List View
-  const BookListItem = ({ book }: { book: BorrowedBook }) => {
-    const bookStatus = getBookStatus(book.due_date)
-    return (
-      <View className="rounded-lg border border-border bg-card p-4 mb-4 flex-row">
-        <View className="w-16 h-20 bg-gray-100 rounded-lg items-center justify-center mr-4">
-          <MaterialCommunityIcons name="book" size={32} color="#3b82f6" />
-        </View>
 
-        <View className="flex-1">
-          <Typography className="text-base font-semibold text-foreground mb-1">{book.title}</Typography>
-          <Typography className="text-sm text-muted-foreground mb-2">by {book.author}</Typography>
-
-          <View className="mb-2">
-            <View className="flex-row items-center gap-2 mb-1">
-              <MaterialCommunityIcons name="book-marker" size={14} color="#999" />
-              <Typography className="text-sm text-foreground">ISBN: {book.isbn}</Typography>
-            </View>
-            <View className="flex-row items-center gap-2 mb-1">
-              <MaterialCommunityIcons name="book-open-page-variant" size={14} color="#999" />
-              <Typography className="text-sm text-foreground">Code: {book.code}</Typography>
-            </View>
-            <View className="flex-row items-center gap-2 mb-1">
-              <MaterialCommunityIcons name="calendar" size={14} color="#999" />
-              <Typography className="text-sm text-foreground">Issued: {formatDateDisplay(book.issue_date)}</Typography>
-            </View>
-            <View className="flex-row items-center gap-2">
-              <MaterialCommunityIcons name="clock" size={14} color="#999" />
-              <Typography className="text-sm text-foreground">Due: {formatDateDisplay(book.due_date)}</Typography>
-            </View>
-          </View>
-
-          {book.fine_amount && book.fine_amount > 0 && (
-            <View className="bg-red-50 rounded-lg p-2 mb-2 flex-row items-center gap-2">
-              <MaterialCommunityIcons name="alert" size={16} color="#dc2626" />
-              <Typography className="text-sm font-medium text-red-800">
-                Fine: {formatCurrency(book.fine_amount)}
-              </Typography>
-            </View>
-          )}
-        </View>
-
-        <View className="items-end gap-2">
-          {/* <View className={`rounded-full px-2 py-1 ${getBookStatus(book.due_date).color}`}>
-            <Typography className="text-xs font-medium text-white">
-              {getBookStatus(book.due_date).status === "overdue"
-                ? `${getBookStatus(book.due_date).days}d`
-                : getBookStatus(book.due_date).status === "due_today"
-                  ? "Today"
-                  : getBookStatus(book.due_date).status === "due_soon"
-                    ? `${getBookStatus(book.due_date).days}d`
-                    : "OK"}
-            </Typography>
-          </View> */}
-          <TouchableOpacity
-            onPress={() => handleReturnBook(book.assignment_id)}
-            disabled={isReturning === book.assignment_id}
-            activeOpacity={0.7}
-            className={`flex-row items-center justify-center rounded-lg px-3 py-2 ${isReturning === book.assignment_id ? "bg-gray-400" : "bg-purple-600"
-              }`}
-          >
-            {isReturning === book.assignment_id ? (
-              <ActivityIndicator size="small" color="white" />
-            ) : (
-              <>
-                <MaterialCommunityIcons name="logout" size={16} color="white" />
-                <Typography className="text-white font-semibold ml-1 text-xs">
-                  Vacate
-                </Typography>
-              </>
-            )}
-          </TouchableOpacity>
-
-        </View>
-      </View>
-    )
-  }
 
   return (
     <SafeAreaView className="flex-1 bg-background" edges={["top"]}>
@@ -626,7 +550,7 @@ export default function ReturnBooksPage() {
                       : "This student has no borrowed books."}
                   </Typography>
                 </View>
-              ) : viewType === "GRID" ? (
+              ) : (
                 <View className="gap-3 bg-white">
                   <FlatList
                     scrollEnabled={false}
@@ -641,13 +565,6 @@ export default function ReturnBooksPage() {
                     )}
                   />
                 </View>
-              ) : (
-                <FlatList
-                  scrollEnabled={false}
-                  data={filteredBooks}
-                  keyExtractor={(item) => item.assignment_id}
-                  renderItem={({ item }) => <BookListItem book={item} />}
-                />
               )}
             </>
           )}

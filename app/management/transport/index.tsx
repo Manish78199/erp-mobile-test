@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { View, Text, ScrollView, FlatList, TouchableOpacity } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { useRouter } from "expo-router"
+import { Link, useRouter } from "expo-router"
 import RNPickerSelect from "react-native-picker-select"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { cn } from "@/utils/cn"
@@ -115,6 +115,72 @@ export default function TransportDashboard() {
             />
           </View>
         </View>
+
+ <View className="rounded-lg  p-4 mt-3 border border-gray-200  bg-white ">
+                <Typography className="text-lg font-semibold mb-4 text-gray-900 ">Quick Actions</Typography>
+                <View className="space-y-2 ">
+                  <Link href={"/management/library/book"} className="">
+
+                    <View className="flex-row items-center w-full gap-3  p-3 rounded-lg border border-gray-200  bg-gray-50 " >
+                      <View className="p-2 bg-blue-500 rounded-lg">
+                        <MaterialCommunityIcons name="plus" size={16} color="white" />
+                      </View>
+                      <View className="">
+                        <Typography className="font-semibold text-gray-900 ">Books</Typography>
+                        <Typography className="text-xs text-gray-600 ">Manage books</Typography>
+                      </View>
+                    </View>
+                  </Link>
+
+                  <Link href={"/management/transport/route"} className="mt-2">
+
+                    <View className="flex-row w-full items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
+                      <View className="p-2 bg-green-500 rounded-lg">
+                        <MaterialCommunityIcons name="book-plus" size={16} color="white" />
+                      </View>
+                      <View>
+                        <Typography className="font-semibold text-gray-900 ">Route </Typography>
+                        <Typography className="text-xs text-gray-600 ">Issue books to students</Typography>
+                      </View>
+                    </View>
+                  </Link>
+
+                  <Link href={"/management/transport/vehicle"} className="mt-2">
+                    <View className="flex-row items-center w-full gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
+                      <View className="p-2 bg-purple-500 rounded-lg">
+                        <MaterialCommunityIcons name="check-circle" size={16} color="white" />
+                      </View>
+                      <View>
+                        <Typography className="font-semibold text-gray-900 ">Vehicle</Typography>
+                        <Typography className="text-xs text-gray-600 ">Process book returns</Typography>
+                      </View>
+                    </View>
+                  </Link>
+                   <Link href={"/management/transport/track"} className="mt-2">
+                    <View className="flex-row items-center w-full gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
+                      <View className="p-2 bg-purple-500 rounded-lg">
+                        <MaterialCommunityIcons name="check-circle" size={16} color="white" />
+                      </View>
+                      <View>
+                        <Typography className="font-semibold text-gray-900 ">Track</Typography>
+                        <Typography className="text-xs text-gray-600 ">Process book returns</Typography>
+                      </View>
+                    </View>
+                  </Link>
+
+                  {/* <Link href={"/management/library/due"} className="mt-2">
+                    <View className="flex-row w-full items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
+                      <View className="p-2 bg-red-500 rounded-lg">
+                        <MaterialCommunityIcons name="alert-circle" size={16} color="white" />
+                      </View>
+                      <View>
+                        <Typography className="font-semibold text-gray-900 ">Due Books</Typography>
+                        <Typography className="text-xs text-gray-600 ">Manage overdue books</Typography>
+                      </View>
+                    </View>
+                  </Link> */}
+                </View>
+              </View>
 
         <View className="rounded-lg p-4 mt-3 border border-gray-200  bg-white ">
           <View className="flex-row items-center justify-between mb-4">

@@ -1,10 +1,11 @@
-import routes from "@/config/route";
+import {ApiRoute} from "@/constants/apiRoute";
+import { get_access_token } from "@/utils/accessToken";
 import axios from "axios";
 
 const save_student_health = async (health: any) => {
-    const access_token = localStorage.getItem("access_token")
+    const access_token =await get_access_token()
 
-    const response = await axios.post(`${routes.studentService.student_health}`,
+    const response = await axios.post(`${ApiRoute.studentService.student_health}`,
         health,
         {
             headers: {
@@ -19,9 +20,9 @@ const save_student_health = async (health: any) => {
 }
 
 const get_student_health = async (student_id: string) => {
-    const access_token = localStorage.getItem("access_token")
+        const access_token =await get_access_token()
     try {
-        const response = await axios.get(`${routes.studentService.student_health}/${student_id}`,
+        const response = await axios.get(`${ApiRoute.studentService.student_health}/${student_id}`,
 
             {
                 headers: {

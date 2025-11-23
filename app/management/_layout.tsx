@@ -138,19 +138,23 @@ function ManagementLayout() {
       <Tabs.Screen name="event/photos/add/index" options={{ href: null }} />
       <Tabs.Screen name="exam/index" options={{ href: null }} />
       <Tabs.Screen name="exam/create/index" options={{ href: null }} />
+      <Tabs.Screen name="exam/process/index" options={{ href: null }} />
+      <Tabs.Screen name="exam/attendance/index" options={{ href: null }} />
+      <Tabs.Screen name="exam/attendance/controller" options={{ href: null }} />
+
       <Tabs.Screen name="fee/deposit/index" options={{ href: null }} />
       <Tabs.Screen name="fee/history/index" options={{ href: null }} />
       <Tabs.Screen name="fee/structure/index" options={{ href: null }} />
       <Tabs.Screen name="fee/structure/create/index" options={{ href: null }} />
       <Tabs.Screen name="fee/structure/update/[class_id]/index" options={{ href: null }} />
       <Tabs.Screen name="fee/structure/view/[class_id]/index" options={{ href: null }} />
-      <Tabs.Screen name="fee/view/[deposit_id]/index" options={{ href: null }} />
+      <Tabs.Screen name="fee/view/[depositId]/index" options={{ href: null }} />
 
       <Tabs.Screen name="homework/create/index" options={{ href: null }} />
       <Tabs.Screen name="library/index" options={{ href: null }} />
       <Tabs.Screen name="library/assignment/index" options={{ href: null }} />
       <Tabs.Screen name="library/assignment/issue" options={{ href: null }} />
-      <Tabs.Screen name="library/assignment/return" options={{ href: null }} />
+      <Tabs.Screen name="library/assignment/return/index" options={{ href: null }} />
       <Tabs.Screen name="library/book/index" options={{ href: null }} />
       <Tabs.Screen name="library/book/add/index" options={{ href: null }} />
       <Tabs.Screen name="library/due/index" options={{ href: null }} />
@@ -166,6 +170,7 @@ function ManagementLayout() {
       <Tabs.Screen name="staff/view/[staff_id]/index" options={{ href: null }} />
       <Tabs.Screen name="student/index" options={{ href: null }} />
       <Tabs.Screen name="student/admission/index" options={{ href: null }} />
+      <Tabs.Screen name="student/view/[studentId]/index" options={{ href: null }} />
       <Tabs.Screen name="student/attendance/attendance-controller" options={{ href: null }} />
 
       <Tabs.Screen name="subject/index" options={{ href: null }} />
@@ -178,6 +183,13 @@ function ManagementLayout() {
       <Tabs.Screen name="transport/route/add/index" options={{ href: null }} />
       <Tabs.Screen name="transport/vehicle/index" options={{ href: null }} />
       <Tabs.Screen name="transport/vehicle/add/index" options={{ href: null }} />
+      <Tabs.Screen name="transport/track/index" options={{ href: null }} />
+      <Tabs.Screen name="transport/assignment/index" options={{ href: null }} />
+      <Tabs.Screen name="transport/assignment/assign/index" options={{ href: null }} />
+      <Tabs.Screen name="transport/assignment/release/index" options={{ href: null }} />
+      <Tabs.Screen name="transport/vehicle-route/index" options={{ href: null }} />
+      <Tabs.Screen name="transport/track/[vehicle_id]/index" options={{ href: null }} />
+
     </Tabs>
   )
 }

@@ -1,174 +1,167 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
-import { View, Text, ScrollView, FlatList, TouchableOpacity, TextInput, ActivityIndicator, Alert } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { useEffect, useState } from "react"
+import { View, Text, ScrollView, TouchableOpacity, TextInput, FlatList, ActivityIndicator, RefreshControl } from "react-native"
 import { useRouter } from "expo-router"
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons"
-import { cn } from "@/utils/cn"
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { Typography } from "@/components/Typography"
 
-// Mock API - replace with actual API calls
-const getAllFeeStructure = async () => {
-  return [
-    { _id: "1", class_id: "1", class_name: "Class 10-A", total_amount: 50000, created_at: new Date() },
-    { _id: "2", class_id: "2", class_name: "Class 10-B", total_amount: 50000, created_at: new Date() },
-    { _id: "3", class_id: "3", class_name: "Class 9-A", total_amount: 45000, created_at: new Date() },
-  ]
+import { getAllFeeStructure } from "@/service/management/feeStructure"
+
+interface FeeStructure {
+  _id: string
+  class_id: string
+  class_name: string
+  total_amount: number
+  components: Array<{ head_name: string; amount: number }>
+  created_at: string
 }
 
-const deleteFeeStructure = async (id: string) => {
-  return { success: true }
-}
-
-export default function FeeStructureList() {
-  const insets = useSafeAreaInsets()
+export default function FeeStructureListScreen() {
   const router = useRouter()
-
-  const [allFeeStructure, setAllFeeStructure] = useState([])
+  const [allFeeStructure, setAllFeeStructure] = useState<FeeStructure[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState("")
 
+  const get_fee_structure_request = async () => {
+    setLoading(true)
+    const mockData: FeeStructure[] = await getAllFeeStructure()
+    setAllFeeStructure(mockData)
+    setLoading(false)
+  }
+
   useEffect(() => {
-    const fetchFeeStructures = async () => {
-      try {
-        setLoading(true)
-        const structures = await getAllFeeStructure()
-        setAllFeeStructure(structures)
-      } catch (error) {
-        Alert.alert("Error", "Failed to fetch fee structures")
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchFeeStructures()
+
+    get_fee_structure_request()
   }, [])
 
-  const filteredData = useMemo(() => {
-    return allFeeStructure.filter((fee: any) => fee.class_name?.toLowerCase().includes(searchTerm.toLowerCase()))
-  }, [allFeeStructure, searchTerm])
+  const filteredData = allFeeStructure.filter((fee) => fee.class_name?.toLowerCase().includes(searchTerm.toLowerCase()))
 
-  const totalClasses = allFeeStructure.length
-  const totalRevenue = allFeeStructure.reduce((sum: number, fee: any) => sum + (fee.total_amount || 0), 0)
-  const averageFee = totalClasses > 0 ? totalRevenue / totalClasses : 0
+  const renderFeeItem = ({ item }: { item: FeeStructure }) => (
+    <View className="bg-white border border-gray-200 rounded-2xl p-4 mb-4 shadow-sm">
+      <View className="flex-row items-center justify-between mb-3">
+        <View className="flex-row items-center flex-1">
+          <View className="bg-card-bg p-2 rounded-lg mr-3">
+            <MaterialIcons name="school" size={20} color="#6b7280" />
+          </View>
+          <Text className="text-text-color font-semibold text-base flex-1">{item.class_name}</Text>
+        </View>
+      </View>
 
-  const StatCard = ({ icon, title, value, color }: any) => (
-    <View className={cn("flex-1 rounded-lg p-3 border border-gray-200  bg-white ")}>
-      <View className="flex-row items-center justify-between">
-        <View className="flex-1">
-          <Text className="text-xs font-medium mb-1 text-gray-600 ">{title}</Text>
-          <Text className="text-lg font-bold text-gray-900 ">{value}</Text>
+      <View className="bg-green-50 border border-green-200 rounded-xl p-3 mb-3">
+        <View className="flex-row items-center">
+          <MaterialCommunityIcons name="currency-inr" size={20} color="#16a34a" />
+          <Text className="text-green-700 font-bold text-lg ml-2">₹{item.total_amount.toLocaleString()}</Text>
         </View>
-        <View className={cn("p-2 rounded-lg", color)}>
-          <MaterialCommunityIcons name={icon} size={16} color="white" />
-        </View>
+      </View>
+
+      <Text className="text-nav-text text-xs mb-2">Updated: {new Date(item.created_at).toLocaleDateString()}</Text>
+
+      <View className="flex-row gap-2">
+        <TouchableOpacity
+          onPress={() => router.push(`/management/fee/structure/view/${item.class_id}`)}
+          className="flex-1 bg-blue-50 border border-blue-200 rounded-lg py-2 px-3"
+        >
+          <View className="flex-row items-center justify-center">
+            <MaterialIcons name="visibility" size={16} color="#2563eb" />
+            <Text className="text-blue-600 font-medium text-sm ml-1">View</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => router.push(`/management/fee/structure/update/${item.class_id}`)}
+          className="flex-1 bg-indigo-50 border border-indigo-200 rounded-lg py-2 px-3"
+        >
+          <View className="flex-row items-center justify-center">
+            <MaterialIcons name="edit" size={16} color="#4f46e5" />
+            <Text className="text-indigo-600 font-medium text-sm ml-1">Edit</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   )
 
   return (
-    <ScrollView
-      className="flex-1 bg-white dark:bg-gray-900"
-      contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
-    >
-      <View className="px-4 py-6 space-y-6">
-        <View>
-          <Text className="text-2xl font-bold text-gray-900 ">Fee Structure</Text>
-          <Text className="text-sm mt-1 text-gray-600 ">Manage class fee structures</Text>
+    <SafeAreaView className="flex-1 bg-background">
+
+      <ScrollView className="flex-1" showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={loading} onRefresh={get_fee_structure_request}/>}>
+        <View className="flex-row items-center p-4">
+          <TouchableOpacity
+            onPress={() => router.push("/management")}
+            className="flex-row items-center bg-white border border-border rounded-lg px-3 py-2 mr-2"
+          >
+            <Typography className="text-primary font-semibold">← Back</Typography>
+          </TouchableOpacity>
+
+          <Typography className="text-xl font-bold text-foreground"> Fee Structure</Typography>
+        </View>
+        <View className="flex-row items-center justify-between px-4 pt-6 pb-4 ">
+          <View className=" mb-4">
+
+
+            <Text className="text-text-color text-2xl font-bold">Fee Structure</Text>
+            <Text className="text-nav-text text-sm mt-1">Manage class fee structures</Text>
+
+          </View>
+
+          <TouchableOpacity
+            onPress={() => router.push("/management/fee/structure/create")}
+            className="bg-blue-600 rounded-xl py-3 px-4 flex-row items-center justify-center"
+          >
+            <MaterialIcons name="add" size={20} color="white" />
+            {/* <Text className="text-white font-semibold ml-2">Add Fee Structure</Text> */}
+          </TouchableOpacity>
         </View>
 
-        <View className="space-y-2">
-          <View className="flex-row gap-2">
-            <StatCard icon="school" title="Total Classes" value={totalClasses} color="bg-blue-500" />
-            <StatCard
-              icon="currency-inr"
-              title="Total Revenue"
-              value={`₹${totalRevenue.toLocaleString()}`}
-              color="bg-emerald-500"
-            />
-          </View>
-          <View className="flex-row gap-2">
-            <StatCard
-              icon="calculator"
-              title="Average Fee"
-              value={`₹${Math.round(averageFee).toLocaleString()}`}
-              color="bg-purple-500"
-            />
-          </View>
-        </View>
 
-        <View className="rounded-lg p-4 border border-gray-200  bg-white  space-y-3">
-          <View className="flex-row items-center justify-between mb-3">
-            <Text className="text-lg font-semibold text-gray-900 ">Search</Text>
-            <TouchableOpacity
-              onPress={() => router.push("/fee-structure-create")}
-              className="bg-emerald-600 rounded-lg p-2 flex-row items-center gap-1"
-            >
-              <MaterialCommunityIcons name="plus" size={18} color="white" />
-              <Text className="text-white text-sm font-medium">Add</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View className="flex-row items-center px-3 rounded-lg border border-gray-300 ">
-            <MaterialCommunityIcons name="magnify" size={20} color="#6b7280" />
+        <View className="px-4 py-4 ">
+          <View className="bg-white border border-gray-200 rounded-xl px-3 py-2 flex-row items-center">
+            <MaterialIcons name="search" size={20} color="#6b7280" />
             <TextInput
               placeholder="Search by class name..."
-              placeholderTextColor="#9ca3af"
               value={searchTerm}
               onChangeText={setSearchTerm}
-              className="flex-1 ml-2 py-2 text-sm text-gray-900 "
+              className="flex-1 ml-2 text-text-color"
+              placeholderTextColor="#9ca3af"
             />
           </View>
         </View>
 
-        {loading ? (
-          <View className="flex-row items-center justify-center py-12">
-            <ActivityIndicator size="large" color="#10b981" />
-          </View>
-        ) : filteredData.length > 0 ? (
-          <FlatList
-            scrollEnabled={false}
-            data={filteredData}
-            keyExtractor={(item) => item._id}
-            renderItem={({ item }) => (
-              <View className="mb-3 rounded-lg p-4 border border-gray-200  bg-white ">
-                <View className="flex-row items-center justify-between mb-2">
-                  <View className="flex-1">
-                    <Text className="font-semibold text-gray-900 ">{item.class_name}</Text>
-                    <Text className="text-xs mt-1 text-gray-600 ">
-                      Updated: {new Date(item.created_at).toLocaleDateString()}
-                    </Text>
-                  </View>
-                  <View className="flex-row gap-2">
-                    <TouchableOpacity
-                      onPress={() => router.push(`/view-fee-structure/${item.class_id}`)}
-                      className="bg-blue-100 dark:bg-blue-900 p-2 rounded-lg"
-                    >
-                      <MaterialCommunityIcons name="eye" size={18} color="#3b82f6" />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => router.push(`/update-fee-structure/${item.class_id}`)}
-                      className="bg-amber-100 dark:bg-amber-900 p-2 rounded-lg"
-                    >
-                      <MaterialCommunityIcons name="pencil" size={18} color="#f59e0b" />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-                <View className="flex-row items-center gap-2 mt-2">
-                  <MaterialCommunityIcons name="currency-inr" size={16} color="#10b981" />
-                  <Text className="font-bold text-emerald-600 dark:text-emerald-400">
-                    ₹{item.total_amount?.toLocaleString()}
-                  </Text>
-                </View>
+
+        <View className="px-4 pb-6">
+          {loading ? (
+            <View className="py-8 items-center justify-center">
+              <ActivityIndicator size="large" color="#2563eb" />
+            </View>
+          ) : filteredData.length > 0 ? (
+            <FlatList
+              data={filteredData}
+              renderItem={renderFeeItem}
+              keyExtractor={(item) => item._id}
+              scrollEnabled={false}
+            />
+          ) : (
+            <View className="py-12 items-center justify-center">
+              <View className="bg-card-bg rounded-full p-4 mb-4">
+                <MaterialCommunityIcons name="cash-multiple" size={32} color="#6b7280" />
               </View>
-            )}
-          />
-        ) : (
-          <View className="items-center justify-center py-12">
-            <MaterialIcons name="folder-open" size={48} color="#d1d5db" />
-            <Text className="text-gray-500  mt-2">No fee structures found</Text>
-          </View>
-        )}
-      </View>
-    </ScrollView>
+              <Text className="text-text-color font-semibold text-lg mb-2">No fee structures found</Text>
+              <Text className="text-nav-text text-sm mb-6">
+                {searchTerm ? "Try adjusting your search" : "Create your first fee structure"}
+              </Text>
+              <TouchableOpacity
+                onPress={() => router.push("/management/fee/structure/create")}
+                className="bg-blue-600 rounded-xl py-3 px-6 flex-row items-center"
+              >
+                <MaterialIcons name="add" size={18} color="white" />
+                <Text className="text-white font-semibold ml-2">Create Fee Structure</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+      </ScrollView>
+
+    </SafeAreaView>
   )
 }
