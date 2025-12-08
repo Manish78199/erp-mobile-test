@@ -299,9 +299,9 @@ export default function VehicleManagement() {
                   <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 ">
                     <Text className="text-center text-sm font-medium text-gray-700 ">Edit</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-red-300 ">
+                  {/* <TouchableOpacity className="flex-1 p-2 rounded-lg border border-red-300 ">
                     <Text className="text-center text-sm font-medium text-red-600 ">Delete</Text>
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                 </View>
               </View>
             )}

@@ -1,12 +1,14 @@
+"use client"
 
 import { useEffect, useState } from "react"
-import { View, Text, ScrollView, TouchableOpacity, TextInput, FlatList } from "react-native"
+import { View, Text, ScrollView, TouchableOpacity, TextInput, FlatList, ActivityIndicator, Alert } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { Link } from "expo-router"
+import { get_vehicle } from "@/service/management/transport"
 
 interface VehicleLocation {
-  id: string
+  _id: string
   registration: string
   driver: string
   route: string
@@ -39,100 +41,69 @@ export default function GPSTracking() {
   const [lastRefresh, setLastRefresh] = useState(new Date())
   const [loading, setLoading] = useState(false)
 
-  const [vehicleLocations, setVehicleLocations] = useState<VehicleLocation[]>([
-    {
-      id: "1",
-      registration: "TN-01-AB-1234",
-      driver: "Rajesh Kumar",
-      route: "Route A1",
-      status: "moving",
-      location: {
-        address: "Anna Nagar, Chennai",
-        coordinates: { lat: 13.0843, lng: 80.2705 },
-      },
-      speed: 35,
-      heading: 180,
-      studentsOnBoard: 28,
-      maxCapacity: 35,
-      fuelLevel: 75,
-      engineStatus: "on",
-      temperature: 85,
-      lastUpdate: new Date().toISOString(),
-      nextStop: "Kilpauk Medical College",
-      eta: "8 min",
-      distanceToDestination: 2.5,
-      tripProgress: 65,
-    },
-    {
-      id: "2",
-      registration: "TN-01-AB-5678",
-      driver: "Suresh Singh",
-      route: "Route B2",
-      status: "stopped",
-      location: {
-        address: "Guindy Metro Station, Chennai",
-        coordinates: { lat: 13.0067, lng: 80.2206 },
-      },
-      speed: 0,
-      heading: 90,
-      studentsOnBoard: 15,
-      maxCapacity: 40,
-      fuelLevel: 45,
-      engineStatus: "on",
-      temperature: 78,
-      lastUpdate: new Date().toISOString(),
-      nextStop: "Adyar Signal",
-      eta: "12 min",
-      distanceToDestination: 4.2,
-      tripProgress: 40,
-    },
-    {
-      id: "3",
-      registration: "TN-01-AB-9012",
-      driver: "Vikash Yadav",
-      route: "Route C3",
-      status: "idle",
-      location: {
-        address: "Tambaram Railway Station, Chennai",
-        coordinates: { lat: 12.9249, lng: 80.1 },
-      },
-      speed: 0,
-      heading: 270,
-      studentsOnBoard: 0,
-      maxCapacity: 25,
-      fuelLevel: 90,
-      engineStatus: "off",
-      temperature: 65,
-      lastUpdate: new Date().toISOString(),
-      nextStop: "Chrompet Bus Stand",
-      eta: "15 min",
-      distanceToDestination: 6.8,
-      tripProgress: 0,
-    },
-    {
-      id: "4",
-      registration: "TN-01-AB-3456",
-      driver: "Amit Sharma",
-      route: "Route D4",
-      status: "emergency",
-      location: {
-        address: "OMR, Chennai",
-        coordinates: { lat: 12.9716, lng: 80.2431 },
-      },
-      speed: 0,
-      heading: 45,
-      studentsOnBoard: 22,
-      maxCapacity: 30,
-      fuelLevel: 25,
-      engineStatus: "on",
-      temperature: 95,
-      lastUpdate: new Date().toISOString(),
-      nextStop: "Emergency Stop",
-      eta: "N/A",
-      distanceToDestination: 0,
-      tripProgress: 50,
-    },
-  ])
+  const [vehicleLocations, setVehicleLocations] = useState<VehicleLocation[]>([])
+
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        setLoading(true)
+        const fetchedVehicles = await get_vehicle()
+
+        // Map vehicle data to VehicleLocation interface
+        const mappedVehicles: VehicleLocation[] = fetchedVehicles.map((vehicle: any, index: number) => ({
+          _id: vehicle._id || index.toString(),
+          registration: vehicle.registrationNumber || "N/A",
+          driver: vehicle.driver || "Unknown",
+          route: vehicle.route || "Route Unknown",
+          status: getRandomStatus(),
+          location: {
+            address: vehicle.location || "Unknown Location",
+            coordinates: {
+              lat: vehicle.latitude || 13.0843,
+              lng: vehicle.longitude || 80.2705,
+            },
+          },
+          speed: getRandomSpeed(),
+          heading: Math.floor(Math.random() * 360),
+          studentsOnBoard: Math.floor(Math.random() * vehicle.capacity),
+          maxCapacity: vehicle.capacity || 35,
+          fuelLevel: Math.floor(Math.random() * 100),
+          engineStatus: Math.random() > 0.3 ? "on" : "off",
+          temperature: 65 + Math.floor(Math.random() * 30),
+          lastUpdate: new Date().toISOString(),
+          nextStop: vehicle.nextStop || "Next Stop",
+          eta: Math.floor(Math.random() * 30) + " min",
+          distanceToDestination: (Math.random() * 10).toFixed(1),
+          tripProgress: Math.floor(Math.random() * 100),
+        }))
+
+        setVehicleLocations(mappedVehicles)
+      } catch (error) {
+        Alert.alert("Error", "Failed to fetch vehicles")
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchVehicles()
+  }, [])
+
+  // Helper functions for random data
+  const getRandomStatus = (): "moving" | "stopped" | "idle" | "emergency" | "offline" => {
+    const statuses: ("moving" | "stopped" | "idle" | "emergency" | "offline")[] = [
+      "moving",
+      "stopped",
+      "idle",
+      "emergency",
+      "offline",
+    ]
+    return statuses[Math.floor(Math.random() * statuses.length)]
+  }
+
+  const getRandomSpeed = () => {
+    const speeds = [0, 15, 25, 35, 45, 55]
+    return speeds[Math.floor(Math.random() * speeds.length)]
+  }
 
   useEffect(() => {
     if (autoRefresh) {
@@ -339,7 +310,10 @@ export default function GPSTracking() {
 
       {/* Actions */}
       <View className="flex-row gap-2 pt-4 border-t border-gray-200">
-        <Link href={`/management/transport/track/${item?.vehicle_id}`} className="flex-1 py-2 px-3 border border-gray-300 rounded-lg items-center">
+        <Link
+          href={`/management/transport/track/${item?._id}`}
+          className="flex-1 py-2 px-3 border border-gray-300 rounded-lg items-center"
+        >
           <View className="flex-row items-center gap-1">
             <MaterialCommunityIcons name="map-marker" size={14} color="#3b82f6" />
             <Text className="text-xs font-medium text-blue-600">View Map</Text>
@@ -415,32 +389,43 @@ export default function GPSTracking() {
           </View>
         </View>
 
-        {/* Status Summary */}
-        <View className="mx-4 mb-4 flex-row gap-2">
-          {[
-            { status: "moving", color: "bg-green-100", textColor: "text-green-600" },
-            { status: "stopped", color: "bg-yellow-100", textColor: "text-yellow-600" },
-            { status: "idle", color: "bg-gray-100", textColor: "text-gray-600" },
-            { status: "emergency", color: "bg-red-100", textColor: "text-red-600" },
-          ].map((item) => (
-            <View key={item.status} className={`flex-1 p-3 rounded-lg ${item.color}`}>
-              <Text className={`text-lg font-bold ${item.textColor}`}>
-                {filteredVehicles.filter((v) => v.status === item.status).length}
-              </Text>
-              <Text className="text-xs text-gray-600 capitalize">{item.status}</Text>
+        {/* Loading State */}
+        {loading ? (
+          <View className="flex-row items-center justify-center py-12">
+            <ActivityIndicator size="large" color="#3b82f6" />
+          </View>
+        ) : (
+          <>
+            {/* Status Summary */}
+            <View className="mx-4 mb-4 flex-row gap-2">
+              {[
+                { status: "moving", color: "bg-green-100", textColor: "text-green-600" },
+                { status: "stopped", color: "bg-yellow-100", textColor: "text-yellow-600" },
+                { status: "idle", color: "bg-gray-100", textColor: "text-gray-600" },
+                { status: "emergency", color: "bg-red-100", textColor: "text-red-600" },
+              ].map((item) => (
+                <View key={item.status} className={`flex-1 p-3 rounded-lg ${item.color}`}>
+                  <Text className={`text-lg font-bold ${item.textColor}`}>
+                    {filteredVehicles.filter((v) => v.status === item.status).length}
+                  </Text>
+                  <Text className="text-xs text-gray-600 capitalize">{item.status}</Text>
+                </View>
+              ))}
             </View>
-          ))}
-        </View>
 
-        {/* Vehicle List */}
-        <FlatList
-          data={filteredVehicles}
-          renderItem={renderVehicleCard}
-          keyExtractor={(item) => item.id}
-          scrollEnabled={false}
-          contentContainerStyle={{ paddingBottom: 20 }}
-        />
+            {/* Vehicle List */}
+            <FlatList
+              data={filteredVehicles}
+              renderItem={renderVehicleCard}
+              keyExtractor={(item) => item.id}
+              scrollEnabled={false}
+              contentContainerStyle={{ paddingBottom: 20 }}
+            />
+          </>
+        )}
       </ScrollView>
     </SafeAreaView>
   )
 }
+
+
