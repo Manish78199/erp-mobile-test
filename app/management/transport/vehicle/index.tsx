@@ -8,6 +8,7 @@ import RNPickerSelect from "react-native-picker-select"
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons"
 import { cn } from "@/utils/cn"
 import { get_vehicle } from "@/service/management/transport"
+import { Typography } from "@/components/Typography"
 
 export default function VehicleManagement() {
   const insets = useSafeAreaInsets()
@@ -98,6 +99,16 @@ export default function VehicleManagement() {
       className="flex-1 bg-white "
       contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
     >
+      <View className="flex-row items-center p-4">
+        <TouchableOpacity
+          onPress={() => router.push("/management/transport")}
+          className="flex-row items-center bg-white border border-border rounded-lg px-3 py-2 mr-2"
+        >
+          <Typography className="text-primary font-semibold">← Back</Typography>
+        </TouchableOpacity>
+
+        <Typography className="text-lg font-bold text-foreground">Vehicles</Typography>
+      </View>
       <View className="px-4 py-6 space-y-6">
         <View>
           <Text className="text-2xl font-bold text-gray-900 ">Vehicle Management</Text>
@@ -208,16 +219,16 @@ export default function VehicleManagement() {
                       <MaterialCommunityIcons name="truck" size={24} color="white" />
                     </View>
                     <View className="flex-1">
-                      <Text className="text-lg font-semibold text-gray-900 ">
-                        {vehicle.registrationNumber}
+                      <Text className="text-lg font-semibold capitalize text-gray-900 ">
+                        {vehicle?.vehicle_number}
                       </Text>
-                      <Text className="text-sm mt-1 text-gray-600 ">
-                        {vehicle.make} {vehicle.model} ({vehicle.year})
+                      <Text className="text-sm mt-1 capitalize text-gray-600 ">
+                        {vehicle?.make} {vehicle.model} ({vehicle?.model_year})
                       </Text>
                       <View className="flex-row gap-2 mt-2">
                         <View className={cn("px-2 py-1 rounded", getStatusColor(vehicle.status))}>
-                          <Text className="text-xs font-medium text-gray-800 ">
-                            {vehicle?.status?.charAt(0).toUpperCase() + vehicle?.status?.slice(1)}
+                          <Text className="text-xs font-medium capitalize text-gray-800 ">
+                            {vehicle?.fuelType}
                           </Text>
                         </View>
                         <View className={cn("px-2 py-1 rounded", getTypeColor(vehicle.type))}>
@@ -249,9 +260,9 @@ export default function VehicleManagement() {
                     </Text>
                   </View>
                   <View className="flex-row justify-between">
-                    <Text className="text-sm text-gray-600 ">Last Maintenance:</Text>
-                    <Text className="text-sm font-medium text-gray-900 ">
-                      {formatDate(vehicle.lastMaintenance)}
+                    <Text className="text-sm text-gray-600 ">Color:</Text>
+                    <Text className="text-sm capitalize font-medium text-gray-900 ">
+                      {vehicle.color}
                     </Text>
                   </View>
                 </View>
@@ -292,17 +303,17 @@ export default function VehicleManagement() {
                   </View>
                 </View>
 
-                <View className="flex-row gap-2 pt-4 border-t border-gray-200 ">
+                {/* <View className="flex-row gap-2 pt-4 border-t border-gray-200 ">
                   <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 ">
                     <Text className="text-center text-sm font-medium text-gray-700 ">View</Text>
                   </TouchableOpacity>
                   <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 ">
                     <Text className="text-center text-sm font-medium text-gray-700 ">Edit</Text>
                   </TouchableOpacity>
-                  {/* <TouchableOpacity className="flex-1 p-2 rounded-lg border border-red-300 ">
+                  <TouchableOpacity className="flex-1 p-2 rounded-lg border border-red-300 ">
                     <Text className="text-center text-sm font-medium text-red-600 ">Delete</Text>
-                  </TouchableOpacity> */}
-                </View>
+                  </TouchableOpacity>
+                </View> */}
               </View>
             )}
           />

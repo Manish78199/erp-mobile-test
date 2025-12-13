@@ -7,6 +7,7 @@ import RNPickerSelect from "react-native-picker-select"
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons"
 import { cn } from "@/utils/cn"
 import { getAllRoutes } from "@/service/management/transport"
+import { Typography } from "@/components/Typography"
 
 export default function RouteManagement() {
   const insets = useSafeAreaInsets()
@@ -83,9 +84,19 @@ export default function RouteManagement() {
   return (
     <ScrollView
       className="flex-1 bg-background "
-    
+
     >
-      <View className="px-4 mt-3 py-6 space-y-6">
+      <View className="flex-row items-center p-4">
+        <TouchableOpacity
+          onPress={() => router.push("/management/transport")}
+          className="flex-row items-center bg-white border border-border rounded-lg px-3 py-2 mr-2"
+        >
+          <Typography className="text-primary font-semibold">← Back</Typography>
+        </TouchableOpacity>
+
+        <Typography className="text-lg font-bold text-foreground">Routes</Typography>
+      </View>
+      <View className="px-4  py-6 space-y-6">
         <View>
           <Text className="text-2xl font-bold text-gray-900 ">Route Management</Text>
           <Text className="text-sm mt-1 text-gray-600 ">
@@ -243,7 +254,7 @@ export default function RouteManagement() {
                   </View>
                 </View>
 
-                <View className="flex-row gap-2 pt-4 border-t border-gray-200 ">
+                {/* <View className="flex-row gap-2 pt-4 border-t border-gray-200 ">
                   <TouchableOpacity className="flex-1 p-2 rounded-lg border border-gray-300 ">
                     <Text className="text-center text-sm font-medium text-gray-700 ">View</Text>
                   </TouchableOpacity>
@@ -253,7 +264,7 @@ export default function RouteManagement() {
                   <TouchableOpacity className="flex-1 p-2 rounded-lg border border-blue-300 ">
                     <Text className="text-center text-sm font-medium text-blue-600 ">Track</Text>
                   </TouchableOpacity>
-                </View>
+                </View> */}
               </View>
             )}
           />

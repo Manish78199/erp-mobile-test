@@ -195,7 +195,7 @@ const ManagementDashboard: React.FC = () => {
           title: "Transport",
           icon: "bus",
           colors: ["#f43f5e", "#e11d48"],
-          screen: "/management/transport",
+          screen: "/management/transport/track",
           description: "Bus routes & vehicle info",
         },
       ],

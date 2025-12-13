@@ -71,12 +71,12 @@ export default function TransportSearchForm() {
     <SafeAreaView className="flex-1 bg-background">
       <View className="flex-row items-center p-4">
         <TouchableOpacity
-          onPress={() => router.back()}
+          onPress={() => router.push("/management/transport")}
           className="flex-row items-center bg-white border border-border rounded-lg px-3 py-2 mr-2"
         >
           <Typography className="text-primary font-semibold">← Back</Typography>
         </TouchableOpacity>
-        <Typography className="text-lg font-bold text-foreground">Search Transport</Typography>
+        <Typography className="text-lg font-bold text-foreground"> Transport Assignment</Typography>
       </View>
 
       <ScrollView className="flex-1 bg-background">

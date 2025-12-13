@@ -81,6 +81,16 @@ export default function TransportDashboard() {
       className="flex-1 bg-white "
       contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
     >
+      <View className="flex-row items-center p-4">
+        <TouchableOpacity
+          onPress={() => router.push("/management")}
+          className="flex-row items-center bg-white border border-border rounded-lg px-3 py-2 mr-2"
+        >
+          <Typography className="text-primary font-semibold">← Back</Typography>
+        </TouchableOpacity>
+
+        <Typography className="text-lg font-bold text-foreground">Transport</Typography>
+      </View>
       <View className="px-4 py-6 space-y-6">
         <View className="flex-row items-center justify-between">
           <View>
@@ -116,59 +126,60 @@ export default function TransportDashboard() {
           </View>
         </View>
 
- <View className="rounded-lg  p-4 mt-3 border border-gray-200  bg-white ">
-                <Typography className="text-lg font-semibold mb-4 text-gray-900 ">Quick Actions</Typography>
-                <View className="space-y-2 ">
-                  <Link href={"/management/library/book"} className="">
+        <View className="rounded-lg  p-4 mt-3 border border-gray-200  bg-white ">
+          <Typography className="text-lg font-semibold mb-4 text-gray-900 ">Quick Actions</Typography>
+          <View className="space-y-2 ">
+           
 
-                    <View className="flex-row items-center w-full gap-3  p-3 rounded-lg border border-gray-200  bg-gray-50 " >
-                      <View className="p-2 bg-blue-500 rounded-lg">
-                        <MaterialCommunityIcons name="plus" size={16} color="white" />
-                      </View>
-                      <View className="">
-                        <Typography className="font-semibold text-gray-900 ">Books</Typography>
-                        <Typography className="text-xs text-gray-600 ">Manage books</Typography>
-                      </View>
-                    </View>
-                  </Link>
+            <Link href={"/management/transport/route"} className="mt-2">
 
-                  <Link href={"/management/transport/route"} className="mt-2">
+              <View className="flex-row w-full items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
+                <View className="p-2 bg-purple-500 rounded-lg">
+                  <MaterialCommunityIcons name="map-marker" size={16} color="white" />
+                </View>
+                <View>
+                  <Typography className="font-semibold text-gray-900 ">Route </Typography>
+                  <Typography className="text-xs text-gray-600 ">Manage routes and stops</Typography>
+                </View>
+              </View>
+            </Link>
 
-                    <View className="flex-row w-full items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
-                      <View className="p-2 bg-green-500 rounded-lg">
-                        <MaterialCommunityIcons name="book-plus" size={16} color="white" />
-                      </View>
-                      <View>
-                        <Typography className="font-semibold text-gray-900 ">Route </Typography>
-                        <Typography className="text-xs text-gray-600 ">Issue books to students</Typography>
-                      </View>
-                    </View>
-                  </Link>
+            <Link href={"/management/transport/vehicle"} className="mt-2">
+              <View className="flex-row items-center w-full gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
+                <View className="p-2 bg-blue-500 rounded-lg">
+                  <MaterialCommunityIcons name="truck" size={16} color="white" />
+                </View>
+                <View>
+                  <Typography className="font-semibold text-gray-900 ">Vehicle</Typography>
+                  <Typography className="text-xs text-gray-600 ">Manage vehicle</Typography>
+                </View>
+              </View>
+            </Link>
+             <Link href={"/management/transport/assignment"} className="mt-2">
+              <View className="flex-row items-center w-full gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
+                <View className="p-2 bg-violet-500 rounded-lg">
+                  <MaterialCommunityIcons name="plus-network" size={16} color="white" />
+                </View>
+                <View>
+                  <Typography className="font-semibold text-gray-900 ">Assignment</Typography>
+                  <Typography className="text-xs text-gray-600 ">Student Transport</Typography>
+                </View>
+              </View>
+            </Link>
+            <Link href={"/management/transport/track"} className="mt-2">
+              <View className="flex-row items-center w-full gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
+                <View className="p-2 bg-orange-500 rounded-lg">
+                  <MaterialCommunityIcons name="map-marker-distance" size={16} color="white" />
+                </View>
+                <View>
+                  <Typography className="font-semibold text-gray-900 ">Track</Typography>
+                  <Typography className="text-xs text-gray-600 ">Track Vehicle</Typography>
+                </View>
+              </View>
+            </Link>
+           
 
-                  <Link href={"/management/transport/vehicle"} className="mt-2">
-                    <View className="flex-row items-center w-full gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
-                      <View className="p-2 bg-purple-500 rounded-lg">
-                        <MaterialCommunityIcons name="check-circle" size={16} color="white" />
-                      </View>
-                      <View>
-                        <Typography className="font-semibold text-gray-900 ">Vehicle</Typography>
-                        <Typography className="text-xs text-gray-600 ">Process book returns</Typography>
-                      </View>
-                    </View>
-                  </Link>
-                   <Link href={"/management/transport/track"} className="mt-2">
-                    <View className="flex-row items-center w-full gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
-                      <View className="p-2 bg-purple-500 rounded-lg">
-                        <MaterialCommunityIcons name="check-circle" size={16} color="white" />
-                      </View>
-                      <View>
-                        <Typography className="font-semibold text-gray-900 ">Track</Typography>
-                        <Typography className="text-xs text-gray-600 ">Process book returns</Typography>
-                      </View>
-                    </View>
-                  </Link>
-
-                  {/* <Link href={"/management/library/due"} className="mt-2">
+            {/* <Link href={"/management/library/due"} className="mt-2">
                     <View className="flex-row w-full items-center gap-3 p-3 rounded-lg border border-gray-200  bg-gray-50 " >
                       <View className="p-2 bg-red-500 rounded-lg">
                         <MaterialCommunityIcons name="alert-circle" size={16} color="white" />
@@ -179,10 +190,10 @@ export default function TransportDashboard() {
                       </View>
                     </View>
                   </Link> */}
-                </View>
-              </View>
+          </View>
+        </View>
 
-        <View className="rounded-lg p-4 mt-3 border border-gray-200  bg-white ">
+        {/* <View className="rounded-lg p-4 mt-3 border border-gray-200  bg-white ">
           <View className="flex-row items-center justify-between mb-4">
             <Typography className="text-lg font-semibold text-gray-900 ">Live Vehicle Status</Typography>
             <TouchableOpacity>
@@ -281,7 +292,7 @@ export default function TransportDashboard() {
               </Typography>
             </View>
           </View>
-        </View>
+        </View> */}
       </View>
     </ScrollView>
   )
