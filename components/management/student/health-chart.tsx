@@ -11,7 +11,7 @@ interface HealthChartProps {
   }>
 }
 
-export default function HealthChart({ data =[]}: HealthChartProps) {
+export default function HealthChart({ data = [] }: HealthChartProps) {
   const screenWidth = Dimensions.get("window").width - 32
 
   const chartConfig = {
@@ -24,43 +24,26 @@ export default function HealthChart({ data =[]}: HealthChartProps) {
     useShadowColorFromDataset: false,
   }
 
-  const heightData = {
-    labels: data?.map((d) => d.month.slice(0, 3)),
+  // Helper to build dataset safely
+  const buildDataset = (values: number[], color: string) => ({
+    labels: data.length ? data.map((d) => d.month.slice(0, 3)) : ["No Data"],
     datasets: [
       {
-        data: data?.map((d) => d.height),
-        color: () => "#6366F1",
+        data: data.length ? values : [0],
+        color: () => color,
         strokeWidth: 2,
       },
     ],
-  }
+  })
 
-  const weightData = {
-    labels: data?.map((d) => d.month.slice(0, 3)),
-    datasets: [
-      {
-        data: data?.map((d) => d.weight),
-        color: () => "#10B981",
-        strokeWidth: 2,
-      },
-    ],
-  }
-
-  const bmiData = {
-    labels: data?.map((d) => d.month.slice(0, 3)),
-    datasets: [
-      {
-        data: data?.map((d) => d.bmi),
-        color: () => "#F59E0B",
-        strokeWidth: 2,
-      },
-    ],
-  }
+  const heightData = buildDataset(data.map((d) => d.height), "#6366F1")
+  const weightData = buildDataset(data.map((d) => d.weight), "#10B981")
+  const bmiData = buildDataset(data.map((d) => d.bmi), "#F59E0B")
 
   return (
-    <ScrollView className="bg-white  rounded-lg p-4">
+    <ScrollView className="bg-white rounded-lg p-4">
       <View className="mb-6">
-        <Text className="text-lg font-semibold text-slate-900  mb-3">Height (cm)</Text>
+        <Text className="text-lg font-semibold text-slate-900 mb-3">Height (cm)</Text>
         <LineChart
           data={heightData}
           width={screenWidth}
@@ -72,7 +55,7 @@ export default function HealthChart({ data =[]}: HealthChartProps) {
       </View>
 
       <View className="mb-6">
-        <Text className="text-lg font-semibold text-slate-900  mb-3">Weight (kg)</Text>
+        <Text className="text-lg font-semibold text-slate-900 mb-3">Weight (kg)</Text>
         <LineChart
           data={weightData}
           width={screenWidth}
@@ -84,7 +67,7 @@ export default function HealthChart({ data =[]}: HealthChartProps) {
       </View>
 
       <View>
-        <Text className="text-lg font-semibold text-slate-900  mb-3">BMI</Text>
+        <Text className="text-lg font-semibold text-slate-900 mb-3">BMI</Text>
         <LineChart
           data={bmiData}
           width={screenWidth}
