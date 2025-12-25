@@ -1109,7 +1109,7 @@ const TransportScreen: React.FC = () => {
 
   const mapRef = useRef<MapView | null>(null)
 
- 
+
 
   const getAddressFromCoordinates = async (latitude: number, longitude: number) => {
     try {
@@ -1269,7 +1269,7 @@ const TransportScreen: React.FC = () => {
   const onRefresh = () => {
     setRefreshing(true)
     fetchTransportData(false)
-    
+
   }
 
   const callDriver = () => {
@@ -1575,22 +1575,13 @@ const TransportScreen: React.FC = () => {
                         flat={true}
                       >
                         <View className="items-center">
-                          <View
-                            className="bg-[#6A5ACD] rounded-full p-3 border-4 border-white"
-                            style={{
-                              shadowColor: "#000",
-                              shadowOffset: { width: 0, height: 4 },
-                              shadowOpacity: 0.3,
-                              shadowRadius: 6,
-                              elevation: 8,
-                            }}
-                          >
-                            <MaterialCommunityIcons name="car-side" size={28} color="white" />
+                          <View className="items-center justify-center bg-blue-500 rounded-full p-2 shadow-lg">
+                            <MaterialCommunityIcons name="car" size={24} color="#ffffff" />
                           </View>
                         </View>
                       </Marker>
 
-                      
+
                     </MapView>
 
                     {/* Floating map controls */}
@@ -1611,7 +1602,7 @@ const TransportScreen: React.FC = () => {
                       >
                         <MaterialCommunityIcons name="crosshairs-gps" size={24} color="#6A5ACD" />
                       </TouchableOpacity>
-                     
+
                     </View>
                   </View>
                 </View>
@@ -1638,7 +1629,7 @@ const TransportScreen: React.FC = () => {
                       <Icon name="chevron-right" size={24} color="white" />
                     </TouchableOpacity>
 
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                       onPress={callDriver}
                       className="flex-row items-center justify-between bg-[#2ECC71] rounded-xl p-4 shadow-md"
                     >
@@ -1652,9 +1643,9 @@ const TransportScreen: React.FC = () => {
                         </View>
                       </View>
                       <Icon name="chevron-right" size={24} color="white" />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                       onPress={() => Alert.alert("Route Info", `Route: ${transport.route_name}`)}
                       className="flex-row items-center justify-between bg-[#3498DB] rounded-xl p-4 shadow-md"
                     >
@@ -1668,7 +1659,7 @@ const TransportScreen: React.FC = () => {
                         </View>
                       </View>
                       <Icon name="chevron-right" size={24} color="white" />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                   </View>
                 </View>
               </View>

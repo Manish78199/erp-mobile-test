@@ -22,7 +22,8 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.vedatron.erp_mobile",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "config": { "googleMaps": { "apiKey": "AIzaSyDjn35Q3uZrtjAkCRyXZGVJc21YvpPMG_o" } }
     
     },
     "web": {
